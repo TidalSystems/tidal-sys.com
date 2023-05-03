@@ -1,0 +1,711 @@
+<?php  
+ if(isset($_GET['type']))
+{
+   $type = $_GET['type'];
+}
+else{
+$type = '';
+}
+ 
+?>
+<?php if($this->Custom == 'Destinations')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/city/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h3 class="widget-title"> Filter By  Country </h3>
+<div class="formAk" >
+    <form class="form-row"  action="<?php echo $this->baseUrl() ?>/admin/destinations/search" for="" class="" method="get" id="">
+        <?php echo $this->form->countryid ?>
+        <input class="btn btn-primary"  style="margin-left: 11px;"  type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+
+<?php    
+}elseif($this->Custom == 'Country')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/country/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h3 class="widget-title"> Filter By  Region</h3>
+<div class="formAk" >
+     <form class="form-row" action="<?php echo $this->baseUrl() ?>/admin/country/search" for="" class="" method="get" id="">
+        <?php echo $this->form->regionid ?>
+        <input class="btn btn-primary"  style="margin-left: 11px;"   type="submit" class="buttons" value="Search" id="save" name="save">
+    </form>
+</div>
+
+
+
+
+
+<?php    
+}elseif($this->Custom == 'items')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/items/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h1> Filter By  </h1>
+<div class="formAk" >
+     <form action="<?php echo $this->baseUrl() ?>/admin/items/search" for="" class="" method="get" id="">
+        <?php echo $this->form->pageid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="save">
+    </form>
+</div>
+
+
+
+<?php    
+}elseif($this->Custom == 'items2')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/items2/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+
+ <h1> Hotels</h1>
+<h4> <i class="fa fa-files-o"></i><a href="<?php echo constant('APP_BASEURL') .  '/admin/destinations/createdestinations' ?> "> Add New </a>  <spam style="margin-left: 40px;">   <i class="fa fa-files-o"></i> <a href="<?php echo constant('APP_BASEURL') .  '/admin/items2/index' ?>"> Update Existing </a>  </spam> </h4> 
+
+<div class="formAk" >
+     <form action="<?php echo $this->baseUrl() ?>/admin/items2/search" for="" class="" method="get" id="">
+        
+ <table width="400px" border="0">
+  <tr>
+<td style="padding-right:20px" ><?php echo $this->form->regionid;  ?></td>
+     <td style="padding-right:20px" ><?php echo $this->form->countryid;  ?></td>
+    <td><?php echo $this->form->cityid  ;  ?></td>
+  </tr>
+
+ 
+
+</table>
+        <input  style="margin-top:10px;" type="submit" class="buttons" value="Search" id="save" name="save">
+    </form>
+	 
+</div>
+
+  <script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/items2/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value=""> ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.5');
+                    
+                     document.getElementById("save").style.display = "none";
+                    var url = '<?php echo $this->baseUrl().'/admin/items2/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region+'</option>';
+                                region.html(html);
+                                
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+ document.getElementById("save").style.display = "block";
+                                region.hide();
+                                region.fadeIn();
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+<?php    
+}elseif($this->Custom == 'items3')
+{
+
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/city3/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h1> Cruises </h1>
+<h4> <i class="fa fa-files-o"></i><a href="<?php echo constant('APP_BASEURL') .  '/admin/items3/createitem3' ?> "> Add New </a>  <spam style="margin-left: 40px;">   <i class="fa fa-files-o"></i> <a href="<?php echo constant('APP_BASEURL') .  '/admin/items3/' ?>"> Update Existing </a>  </spam> </h4>   
+
+<div class=" " >
+    <form action="<?php echo $this->baseUrl() ?>/admin/items3/search" for="" class="" method="get" id="">
+        <?php echo $this->form->regionid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+
+
+<?php    
+}elseif($this->Custom == 'items5')
+{
+
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/city/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h4> <i class="fa fa-files-o"></i><a href="<?php echo constant('APP_BASEURL') .  '/admin/items5/createitem5' ?> "> Add New </a>  <spam style="margin-left: 40px;">   <i class="fa fa-files-o"></i> <a href="<?php echo constant('APP_BASEURL') .  '/admin/items5/' ?>"> Update Existing </a>  </spam> </h4>   
+
+<div class=" " >
+    <form action="<?php echo $this->baseUrl() ?>/admin/items5/search" for="" class="" method="get" id="">
+        <?php echo $this->form->cityid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+
+<?php    
+}elseif($this->Custom == 'items4')
+{
+
+      
+?>
+<h4> <i class="fa fa-files-o"></i><a href="<?php echo constant('APP_BASEURL') .  '/admin/items4/createitem4' ?> "> Add New </a>  <spam style="margin-left: 40px;">   <i class="fa fa-files-o"></i> <a href="<?php echo constant('APP_BASEURL') .  '/admin/items4/' ?>"> Update Existing </a>  </spam> </h4>   
+
+<div class=" " >
+     
+</div>
+
+
+
+
+<?php    
+}
+?>
+ 
+
+
+
+
+<?php if($this->Custom == 'Package Type' ): ?> 
+ 
+
+ 
+
+ <?php  endif; ?>
+   
+ 
+<h3 class="widget-title"><?php echo $this->typename ?></h3>
+<div class="actions" style="margin-bottom:20px;" >
+            <a class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/createdestinations">Add New</a>
+        </div>
+ 
+ 
+
+
+  
+
+<?php
+$uri = $_SERVER["REQUEST_URI"];
+$sortUrl = explode('/', $uri);
+unset($sortUrl[count($sortUrl)-1]);
+$sortUrl = implode('/', $sortUrl);
+$sortUrl = $sortUrl . '/sort';
+?>
+
+ 
+
+<script type="text/javascript">
+/* when the DOM is ready */
+jQuery(document).ready(function() {
+	/* grab important elements */
+	var sortInput = jQuery('#sort_order');
+	var submit = jQuery('#autoSubmit');
+	var messageBox = jQuery('#message-box');
+	var list = jQuery('#sortable');
+	/* create requesting function to avoid duplicate code */
+	var request = function(sortOrder) {
+        console.log(sortOrder);
+		jQuery.ajax({
+			beforeSend: function() {
+				messageBox.text('Updating the sort order in the database.');
+			},
+			complete: function() {
+				 location.reload();
+			},
+			data: {'sortOrder': sortOrder},
+			type: 'post',
+			url: '<?=$_SERVER["REQUEST_URI"]?>'
+		});
+	};
+	/* worker function */
+	var fnSubmit = function(save) {
+		var sortOrder = [];
+		list.children('tr').each(function(){
+			sortOrder.push(jQuery(this).data('id'));
+		});
+
+		if(save) {
+			request(sortOrder);
+		}
+	};
+	/* store values */
+	list.children('tr').each(function() {
+		var tr = jQuery(this);
+		tr.data('id',tr.attr('title')).attr('title','');
+	});
+	/* sortables */
+	list.sortable({
+		opacity: .7,
+
+		update: function() {
+			fnSubmit(true);
+ 
+		}
+
+	});
+	list.disableSelection();
+	/* ajax form submission */
+	jQuery('#dd-form').bind('submit',function(e) {
+		if(e) e.preventDefault();
+		fnSubmit(true);
+     
+
+	});
+});
+
+</script>
+ <?php  if(!empty($message)): ?>
+    <div id="message-box"><?php echo $message; ?> Waiting for sortation submission...</div>
+<?php endif; ?>
+
+   <?php if($this->Custom !== 'items2'  ): ?>
+  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+ 
+   <table <?php if($this->Sort !== 'no'  ): ?>id="tableId" <?php endif; ?>  class="table table-bordered table-striped dataTable no-footer">
+        <thead>
+            <tr >
+ <th ># </th> 
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+               <th></th>
+            </tr>
+        </thead>
+ 
+
+        <tbody <?php if($this->Sort !== 'no'  ): ?>id="sortable" <?php endif; ?> class="ui-sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+ <td > <?php echo $i ?> </td> 
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+if($values[$variable] != '') {
+                        echo $this->ImgView($values[$variable]);
+}
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+elseif($type == 'Active')
+                    {
+if($values[$variable] == '0'){
+                        echo '<spam style="color:red">'.'Inactive'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Active'.'</spam>';
+}
+                    }
+
+elseif($type == 'Name')
+                    {
+ $model = new Model_PlusData();$model->_name  = 'destinaions';
+		           $toppages = $model->selectForArray(array('id' => $values->id), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ $new= $toppage2->New; $active= $toppage2->Active; $TravelIdeas= $toppage2->TravelIdeas; $extention=$toppage2->extention; } 
+if ( $new == '1' ){
+                        echo '<spam style="" >'.$values[$variable].'<spam style="color:red" > (NEW)</spam>  </spam> ';
+}
+elseif($active == '1'){
+ echo '<spam style="color:red" >'.$values[$variable].' (Inactive) </spam> ';
+}
+
+elseif($TravelIdeas == '1'){
+ echo '<spam style="color:#004eff" >'.$values[$variable].' (Travel Ideas) </spam> ';
+}
+
+elseif($extention == '1'){
+ echo '<spam style="color:#fd00ff" >'.$values[$variable].' (Extention) </spam> ';
+}
+
+
+else{
+  echo  $values[$variable];
+}
+                    }
+
+elseif($type == 'countryid' || $type == 'Country' )
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'country';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->country_name; } 
+                       
+                    }
+
+elseif($type == 'districtid')
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'districts';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->Name; } 
+                       
+                    }
+
+
+elseif($type == 'GroupID')
+                    {
+
+		           $model = new Model_PlusData();$model->_name  = 'cars_groups';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){  
+$model3 = new Model_PlusData();$model3->_name  = 'country';
+    $toppages33 = $model3->selectForArray(array('id' => $toppage2->Country), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages33  as  $toppage233 ){ $name11 = $toppage233->country_name; }
+ echo $toppage2->Name . '-- ' . $name11; } 
+                       
+                    }
+
+
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+
+
+
+
+
+  
+
+ <a  class="badge badge-success"   href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/editdestinations/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?>&type=exist&country=<?php echo $values['id'] ?>" title="Edit">Edit</a>
+                    
+           
+
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+
+                   <a class="badge badge-danger"   href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/deletedestinations/id/<?php echo $values['id'] ?>')" title="Delete">Delet </a> 
+   
+
+  
+
+          
+ 
+<?php
+                        }
+                    }
+ 
+                ?>
+                    
+ 
+
+                </td>
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+    <br>
+  
+  <?php endif;  ?>
+
+
+
+
+ <?php if($this->Custom == 'comment' ): ?>
+  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+    <table id="table1" class="table table-bordered table-striped dataTable">
+        <thead>
+            <tr >
+
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody  id="sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+  
+                  <a   style=" border: 1px;  border-style: double;  padding: 4px;"  href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edit3/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?>" title="Edit">Edit</a>
+                   
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+
+                   <a style=" border: 1px;  border-style: double;  padding: 4px;" href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/delete/id/<?php echo $values['id'] ?>')" title="Delete">Delet </a> 
+                
+ 
+<?php
+                        }
+                    }
+ 
+                ?>
+                    
+ 
+
+                </td>
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+    <br>
+  
+  <?php endif;  ?>
+<?php $str = $this->Custom ;
+$exclude_list = array("contact","items2" ) ;
+?>
+
+ 
+
+
+ 
+ 
+
+
+
+ 
+
+
+
+<?php 
+
+ if(isset($_POST['do_submit']))  {
+	 $message = 'Sortation has been saved.'; 
+
+
+}
+
+?>
+ 
+</form>
+<!-- <?php if($this->Custom == 'Authorized Locations' ): ?>
+<h3 class="widget-title">Alert Message </h3>
+
+<form   id="form2" name="form2" method="post" action="<?php echo  $this->baseUrl().'/admin/'.'ip/index' ?>"     enctype="multipart/form-data"   >
+<div id="message-label"><label for="message" class="required">Message :</label></div>
+<textarea name="message" id="message"  style="width:100%" > <?php
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'ipmessage';						                                       
+						        $toppages2 = $model->selectForArray(array(  ), array('title' => 'ASC'),1  );
+								foreach($toppages2 as $toppage):?><?php echo $toppage->message ?><?php endforeach; ?></textarea>
+<input type="submit" name="save2" id="save2" value="Save" class="btn btn-primary btn-lg" style="margin:20px">
+
+</form>
+<br/><br/><br/>
+<?php endif; ?> --> 
+
+ 

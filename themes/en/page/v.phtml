@@ -1,0 +1,667 @@
+<?php foreach($this->Page as $value) : ?> 
+<?php $idid = $value->id; ?>
+ 
+
+
+
+		<div class="page-header">
+			<div class="page-header__bg"
+				style="background-image: url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Header; ?>);"></div>
+			<!-- /.page-header__bg -->
+			<div class="container">
+				<ul class="thm-breadcrumb list-unstyled">
+					<li><a href="<?php echo LANG_URL ?>index.php">Home</a></li>
+					<li><?php echo $value->title; ?></li>
+				</ul>
+				<h2 class="page-header__title"><?php echo $value->title; ?> </h2><!-- /.page-header__title -->
+			</div><!-- /.container -->
+		</div><!-- /.page-header -->
+
+
+   
+		
+ <style>
+ .about-des ul li {
+      display: revert;
+    margin-left: 20px;
+    list-style: square;
+	font-size: 16px;
+ }
+ </style>
+ 
+ 
+
+<?php if(trim($value->description)):  ?>
+<section class="about-four section-padding--top">
+			<div class="container">
+				<div class="row gutter-y-60">
+					<div class="col-lg-6">
+						<div class="about-four__image">
+							<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Header; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+						</div><!-- /.about-four__image -->
+					</div><!-- /.col-lg-6 -->
+					<div class="col-lg-6">
+						<div class="about-four__content">
+							<div class="section-title "> 
+								<h2 class="section-title__title"><?php echo $value->title; ?></h2><!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+							<div class="about-four__text"><?php echo $value->description; ?></div>
+						 
+						</div><!-- /.about-four__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+  
+<?php endif; ?>
+
+
+
+
+
+
+
+
+<?php if(($value->id) == '39' ):  ?> 
+<section class="about-four section-padding--top" id="<?php echo $servicescategories->id; ?>">
+			<div class="container">
+		
+		<div class="row gutter-y-60" style="margin-bottom:50px;" >
+
+	<div class="col-lg-12 col-md-12 col-sm-12" style="margin: 10px 0px 0px 0px;"  >
+<?php  $model = new Model_PlusData(); $model->_name  = 'blogscategories'; $toppages = $model->selectForArray(array(  ), array( 'id' => 'ASC' ) , 3  ); 
+ foreach($toppages as $blogscategories): ?> 			 
+<a href="?catID=<?php echo $blogscategories->id;?>" class="thm-btn project-one__top__btn">
+										<span><?php echo $blogscategories->title;?></span>
+									</a> <?php endforeach; ?>
+</div>
+				 
+<?php  $model = new Model_PlusData();
+   $model->_name  = 'Blogs'; $toppages = $model->selectForArray(array(  ), array( 'id' => 'ASC' ) , 3  ); 
+ foreach($toppages as $Blogs): ?> 
+					<div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="100ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 100ms; animation-name: fadeInUp;">
+						<div class="blog-card-one">
+							<div class="blog-card-one__image">
+ 	<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$Blogs->thumb; ?>">
+								<a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>"></a>
+							</div><!-- /.blog-card-one__image -->
+							<div class="blog-card-one__content">
+								<div class="blog-card-one__meta">
+									<div class="blog-card-one__date">
+										<i class="fa fa-calendar-alt" aria-hidden="true"></i>
+									<?php echo $Blogs->datepicker; ?>
+									</div><!-- /.blog-card-one__date -->
+								 
+									<!-- /.blog-card-one__category -->
+								</div><!-- /.blog-card-one__meta -->
+								<h3 class="blog-card-one__title"><a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>"><?php echo $Blogs->title; ?> </a></h3>
+								<a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>" class="blog-card-one__more">
+									Read More
+									<i class="fa fa-arrow-right"></i>
+								</a><!-- /.blog-card-one__more -->
+							</div><!-- /.blog-card-one__content -->
+						</div><!-- /.blog-card-one -->
+					</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+				 <?php endforeach; ?>
+
+
+</div></div>
+</section>
+<?php endif; ?>
+
+
+
+<?php if(($value->id) == '2' ):  ?> 
+<section class="about-four section-padding--top" id="<?php echo $servicescategories->id; ?>">
+			<div class="container">
+		
+		<div class="row gutter-y-60">
+			 
+
+<?php $model = new Model_PlusData();    $model->_name  = 'servicescategories';    $partners = $model->selectForArray(array(), array('displayorder' => 'ASC')  );
+								foreach($partners as $index =>$servicescategories):	?>
+
+	<div   class="row col-lg-6"  >
+					<div class="col-lg-12">
+<h2 style="    margin-bottom: 20px;" class="section-title__title"><?php echo $servicescategories->title; ?></h2>
+						<div class="about-four__image" style="width: 90%;" >	
+
+							<img style="width: 100%;" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$servicescategories->Thumb; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+						</div><!-- /.about-four__image -->
+					</div><!-- /.col-lg-6 -->
+					<div class="col-lg-12">
+						<div class="about-four__content" style="    margin-left: 0px;" >
+							<div class="section-title "> 
+							<!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+							<div class="about-four__text"><br/><?php echo $servicescategories->summary; ?>
+<a href="<?php echo LANG_URL ?>solution/<?php echo (trim($servicescategories->pagurl)?''.trim($servicescategories->pagurl):'solution/v/i/'.$servicescategories->id) ?>">
+ 
+More Details... </a></div>
+						 
+						</div><!-- /.about-four__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+
+<?php endforeach; ?>
+	</div>
+			</div><!-- /.container -->
+		</section>
+  
+<?php endif; ?>
+
+
+
+<?php if( $value->type2 == 'articleAA'): ?>
+
+	
+	<div class="shop-main-area pt-0 pb-40">
+            <div class="container">
+                <div class="row">	
+		
+		<div class="col-lg-12 col-md-12 order-lg-12 order-md-2">
+                       <div class="row">
+<h4 style="font-weight: bold; text-align: center; width: 100%; padding-bottom: 10px;" >
+<?php echo $value->slogne; ?></h4>
+                           
+ <?php  $model = new Model_PlusData();  $model->_name  = 'articles'; $articles = $model->selectForArray(array(  ), array( 'datepicker' => 'DESC')   );  foreach($articles as $article): ?>
+ 
+                            <div class="col-lg-4" style="margin-bottom:60px;text-align:center;" >
+                                <div class="single-blog sb-2 mb-30">
+                                    <div class="blog-img pos-rltv product-overlay">
+ <a href="<?php echo LANG_URL ?><?php echo (trim($article->pagurl)?'article/'.trim($article->pagurl):'article/v/i/'.$article->id) ?>"><img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$article->thumb; ?>" ></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <div style="    padding: 20px 10px 20px 10px;">
+                                            <h5 class="uppercase font-bold"><?php echo $article->title; ?></h5>
+                                            <div class="like-comments-date">
+ <a href="<?php echo LANG_URL ?><?php echo (trim($article->pagurl)?'article/'.trim($article->pagurl):'article/v/i/'.$article->id) ?>" class="btn-def small" tabindex="0">Read More</a>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <?php endforeach; ?>
+                            
+                            
+                     
+                        </div>
+                    </div>
+     </div>    </div>    </div>
+ 
+ <?php endif; ?>   
+
+
+
+
+
+
+
+
+
+<?php if( $value->type2 == 'newsSSS'): ?>
+
+	
+	<div class="shop-main-area pt-0 pb-40">
+            <div class="container">
+                <div class="row">	
+		
+		<div class="col-lg-12 col-md-12 order-lg-12 order-md-2">
+                       <div class="row">
+                           
+ <?php  $model = new Model_PlusData();  $model->_name  = 'news'; $articles = $model->selectForArray(array(  ), array( 'datepicker' => 'DESC')   );  foreach($articles as $article): ?>
+ 
+                            <div class="col-lg-4" style="margin-bottom:60px;text-align:center;" >
+                                <div class="single-blog sb-2 mb-30">
+                                    <div class="blog-img pos-rltv product-overlay">
+ <a href="<?php echo LANG_URL ?><?php echo (trim($article->pagurl)?'news/'.trim($article->pagurl):'article/v/i/'.$news->id) ?>"><img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$article->thumb; ?>" ></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <div style="    padding: 20px 10px 20px 10px;">
+                                            <h5 class="uppercase font-bold"><?php echo $article->title; ?></h5>
+                                            <div class="like-comments-date">
+ <a href="<?php echo LANG_URL ?><?php echo (trim($article->pagurl)?'news/'.trim($article->pagurl):'article/v/i/'.$news->id) ?>" class="btn-def small" tabindex="0">Read More</a>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <?php endforeach; ?>
+                            
+                            
+                     
+                        </div>
+                    </div>
+     </div>    </div>    </div>
+ 
+ <?php endif; ?>   
+
+
+
+<?php if( $value->type2 == 'Contact'): ?>
+												 <?php  $model = new Model_PlusData();
+   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'Contact' ), array( ) , 1  ); 
+ foreach($toppages as $contact): ?>  <?php endforeach; ?>
+
+
+<section class="contact-one section-padding--top section-padding--bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+
+						<form action="" method="post"  class="contact-one__form">
+							<div class="section-title">
+								<p class="section-title__text">Contact with us</p><!-- /.section-title__text -->
+							 
+                                <!-- Field 1 -->
+       <?php  ($this->messageVi)  ?>
+                <?php echo '<p style="width: 100%;color: red;">' . $this->messageVi . '</p>' ?>
+
+							</div><!-- /.section-title -->
+							<div class="row ">
+								<div class="col-lg-12 col-md-12">
+									<input type="text" placeholder="Your name" id="name" name="name">
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-lg-12 col-md-12">
+									<input type="email" placeholder="Email address" name="email">
+								</div><!-- /.col-lg-6 col-md-12 -->
+<div class="col-lg-12 col-md-12">
+									<input type="text" placeholder="Phone" name="phone">
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-lg-12 col-md-12">
+									<textarea name="message" placeholder="Write message"></textarea>
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-md-12">
+									<input style="background: #3078a9;" name="save7" id="save7" class="thm-btn contact-one__btn" type="submit" value="send a message" >
+								</div><!-- /.col-md-12 -->
+							</div><!-- /.row -->
+						</form><!-- /.contact-one__form -->
+						<div class="result"></div><!-- / -->
+					</div><!-- /.col-lg-8 -->
+					<div class="col-lg-6" style="display: block !important;" >
+						<div class="contact-one__info wow fadeInRight" data-wow-duration="1500ms"
+							style="background-image: url(assets/images/background/contact-one-bg-1-1.png);">
+							<div class="contact-one__item">
+	<h3 style="margin-bottom: 20px;"  class="contact-one__item__title"><?php echo $contact->titlecontact1; ?><br/></h3>
+								<h3 class="contact-one__item__title"><i style="color:#fff;"  class="fa fa-map-marker-alt"></i> Address</h3><!-- /.contact-one__item__title -->
+								<p class="contact-one__item__text"><?php echo $contact->address; ?></p><!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+							<div class="contact-one__item">
+								<h3 class="contact-one__item__title">	<i style="color:#fff;" class="fa fa-phone"></i>  	 <a style="color:rgba(255, 255, 255, 0.7);" href="tel:<?php echo $contact->mainphone; ?>"><?php echo $contact->mainphone; ?></a></h3><!-- /.contact-one__item__title -->
+			</p>
+								<!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+							<div class="contact-one__item">
+								<h3 class="contact-one__item__title">	<i style="color:#fff;" class="fa fa-envelope"></i>  <a style="color:rgba(255, 255, 255, 0.7);" href="mailto:<?php echo $contact->email; ?>"><?php echo $contact->email; ?></a></h3><!-- /.contact-one__item__title -->
+	 <p class="contact-one__item__text"> </p>
+								<!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+
+	<div class="contact-one__item" style="margin-top: 10px;color: #fff;" > ----------------------------------------------   </div>
+	<div class="contact-one__item" style="margin-top:30px;" >
+	<h3 style="margin-bottom: 20px;" class="contact-one__item__title"><?php echo $contact->titlecontact2; ?><br/></h3>
+								<h3 class="contact-one__item__title"><i style="color:#fff;"  class="fa fa-map-marker-alt"></i> Address</h3><!-- /.contact-one__item__title -->
+								<p class="contact-one__item__text"><?php echo $contact->addressSA; ?></p><!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+							<div class="contact-one__item">
+								<h3 class="contact-one__item__title">	<i style="color:#fff;" class="fa fa-phone"></i>  	 <a style="color:rgba(255, 255, 255, 0.7);" href="tel:<?php echo $contact->phoneSA; ?>"><?php echo $contact->phoneSA; ?></a></h3><!-- /.contact-one__item__title -->
+			</p>
+								<!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+							<div class="contact-one__item">
+								<h3 class="contact-one__item__title">	<i style="color:#fff;" class="fa fa-envelope"></i>  <a style="color:rgba(255, 255, 255, 0.7);" href="mailto:<?php echo $contact->emailSA; ?>"><?php echo $contact->emailSA; ?></a></h3><!-- /.contact-one__item__title -->
+	 <p class="contact-one__item__text"> </p>
+								<!-- /.contact-one__item__text -->
+							</div><!-- /.contact-one__item -->
+
+
+
+							<div class="contact-one__item">
+								<ul class="contact-one__social">
+								<?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="fab fa-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="fab fa-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="fab fa-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="fab fa-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="fab fa-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="fab fa-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="fab fa-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="fab fa-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="fab fa-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="fab fa-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> >
+								</ul><!-- /.contact-one__social -->
+							</div><!-- /.contact-one__item -->
+						</div><!-- /.contact-one__info -->
+					</div><!-- /.col-lg-4 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.contact-one -->
+
+		<!--Google Map Start-->
+		<section class="" style="margin-bottom:80px;" >
+		<iframe src="https://www.google.com/maps/embed?<?php echo $contact->mapGoogle; ?>" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+	 
+
+		</section>
+		<!--Google Map End-->
+
+ 
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<?php if( $value->type2 == 'videos'): ?>
+ 
+ 
+        <div class="choose-us-area pb-0" style="margin-top: 0px;  padding-top: 10px;  margin-bottom: 40px;  color: #fff;">
+            <div class="container">
+                <div class="row">
+                                     
+ <?php  $model = new Model_PlusData();  $model->_name  = 'videos'; $videos = $model->selectForArray(array(  ), array( 'displayorder' => 'ASC')   );  foreach($videos as $video): ?>
+                    <div class="col-lg-4 col-md-4">
+                        <div class=" ">
+                            <div class="choose-i">
+                             <iframe width="100%"  class="videoo" src="https://www.youtube.com/embed/<?php echo $video->video ; ?>" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							 <h5> sss</h5>
+                            </div>
+                         </div>
+                    </div>
+					   <?php endforeach; ?>
+                    
+                       
+
+                    
+                </div>
+            </div>
+        </div>
+
+
+                           
+                         
+                            
+                            
+                    
+<?php endif; ?>
+
+
+ 
+ 
+  
+<?php if( $value->type2 == 'clients'): ?>
+
+
+<section class="about-us style-two" style="padding: 0px;">
+        <div class="auto-container">
+            <div class="row">
+                
+		  <?php $model = new Model_PlusData();    $model->_name  = 'Clients';    $hoem = $model->selectForArray(array(), array( 'displayorder' => 'ASC' )  );
+								foreach($hoem as $client):	?> 
+				<div class="video-column col-xl-3 col-lg-7 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="video-box">
+                            <figure class="image">
+ <a href="<?php echo $client->photo; ?>" > <img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$client->photo; ?>" > </a></figure>
+                             
+                        </div>
+                    </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+
+ <?php endif; ?>
+
+  
+<?php if( $value->type2 == 'servicesSSSS'): ?>
+
+<?php $model = new Model_PlusData();    $model->_name  = 'servicescategories';    $hoem = $model->selectForArray(array(), array( )  );
+								foreach($hoem as $services):	?> 
+
+
+<section class="about-us style-two" style="padding: 0px;">
+        <div class="auto-container">
+            <div class="row">
+                
+				 <div class="info-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="sec-title">
+                    
+                            <h2><?php echo $services->title; ?></h2>
+                        </div>
+
+                        <div class="text"><?php echo $services->Data; ?> </div>
+
+                        
+                    </div>
+                </div>
+				
+				
+				<div class="video-column col-xl-6 col-lg-7 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="video-box">
+                            <figure class="image"><img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$services->Thumb; ?>" ></figure>
+                             
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+
+ <?php endforeach; ?>
+
+
+
+ <?php endif; ?>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+<?php if( $value->type2 == 'gallery'): ?>
+
+<div class="choose-us-area pb-70">
+            <div class="container">
+                <div class="row">
+                     
+ <?php $model = new Model_PlusData();    $model->_name  = 'gallery';    $photos = $model->selectForArray(array(), array( 'displayorder' => 'ASC' )  );
+								foreach($photos as $photo):	?> 
+                          <div class="col-lg-4 col-md-4" style="margin-bottom:30px;" >
+                        <div class=" ">
+                            <div class="choose-icon pos-rltv">
+ <a  style="z-index: 999999999;" class="fancybox" data-fancybox-group="group" href="<?php echo constant('APP_BASEURL').'/MyUpload/'.$photo->Thumb; ?>">
+         <img style="width: 100%;" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$photo->Thumb; ?>"  /></a>
+                        </div>
+                                <h5 style="margin-top: 20px;" ><b> </b> </h5>
+                           
+                         </div>
+                    </div>
+
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+		
+     
+
+					<?php endif; ?>
+					
+ 
+ 
+	
+	
+	 <?php if( $value->type2 == 'partners'): ?>
+
+							<section class="section-padding--bottom section-padding--top">
+			<div class="container">
+				<div class="row gutter-y-30">			
+   <?php  $model = new Model_PlusData();   $model->_name  = 'projects'; $top = $model->selectForArray(array(  ), array('displayorder' => 'asc' )   ); 
+ foreach($top as $pro): ?> 
+					<div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-duration="1500ms"
+						data-wow-delay="000ms">
+						<div class="project-card-one">
+							<div class="project-card-one__image">
+								<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$pro->Thumb; ?>">							</div><!-- /.project-card-one__image -->
+							<div class="project-card-one__content">
+								<div class="project-card-one__content__inner" style="transform: scale(1, 1);" >
+									<p class="project-card-one__text"></p>
+									<h3 class="project-card-one__title">
+<a href="<?php echo LANG_URL ?><?php echo (trim($pro->pagurl)?'client/'.trim($pro->pagurl):'client/v/i/'.$pro->id) ?>"><?php echo $pro->Title; ?>
+											 </a></h3><!-- /.project-card-one__title -->
+									<a href="<?php echo LANG_URL ?><?php echo (trim($pro->pagurl)?'client/'.trim($pro->pagurl):'client/v/i/'.$pro->id) ?>" class="project-card-one__more">
+										<i class="fa fa-angle-right"></i>									</a><!-- /.project-card-one__more -->
+								</div><!-- /.project-card-one__content__inner -->
+							</div><!-- /.project-card-one__content -->
+						</div><!-- /.project-card-one -->
+					</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+<?php endforeach; ?>
+	
+  	<?php endif; ?>
+					
+ 
+ 
+ 
+					
+<!-- Sections -->
+<?php $model = new Model_PlusData();    $model->_name  = 'PageSections';     $where = array('pageid' => ($value->id) , 'branche' => 'page'  );
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages as $index =>$PageSections):	?>
+
+ <?php if($PageSections->style == '1'): ?> 
+  <div class="about-us-area ptb-0">
+
+
+<section class="about-four section-padding--top">
+			<div class="container">
+				<div class="row gutter-y-60">
+					<div class="col-lg-6">
+						<div class="about-four__image">
+							<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+						</div><!-- /.about-four__image -->
+					</div><!-- /.col-lg-6 -->
+					<div class="col-lg-6">
+						<div class="about-four__content">
+							<div class="section-title "> 
+								<h2 class="section-title__title"><?php echo $PageSections->title; ?></h2><!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+							<div class="about-four__text"><?php echo $PageSections->description; ?></div>
+						 
+						</div><!-- /.about-four__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+             
+    
+
+<?php elseif($PageSections->style == '2'): ?> 
+  <section class="about-four section-padding--top">
+			<div class="container">
+				<div class="row gutter-y-60">
+			 
+					<div class="col-lg-12">
+						<div class="about-four__content">
+							<div class="section-title "> 
+								<h2 class="section-title__title"><?php echo $PageSections->title; ?></h2><!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+							<div class="about-four__text"><?php echo $PageSections->description; ?></div>
+						 
+						</div><!-- /.about-four__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+
+
+<?php elseif($PageSections->style == '3'): ?>
+
+  <section class="about-four section-padding--top">
+			<div class="container">
+				<div class="row gutter-y-60">
+				
+					<div class="col-lg-6">
+						<div class="about-four__content">
+							<div class="section-title "> 
+								<h2 class="section-title__title"><?php echo $PageSections->title; ?></h2><!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+							<div class="about-four__text"><?php echo $PageSections->description; ?></div>
+						 
+						</div><!-- /.about-four__content -->
+					</div><!-- /.col-lg-6 -->
+
+	<div class="col-lg-6">
+						<div class="about-four__image">
+							<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+						</div><!-- /.about-four__image -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+ 
+<?php endif; ?>
+
+<?php endforeach; ?>
+
+
+</div></div> 
+
+<!-- Sections -->
+ 
+ 
+<!-- Sections -->
+
+ 
+                
+            </div>
+        </div>
+    </section>
+	
+	
+	
+<?php endforeach; ?>
+
+  

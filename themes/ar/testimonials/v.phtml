@@ -1,0 +1,139 @@
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'testmonials' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?><?php endforeach; ?>
+ <!--Page Title-->
+    <section class="page-title" style="background-image:url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$page->Header ; ?>);">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Add Testimonial</h1>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="<?php echo LANG_URL ?>">Home</a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<section class="property-search-section" style="margin-top:0px;">
+        <div class="auto-container">
+            <div class="property-search-tabs tabs-box">
+                <ul class="tab-buttons">
+                    <li data-tab="#sale" class="tab-btn  ">ADD TESTIMONIAL </li>
+                
+                </ul>
+
+                <div class="tabs-content">
+                    <!--Tab / Active Tab-->
+                    <div class="tab active-tab" id="sale">                         
+                        <div class="property-search-form">
+                      <form id="maillistform" name="form2" method="post" action=""    " enctype="multipart/form-data">
+
+            <?php  ($this->messageVi)  ?>
+                                <div class="row">
+                             
+ <h5 class="view-messages" style="width: 100%;color: #df1b23; margin:20px 0;    padding: 0px;"><?php  echo $this->messageVi ?> </h4> 
+		<input style="display:none"  name="created_on" id="created_on" value="<?php echo date("Y/m/d") ?>" />
+<input name="type2"  id="type2" type="hidden" value="Waiting Approval" />
+                                    <!-- Form Group -->
+                                    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                        <label>Name*</label>
+                                        <input type="text" name="title" id="title" placeholder=" " required="">
+                                    </div>
+
+                                    <!-- Form Group -->
+                                    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                        <label>Location</label>
+                                        <input type="text" name="Location" id="Location" placeholder=" " >
+                                    </div>
+
+    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                        <label>datepicker*</label>
+                                        <input type="date" name="datepicker" id="datepicker" placeholder=" " required="">
+                                    </div>
+
+  
+                                   
+
+                                   
+                                   
+                                   <!-- Form Group -->
+                                    <div class="col-lg-12 col-md-6 col-sm-12">
+<textarea id="data" name="data" rows="4" cols="50" style="width: 100%;" > </textarea>
+                                    </div>
+
+
+  <div style="float:left;margin-left:30px;"  class="g-recaptcha" data-sitekey="6LdR8UAbAAAAAEnSD7eIh7EwuD7s_t5PjUYsT2Tw"></div>
+
+                                    <!-- Form Group -->
+                                    <div class="form-group col-lg-2 col-md-6 col-sm-12">
+                                        <button style="margin: 20px;" type="submit" name="save2" id="save2" class="theme-btn btn-style-two">Submit Now...</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--Tab -->
+                      
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+<script>
+var _captchaTries = 0;
+function recaptchaOnload() {
+    _captchaTries++;
+    if (_captchaTries > 9)
+        return;
+    if ($('.g-recaptcha').length > 0) {
+        grecaptcha.render("recaptcha", {
+            sitekey: 'site key here',
+            callback: function() {
+                console.log('recaptcha callback');
+            }
+        });
+        return;
+    }
+    window.setTimeout(recaptchaOnload, 1000);
+}
+
+
+window.onload = function() {
+  var recaptcha = document.forms["form2"]["g-recaptcha-response"];
+  recaptcha.required = true;
+  recaptcha.oninvalid = function(e) {
+    // do something
+    alert("Please complete the captcha");
+  }
+}
+</script>
+ 
+ 			

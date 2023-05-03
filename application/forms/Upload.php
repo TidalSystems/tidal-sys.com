@@ -1,0 +1,1 @@
+<?php class Form_Upload extends Form_SuperForm {    public function init() {               $this->Upload('table_image', 'jpg,png,gif,jpeg', 'الصورة : ');    }}

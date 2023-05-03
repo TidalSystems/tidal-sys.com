@@ -1,0 +1,165 @@
+   <style>
+table tr td{
+
+padding-left: 4px;
+}
+</style>
+ <div class="form-row" >
+ <div class="col-md-12" >
+ 
+  <h3 class="widget-title" >Brochures Requests </h3> 
+
+</div>
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<?php
+if(isset($_GET['fromdate'])) {$fromdate=  $_GET['fromdate']; } else { $fromdate=  ''; } 
+if(isset($_GET['todate'])) {$todate=  $_GET['todate']; } else { $todate=  ''; } ; 
+?>
+ 
+<?php	$result = array(); 	$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array(  ), array('created_on'  => 'asc' )  );
+								foreach($toppagescountry as $toppage2): ?>
+<?php if($toppage2->created_on >= $fromdate && $toppage2->created_on <= $todate ) : ?>
+<?php $result[] = $toppage2->id; ?> <?php endif; endforeach; ?>
+
+ <div  class="col-md-6">
+ <form  action="<?php echo  $this->baseUrl();?>/admin/brochuresrequests"  method="get"   >
+From <input required style="width:150px;" name="fromdate" id"fromdate" class="fromdate" />  
+To <input  required style="width: 150px;" name="todate" id"todate" class="todate" /> 
+ 
+ <input class="btn btn-primary" type="submit" value="Create" style="position: absolute;height: 30px;padding: 4px;"> </form></div>
+ 
+ 
+<?php if(  count($result) != '0' ): ?>
+<div  class="col-md-3" style="text-align: center; color: #f30000;"><a href="http://centralholidays.net/registrations.csv" download >	<img src="<?php echo $this->themeUrl ?>images/download.png"   style="width: 40px;" />  Download Records </a> </div>
+<div  class="col-md-3" style="text-align: center; color: #f30000;"><a href=""  >	<img src="<?php echo $this->themeUrl ?>images/email.png"   style="width: 40px;" />  Email it to the fulfillment center </a></div>
+<?php endif; ?>
+
+ 
+ <br/><br/>
+
+<div  class="col-md-12">  
+
+
+
+<?php if($fromdate !='' && $todate !=  '' && count($result) == '0' ): ?><h3 style="text-align:center" > NO Recode </h3>  <?php endif; ?>
+<?php if(count($result) != '0' ): ?>
+ 
+<spam style="color:red" > From:  </spam><?php echo $fromdate; ?>  <spam style="color:red; padding-left:50px" > TO: </spam><?php echo $todate; ?>
+<table cellspacing="0" cellpadding="0"  border="1" style="font-size:14px; width:100%">
+  <col width="22">
+  <col width="71">
+  <col width="75">
+  <col width="113">
+  <col width="182" span="2">
+  <col width="141">
+  <col width="88">
+  <col width="41">
+  <col width="64">
+  <col width="219">
+  <col width="35">
+  <col width="43">
+  <col width="147">
+  <col width="128">
+  <col width="106">
+  <tr height="19">
+    <td height="19" width="22"><div align="center"><strong>#</strong></div></td>
+    <td width="300"><div align="center"><strong>Date</strong></div></td>
+    <td width="75"><div align="center"><strong>First name</strong></div></td>
+    <td width="113"><div align="center"><strong>Last name</strong></div></td>
+    <td width="182"><div align="center"><strong>Agency name</strong></div></td>
+    <td width="182"><div align="center"><strong>Address</strong></div></td>
+    <td width="141"><div align="center"><strong>Apt./Fl/Suit</strong></div></td>
+    <td width="88"><div align="center"><strong>City</strong></div></td>
+    <td width="41"><div align="center"><strong>State</strong></div></td>
+    <td width="64"><div align="center"><strong>Zip Code</strong></div></td>
+  
+    <td width="35"><div align="center"><strong>Italy</strong></div></td>
+    <td width="43"><div align="center"><strong>Egypt</strong></div></td>
+    <td width="147"><div align="center"><strong>Latin America &amp; Cuba</strong></div></td>
+    <td width="128"><div align="center"><strong>Africa &amp; West Asia</strong></div></td>
+    <td width="106"><div align="center"><strong>Mediterranean</strong></div></td>
+  </tr>
+   
+<?php foreach ($result as $indexx=>$item): ?>
+<?php $counter=0;
+ 
+  $file = fopen("registrations.csv", "w");	$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array('id' => $item  ), array(  ) , 1  );
+								foreach($toppagescountry as $toppage2z): ?>
+
+    <tr height="19">
+    <td height="19">  <?php echo $indexx; ?>  </td>
+    <td><?php echo $toppage2z->created_on; ?> </td>
+    <td><?php echo $toppage2z->FIRSTNAME2 ?></td>
+    <td><?php echo $toppage2z->LASTNAME2 ?></td>
+    <td><?php echo $toppage2z->AGENCY_NAME2 ?></td>
+    <td><?php echo $toppage2z->ADDRESS2 ?></td>
+    <td><?php echo $toppage2z->ADDRESS22 ?></td>
+    <td><?php echo $toppage2z->CITY2 ?></td>
+    <td><?php echo $toppage2z->STATE2 ?></td>
+    <td><?php echo $toppage2z->POSTAL_CODE2 ?></td>
+    <td><div align="center"><?php echo $toppage2z->ITALY_BROCHURE_QUANTITY2 ?></div></td>
+    <td><div align="center"><?php echo $toppage2z->EGYPT_BROCHURE_QUANTITY2 ?></div></td>
+    <td><div align="center"><?php echo $toppage2z->LATIN_AMERICA_BROCHURE_QUANTITY2 ?></div></td>
+    <td><div align="center"><?php echo $toppage2z->AFRICA_BROCHURE_QUANTITY2 ?></div></td>
+    <td><div align="center"><?php echo $toppage2z->MEDITERRANEAN_BROCHURE_QUANTITY2 ?></div></td>
+  </tr>  
+
+
+
+
+<?php endforeach; ?>
+
+<?php  fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+  $values ='sss';
+ $row = [
+    'Date' => $toppage2z->created_on,
+ 'First Name' => $toppage2z->FIRSTNAME2,
+ 'Last Name' => $toppage2z->LASTNAME2,
+ 'Address' => $toppage2z->ADDRESS2,
+ 'Address 2' => $toppage2z->ADDRESS22 ,
+
+            ];  if ($counter == 0)
+                fputcsv($file, array_keys($row)  );
+            fputcsv($file, $row  );
+            $counter++; 
+          ?>
+ 
+<?php endforeach; ?>
+
+</table> 
+<?php endif; ?>
+ 
+ </div> 
+
+
+<div  class="col-md-12">
+ <br/>
+ <br/>
+ <br/>
+</div>
+
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+
+ <script>
+ $(".fromdate").datepicker({ dateFormat: 'yy-mm-dd' });
+ $(".todate").datepicker({ dateFormat: 'yy-mm-dd' });
+ </script>
+
+ 
+ 
+
+</body>
+</html>
+ 
+
+ 
+
+</div>
+ 

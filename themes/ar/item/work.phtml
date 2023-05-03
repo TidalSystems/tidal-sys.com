@@ -1,0 +1,106 @@
+
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Arimo:300,400,700,400italic,700italic' />
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css' />
+        <!-- Font Awesome Icons -->
+        <link href='<?php echo THEME_DIR ?>css/font-awesome.min.css' rel='stylesheet' type='text/css' />
+        <!-- Bootstrap core CSS -->
+        <link href="<?php echo THEME_DIR ?>css/bootstrap.min.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>css/hover-dropdown-menu.css" rel="stylesheet" />
+        <!-- Icomoon Icons -->
+        <link href="<?php echo THEME_DIR ?>css/icons.css" rel="stylesheet" />
+        <!-- Revolution Slider -->
+        <link href="<?php echo THEME_DIR ?>css/revolution-slider.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>rs-plugin/css/settings.css" rel="stylesheet" />
+        <!-- Animations -->
+        <link href="<?php echo THEME_DIR ?>css/animate.min.css" rel="stylesheet" />
+        <!-- Owl Carousel Slider -->
+        <link href="<?php echo THEME_DIR ?>css/owl/owl.carousel.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>css/owl/owl.theme.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>css/owl/owl.transitions.css" rel="stylesheet" />
+        <!-- PrettyPhoto Popup -->
+        <link href="<?php echo THEME_DIR ?>css/prettyPhoto.css" rel="stylesheet" />
+        <!-- Date Picker -->
+        <link href="<?php echo THEME_DIR ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+        <!-- Custom Style -->
+        <link href="<?php echo THEME_DIR ?>css/style.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>css/style1.css" rel="stylesheet" />
+        <link href="<?php echo THEME_DIR ?>css/responsive.css" rel="stylesheet" />
+        <!-- fancy Select -->
+        <link href="<?php echo THEME_DIR ?>css/fancySelect.css" rel="stylesheet">
+        <link href="<?php echo THEME_DIR ?>css/photostack.css" rel="stylesheet">
+        <!-- Color Scheme -->
+        <link href="<?php echo THEME_DIR ?>css/color.css" rel="stylesheet" />
+        
+<div class="page-header">
+    <div class="container">
+        <h1 class="title">تشكيلي</h1>
+    </div>
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="<?php echo LANG_URL ?>">الرئيسية</a>
+                </li>
+                <li>
+                    <a href="<?php echo LANG_URL . '/user/list' ?>">أعمال الفنانين</a>
+                </li>
+                <li class="active"><?php $name = 'name_' . LANG;
+echo $this->user->$name ?></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="works" class="page-section">
+    <div class="mixed-grid">
+        <div class="clearfix"></div>
+        <div class="masonry-grid grid-col-3" data-gutter="0">
+            <div class="grid-sizer"></div>
+            <?php
+            if (count($this->paginator)):
+                foreach ($this->paginator as $i => $item):
+                    $title = 'title_' . LANG;
+                    $about = 'data_' . LANG;
+                    ?>
+                    <!-- Item -->
+                    <div class="grids row mix all web">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">
+                                <h3 class="title">
+                                    <a href="portfolio-single.html"><?php echo $item->$title ?></a>
+                                </h3>
+                                <?php echo $item->$about ?>
+                                <a href="<?php echo LANG_URL.'/item/v/i/'.$item->id.'?iframe=true' ?>" class="btn btn-default" rel="prettyPhoto">طلب</a>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <?php 
+                                        $images = explode('||',trim($item->table_image,'|'));
+                                        foreach($images as $i=>$photo): if(!trim($photo)) continue;?>
+                                        <li data-target="#carousel-example-generic1" data-slide-to="<?php echo $i ?>"<?php if($i<1): ?> class="active"<?php endif ?>></li>
+                                        <?php endforeach; ?>
+                                    </ol>
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <?php foreach($images as $i=>$photo): if(!trim($photo)) continue;?>
+                                        <div class="item<?php if($i<1): ?> active<?php endif ?>">
+                                            <a href="<?php echo LANG_URL.'files/ful/i/'. $photo?>" class="image" rel="prettyPhoto<?php echo $item->id ?>">
+                                                <img src="<?php echo LANG_URL.'files/ful/i/'. $photo?>" width="790" height="440" alt="" />
+                                            </a>
+                                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item Ends-->
+                <?php endforeach; ?>
+<?php endif ?>
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'patrial/pagination-control.phtml'); ?>
+<div class="clearfix"></div>

@@ -1,0 +1,39 @@
+:root {
+	--cretech-font: 'DM Sans', sans-serif;
+	--cretech-primary: #6a2dec;
+	--cretech-primary-rgb: 106, 46, 237;
+	--cretech-secondary: #9c2ede;
+	--cretech-secondary-rgb: 156, 46, 222;
+	--cretech-text: #797582;
+	--cretech-text-rgb: 121, 117, 130;
+	--cretech-text-light: #a39eae;
+	--cretech-text-light-rgb: 163, 158, 174;
+	--cretech-link-light: #877e9b;
+	--cretech-link-light-rgb: 135, 126, 155;
+	--cretech-black: #12062c;
+	--cretech-black-rgb: 18, 6, 44;
+	--cretech-bg-black: #0d0421;
+	--cretech-bg-black-rgb: 13, 4, 33;
+	--cretech-gray: #f9f6ff;
+	--cretech-gray-rgb: 249, 246, 255;
+	--cretech-border: #e1dbec;
+}
+
+$cretech-font:var(--cretech-font, 'DM Sans', sans-serif);
+$cretech-primary:var(--cretech-primary, #6a2dec);
+$cretech-primary-rgb:var(--cretech-primary-rgb, 106, 46, 237);
+$cretech-secondary:var(--cretech-secondary, #9c2ede);
+$cretech-secondary-rgb:var(--cretech-secondary-rgb, 156, 46, 222);
+$cretech-text:var(--cretech-text, #797582);
+$cretech-text-rgb:var(--cretech-text-rgb, 121, 117, 130);
+$cretech-text-light:var(--cretech-text-light, #a39eae);
+$cretech-text-light-rgb:var(--cretech-text-light-rgb, 163, 158, 174);
+$cretech-link-light:var(--cretech-link-light, #877e9b);
+$cretech-link-light-rgb:var(--cretech-link-light-rgb, 135, 126, 155);
+$cretech-black:var(--cretech-black, #12062c);
+$cretech-black-rgb:var(--cretech-black-rgb, 18, 6, 44);
+$cretech-bg-black:var(--cretech-bg-black, #0d0421);
+$cretech-bg-black-rgb:var(--cretech-bg-black-rgb, 13, 4, 33);
+$cretech-gray:var(--cretech-gray, #f9f6ff);
+$cretech-gray-rgb:var(--cretech-gray-rgb, 249, 246, 255);
+$cretech-border:var(--cretech-border, #e1dbec);

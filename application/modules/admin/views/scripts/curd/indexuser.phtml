@@ -1,0 +1,280 @@
+ <?php
+$this->session = new Zend_Session_Namespace('Default');
+$request = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+ $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()) {
+$userInfo = Zend_Auth::getInstance()->getStorage()->read(); 
+$userid =  $userInfo->id;
+} ?>
+
+<?php  	$model = new Model_PlusData();   $model->_name  = 'users';                                
+			 $toppages2item = $model->selectForArray(array('id' => $userid ), array('displayorder' => 'ASC')  );
+ foreach($toppages2item as $toppage2items):?>    <?php endforeach; ?>
+ <?php  $allpermission = array() ;
+ $all = explode('||',trim($toppage2items->permissions ,'|')); foreach($all as $photo): ?>
+<?php $allpermission []= $photo ?> <?php endforeach; ?> 
+ 
+  
+
+<?php
+$uri = $_SERVER["REQUEST_URI"];
+$sortUrl = explode('/', $uri);
+unset($sortUrl[count($sortUrl)-1]);
+$sortUrl = implode('/', $sortUrl);
+$sortUrl = $sortUrl . '/sort';
+?>
+
+ 
+
+<script type="text/javascript">
+/* when the DOM is ready */
+jQuery(document).ready(function() {
+	/* grab important elements */
+	var sortInput = jQuery('#sort_order');
+	var submit = jQuery('#autoSubmit');
+	var messageBox = jQuery('#message-box');
+	var list = jQuery('#sortable');
+	/* create requesting function to avoid duplicate code */
+	var request = function(sortOrder) {
+        console.log(sortOrder);
+		jQuery.ajax({
+			beforeSend: function() {
+				messageBox.text('Updating the sort order in the database.');
+			},
+			complete: function() {
+				 location.reload();
+			},
+			data: {'sortOrder': sortOrder},
+			type: 'post',
+			url: '<?=$_SERVER["REQUEST_URI"]?>'
+		});
+	};
+	/* worker function */
+	var fnSubmit = function(save) {
+		var sortOrder = [];
+		list.children('tr').each(function(){
+			sortOrder.push(jQuery(this).data('id'));
+		});
+
+		if(save) {
+			request(sortOrder);
+		}
+	};
+	/* store values */
+	list.children('tr').each(function() {
+		var tr = jQuery(this);
+		tr.data('id',tr.attr('title')).attr('title','');
+	});
+	/* sortables */
+	list.sortable({
+		opacity: .7,
+
+		update: function() {
+			fnSubmit(true);
+ 
+		}
+
+	});
+	list.disableSelection();
+	/* ajax form submission */
+	jQuery('#dd-form').bind('submit',function(e) {
+		if(e) e.preventDefault();
+		fnSubmit(true);
+     
+
+	});
+});
+
+</script>
+ <?php  if(!empty($message)): ?>
+    <div id="message-box"><?php echo $message; ?> Waiting for sortation submission...</div>
+<?php endif; ?>
+
+
+	<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo $this->typename ?> </span> </h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+							  
+						 	</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="<?php echo $this->baseUrl() ?>/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<span class="breadcrumb-item active">Dashboard</span>
+						</div>
+ <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+ <?php if(in_array(($this->typename.'_add') , $allpermission)): ?>			 
+ <a class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/createuser">Add New</a>
+<?php endif; ?>
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+
+<div class="content">
+
+				<!-- Page length options -->
+				<div class="card">
+
+
+   <?php if($this->Custom !== 'items2'  ): ?>
+			<div class="content">
+
+				<!-- HTML sourced data -->
+				<div class="card">
+
+
+  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+ 
+   <table  id="tableId"    class="table datatable-show-all">
+        <thead>
+            <tr >
+ <th ># </th> 
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+               <th></th>
+            </tr>
+        </thead>
+ 
+
+        <tbody id="sortable"   class="ui-sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+<?php if($values->id !='1'): ?>
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+ <td > <?php echo $i ?> </td> 
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'role')
+                    {
+if($values[$variable] == '6') {
+                        echo 'Admin';
+}
+elseif($values[$variable] == '2') {
+    echo 'Representative';
+
+}
+                    }
+                    elseif($type == 'firstname')
+                    {
+                        echo  $values['firstname'] . ' ' .$values['lastname'] ;
+                    }
+elseif($type == 'departmentid' )
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'departments';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->DepName; } 
+                       
+                    }
+
+elseif($type == 'discount')
+                    {
+                        echo '$'.$values[$variable];
+                    }
+
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+
+
+
+ 
+ <?php if(in_array(($this->typename.'_edit') , $allpermission)): ?>
+  
+                  <a  class="badge badge-success"    href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edituser/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?>" title="Edit">Edit</a>
+                     
+<?php endif; ?>
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+<?php if(in_array(($this->typename.'_delete') , $allpermission)): ?>
+                   <a class="badge badge-danger"   href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/deleteuser/id/<?php echo $values['id'] ?>')" title="Delete">Delet </a> 
+   
+<?php endif; ?>
+  
+
+          
+ 
+<?php
+                        }
+                    }
+ 
+                ?>
+                    
+ 
+
+                </td>
+            </tr>
+<?php endif; ?>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+    <br>
+  
+  <?php endif;  ?>
+
+
+ 
+ 
+
+
+ </div></div>
+ 
+
+
+
+ 
+
+
+
+<?php 
+
+ if(isset($_POST['do_submit']))  {
+	 $message = 'Sortation has been saved.'; 
+
+
+}
+
+?>
+ 
+ 

@@ -1,0 +1,120 @@
+.testimonials-one {
+
+	.container {
+		@media (min-width: 1200px) {
+			max-width: 1220px;
+		}
+	}
+}
+
+.testimonials-one-card {
+	border: 1px solid $cretech-border;
+	box-shadow: 0px 13px 40px 0px rgba(0, 0, 0, 0.07);
+	padding: 40px;
+	position: relative;
+	transition: all 500ms ease-in-out;
+	box-shadow: 0px 13px 40px 0px rgba(0, 0, 0, 0.07);
+	background-color: #fff;
+
+	&:hover {
+		box-shadow: 0px 13px 40px 0px rgba(0, 0, 0, 0.1), inset 0 0 0 5px $cretech-secondary;
+		border-color: transparent;
+	}
+
+	@media (min-width: 768px) {
+		display: flex;
+	}
+
+	@media (min-width: 1200px) {
+		padding-left: 0px;
+		margin-left: 40px;
+		padding-right: 47px;
+	}
+
+	&__image {
+		display: inline-block;
+		margin-bottom: 30px;
+		flex-shrink: 0;
+
+		@media (min-width: 768px) {
+			margin-bottom: 0;
+			margin-right: 38px;
+		}
+
+		@media (min-width: 1200px) {
+			margin-left: -40px;
+		}
+
+		img {
+			border: 5px solid $cretech-secondary;
+		}
+	}
+
+	&__text {
+		@media (min-width: 768px) {
+			margin-top: -8px;
+		}
+	}
+
+	&__title {
+		font-size: 20px;
+		line-height: 1.1;
+		font-weight: bold;
+		letter-spacing: -0.05em;
+		color: $cretech-black;
+		margin: 0;
+		margin-bottom: 7px;
+		margin-top: 15px;
+	}
+
+	&__designation {
+		text-transform: uppercase;
+		color: $cretech-primary;
+		font-size: 12px;
+		font-weight: bold;
+		letter-spacing: .1em;
+		margin: 0;
+		line-height: 1;
+	}
+
+	&__icon {
+		position: absolute;
+		bottom: 30px;
+		right: 40px;
+		font-size: 45px;
+		@include cretech-gradient;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+
+		@media (min-width: 1200px) {
+			font-size: 64px;
+			right: 60px;
+		}
+	}
+
+}
+
+.testimonials-two {
+	.section-title {
+		padding-bottom: 25px;
+	}
+
+	&__content {
+		&__text {
+			margin-bottom: 30px;
+		}
+
+		&__btn {
+			margin-top: 10px;
+		}
+	}
+
+	&__items {
+		@media (min-width: 1200px) {
+			padding-left: 89px;
+		}
+	}
+
+
+}

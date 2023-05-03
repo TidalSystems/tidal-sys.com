@@ -1,0 +1,103 @@
+ <?php $header2="" ; foreach($this->Page as $value): ?>
+  
+  <section class="page-section" style="padding: 200px;">
+ <div class="image-bg content-in" data-background="<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Header; ?>" style="background-image: url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Header; ?>);background-position: center center;"></div>
+                <div class="container white">
+                    <div class="row text-center fact-counter">
+						   
+						<div class="col-sm-12 col-md-12 animated pulse visible" data-animation="pulse">
+							<!-- Icon -->
+							 
+							<!--  
+							<h2><?php echo $value->title ; ?></h2> -->
+						</div>
+					</div>
+				</div>
+            </section>
+			
+ 
+    
+	  <section class="about-section" style="margin-top:37px;">
+    	<div class="container">
+        	<div class="row">
+            	
+                <!--Content Column-->
+                <div class="content-column col-md-12 col-sm-12 col-xs-12">
+                	<div class="inner-column">
+                    	<!--Sec Title-->
+                        <div class="sec-title">
+ <h2 style="text-align:center;width: 100%;" ><?php echo $value->title; ?><br/><img src="<?php echo THEME_DIR ?>img/divider.png"></h2> 
+                        </div>
+                        <div ><?php echo $value->Data ; ?></div>
+                      
+                    </div>
+                </div>
+          </div> </div> </section>
+
+
+
+
+    <section id="aboutus" class="page-section" style="padding: 7px 0;" >
+                <div class="container">
+              
+                    <div class="row">
+					
+<!-- Sections -->
+<?php $model = new Model_PlusData();    $model->_name  = 'servicessections';     $where = array('serviceid' => ($value->id));
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages as $index =>$PageSections):	?>
+
+ <?php if($PageSections->style == '1'): ?> 
+ <div class="col-md-8" data-animation="fadeInUp">
+<div class="sec-title">                 
+<?php if(trim($PageSections->title)): ?> <h2 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3><div class="separator"></div> <?php endif; ?>
+   </div>                       
+<?php echo $PageSections->description; ?>	</div>
+ <div class="col-md-4" data-animation="fadeInUp"">
+<div class="image-box"> <figure class="image"> <img  style="width:100%;" class="img-responsive" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb ; ?>" >
+ </figure> </div></div>
+  
+ <div class="col-md-12" style="margin-bottom:30px;" >	<hr></div>
+
+
+<?php elseif($PageSections->style == '2'): ?> 
+ <div class="col-md-12" data-animation="fadeInUp"">
+<div class="sec-title">                 
+<?php if(trim($PageSections->title)): ?> <h2 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3><div class="separator"></div> <?php endif; ?>
+   </div>                       
+<?php echo $PageSections->description; ?>	</div>
+ 
+  
+ <div class="col-md-12" style="margin-bottom:30px;" >	<hr></div>
+
+
+<?php elseif($PageSections->style == '3'): ?>
+ <div class="col-md-4" data-animation="fadeInUp"">
+<div class="image-box"> <figure class="image"> <img style="width:100%;" class="img-responsive" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb ; ?>" >
+ </figure> </div></div>
+  
+  
+ <div class="col-md-8" data-animation="fadeInUp"">
+<div class="sec-title">                 
+<?php if(trim($PageSections->title)): ?> <h2 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3><div class="separator"></div> <?php endif; ?>
+   </div>                       
+<?php echo $PageSections->description; ?>	</div>
+
+ <div class="col-md-12" style="margin-bottom:30px;" >	<hr></div>
+ 
+<?php endif; ?>
+
+<?php endforeach; ?>
+
+
+</div></div>  </section>
+
+<!-- Sections -->
+ 
+ 
+<!-- Sections -->
+
+ 
+    
+  
+ <?php endforeach ?>

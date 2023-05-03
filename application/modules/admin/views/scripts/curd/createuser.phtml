@@ -1,0 +1,638 @@
+<?php  
+ if(isset($_GET['id']))
+{
+   $id = $_GET['id'];
+}
+else{
+$id = '';
+}
+ 
+?>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<style>
+
+ input[type="text"] {
+width:100% !important;
+} 
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message p {
+    padding: 1px 40px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+ #inactive-label {
+margin-left: 20px;
+}
+
+  #inactive{
+    margin-top: -25px;
+}
+
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+</style>
+
+ 
+
+
+ 	<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo $this->typename ?> </span>  </h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+
+						  	</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="<?php echo $this->baseUrl() ?>/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<span class="breadcrumb-item active">Dashboard</span>
+						</div>
+ 
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+	 
+
+     
+ 
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+
+ 
+
+
+<?php  $setting = array( 'Users Account' => 'Users Account' , 'Defaul SEO' => 'Defaul SEO' , 'Social Icons' => 'Social Icons' ,  'Footer' => 'Footer'    );
+ 
+$HomePage = array('Home Slider' => 'Home Slider' ,'Home Page Section' => 'Home Page Section'   );
+ $Products= array('Products Categories' => 'Products Categories' , 'Products' => 'Products'   );
+$Photos= array('Photos' => 'Photos'   );
+ $Certificates= array('Certificates' => 'Certificates'   );
+ $Videos= array('Videos' => 'Videos'   );
+ $Modules= array('Solutions' => 'Solutions' ,'Clients' => 'Clients'  ,'Blogs' => 'Blogs' , 'Blogs Category' => 'Blogs Category'  );
+  $Events= array('Events' => 'Events'   );
+$Pages = array('About Us' => 'About Us' ,   'Our Solutions' => 'Our Solutions', 'Our Clients' => 'Our Clients',  'Blogs' => 'Blogs' , 'Contact Us' => 'Contact Us'  );
+
+ 
+$oprations = array('index' => 'Read','add' => 'Add','edit' => 'Edit','delete' => 'Delete'  ); 
+$oprations2 = array('index' => 'Edit'  ); 
+ 
+?>
+ 
+  <div class="content">
+
+				<!-- Form inputs -->
+				<div class="card" style="padding:30px;" >
+ 
+<form id="formID" name="postForm"   method="post" role="form" class="" action="" >
+	<div class="form-row">
+ 
+ 
+ 
+   <div class="col-md-6"> <?php echo $this->form->firstname ?></div>
+   <div class="col-md-6"> <?php echo $this->form->lastname ?></div>
+ 
+ 
+ 
+   <div class="col-md-6"> <?php echo $this->form->phone ?></div>
+ 
+
+   <div class="col-md-6"><?php echo $this->form->email ?></div>
+ 
+   <div class="col-md-6"><?php echo $this->form->username ?></div>
+
+   <div class="col-md-6"> <?php echo $this->form->password ?>
+<div id="message">
+  <p>Password must contain the following:</p>
+  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+  <p id="number" class="invalid">A <b>number</b></p>
+
+</div> </div>
+ 
+
+ 
+
+
+
+
+
+ <?php  $allpermission = array() ; $permtitle= '' ; $permi=''; $oprv=''; $oprk ='' ; $permtitle =''; 
+$all = explode('||',trim($this->form->getValue('permissions'),'|')); foreach($all as $photo): ?>
+<?php $allpermission []= $photo ?> <?php endforeach; ?>
+ 
+ <?php  $allpermissionsmain = array() ;
+$all2 = explode('||',trim($this->form->getValue('allpermissionsmain'),'|')); foreach($all2 as $photo2): ?>
+<?php $allpermissionsmain []= $photo2 ?> <?php endforeach; ?> 
+
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+<div  class="form-group col-md-12" style="float:left;padding:0px;"> 
+
+ 
+
+ <div style=" margin: 0px;" class="card collapse-header"> <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">  <span class="lead collapse-title">  <h3 style="color: #ea0000;"> <div style="float:left;" class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+<input <?php if(in_array('Setting', $allpermissionsmain)): ?> checked <?php endif; ?> type="checkbox" class="custom-control-input form-input-switchery" name="Setting" id="Setting"    data-fouc>
+ </div>Setting</h3></span> </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">    
+                                                    <div class="card-content"><div class="card-body">
+                                                             <?php foreach ($setting as $permi => $permtitle): ?>       
+             <div style="float:left;padding: 0px; margin: 0px;" class="col-md-12 col-sm-12">
+<div style="float:left;" class="col-sm-3">- <a onClick="functionallchek($name= '<?= str_replace(' ', '', $permtitle) ?>') "><?= $permtitle ?></a></div> <?$i=0;?>
+                        <?php foreach ($oprations as $oprk => $oprv): ?> <? $i++?>
+ <div style="float:left;" class="<?=($permi=="companies" ? "col-sm-2" : "col-sm-2")?>" >
+ <div class="vs-checkbox-con vs-checkbox-<?php if($oprv =='Read'):?>primary<?php elseif($oprv =='Add'):?>Success<?php elseif($oprv =='Edit'):?>info<?php elseif($oprv =='Delete'):?>Warning<?php endif; ?>"><input class="<?= str_replace(' ', '', $permtitle) ?>" id="someid477" type="checkbox" <?php if(in_array(($permi.'_'.$oprk) , $allpermission)): ?> checked <?php endif; ?> name="<?= $permi ?>_<?= $oprk ?>"  > <span class="vs-checkbox">
+ <span class="vs-checkbox--check"></span></span><?= $oprv ?></div><br />
+ </div><?php endforeach ?> </div><?php endforeach ?>   <div style="float:left" class="col-md-12 col-sm-12"><hr/></div>
+                     
+                                                        </div>  </div>  </div>  </div>
+
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+  
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+  
+  
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+
+  
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+
+
+
+ <div style=" margin: 0px;" class="card collapse-header"> <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">  <span class="lead collapse-title">  <h3 style="color: #ea0000;"> <div style="float:left;" class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+<input <?php if(in_array('HomePage', $allpermissionsmain)): ?> checked <?php endif; ?> type="checkbox" class="custom-control-input form-input-switchery" name="HomePage" id="HomePage">
+ </div>Home Page</h3></span> </div>
+                                            <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6" class="collapse">    
+                                                    <div class="card-content"><div class="card-body">
+                                                             <?php foreach ($HomePage as $permi => $permtitle): ?>       
+             <div style="float:left;padding: 0px; margin: 0px;" class="col-md-12 col-sm-12">
+<div style="float:left;" class="col-sm-3">- <a onClick="functionallchek($name= '<?= str_replace(' ', '', $permtitle) ?>') "><?= $permtitle ?></a></div> <?$i=0;?>
+                        <?php foreach ($oprations as $oprk => $oprv): ?> <? $i++?>
+ <div style="float:left;" class="<?=($permi=="companies" ? "col-sm-2" : "col-sm-2")?>" >
+ <div class="vs-checkbox-con vs-checkbox-<?php if($oprv =='Read'):?>primary<?php elseif($oprv =='Add'):?>Success<?php elseif($oprv =='Edit'):?>info<?php elseif($oprv =='Delete'):?>Warning<?php endif; ?>"><input class="<?= str_replace(' ', '', $permtitle) ?>" id="someid477" type="checkbox" <?php if(in_array(($permi.'_'.$oprk) , $allpermission)): ?> checked <?php endif; ?> name="<?= $permi ?>_<?= $oprk ?>"  > <span class="vs-checkbox">
+ <span class="vs-checkbox--check"></span></span><?= $oprv ?></div><br />
+ </div><?php  endforeach ?> </div><?php  endforeach ?>   <div style="float:left" class="col-md-12 col-sm-12"><hr/></div>
+                     
+                                                        </div>  </div>  </div>  </div>
+
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+   
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+  <div style=" margin: 0px;" class="card collapse-header"> <div id="headingCollapse11x0Car" class="card-header" data-toggle="collapse" role="button" data-target="#collapse11x0Car" aria-expanded="false" aria-controls="collapse11">  <span class="lead collapse-title">  <h3 style="color: #ea0000;"> <div style="float:left;" class="custom-control custom-switch custom-switch-success mr-2 mb-1"> <input <?php if(in_array('Modules', $allpermissionsmain)): ?> checked <?php endif; ?> type="checkbox" class="custom-control-input form-input-switchery" name="Modules" id="Modules">
+ </div>Modules</h3></span> </div>
+                                            <div id="collapse11x0Car" role="tabpanel" aria-labelledby="headingCollapse11x0Car" class="collapse">    
+                                                    <div class="card-content"><div class="card-body">
+                                                             <?php foreach ($Modules as $permi => $permtitle): ?>       
+             <div style="float:left;padding: 0px; margin: 0px;" class="col-md-12 col-sm-12">
+<div style="float:left;" class="col-sm-3">- <a onClick="functionallchek($name= '<?= str_replace(' ', '', $permtitle) ?>') "><?= $permtitle ?></a></div> <?$i=0;?>
+                        <?php foreach ($oprations as $oprk => $oprv): ?> <? $i++?>
+ <div style="float:left;" class="<?=($permi=="companies" ? "col-sm-2" : "col-sm-2")?>" >
+ <div class="vs-checkbox-con vs-checkbox-<?php if($oprv =='Read'):?>primary<?php elseif($oprv =='Add'):?>Success<?php elseif($oprv =='Edit'):?>info<?php elseif($oprv =='Delete'):?>Warning<?php endif; ?>"><input class="<?= str_replace(' ', '', $permtitle) ?>" id="someid477" type="checkbox" <?php if(in_array(($permi.'_'.$oprk) , $allpermission)): ?> checked <?php endif; ?> name="<?= $permi ?>_<?= $oprk ?>"  > <span class="vs-checkbox">
+ <span class="vs-checkbox--check"></span></span><?= $oprv ?></div><br />
+ </div><?php  endforeach ?> </div><?php  endforeach ?>   <div style="float:left" class="col-md-12 col-sm-12"><hr/></div>
+                     
+                                                        </div>  </div>  </div>  </div>
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+ 
+ 
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+  
+  
+
+
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+ 
+   <!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+
+   
+
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+ <div style=" margin: 0px;" class="card collapse-header"> <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">  <span class="lead collapse-title">  <h3 style="color: #ea0000;"> <div style="float:left;" class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+<input <?php if(in_array('Pages', $allpermissionsmain)): ?> checked <?php endif; ?> type="checkbox" class="custom-control-input form-input-switchery" name="Pages" id="Pages">
+  </div>Pages</h3></span> </div>
+                                            <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse">    
+                                                    <div class="card-content"><div class="card-body">
+                                                             <?php foreach ($Pages as $permi => $permtitle): ?>       
+             <div style="float:left;padding: 0px; margin: 0px;" class="col-md-12 col-sm-12">
+<div style="float:left;" class="col-sm-3">- <a onClick="functionallchek($name= '<?= str_replace(' ', '', $permtitle) ?>') "><?= $permtitle ?></a></div> <?$i=0;?>
+                        <?php foreach ($oprations2 as $oprk => $oprv): ?> <? $i++?>
+ <div style="float:left;" class="<?=($permi=="companies" ? "col-sm-2" : "col-sm-2")?>" >
+ <div class="vs-checkbox-con vs-checkbox-<?php if($oprv =='Read'):?>primary<?php elseif($oprv =='Add'):?>Success<?php elseif($oprv =='Edit'):?>info<?php elseif($oprv =='Delete'):?>Warning<?php endif; ?>"><input class="<?= str_replace(' ', '', $permtitle) ?>" id="someid477" type="checkbox" <?php if(in_array(($permi.'_'.$oprk) , $allpermission)): ?> checked <?php endif; ?> name="<?= $permi ?>_<?= $oprk ?>"  > <span class="vs-checkbox">
+ <span class="vs-checkbox--check"></span></span><?= $oprv ?></div><br />
+ </div><?php  endforeach ?> </div><?php  endforeach ?>   <div style="float:left" class="col-md-12 col-sm-12"><hr/></div>
+                     
+                                                        </div>  </div>  </div>  </div>
+
+ 
+<!-- ./////////////////////////////////////////////////////////////////////////////////.  -->
+
+ 
+
+     <?php echo $this->form->permissions; ?>
+<?php echo $this->form->allpermissionsmain; ?> 
+
+   <div class="col-md-12">  <?php echo $this->form->save; ?> </div>
+
+									 
+									 
+								</div>
+							</form>
+
+
+    
+
+  
+       
+ 
+ <script>
+  
+var myInput = document.getElementById("password");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+    document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+  
+</script>
+
+                    
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+ 
+
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4 = $('input:checkbox').filter('#someid477');
+    $checks4.on('change', function() {
+        var string4 = $checks4.filter(":checked").map(function(i,v){
+            return this.name;
+        }).get().join("||");
+        $('#permissions').val( string4);
+    });
+});
+
+</script>
+
+<script  language="javascript">
+$(document).ready(function(){
+    $checks40 = $('input:checkbox').filter('.custom-control-input');
+    $checks40.on('change', function() {
+        var string40 = $checks40.filter(":checked").map(function(i,v){
+            return this.name;
+        }).get().join("||");
+        $('#allpermissionsmain').val( string40);
+    });
+});
+
+</script> 
+ 
+<script>
+function functionallchek(name) {
+    $('input.'+name).prop('checked', true);
+    }
+</script>
+
+
+<script>
+
+  
+    // [END region_geolocation]
+function fillInAddress(autocomplete, unique) {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+        if(!!document.getElementById(component + unique)){
+            document.getElementById(component + unique).value = '';
+            document.getElementById(component + unique).disabled = false;
+        }
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        if (componentForm[addressType] && document.getElementById(addressType + unique)) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType + unique).value = val;
+        }
+    }
+}
+
+// Create the autocomplete object, restricting the search to geographical
+// location types.
+autocomplete = new google.maps.places.Autocomplete(
+/** @type {!HTMLInputElement} */
+(document.getElementById('autocomplete')), {
+    types: ['geocode']
+});
+
+// When the user selects an address from the dropdown, populate the address
+// fields in the form.
+autocomplete.addListener('place_changed', function () {
+    fillInAddress(autocomplete, "");
+});
+
+// Create the second autocomplete object, restricting the search to geographical
+// location types.
+autocomplete2 = new google.maps.places.Autocomplete(
+/** @type {!HTMLInputElement} */
+(document.getElementById('autocomplete2')), {
+    types: ['geocode']
+});
+autocomplete2.addListener('place_changed', function () {
+    fillInAddress(autocomplete2, "2");
+});
+
+var placeSearch, autocomplete, autocomplete2;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */
+    (document.getElementById('autocomplete')), {
+      types: ['geocode']
+    });
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', function() {
+    fillInAddress(autocomplete, "");
+  });
+
+  autocomplete2 = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */
+    (document.getElementById('autocomplete2')), {
+      types: ['geocode']
+    });
+  autocomplete2.addListener('place_changed', function() {
+    fillInAddress(autocomplete2, "2");
+  });
+
+}
+
+function fillInAddress(autocomplete, unique) {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    if (!!document.getElementById(component + unique)) {
+      document.getElementById(component + unique).value = '';
+      document.getElementById(component + unique).disabled = false;
+    }
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType] && document.getElementById(addressType + unique)) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType + unique).value = val;
+    }
+  }
+}
+google.maps.event.addDomListener(window, "load", initAutocomplete);
+
+ 
+</script>
+
+  
+
+
+
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+ 
+
+
+<script type="text/javascript">
+
+var imgs8872 = new Array();
+function showimgs8872(){
+    if(imgs8872.length<=0){
+        $('.imageuploader8872 .files8872').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image8872').val('');
+    }else{
+        $('.imageuploader8872 .files8872').html("<table><tr>");
+        $('.image8872').val("");
+        for (var i = 0; i < imgs8872.length; i++) {
+            // add file to the list
+            $('.imageuploader8872 .files8872').html($('.imageuploader8872 .files8872').html()+"<div > <a href='javascript:removeimg8872("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/MyUpload/"+imgs8872[i]+"'  width='100'></img>      </div>");
+            $('.image8872').val($('.image8872').val()+''+imgs8872[i]);
+        }
+    }
+}
+  
+function removeimg8872(id){
+    imgs8872.splice(id,1);
+    showimgs8872();
+  
+}
+
+ (function($){
+               
+        var button8872 = '<div class="imageuploader8872">  <div style="" class=" "><div  class="" ><a style="background: #000;margin-bottom:20px; color:#fff;padding:4px  10px" href="<?php echo constant('APP_BASEURL') .  '/admin/cropthumb?id='.$id.'&page=Users&width=350&height=350' ; ?>">Personal/Profile Photo </a><button style="display:none;"id="button8872" class="btn btn-danger">Photo </button></div></div>   <input id="content8872" type="hidden" class="image8872" style="width: 250px;" name="thumb" value="<?php echo $photoX; ?>" /><div class="files8872" style="cursor:pointer"  id="sortable8872" ></div>  </div>';
+      $('#thumb').replaceWith(button8872);
+      if($('#button8872').length){
+         var button8872 = $('#button8872'), interval;    
+         new AjaxUpload(button8872, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button8872.text('uploading process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button8872.text();
+                     if (text.length < 13){
+                         button8872.text(text + '.');                    
+                     } else {
+                         button8872.text('uploading process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button8872.text('Upload new Photo');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs8872.splice(response);
+                 imgs8872.push( response );
+                 showimgs8872();
+             }
+         });
+         if($('.image8872').val()!=''){
+             imgs8872=$('.image8872').val().split(' ');
+                   
+             for (var i = 0; i < imgs8872.length; i++) {
+                 if(imgs8872[i]==''){
+                     imgs8872.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs8872();
+ 
+     }
+ })(jQuery);
+//-->
+
+ </script>
+

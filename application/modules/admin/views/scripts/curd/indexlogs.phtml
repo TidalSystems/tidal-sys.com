@@ -1,0 +1,79 @@
+  
+<h3 class="widget-title"><?php echo $this->typename ?></h3>  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+ 
+   <table id="" class="table table-bordered table-striped">
+        <thead>
+            <tr >
+<th>#</th>
+                <?php
+                foreach($this->listValue as  $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+               
+            </tr>
+        </thead>
+ 
+
+        <tbody id=" " class=" ">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+
+ <td > <?php echo $i ?> </td> 
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+                    elseif($type == 'userid')
+                    {
+$model = new Model_PlusData();
+		      $model->_name  = 'users';						                                       
+			  $toppages= $model->selectForArray(array('id' => $values['userid']  ), array('displayorder' => 'ASC') , 1  ); 	foreach($toppages as $toppage2itemsname){
+ echo $toppage2itemsname->firstname . ' ' . $toppage2itemsname->lastname ;}
+                    }
+                         
+                     elseif($type == 'ip')
+                    {
+$model = new Model_PlusData();
+		      $model->_name  = 'ip';						                                       
+			  $toppages= $model->selectForArray(array('ip' => $values['ip']  ), array('displayorder' => 'ASC') , 1  ); 	foreach($toppages as $toppage2items){
+ echo $toppage2items->name. ' ( '. $toppage2items->ip. ' ) ' ;}
+                    }
+                    
+
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                 
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+ 
+
+ 

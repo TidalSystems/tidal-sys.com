@@ -1,0 +1,2 @@
+[20-Aug-2013 18:33:10] PHP Fatal error:  Using $this when not in object context in /home5/karmafou/public_html/themes/ar/patrial/pagination-control.phtml on line 1
+[20-Aug-2013 18:35:38] PHP Fatal error:  Using $this when not in object context in /home5/karmafou/public_html/themes/ar/patrial/pagination-control.phtml on line 1

@@ -1,0 +1,165 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="title">تشكيلي</h1>
+    </div>
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="<?php echo LANG_URL ?>">الرئيسية</a>
+                </li>
+                <li>
+                    <a href="<?php echo LANG_URL . '/user/listings' ?>">أعمالي</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="works" class="page-section">
+    <div id="inner-body" class="users-register container">
+        <?php if (isset($this->item) && $this->item): ?>
+<?php endif; $title = 'title_' . LANG; ?>
+        <fieldset>
+            <legend><?php if (isset($this->item) && $this->item): ?>
+                    تعديل معرض <a href="<?php echo LANG_URL ?>item/v/i/<?php echo $this->item->id ?>">(<?php echo $this->item->$title ?>)</a> 
+                    <?php if (!$this->item->active): ?>
+                        <span class="error">في انتظار موافقة الإدارة للنشر</span>
+                    <?php endif ?>
+                <?php else: ?>
+                    معرض جديد
+            <?php endif ?>
+            </legend>
+<?php if (isset($this->item) && $this->item): ?>
+                <div id="actions">
+                    <a href="<?php echo LANG_URL . '/item/delete/i/' . $this->item->id ?>" onclick="return confirm('هل تريد بالتأكيد حذف هذه العقار');">حذف العقار</a>
+                </div>
+                <div class="clearfix"></div>
+            <?php endif ?>
+            <?php
+            echo $this->form;
+            ?>
+        </fieldset>
+    </div>
+</section>
+<script type="text/javascript" src="<?php echo THEME_DIR ?>js/jquery.ajup.js"></script>
+<script type="text/javascript">
+<!--
+                    var imgs = new Array();
+
+                    function showimgs() {
+                        if (imgs.length <= 0) {
+                            $('.imageuploader .files').html("<div style=\"font-size: small;\">لا يوجد صور</div>");
+                            $('.image').val('');
+                        } else {
+                            $('.imageuploader .files').html("<table><tr>");
+                            $('.image').val("");
+                            for (var i = 0; i < imgs.length; i++) {
+                                // add file to the list
+                                $('.imageuploader .files').html($('.imageuploader .files').html() + "<div><a href='javascript:removeimg(" + i + ");'>إزالة</a><br /><img src='<?php echo $this->baseUrl() ?>/index.php/files/ful/i/" + imgs[i] + "' onclick='removeimg(" + i + ");' title='إزالة الصورة'  width='50' height='50'></img></div>");
+                                $('.image').val($('.image').val() + '||' + imgs[i]);
+                            }
+                        }
+                    }
+
+                    function removeimg(id) {
+                        imgs.splice(id, 1);
+                        showimgs();
+                    }
+
+                    (function ($) {
+                        var button1 = '<div class="imageuploader"><div class="wrapper"><div id="button1"><button class="button">رفع صوره</button></div></div><input type="hidden" class="image" style="width: 250px;" name="table_image" value="<?php echo $this->form->getElement('table_image')->getValue(); ?>" /><div class="files"></div></div>';
+                        $('#table_image').replaceWith(button1);
+                        if ($('#button1').length) {
+                            var button = $('#button1'), interval;
+                            new AjaxUpload(button, {
+                                action: '<?php echo $this->baseUrl() . '/index.php/upload/photo' ?>',
+                                name: 'img',
+                                onSubmit: function (file, ext) {
+                                    if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)) {
+                                        // change button text, when user selects file            
+                                        button.text('جاري الرفع');
+
+                                        // If you want to allow uploading only 1 file at time,
+                                        // you can disable upload button
+                                        this.disable();
+
+                                        // Uploding -> Uploading. -> Uploading...
+                                        interval = window.setInterval(function () {
+                                            var text = button.text();
+                                            if (text.length < 13) {
+                                                button.text(text + '.');
+                                            } else {
+                                                button.text('جاري الرفع');
+                                            }
+                                        }, 200);
+
+                                    } else {
+                                        // cancel upload
+                                        alert("الإمتدادات المسموح بها هي gif أو jpg أو jpeg أو png فقط");
+                                        return false;
+                                    }
+                                },
+                                onComplete: function (file, response) {
+                                    button.text('إضافة صورة');
+
+                                    window.clearInterval(interval);
+
+                                    // enable upload button
+                                    this.enable();
+
+                                    imgs.push(response);
+                                    showimgs();
+                                }
+                            });
+                            if ($('.image').val() != '') {
+                                imgs = $('.image').val().split('||');
+                                for (var i = 0; i < imgs.length; i++) {
+                                    if (imgs[i] == '') {
+                                        imgs.splice(i, 1);
+                                        i = i - 1;
+                                    }
+                                }
+                            }
+                            showimgs();
+                        }
+                    })(jQuery);
+//-->
+</script>
+<script type="text/javascript" src="<?= $this->baseUrl(); ?>/ui/editor/tinymce/tiny_mce.js"></script>
+<script type="text/javascript">
+                    tinyMCE.init({
+                        // General options
+                        //mode : "textareas",
+                        mode: "exact",
+                        elements: "elm1,elm2",
+                        language: "en",
+                        theme: "advanced",
+                        plugins: "imagemanager,filemanager,safari,pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+                        // Theme options
+                        theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect",
+                        theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+                        theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+                        /*theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",*/
+                        theme_advanced_toolbar_location: "top",
+                        theme_advanced_toolbar_align: "left",
+                        //theme_advanced_statusbar_location : "bottom",
+                        theme_advanced_resizing: true,
+                        // Example content CSS (should be your site CSS)
+                        content_css: "jscripts/css/content.css",
+                        // Drop lists for link/image/media/template dialogs
+                        template_external_list_url: "lists/template_list.js",
+                        external_link_list_url: "lists/link_list.js",
+                        external_image_list_url: "lists/image_list.js",
+                        media_external_list_url: "lists/media_list.js",
+                        // Replace values for the template plugin
+                        template_replace_values: {
+                            username: "Some User",
+                            staffid: "991234"
+                        }
+                    });
+
+                    $(document).ready(function () {
+                        $('#save-label label').hide();
+                    });
+
+</script>

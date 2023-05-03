@@ -1,0 +1,94 @@
+
+    <div class="block-header">&nbsp;</div>
+    <div class="block-content">
+            <form id="form2" name="form2" method="post" action="<?php echo LANG_URL ?>contactus/request" class="block">
+            <?php if($this->messageVi): ?>
+            	<?php echo '<p>'.$this->messageVi.'</p>' ?>
+            <?php else: ?>
+		<label for="email">الإسم :</label><div class="field-wrapper"><?php echo $this->form->name ?></div>
+		<div class="clear"></div>
+		<label for="email">رقم التليفون:</label><div class="field-wrapper"><?php echo $this->form->phone ?></div>
+		<div class="clear"></div>
+		<label for="email">الإيميل:</label><div class="field-wrapper"><?php echo $this->form->email ?></div>
+		<div class="clear"></div>
+		<label for="email">التفاصيل :</label><div class="field-wrapper"><?php echo $this->form->message ?></div>
+		<div class="clear"></div>
+		<label for="email">&nbsp;</label><div class="field-wrapper"><button type="submit" name="SEND" id="SEND">إرسال</button></div>
+	          <div class="clear"></div>
+	        <?php endif ?>
+        	</form>
+        </div>
+    
+<script type="text/javascript">
+<!--
+	(function($){
+		$(document).ready(function(){
+			$('form#form2').submit(function(e){
+				e.preventDefault();
+				var form = $(this);
+				var url = form.attr('action')+'?is_ajax=true';
+				var data = form.serialize();
+				form.find('input,textarea,select').attr('disabled','disabled');
+				$.ajax({
+					url:url,
+					data:data,
+					dataType:'json',
+					type:'POST',
+					success:function(data){
+						if(data.success)
+						{
+							form.slideUp('slow', function() {
+								form.html(data.message);
+								form.slideDown('slow');
+							});
+						}
+						else
+						{
+							form.find('input,textarea,select').removeAttr('disabled');
+							form.find('.error').remove();
+							if(typeof data.error.name != 'undefined')
+							{
+								var len = data.error.name.length;
+								for(var i=0;i<len;i++)
+								{
+									form.find('#name').after('<div class="error" style="color:#ff0000;">'+data.error.name[i]+'</div>');
+								}
+							}
+							if(typeof data.error.email != 'undefined')
+							{
+								var len = data.error.email.length;
+								for(var i=0;i<len;i++)
+								{
+									form.find('#email').after('<div class="error" style="color:#ff0000;">'+data.error.email[i]+'</div>');
+								}
+							}
+							if(typeof data.error.phone != 'undefined')
+							{
+								var len = data.error.phone.length;
+								for(var i=0;i<len;i++)
+								{
+									form.find('#phone').after('<div class="error" style="color:#ff0000;">'+data.error.phone[i]+'</div>');
+								}
+							}
+							if(typeof data.error.message != 'undefined')
+							{
+								var len = data.error.message.length;
+								for(var i=0;i<len;i++)
+								{
+									form.find('#message').after('<div class="error" style="color:#ff0000;">'+data.error.message[i]+'</div>');
+								}
+							}
+							form.find('.error').hide();
+							form.find('.error').fadeIn();
+						}
+					},
+					error:function(){
+						//form.unbind('submit');
+						//form.submit();
+					}
+				});
+			});
+		});
+	})(jQuery);
+//-->
+</script>

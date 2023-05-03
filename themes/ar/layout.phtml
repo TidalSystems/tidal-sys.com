@@ -1,0 +1,367 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+ <title><?php if(!trim($this->ceotitle)):?><?php echo $this->siteDataSEO['title'] ?> <?php else: ?> <?php echo $this->ceotitle ? '' . $this->ceotitle : '' ?><?php endif; ?></title>	
+<meta name="keywords" content="<?php if(!trim($this->ceokeywords)):?><?php echo $this->siteDataSEO['Keywords'] ?> <?php else: ?><?php echo $this->ceokeywords ? '' . $this->ceokeywords : '' ?> <?php endif; ?>">
+<meta name="description" content="<?php if(!trim($this->ceodescription)):?><?php echo $this->siteDataSEO['Description'] ?> <?php else: ?><?php echo $this->ceodescription ? '' . $this->ceodescription : '' ?> <?php endif; ?>">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <!-- All css files are included here. -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/bootstrap.min.css">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/shortcode/shortcodes.css">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/responsive.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>css/color/skin-default.css">
+
+
+    <!-- Modernizr JS -->
+    <script src="<?php echo THEME_DIR ?>js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Body main wrapper start -->
+    <div class="wrapper home-one">
+
+        <!-- Start of header area -->
+        <header class="header-area header-wrapper">
+		 <div class="header-top-bar black-bg clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6" style="padding: 0px;">
+                            <div class="login-register-area">
+                                <a href="<?php echo LANG_URL ?>en"><img  style="width: 22px;padding-right: 5px;" src="<?php echo THEME_DIR ?>images/en.png"  > English</a>
+                                 <a href="<?php echo LANG_URL ?>fr" style="font-family:main;" > <img  style="width: 22px;padding-left: 7px;" src="<?php echo THEME_DIR ?>images/f.png"  > French</a>
+                               
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6 col-sm-6 col-6" stle="float:right;" >
+                            <div class="cart-currency-area login-register-area text-right">
+                              <ul>
+                            	 <?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="zmdi zmdi-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="zmdi zmdi-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="zmdi zmdi-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="zmdi zmdi-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="zmdi zmdi-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="zmdi zmdi-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="zmdi zmdi-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="zmdi zmdi-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="zmdi zmdi-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="zmdi zmdi-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> 
+             
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+			
+            <div id="sticky-header" class="header-middle-area">
+                <div class="container">
+                    <div class="full-width-mega-dropdown">
+                        <div class="row">
+                     
+                            <div class="col-lg-10 col-md-10 d-none d-md-block" style="    text-align: center;direction:rtl;">
+                                <nav id="primary-menu">
+                                    <ul class="main-menu">
+                                            <li><a href="<?php echo LANG_URL ?>ar">الرئيسيه</a></li>
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'about' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+                                        <li class=""><a  href=" ">ميديا</a>
+                                            <ul class="dropdown">
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'article' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>
+ 
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'news' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>                               
+
+
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'videos' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>
+ 
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'gallery' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>                               
+                                            
+
+
+</ul>
+                                        </li>
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '42' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+                                                              
+ 
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'Contact' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+                                        
+                                    </ul>
+                                </nav>
+                            </div>
+
+       <div class="col-md-2">
+                                <div class="logo ptb-20">
+                                     <a href="<?php echo LANG_URL ?>ar" >   <img  class="xx" src="<?php echo THEME_DIR ?>images/logo/logo.png" ></a>
+                                </div>
+                            </div>
+                          
+                              <!-- mobile-menu-area start -->
+                            <div class="mobile-menu-area">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <nav id="dropdown">
+                                              <ul>
+                                              <li><a href="<?php echo LANG_URL ?>ar/">الرئيسيه</a></li>
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'about' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+                                        <li class=""><a  href=" ">ميديا</a>
+                                            <ul class="">
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'article' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'news' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>                               
+
+ 
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'videos' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>
+ 
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'gallery' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>                               
+                                           
+
+
+ </ul>
+                                        </li>
+                                          
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '42' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+    
+ 
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'Contact' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->titleAr; ?> </a></li><?php endforeach; ?>  
+                                        
+                                    </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--mobile menu area end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End of header area -->
+ 
+
+
+
+
+		 <?php  $model = new Model_PlusData();
+   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'Contact' ), array( ) , 1  ); 
+ foreach($toppages as $contact): ?>  <?php endforeach; ?>
+
+
+
+	
+ 
+	
+
+     <?php if (count(array($this->messages)) > 0): ?>
+                        <div class="alert-message <?php echo $this->messages['0'] ?>">
+                            <?php echo $this->messages['1'] ?>
+                        </div>
+                        <?php
+                        unset($this->messages);
+                    endif;
+                    ?>
+                    <?php echo $this->layout()->content ?>
+
+
+
+ 
+  
+
+ 
+ 
+        <!-- footer area start-->
+        <div class="footer-area ptb-50" style="margin-top:70px;background: #000 none repeat scroll 0 0; color: #f1f1f1;" >
+            <div class="container">
+                <div class="row" style="direction: rtl;text-align: right;"> 
+                  
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                        <div class="single-footer informaton-area">
+                            <div class="footer-title uppercase">
+                                <h3 style="margin-bottom: 20px;">مواعيد العمل  </h3>
+                            </div>
+                            <div class="informatoin">
+                                <ul>
+                     <?php echo $contact->workhoursAr; ?>
+  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                        <div class="col-xl-5 col-lg-5 col-md-5">
+                        <div class="single-footer contact-us">
+                            <div class="footer-title uppercase">
+                               <h3 style="margin-bottom: 30px;">الاتصال بنا </h3>
+                            </div>
+                            <ul>
+                                <li style="margin-bottom: 0px;font-family: 'main';">
+                                    <div class="contact-icon" > <i class="zmdi zmdi-pin-drop"></i> </div>
+                                    <div class="contact-text">
+                                        <p>العنوان:
+<?php echo $contact->addressar; ?></p>
+                                    </div>
+                                </li>
+                                <li style="width:100%;margin-top: 20px
+;" >
+                                    <div class="contact-icon"> <i class="zmdi zmdi-email-open"></i> </div>
+                                    <div class="contact-text">
+                                        <p><span><a style="color:#fff;text-align: right;" href="mailto://<?php echo $contact->email; ?>"><?php echo $contact->email; ?></a></span>
+                                               
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-icon"> <i class="zmdi zmdi-phone-paused"></i> </div>
+                                    <div class="contact-text">
+                                       <?php echo $contact->mainphone; ?> 
+ 
+ 
+                                    </div>
+                                </li>
+ 
+                            </ul>
+                        </div>
+                    </div>
+                      
+           
+					
+                    <div class="col-xl-c col-lg-3 col-md-3">
+                        <div class="single-footer newslatter-area">
+                            <!-- <div class="footer-title uppercase">
+                               <h3 style="margin-bottom: 20px;">Stay Connect</h3>
+                            </div>  -->
+                            <div class="newslatter">
+                                
+                                <div class="social-icon socile-icon-style-3 mt-40">
+                                    
+                                    <ul>
+			 <?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="zmdi zmdi-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="zmdi zmdi-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="zmdi zmdi-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="zmdi zmdi-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="zmdi zmdi-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="zmdi zmdi-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="zmdi zmdi-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="zmdi zmdi-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="zmdi zmdi-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="zmdi zmdi-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> 
+                         
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer area start-->
+
+        <!--footer bottom area start-->
+<div class="footer-bottom global-table" style="background: #5b5b5b none repeat scroll 0 0;">
+            <div class="global-row">
+                <div class="global-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                 <p class="copyrigth text-center" style="direction: ltr;font-size: 18px;">
+               <span class="text-capitalize" style="font-family:main;" > جميع الحقوق محفوظه لمكتب ابو بكر   © 2021    </span>           </p>
+                            </div>
+                            <div class="col-md-6">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer bottom area end-->
+
+       
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!-- jquery latest version -->
+    <script src="<?php echo THEME_DIR ?>js/vendor/jquery-1.12.0.min.js"></script>
+    <!-- Popper js -->
+    <script src="<?php echo THEME_DIR ?>js/popper.min.js"></script>
+    <!-- Bootstrap framework js -->
+    <script src="<?php echo THEME_DIR ?>js/bootstrap.min.js"></script>
+    <!-- Slider js -->
+    <script src="<?php echo THEME_DIR ?>js/slider/jquery.nivo.slider.pack.js"></script>
+    <script src="<?php echo THEME_DIR ?>js/slider/nivo-active.js"></script>
+    <!-- counterUp-->
+    <script src="<?php echo THEME_DIR ?>js/jquery.countdown.min.js"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="<?php echo THEME_DIR ?>js/plugins.js"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="<?php echo THEME_DIR ?>js/main.js"></script>
+
+</body>
+
+</html>
+  

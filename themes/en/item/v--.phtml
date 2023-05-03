@@ -1,0 +1,141 @@
+<link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>css/galleriffic-4.css"/> 
+<link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>css/jquery.fancybox.css"/> 
+<script type="text/javascript"
+	src="<?php echo THEME_DIR ?>Scripts/jquery.galleriffic.js"></script>
+<script type="text/javascript"
+	src="<?php echo THEME_DIR ?>Scripts/jquery.opacityrollover.js"></script>
+<script type="text/javascript"
+	src="<?php echo THEME_DIR ?>Scripts/jquery.fancybox.pack.js"></script>
+
+<h1><?php echo $this->item->title ?></h1>
+
+<div class="block-content">
+	<div id="product-side-image">
+            
+				<div class="rpl_gallery">
+					<script type="text/javascript">
+			document.write('<style>.noscript { display: none; }</style>');
+		</script>
+					<!-- Start Advanced Gallery Html Containers -->
+					<div class="content">
+						<div class="slideshow-container">
+							<div id="controls" class="controls"></div>
+							<div id="loading" class="loader"></div>
+							<div id="slideshow" class="slideshow"></div>
+						</div>
+						<div id="caption" class="caption-container">
+							<div class="photo-index"></div>
+						</div>
+					</div>
+					<div class="navigation-container">
+						<div id="thumbs" class="navigation">
+							
+
+							<ul class="thumbs noscript">
+							<?php 
+                                                            $images = explode('||',trim($this->item->table_image,'|'));
+                                                            foreach($images as $photo): if(!trim($photo)) continue;?>
+							<li><a class="thumb" name="leaf"
+									href="<?php echo  APP_BASEURL.'/files/ful/i/'.$photo ?>"
+									title="<?php echo $this->item->title ?>"> <img
+										src="<?php echo  APP_BASEURL.'/files/ful/i/'.$photo ?>"
+										alt="<?php echo $this->item->title ?>" />
+								</a>
+									<div class="caption">
+										<div class="image-title"><?php echo $this->item->title ?></div>
+										<div class="image-desc"></div>
+										<div class="download"></div>
+									</div></li>
+							<?php endforeach; ?>
+						</ul>
+							
+						</div>
+					</div>
+					<script type="text/javascript">
+        jQuery(document).ready(function() {
+        	var gallery = jQuery('#thumbs').galleriffic({
+				delay:                     2500,
+				numThumbs:                 15,
+				preloadAhead:              10,
+				enableTopPager:            true,
+				enableBottomPager:         true,
+				maxPagesToShow:            7,
+				imageContainerSel:         '#slideshow',
+				controlsContainerSel:      '',
+				captionContainerSel:       '#caption',
+				loadingContainerSel:       '#loading',
+				renderSSControls:          true,
+				renderNavControls:         true,
+				playLinkText:              'Play Slideshow',
+				pauseLinkText:             'Pause Slideshow',
+				prevLinkText:              '&lsaquo; Previous Photo',
+				nextLinkText:              'Next Photo &rsaquo;',
+				nextPageLinkText:          '',
+				prevPageLinkText:          '',
+				enableHistory:             false,
+				autoStart:                 false,
+				syncTransitions:           true,
+				defaultTransitionDuration: 900,
+	            onTransitionIn:   function(slide, caption, isSync) {
+	                slide.fadeTo(this.getDefaultTransitionDuration(isSync), 1.0);
+                    slide.find("a.advance-link").fancybox({
+                        'titleShow'     : true,
+                        'transitionIn'  : 'elastic',
+                        'transitionOut' : 'elastic',
+                        'easingIn'      : 'easeOutBack',
+                        'easingOut'     : 'easeInBack'
+                    });
+	            }
+			});
+
+			if(console)
+				console.debug(gallery);
+			
+			gallery.onFadeOut = function() {
+				jQuery('#details').fadeOut('fast');
+			};
+			
+			gallery.onFadeIn = function() {
+				jQuery('#details').fadeIn('fast');
+			};
+		});
+        </script>
+
+
+				</div>
+				<div style="clear: both"></div>
+        </div>
+	<div id="product-full-description">
+            <table>
+             
+               
+                <? if(strlen($this->item->slider_image)) :?>
+                <tr>
+                    <td>السعر</td>
+                    <td><?php echo $this->item->slider_image ?> ريال سعودي</td>
+                </tr>
+                <? endif ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <?php echo $this->item->data ?>
+
+ 
+ 
+        </div>
+	<div class="clear"></div>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+  
+
+              
+       <img height='150' width='150' src="<?php echo $this->baseUrl();?>/MyUpload/<?php echo $this->item->adv;?>"  />
+ 
+
+
+</div>
+	<div class="clear"></div>
+</div>

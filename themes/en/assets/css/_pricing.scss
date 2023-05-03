@@ -1,0 +1,208 @@
+.pricing-one {
+	position: relative;
+
+	&__shape {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background-repeat: no-repeat;
+		height: 688px;
+		display: none;
+
+		@media (min-width: 1200px) {
+			display: block;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	.section-title {
+		padding-bottom: 30px;
+	}
+
+	&__text {
+		margin-bottom: 39px;
+	}
+
+	&__content {
+		padding-bottom: 130px;
+
+		@media (min-width: 992px) {
+			padding-bottom: 0;
+
+		}
+	}
+
+	&__items {
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 100%;
+			height: 100%;
+			width: 100%;
+			background-image: url(../images/shapes/pricing-one-bg-1-1.png);
+			background-position: left center;
+			background-repeat: no-repeat;
+		}
+
+		&::before {
+			position: absolute;
+			content: '';
+			width: 10000px;
+			left: 170px;
+			background-color: $cretech-primary;
+			top: -80px;
+			bottom: -50px;
+
+			@media (min-width: 768px) {
+				bottom: -80px;
+			}
+
+			@media (min-width: 992px) {
+				top: -120px;
+				bottom: -120px;
+			}
+		}
+	}
+
+	&__circle {
+		@include reset-ul;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-bottom: 45px;
+		margin-top: 6px;
+
+		@media (min-width: 1200px) {
+			padding-right: 45px;
+		}
+
+		.circle-progress {
+			position: relative;
+			display: block;
+			width: 125px;
+			height: 125px;
+
+			span {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				font-size: 24px;
+				color: $cretech-black;
+				font-weight: bold;
+				line-height: 1em;
+			}
+		}
+
+		&__title {
+			margin: 0;
+			font-size: 20px;
+			font-weight: bold;
+			color: $cretech-black;
+			letter-spacing: -0.05em;
+			margin-top: 15px;
+
+			@media (min-width: 992px) {
+				text-align: center;
+				padding-right: 30px;
+			}
+
+			@media (min-width: 1200px) {
+				padding-left: 15px;
+				padding-right: 0;
+				text-align: left;
+			}
+
+		}
+	}
+}
+
+.pricing-card-one {
+	background-image: url(../images/shapes/price-card-bg-1-1.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	position: relative;
+	background-color: #fff;
+	box-shadow: 0px 0px 43px 0px rgba(0, 0, 0, 0.07);
+	padding: 50px;
+	margin-bottom: 30px;
+
+	@media (min-width: 768px) {
+		margin-bottom: 0;
+	}
+
+	&__name {
+		text-align: right;
+		text-transform: uppercase;
+		color: $cretech-black;
+		letter-spacing: .1em;
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 1em;
+		margin-bottom: 13px;
+		margin-bottom: 2px;
+	}
+
+	&__price {
+		text-align: right;
+		font-size: 38px;
+		font-weight: bold;
+		color: $cretech-primary;
+		line-height: 1em;
+		margin-top: 11px;
+
+		@media (min-width: 768px) {
+			font-size: 45px;
+		}
+
+		@media (min-width: 992px) {
+			font-size: 52px;
+		}
+
+		@media (min-width: 1200px) {
+			font-size: 60px;
+		}
+	}
+
+	&__time {
+		text-align: right;
+		font-size: 20px;
+		font-weight: 400;
+		margin-bottom: 33px;
+	}
+
+	&__list {
+		@include reset-ul;
+		margin-bottom: 30px;
+
+		li {
+			position: relative;
+			padding-left: 37px;
+			font-weight: 400;
+
+			+li {
+				margin-top: 8px;
+			}
+
+			>i {
+				position: absolute;
+				top: 6px;
+				left: 0;
+				font-size: 16px;
+				color: $cretech-secondary;
+			}
+		}
+	}
+
+	&__btns {
+		display: flex;
+	}
+}

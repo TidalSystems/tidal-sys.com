@@ -1,0 +1,148 @@
+<?php 
+
+$name = $this->ele->getFullyQualifiedName();
+$value = $this->ele->getValue();
+if($value)
+{
+    $svalue = unserialize($value);    
+}
+?>
+
+<script>
+     
+   jQuery(function($) {
+        var clicked = <?php  echo ($svalue)?count($svalue)+1:1 ?>;
+        
+        function grEl()
+        {
+            var imgRemvable = '<img  src="<?php  echo $this->baseUrl().'/ui/misc/cross.png' ;?>" class="RemoveDateRow"  title="GrElements-'+clicked+'" />';
+            var ele = '<div  class="GrElements" id="GrElements-'+clicked+'">';
+            ele += '<dl>';
+            ele += '<dt><label for="name">'+clicked+' -Question:- </label></dt>';
+            ele += '<dd>';
+            ele += '<input type="text" name="question_[]" size="100" /> &nbsp; &nbsp;'+imgRemvable;
+            ele += '</dd>';
+            ele += '<dt><label for="name">Answers:- </label></dt>';
+            ele += '<input type="radio" name="answer_['+clicked+']"  value="0"> <input type="tex" name="answer_text_['+clicked+'][]"  size="50"><input type="tex" name="answer_image_['+clicked+'][]" value="" size="50"><br><br>';
+            ele += '<input type="radio" name="answer_['+clicked+']"  value="1"> <input type="tex" name="answer_text_['+clicked+'][]"  size="50"><input type="tex" name="answer_image_['+clicked+'][]" value="" size="50"><br><br>';
+            ele += '<input type="radio" name="answer_['+clicked+']"  value="2"> <input type="tex" name="answer_text_['+clicked+'][]"  size="50"><input type="tex" name="answer_image_['+clicked+'][]" value="" size="50"><br><br>';
+            ele += '<input type="radio" name="answer_['+clicked+']"  value="3"> <input type="tex" name="answer_text_['+clicked+'][]"  size="50"><input type="tex" name="answer_image_['+clicked+'][]" value="" size="50"><br><br>';
+            ele += '</dl></div>';
+            return $('#questionsElements .GrElements').last().after(ele);
+        }
+        $('.New-Question').click(function() {
+            var numRow = $('input[name="numRow"]').val();
+            if(numRow > 1)
+            {
+                    for(var i=0; i<numRow;i++)
+                    {
+                        grEl();
+                        clicked = clicked + 1;
+                    }
+                    $('input[name="numRow"]').val(1);
+            }
+            else
+            {
+                    grEl();
+                    clicked = clicked + 1;
+            }            
+        });
+        $('.RemoveDateRow').live('click', function() {
+        $('#' +$(this).attr('title')).remove();
+         clicked = clicked - 1 ;
+	});
+    });
+</script>
+<?php  if($this->ele->getAttrib(EditId) != 'StartExam') { ?>
+<div style="margin-bottom: 10px;">
+    <button type="button" class="New-Question button small red" >Add New Questions</button>
+    <input type="text" size="3" name="numRow">
+</div>
+
+<div class="questions-answers">
+    <span id="questionsElements" style="border: 1px solid #000000; display: block;margin-bottom: 4px;">
+        <div  class="GrElements"></div>
+        <?php 
+           if($svalue)
+           {
+                foreach($svalue as $value)
+                {
+                    $i++;
+         ?>
+
+<div  class="GrElements" id="GrElements-<?php  echo $i ?>">
+<dl>
+<dt><label for="name"><?php  echo $i ?> -Question:- </label></dt>
+<dd>
+<input type="text" name="question_[]" size="100"  value="<?php  echo $value['questions'] ?>"/> &nbsp; &nbsp;<img  src="<?php  echo $this->baseUrl().'/ui/misc/cross.png' ;?>" class="RemoveDateRow"  title="GrElements-<?php  echo $i ?>" />
+</dd>
+<dt><label for="name">Answers:- </label></dt>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 1) echo 'checked="checked"'; ?> value="1"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][0] ?>" size="50"><input type="tex" name="answer_image_[<?php  echo $i ?>][]" value="<?php  echo $value['answers_image'][0] ?>" size="30"><?php  if($value['answers_image'][0]){ ?> <img src="<?php  echo $this->baseUrl(); ?>/files/thmb/i/<?php  echo $value['answers_image'][0] ?>" > <?php  } ?><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 2) echo 'checked="checked"'; ?> value="2"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][1] ?>" size="50"><input type="tex" name="answer_image_[<?php  echo $i ?>][]" value="<?php  echo $value['answers_image'][1] ?>" size="30"><?php  if($value['answers_image'][1]){ ?> <img src="<?php  echo $this->baseUrl(); ?>/files/thmb/i/<?php  echo $value['answers_image'][1] ?>" > <?php  } ?><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 3) echo 'checked="checked"'; ?> value="3"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][2] ?>" size="50"><input type="tex" name="answer_image_[<?php  echo $i ?>][]" value="<?php  echo $value['answers_image'][2] ?>" size="30"><?php  if($value['answers_image'][2]){ ?> <img src="<?php  echo $this->baseUrl(); ?>/files/thmb/i/<?php  echo $value['answers_image'][2] ?>" > <?php  } ?><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 4) echo 'checked="checked"'; ?> value="4"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][3] ?>" size="50"><input type="tex" name="answer_image_[<?php  echo $i ?>][]" value="<?php  echo $value['answers_image'][3] ?>" size="30"><?php  if($value['answers_image'][3]){ ?> <img src="<?php  echo $this->baseUrl(); ?>/files/thmb/i/<?php  echo $value['answers_image'][3] ?>" > <?php  } ?><br><br>
+</dl></div>
+
+        <?php     }
+           }
+        ?>
+    </span>
+</div>
+
+<div style="margin-bottom: 10px;">
+    <button type="button"  class="button small red New-Question" onclick="">Add New Questions</button>
+</div>
+
+<?php  }else{
+    $value = $svalue[0];
+    $i = 1;
+    ?>
+
+<div  class="GrElements" id="GrElements-<?php  echo $i ?>">
+<dl>
+<dt><label for="name"><?php  echo $i ?> -Question:- </label></dt>
+<dd>
+<input type="text" name="question_[]" size="100"  value="<?php  echo $value['questions'] ?>"/>
+</dd>
+<dt><label for="name">Answers:- </label></dt>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 1) echo 'checked="checked"'; ?> value="1"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][0] ?>" size="50">  <br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 2) echo 'checked="checked"'; ?> value="2"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][1] ?>" size="50">  <br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 3) echo 'checked="checked"'; ?> value="3"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][2] ?>" size="50">  <br><br>
+</dl></div>
+
+<?php  $value = $svalue[1];
+       $i = 2;
+?>
+
+<div  class="GrElements" id="GrElements-<?php  echo $i ?>">
+<dl>
+<dt><label for="name"><?php  echo $i ?> -Question:- </label></dt>
+<dd>
+<input type="text" name="question_[]" size="100"  value="<?php  echo $value['questions'] ?>"/>
+</dd>
+<dt><label for="name">Answers:- </label></dt>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 1) echo 'checked="checked"'; ?> value="1"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][0] ?>" size="50"><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 2) echo 'checked="checked"'; ?> value="2"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][1] ?>" size="50"><br><br>
+</dl></div>
+
+
+
+<?php  $value = $svalue[2];
+       $i = 3;
+?>
+
+<div  class="GrElements" id="GrElements-<?php  echo $i ?>">
+<dl>
+<dt><label for="name"><?php  echo $i ?> -Question:- </label></dt>
+<dd>
+<input type="text" name="question_[]" size="100"  value="<?php  echo $value['questions'] ?>"/>
+</dd>
+<dt><label for="name">Answers:- </label></dt>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 1) echo 'checked="checked"'; ?> value="1"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][0] ?>" size="50"><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 2) echo 'checked="checked"'; ?> value="2"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][1] ?>" size="50"><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 3) echo 'checked="checked"'; ?> value="3"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][2] ?>" size="50"><br><br>
+<input type="radio" name="answer_[<?php  echo $i ?>]" <?php  if($value['corect'] == 4) echo 'checked="checked"'; ?> value="4"> <input type="tex" name="answer_text_[<?php  echo $i ?>][]" value="<?php  echo $value['answers'][3] ?>" size="50"><br><br>
+</dl></div>
+
+
+<?php  } ?>

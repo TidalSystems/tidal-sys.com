@@ -1,0 +1,7 @@
+<?php if(count($this->messages) > 0): ?>
+<div class="alert-message <?php echo $this->messages['0'] ?>">
+<?php echo $this->messages['1'] ?>
+</div>
+<?php
+unset($this->messages);
+endif; ?>

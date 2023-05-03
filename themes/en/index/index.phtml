@@ -1,0 +1,510 @@
+ 
+<?php  $currentdate2 = date("Y-m-d") ; $packagesid = array() ; 
+                        $modelCities = new Model_PlusData();
+                        $modelCities->_name = 'popup'; 
+                        $where = array();
+                        $toppages = $modelCities->selectForArray(array( 'show_home' => '1' , 'id' =>  '2'  ), array('displayorder' => 'DESC')  );
+                        foreach ($toppages as $values):
+                        ?>
+ 
+<?php if(($values->expiredate == '') || ($values->expiredate > $currentdate2) ): ?>
+ 
+ <div id="thover"></div>  <div id="tpopup"><h3> <?php echo $values->title; ?> </h3>
+ <div style="padding: 20px;"> <?php echo $values->data; ?>  </div><div id="tclose">X</div> </div>
+ 
+ <?php endif; ?> 
+
+<?php  endforeach; ?>
+  
+
+
+
+
+
+
+<div class="slider-one">
+			<div class="slider-one__carousel owl-carousel owl-theme thm-owl__carousel"
+				data-owl-options='{"loop": true, "items": 1, "navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"], "margin": 0, "dots": true, "nav": true, "animateOut": "slideOutDown", "animateIn": "fadeIn", "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 7000, "autoplayHoverPause": false}'>
+			
+  <?php $model = new Model_PlusData();    $model->_name  = 'home-slider'; 
+  $toppages = $model->selectForArray(array( ), array('displayorder' => 'ASC')   );  ?>
+<?php foreach($toppages as $index =>$HomeSlider):?>
+
+
+	<div class="item slider-one__slide-<?php echo $index+1; ?> ">
+					<div class="slider-one__bg" style="background-image: url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$HomeSlider->Header; ?>);">
+					</div><!-- /.slider-one__bg -->
+					<div class="slider-one__line"></div><!-- /.slider-one__line -->
+					<div class="slider-one__shape-1"></div><!-- /.slider-one__shape-1 -->
+					<div class="slider-one__shape-2"></div><!-- /.slider-one__shape-2 -->
+					<div class="slider-one__shape-3"></div><!-- /.slider-one__shape-3 -->
+					<div class="container">
+						<div class="slider-one__content ">
+						 
+                            <div class="slider-one__title-wrapper">
+								<h2 class="slider-one__title"><?php echo $HomeSlider->daraEn; ?>  
+									</h2><!-- /.slider-one__title -->
+							</div><!-- /.slider-one__title-wrapper -->
+							<!-- /.slider-one__floated -->
+							<p class="slider-one__text"><?php echo $HomeSlider->title; ?> </p><!-- /.slider-one__text -->
+							
+							<div class="slider-one__btns" style="margin-top:20px;">
+								<a href="<?php echo $HomeSlider->linkurlEn; ?>" class="thm-btn slider-one__btn"><span><?php echo $HomeSlider->linkTextEn; ?></span></a>
+								<!-- /.thm-btn slider-one__btn -->
+							</div><!-- /.slider-one__btns -->
+						</div><!-- /.slider-one__content -->
+					</div><!-- /.container -->
+				</div><!-- /.item -->
+
+<?php endforeach; ?> 
+			</div><!-- /.slider-one__carousel -->
+		</div><!-- /.slider-one -->
+
+
+ 
+	
+	
+	
+	
+	
+
+<?php $model = new Model_PlusData();    $model->_name  = 'home-page-section';     $where = array('id' => '1'  );
+						        $hoem = $model->selectForArray(array(), array( )  );
+								foreach($hoem as $homepage):	?> 
+						
+	<section class="section-padding--bottom section-padding--top about-five">
+			<div class="container">
+				<div class="row gutter-y-60">
+					<div class="col-lg-6">
+						<div class="about-five__images">
+							<div class="about-five__images__shape"></div><!-- /.about-five__images__shape -->
+							<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$homepage->Photo1; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+					 
+						<?php if(trim($homepage->video)): ?>		<div class="about-five__video">
+							<a href="https://www.youtube.com/watch?v=<?php echo $homepage->video; ?>" class="video-popup">
+									<i class="fa fa-play"></i>								</a>					</div><!-- /.about-five__video -->
+							<?php endif; ?>	
+						<div class="about-five__images__caption count-box wow fadeInUp" data-wow-duration="1500ms">
+								<span class="count-text" data-stop="<?php echo $homepage->Experience2; ?>" data-speed="2500">00</span>
+							<?php echo $homepage->Experience1; ?>						</div><!-- /.about-five__images__caption -->
+						</div><!-- /.about-five__images -->
+					</div><!-- /.col-lg-6 -->
+					<div class="col-lg-6">
+						<div class="about-five__content">
+							<div class="section-title ">
+								<p class="section-title__text">About Us</p><!-- /.section-title__text -->
+								<h2 class="section-title__title"><?php echo $homepage->title; ?>
+									 </h2>
+								<!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+						 
+							<div class="about-five__text"><?php echo $homepage->TextUnderSlider; ?></div>
+							<!-- /.about-five__text -->
+						 
+							<div class="about-four__meta" style="padding-top: 0px;">
+								<div class="about-four__author">
+							 
+								</div><!-- /.about-four__author -->
+								<a  href="<?php echo $homepage->Link; ?>" class="thm-btn about-four__btn"><span><?php echo $homepage->LinkTitle; ?></span></a>
+								
+								
+										<a  href="<?php echo $homepage->Link2; ?>" class="thm-btn about-four__btn"><span><?php echo $homepage->Link2Title; ?></span></a>
+								<!-- /.thm-btn about-four__btn -->
+							</div><!-- /.about-four__meta -->
+						</div><!-- /.about-five__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+
+ <?php endforeach; ?>
+ 
+ 
+ 
+  
+       
+		
+ 
+ 
+    
+
+       
+	   <section style="padding-top: 80px;padding-bottom: 80px;" 
+			class=" section-padding--top service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right"
+			style="background-image: url(<?php echo THEME_DIR ?>assets/images/shapes/service-four-bg-1-1.png);">
+			<div class="container">
+				<div class="section-title text-center">
+			 
+					<h2 class="section-title__title">OUR SOLUTIONS</h2>
+					<!-- /.section-title__title -->
+				</div><!-- /.section-title -->
+				<div class="owl-carousel thm-owl__carousel thm-owl__carousel--with-shadow service-four__carousel"
+					data-owl-options='{"loop": true,
+				"autoplay": true,
+				"nav": false,
+				"navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
+				"dots": true,
+				"margin": 0,
+                "items": 1,
+				"smartSpeed": 700,
+				"responsive": {
+					"0": {
+						"margin": 0,
+						"items": 1
+					},
+					"576": {
+						"margin": 30,
+						"items": 2
+					},
+					"768": {
+						"margin": 30,
+						"items": 3
+					},
+					"992": {
+						"margin": 30,
+						"items": 4
+					},
+					"1200": {
+						"margin": 30,
+						"items": 3
+					}
+				}}'>
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $top = $model->selectForArray(array( 'id' => '2' ), array( ) , 1  ); 
+ foreach($top as $servi): ?> <?php endforeach; ?>
+
+ <?php $model = new Model_PlusData();    $model->_name  = 'servicescategories';    $partners = $model->selectForArray(array(), array('displayorder' => 'ASC')  );
+								foreach($partners as $index =>$servicescategories):	?>
+
+					<div class="item">
+						<div class="service-card-three">
+							<div class="service-card-three__icon">
+				 
+	<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$servicescategories->Thumb; ?>" />
+													</div><!-- /.service-card-three__icon -->
+							<div class="service-card-three__content">
+								<h3 class="service-card-three__title">
+<a href="<?php echo LANG_URL ?>solution/<?php echo (trim($servicescategories->pagurl)?''.trim($servicescategories->pagurl):'solution/v/i/'.$servicescategories->id) ?>">
+ 
+										<?php echo $servicescategories->title; ?></a> </h3>
+								<p></p>	
+
+<?php  $a = strip_tags($servicescategories->summary); 
+  $message2 =  substr($a, 0, 500);
+echo implode(' ', array_slice(explode(' ', $a), 0, 10)); ?> 
+<a style="color: #000; text-decoration: underline; font-weight: bold; "  href="<?php echo LANG_URL ?>solution/<?php echo (trim($servicescategories->pagurl)?''.trim($servicescategories->pagurl):'solution/v/i/'.$servicescategories->id) ?>" > more...</a> 
+
+ </p>	
+										
+										
+										<!-- /.service-card-three__title -->
+								<div class="service-card-three__text"> 								</div><!-- /.service-card-three__text -->
+							</div><!-- /.service-card-three__content -->
+						</div><!-- /.service-card-three -->
+					</div><!-- /.item -->
+<?php endforeach; ?> 
+				</div>
+			  <!-- /.owl-carousel -->
+			</div><!-- /.container -->
+		</section>
+
+	   
+	   
+
+
+
+
+
+<section class="section-padding--top section-padding--bottom" style="padding-bottom: 30px;" >
+			<div class="container">
+				<div class="section-title text-center">
+					<p class="section-title__text"><br/><br/></p><!-- /.section-title__text -->
+					<h2 class="section-title__title">From our Blogs</h2><!-- /.section-title__title -->
+				</div><!-- /.section-title -->
+				<div class="row gutter-y-30">
+				 
+<?php  $model = new Model_PlusData();
+   $model->_name  = 'Blogs'; $toppages = $model->selectForArray(array(  ), array( 'id' => 'ASC' ) , 3  ); 
+ foreach($toppages as $Blogs): ?> 
+					<div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-duration="1500ms" data-wow-delay="100ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 100ms; animation-name: fadeInUp;">
+						<div class="blog-card-one">
+							<div class="blog-card-one__image">
+ 	<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$Blogs->thumb; ?>">
+								<a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>"></a>
+							</div><!-- /.blog-card-one__image -->
+							<div class="blog-card-one__content">
+								<div class="blog-card-one__meta">
+									<div class="blog-card-one__date">
+										<i class="fa fa-calendar-alt" aria-hidden="true"></i>
+										<?php echo $Blogs->datepicker; ?>
+									</div><!-- /.blog-card-one__date -->
+								 
+									<!-- /.blog-card-one__category -->
+								</div><!-- /.blog-card-one__meta -->
+								<h3 class="blog-card-one__title"><a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>"><?php echo $Blogs->title; ?> </a></h3>
+								<a href="<?php echo LANG_URL ?><?php echo (trim($Blogs->pagurl)?'article/'.trim($Blogs->pagurl):'article/v/i/'.$pro->id) ?>" class="blog-card-one__more">
+									Read More
+									<i class="fa fa-arrow-right"></i>
+								</a><!-- /.blog-card-one__more -->
+							</div><!-- /.blog-card-one__content -->
+						</div><!-- /.blog-card-one -->
+					</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+				 <?php endforeach; ?>
+
+				</div><!-- /.row gutter-y-30 -->
+			</div><!-- /.container -->
+		</section>
+
+
+     
+	<!-- 	<section class="black-bg section-padding-lg--top section-padding-lg--bottom cta-two" style="padding: 100px; background-color: #2076ab;" >
+			<div class="cta-two__bg jarallax" data-jarallax data-speed="0.2" data-imgPosition="50% 0%"
+				style="background-image: url(<?php echo THEME_DIR ?>assets/images/background/cta-two-bg-1-1.jpg);"></div>
+			<div class="container" style="max-width: 5000px;" >
+				<div class="cta-two__inner">
+
+<?php  $model = new Model_PlusData();
+   $model->_name  = 'Logos'; $toppages = $model->selectForArray(array(  ), array( )   ); 
+ foreach($toppages as $page): ?> 
+<img style="padding:10px; width:200px;"  src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$page->img; ?>" class="wow fadeInUp"
+								data-wow-duration="1500ms" >
+  
+<?php endforeach; ?>
+				 
+			 
+					 
+				</div>
+			</div>
+	 
+		</section> -->
+
+
+
+
+
+
+
+	<section class="section-padding--bottom section-padding--top project-one">
+			<div class="container">
+				<div class="project-one__top">
+					<div class="row">
+						<div class="col-lg-7">
+							<div class="section-title ">
+								<p class="section-title__text"></p><!-- /.section-title__text -->
+								<h2 class="section-title__title">TIDAL CLIENTS</h2>
+								<!-- /.section-title__title -->
+							</div><!-- /.section-title -->
+						</div><!-- /.col-lg-7 -->
+						<div class="col-lg-5">
+							<div class="project-one__top__content">
+								<p class="project-one__top__text"> </p>
+								<div class="project-one__top__btns">
+ <?php  $model = new Model_PlusData();
+   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '3' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> 
+ <a href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>" class="thm-btn">
+<?php endforeach; ?>
+										<span>View All OUR CLIENTS</span>									</a><!-- /.thm-btn project-one__top__btn -->
+								</div><!-- /.project-one__top__btns -->
+							</div><!-- /.project-one__top__content -->
+						</div><!-- /.col-lg-5 -->
+					</div><!-- /.row -->
+				</div><!-- /.project-one__top -->
+				<div class="owl-carousel thm-owl__carousel project-one__carousel thm-owl__carousel--with-shadow"
+					data-owl-options='{"loop": true,
+				"autoplay": true,
+				"autoplayTimeout": 5000,
+				"autoplayHoverPause": true,
+				"nav": true,
+				"navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
+				"dots": false,
+				"margin": 0,
+                "items": 1,
+				"smartSpeed": 700,
+				"responsive": {
+					"0": {
+						"margin": 0,
+						"items": 1
+					},
+					"768": {
+						"margin": 30,
+						"items": 2
+					},
+					"992": {
+						"margin": 30,
+						"items": 3
+					}
+				}}'>
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'projects'; $top = $model->selectForArray(array(  ), array('displayorder' => 'asc' )   ); 
+ foreach($top as $pro): ?> 
+					<div class="item">
+						<div class="project-card-one">
+							<div class="project-card-one__image">
+								<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$pro->Thumb; ?>">							</div><!-- /.project-card-one__image -->
+							<div class="project-card-one__content">
+								<div class="project-card-one__content__inner"  style="transform: scale(1, 1);" >
+									<p class="project-card-one__text"></p>
+									<h3 class="project-card-one__title"><a href="<?php echo LANG_URL ?><?php echo (trim($pro->pagurl)?'client/'.trim($pro->pagurl):'client/v/i/'.$pro->id) ?>"><?php echo $pro->Title; ?>
+											 </a></h3><!-- /.project-card-one__title -->
+									<a href="<?php echo LANG_URL ?><?php echo (trim($pro->pagurl)?'client/'.trim($pro->pagurl):'client/v/i/'.$pro->id) ?>" class="project-card-one__more">
+										<i class="fa fa-angle-right"></i>									</a><!-- /.project-card-one__more -->
+								</div><!-- /.project-card-one__content__inner -->
+							</div><!-- /.project-card-one__content -->
+						</div><!-- /.project-card-one -->
+					</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+<?php endforeach; ?>
+ 
+				</div>
+			  <!-- /.owl-carousel -->
+			</div><!-- /.container -->
+		</section>
+
+
+
+
+
+
+		
+		
+		
+
+
+
+
+<?php $model = new Model_PlusData();    $model->_name  = 'home-page-section';     $where = array('id' => '1'  );
+						        $hoem = $model->selectForArray(array(), array( )  );
+								foreach($hoem as $homepage):	?> 
+
+			<section class=" section-padding--top about-three about-three--home-one">
+		 			</div><!-- /.about-three__shape -->
+			<div class="containerxxx" style="   
+ background-image: url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$homepage->titleb7; ?>);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100%;" >
+				<div class="row gutter-y-60" style=" --bs-gutter-x: 0px;" >
+					<div class="col-lg-6"  >
+						<div class="">
+ 						</div><!-- /.about-three__image -->
+					</div><!-- /.col-lg-6 -->
+					<div class="col-lg-6" style="background: rgb(0,0,0,.5);
+    margin: 0px;
+    padding: 70px;
+    color: #ffff;
+    font-size: 20px;">
+
+<style>
+.white p{
+color:#fff !important;
+}
+</style>
+						<div class="about-three__content">
+						<!--	<div class="section-title ">
+								<p class="section-title__text"></p>
+<div class="about-three__text"><?php echo $homepage->titleb2; ?></div>
+								<h2 style="color:#fff;"  class="section-title__title"><?php echo $homepage->titleb1; ?></h2>
+ 
+
+
+							</div> --> <!-- /.section-title -->
+							<!-- /.about-three__text -->
+							<ul class="about-three__list">
+								<li class="about-three__list__item">
+							 
+									<div class="about-three__list__content white">
+									  
+										<p style="color:#fff;"  class="about-three__list__text"><?php echo $homepage->Mission; ?></p><!-- /.about-three__list__text -->
+									</div><!-- /.about-three__list__content -->
+								</li>
+							 
+							</ul><!-- /.about-three__list -->
+						</div><!-- /.about-three__content -->
+					</div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+
+<?php endforeach; ?>
+              
+                </div>
+            </div>
+        </div> 
+        <!--new arrival area end-->
+		
+		</section>
+		
+		
+		
+		
+		
+		
+		
+
+
+<?php $model = new Model_PlusData();    $model->_name  = 'home-page-section';     $where = array('id' => '1'  );
+						        $hoem = $model->selectForArray(array(), array( )  );
+								foreach($hoem as $homepage):	?> 
+ 
+				
+			<section class=" section-padding--top about-three about-three--home-one"
+style="margin-top:77px; background-image: url(<?php echo constant('APP_BASEURL').'/MyUpload/number.jpg'; ?>);background-repeat: no-repeat; background-size: cover; background-position: center center;" >
+ 
+			<div class="container" style="padding-bottom:30px;" >
+				<div class="row gutter-y-60">
+				 
+					<div class="col-lg-3">
+ 	<h1 style="text-align: center;color: #fff;margin-bottom:30px;  " >
+<i class="fa fa-check-square"></i> <br/>
+<spam style="color:#217aaf; padding-bottom:20px;font-size:55px;" > <?php echo $homepage->t11; ?></spam> <br/>
+<spam style="font-size:25px;" ><?php echo $homepage->t1; ?></spam></h2><!-- /.section-title__title -->
+						 
+					</div><!-- /.col-lg-6 -->
+
+
+ 	<div class="col-lg-3">
+ 	<h1 style="text-align: center;color: #fff;margin-bottom:30px;" >
+<i class="fa fa-handshake"></i> <br/>
+<spam style="color:#217aaf; padding-bottom:20px;font-size:55px;" > <?php echo $homepage->t22; ?></spam> <br/>
+<spam style="font-size:25px;" > <?php echo $homepage->t2; ?></spam> </h2><!-- /.section-title__title -->
+						 
+					</div><!-- /.col-lg-6 -->
+
+
+	<div class="col-lg-3">
+ 	<h1 style="text-align: center;color: #fff;margin-bottom:30px;  ;" >
+<i class="fa fa-clock"></i> <br/>
+<spam style="color:#217aaf; padding-bottom:20px;font-size:55px;" > <?php echo $homepage->t33; ?></spam> <br/>
+<spam style="font-size:25px;" > <?php echo $homepage->t3; ?></spam> </h2><!-- /.section-title__title -->
+						 
+					</div><!-- /.col-lg-6 -->
+
+
+	<div class="col-lg-3">
+ 	<h1 style="text-align: center;color: #fff;margin-bottom:30px; " >
+<i class="fa fa-user-circle"></i> <br/>
+<spam style="color:#217aaf; padding-bottom:20px;font-size:55px;" > <?php echo $homepage->t44; ?></spam> <br/>
+<spam style="font-size:25px;" > <?php echo $homepage->t4; ?></spam> </h2><!-- /.section-title__title -->
+						 
+					</div><!-- /.col-lg-6 -->
+
+
+
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section>
+
+<?php endforeach; ?>
+              
+                </div>
+            </div>
+        </div> 
+        <!--new arrival area end-->
+		
+		
+		
+		
+		
+		
+		 

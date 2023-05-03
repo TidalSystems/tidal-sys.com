@@ -1,0 +1,397 @@
+<?php foreach($this->Page as $value) :  ?> 
+ 
+<div class="inner-banner">
+<div style="background:rgba(0, 0, 0, 0.4); z-index:10; width:100%; height:100% ; position:absolute"> </div>
+  <?php $model = new Model_PlusData(); 
+ $model->_name  = 'country';  $countryid = $model->selectForArray(array('id' => $value->countryid ));foreach($countryid as $toppagecountryid2): ?> 
+  		<img class="center-image" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$toppagecountryid2->thumb; ?>"  /><?php endforeach; ?>
+ 
+    
+	<div class="vertical-align" style="z-index:11">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-8 col-md-offset-2">
+		  			<ul class="banner-breadcrumb color-white clearfix">
+		  				<li><a class="link-blue-2" href="<?php echo LANG_URL ?><?php echo (trim($toppagecountryid2->pagurl)?'Destinations/'.trim($toppagecountryid2->pagurl):'destinations/v/i/'.$toppagecountryid2->id) ?>"> <?php echo $toppagecountryid2->country_name; ?></a>  </li>
+		  				<li><span> </span></li>
+		  			</ul>
+ <h2 class="color-white" style="color:#fff"><?php echo $value->Name; ?></h2>
+  				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- DETAIL WRAPPER -->
+<div class="detail-wrapper">
+	<div class="container">
+		<div class="detail-header">
+			<div class="row">
+            
+            
+				<div class="col-md-12">
+                <div class="col-md-12">    <div class="detaile-title">
+					        <h3 class="link-dr-blue"  style="color: #002c59; letter-spacing:0px">   <?php echo $value->Name; ?>
+</h3>
+		 <h4 class="link-dr-blue"  style="color: #000; letter-spacing:0px"> <?php echo $value->Days; ?> Days  -  <?php echo $value->Nights; ?> Nights 
+<spam style="color:red" >   (<?php 
+          $images = explode('||',trim($value->cityidid,'|')); 
+          foreach($images as $index =>$photo): ?>
+ <?php 	$model = new Model_PlusData();   $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 	<?php endforeach; ?>)  </spam> </h4>
+						   
+                                  				 
+					  <div class="detail-price color-dark-2">
+                   <?php if(trim($value->plane)): ?>  <a class="link-dr-blue"  style="color: #e92c32;"> <i class="fa fa-plane"></i> <?php echo $value->plane ;?> </a><?php endif; ?><br/><br/>
+                      From  <span class="color-dr-blue"> $<?php echo Number_format($value->Price) ;?> </span> </div>		
+					</div> </div>
+                
+                
+                <div class="col-xs-12 col-sm-8 col-md-9">	
+            
+                    
+                    
+                    
+                     
+	         	 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px;"> 
+                 <div class="car-tabs">
+					 <div class="drop-tabs">
+					 
+						<a href="#" class="arrow-down"><i class="fa fa-angle-down"></i></a>
+						 <ul class="nav-tabs tpl-tabs tabs-style-1">
+			 
+						 </ul>
+					 </div>
+
+					<div class="tab-content tpl-tabs-cont section-text t-con-style-1">
+                    
+                    <div class="tab-pane active in"  >
+                        <div class="detail-top slider-wth-thumbs style-1 arrows">
+						<div class="swiper-container thumbnails-preview" data-autoplay="0" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="1">
+			                <div class="swiper-wrapper">
+                             <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destination_imgs';						                                       
+						        $toppagesimage2 = $model->selectForArray(array('Destination' => $value->id  ), array('DisplayOrderGal' => 'asc')  , 1 );
+								foreach($toppagesimage2 as $index33=>$toppage2image): ?>
+
+		                    	<div class="swiper-slide <?php if($index33 ==0): ?>active<?php endif;?>" data-val="<?php echo $index33; ?>">
+		                    		 <img class="img-responsive img-full" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$toppage2image->Img; ?>"  >
+		                    	</div>
+		                    	 <?php endforeach; ?>
+		                     
+		                    	 
+		                    </div>
+			                <div class="pagination pagination-hidden poin-style-1"></div>
+						    <div class="arrow-wrapp arr-s-3">
+								<div class="swiper-arrow-left sw-arrow"><span class="fa fa-angle-left"></span></div>
+								<div class="swiper-arrow-right sw-arrow"><span class="fa fa-angle-right"></span></div>
+							</div>
+			            </div>
+			            <div class="swiper-container thumbnails" data-autoplay="0" data-loop="0" data-speed="500" data-slides-per-view="responsive" data-xs-slides="3" data-sm-slides="5" data-md-slides="5" data-lg-slides="5" 
+			            data-add-slides="5">
+			              
+							<div class="pagination hidden"></div>
+						</div>
+					</div>
+					</div>  
+					
+					 </div>	
+				 </div>
+				</div>
+                
+                    
+                
+                    
+                    
+           
+                 <div class="car-tabs">
+					 <div class="drop-tabs">
+					 
+						<a href="#" class="arrow-down"><i class="fa fa-angle-down"></i></a>
+						 <ul class="nav-tabs tpl-tabs tabs-style-1" style="margin-top: 20px;margin-bottom: 20px;width: 100%;background: #959797;">
+                         
+<?php if(trim($value->Details)): ?> <li class="active click-tabs"><a href="#Details" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Description </a></li><?php endif; ?>
+
+<?php  $alldayscheck = array(); $model = new Model_PlusData();  
+  $model->_name  = 'dest_days';  
+  $destdays = $model->selectForArray(array('Parent' => $value->id ) , array('Id' => 'ASC'));
+  foreach($destdays as $indexdays=>$destday): ?> 
+<?php if($destday->Title != ''): ?>
+<?php $alldayscheck[] = $destday->Title; ?>
+<?php endif; endforeach; ?>
+                                     <?php if(!empty($alldayscheck) ): ?>
+<li class="click-tabs"><a href="#Itinerary" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>  Itinerary</a></li>
+<?php endif; ?>
+					 
+<?php if(trim($value->DInclude)): ?> <li class="click-tabs"><a href="#DInclude" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>  Inclusions</a></li><?php endif; ?>
+<?php if(trim($value->DExclude)): ?> <li class="click-tabs"><a href="#DExclude" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Exclusions</a></li><?php endif; ?>
+ <li class="click-tabs"><a href="#Map" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Map</a></li>  	 
+<?php if(trim($value->Video)): ?> <li class="click-tabs"><a href="#Video" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Video</a></li><?php endif; ?>
+<?php if(trim($value->DNotes)): ?> <li class="click-tabs"><a href="#DNotes" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Notes</a></li><?php endif; ?>
+<?php if(trim($value->Rates)): ?> <li class="click-tabs"><a href="#RATES" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Rates</a></li><?php endif; ?>
+        
+<!-- <li class="click-tabs"><a href="#rates" data-toggle="tab" aria-expanded="false"><span class="fa fa-map-marker"></span>Rates</a></li> -->
+				 		 </ul>
+					 </div>
+
+					<div class="tab-content tpl-tabs-cont section-text t-con-style-1" >
+                    <div class="tab-pane active in" id="Details">
+  <h3> Details</h3>
+                      <?php  echo $value->Details ?>   </div>
+ 
+
+                    
+                    <div class="tab-pane " id="Itinerary">
+
+<?php   $model = new Model_PlusData();  
+  $model->_name  = 'dest_days';  
+  $destdays = $model->selectForArray(array('Parent' => $value->id ) , array('Id' => 'ASC'));
+  foreach($destdays as $indexdays=>$destday): ?> 
+ 
+<?php $alldayscheck[] = $destday->Title; ?>
+  <h3>  Day <?php echo $indexdays+1 ?>- <?php echo $destday->Title; ?> </h3>
+	 <?php echo 	$destday->Det; ?>
+ <br/>
+
+<?php endforeach; ?>
+                                 
+ 
+ </div>  
+				 
+				  
+
+
+
+     <div class="tab-pane " id="DInclude"> 
+ <h3> Include</h3>
+                      <?php  echo $value->DInclude ?>   </div>	
+     <div class="tab-pane"  id="DExclude">  <h3> Exclude</h3>
+                      <?php  echo $value->DExclude ?>   </div>
+  
+
+
+<div class="tab-pane active" id="Map" style="">  <h3> Map</h3><br/>
+ <section class="map-section">
+    	<!--Map Outer-->
+        <div class="map-outer">
+            <div class="google-map" id="contact-google-map" >
+    		</div>
+        </div>
+    </section>
+
+ <style>
+.map-section .google-map {
+    min-height:550px !important;
+}
+</style>
+<?php $allcity = array();
+          $images = explode('||',trim($value->cityidid,'|'));
+            foreach($images as $index=>$photo):  ?>
+ <?php $allcity[] = $photo ;  ?>
+<?php endforeach; ?>
+ 
+ <?php
+       $imagesxx = explode('||',trim($value->cityidid,'|'));
+     
+
+							$model = new Model_PlusData();
+						        $model->_name  = 'city';
+						        $toppages = $model->selectForArray(array('id' => $imagesxx[0] ), array('displayorder' => 'ASC') , 1);
+								foreach($toppages as  $toppagesx):?>
+ 
+ 
+<?php endforeach; ?>
+
+
+<div class="map-outer">
+            <div   class="google-map"
+                id="contact-google-map" 
+                data-map-lat="<?php echo $toppagesx->Lat; ?>" 
+                data-map-lng="<?php echo $toppagesx->Lng; ?>" 
+                data-icon-path="<?php echo THEME_DIR ?>map/map-marker22.png" 
+                data-map-title="<?php echo 'xx'; ?>" 
+                data-map-zoom="5" 
+                data-map-zoomControl = true,
+                data-map-scaleControl =true ,
+  data-markers='{<?php $i = 0;?><?php foreach($allcity as  $index =>$xx):?><?php  $model = new Model_PlusData();
+ $model->_name  = 'city'; $toppages = $model->selectForArray(array('id' => $xx ), array('displayorder' => 'ASC') , 1);
+ $l = count($allcity);	foreach($toppages as $toppage):?><?php if(trim($toppage->Lat) && trim($toppage->Lng)): ?>
+"marker-<?php echo $index+1; ?>":[ <?php echo $toppage->Lat; ?> ,  <?php echo $toppage->Lng; ?> ,"<p><?php echo $toppage->title; ?></p>"]<?php if( $l != $index+1): ?><?php echo ',' ?><?php endif; ?><?php endif; endforeach; ?><?php   endforeach; ?> }'>             
+              
+
+    		</div>
+        </div>
+ 
+
+   </div>
+   <div class="tab-pane " id="Video">  <h3> Video</h3>
+                      <?php  echo $value->Video ?>   </div>
+   <div class="tab-pane"  id="DNotes">  <h3> Notes</h3>
+                      <?php  echo $value->DNotes ?>   </div>
+
+ 
+   <div class="tab-pane"  id="RATES">  <h3> RATES</h3>
+                      <?php  echo $value->Rates ?>
+
+<style> table tr td { padding:6px !important;font-size: 15px; } tbody tr:nth-child(odd){background-color: #f5f5f5;color: #000;} </style>
+   <?php if(trim($value->rates2)): ?>  
+                     
+<?php 
+$single = 0 ;
+$double = 0 ;
+$triple =  0 ;
+$quad =  0 ;
+
+          $images = explode('||',trim($value->rates2,'|'));
+            foreach($images as $index=>$photo):  ?>
+ <?php $images3 = explode(',,',trim($photo,','));  ?>
+ 
+ <?php  $single  .= $images3[2] ?> 
+ <?php  $double .= $images3[3] ?> 
+ <?php  $triple .= $images3[4] ?> 
+ <?php  $quad .= $images3[5] ?> 
+ 
+ <?php endforeach; ?>            
+            
+              
+
+<table border="0" style="width: 100%;margin-top:20px;">
+  <tr style="background:#fff; padding-top: 20px;color: #000;height: 30px;font-weight: bold;text-align: center;">
+    <td style="width:40%">Date</td>
+    <td style="width:15%"><?php if($single != '0'): ?>Single<?php endif; ?></td>
+    <td style="width:15%" ><?php if($double != '0'): ?>Double <?php endif; ?></td>
+    <td style="width:15%"><?php if($triple != '0'): ?>Triple<?php endif; ?> </td>
+    <td style="width:15%"><?php if($quad != '0'): ?>Quad<?php endif; ?> </td>
+  </tr>
+  
+  <?php 
+         $images = explode('||',trim($value->rates2,'|'));
+            foreach($images as $index=>$photo):  ?>
+ <?php $images3 = explode(',,',trim($photo,','));  ?>
+  <tr style="height: 30px;text-align: center;" >
+    <td><spam style="color:red" >Form</spam> <?php echo date("m-d-Y", strtotime($images3[0])); ?> <?php if($images3[1] != '' || $images3[1] != '0' ) :?><spam style="color:red" >To </spam><?php echo date("m-d-Y", strtotime($images3[1])); ?> <?php endif; ?></td>
+    <td><?php if($images3[2] != '' ): ?>$<?php echo  ($images3[2]); ?><?php endif; ?></td>
+    <td><?php if($images3[3] != '' ): ?>$<?php echo  ($images3[3]); ?><?php endif; ?></td>
+    <td><?php if($images3[4] != '' ): ?>$<?php echo  ($images3[4]); ?><?php endif; ?></td>
+    <td><?php if($images3[5] != '' ): ?>$<?php echo  ($images3[5]); ?><?php endif; ?></td>
+  </tr>
+  
+ <?php endforeach; ?> 
+ 
+</table>
+<?php endif; ?>                   
+
+ 
+ 
+</div>
+
+                      
+        </div>                      
+                       
+                      </div> 
+					</div>
+                    
+                    
+                    <div class="col-xs-12 col-sm-8 col-md-3"  style="    padding: 0px;"  > 
+                 <div  style="     padding-bottom:20px;margin-top:20px;background:#f9f8f2" class="sidebar bg-white clearfix" >
+               
+<div class="sidebar-block" style="background:#f9f8f2; ">
+ 
+  <?php if(trim($value->availability)): ?> <div style="padding:0px"  class="col-xs-1 col-sm-1" ><i class="fa fa-calendar"></i> </div><div style="padding:0px;    padding-bottom: 4px;" class="col-xs-11 col-sm-11" ><?php echo $value->availability; ?> </div> <br/> <?php endif; ?>
+  <?php if(trim($value->max)): ?><div style="padding:0px"  class="col-xs-1 col-sm-1" > <i class="fa fa-user"></i> </div><div style="padding:0px;    padding-bottom: 4px;" class="col-xs-11 col-sm-11" ><?php echo $value->max; ?> </div><br/><?php endif; ?>
+  <?php if(trim($value->min)): ?><div style="padding:0px"  class="col-xs-1 col-sm-1" > <i class="fa fa-users"></i> </div><div style="padding:0px;    padding-bottom: 4px;" class="col-xs-11 col-sm-11" ><?php echo $value->min; ?></div> <br/><?php endif; ?>
+  <?php if(trim($value->departure)): ?><div style="padding:0px"  class="col-xs-1 col-sm-1" > <i class="fa fa-calendar"></i> </div><div style="padding:0px;    padding-bottom: 4px;" class="col-xs-11 col-sm-11" ><spam style="font-size: 14px;" >   <?php echo $value->departure ?></div></spam><br/><?php endif; ?>
+  <?php if(trim($value->return)): ?><div style="padding:0px"  class="col-xs-1 col-sm-1" > <i class="fa fa-calendar"></i></div><div style="padding:0px;    padding-bottom: 4px;" class="col-xs-11 col-sm-11" > <spam style="font-size: 14px;"  ><?php echo $value->return ?></div> </spam><br/><br/><?php endif; ?>
+ 
+
+
+
+  <br/> <br/>
+<a href="<?php echo  $this->baseUrl();?>/Request-Quote"  style=" width: 100%;font-size:16px;" type="submit" class=" sidebar-block c-button b-40 bg-red-3 hv-red-3-o" >Request Quote</a>
+  
+ 
+</div></div>
+<br/> 
+ 
+ <div   class=" " >
+ 
+<?php $model = new Model_PlusData();    $model->_name  = 'pages';     $where = array('id' => '7');
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages as $index =>$item):	?>
+
+ <div class="help-contact bg-grey-2">
+                <h4 class="color-dark-2">Need Help?</h4>
+                <p class="color-grey"></p><p>We care about your questions and concerns. </p>
+<p></p>
+                <?php if(trim($item->mainphone)): ?><a style="color: #002c59" class="help-phone color-dark-2 link-dr-blue" href="tel:<?php echo $item->mainphone; ?>"><img src="<?php echo THEME_DIR ?>img/phone24-dark.png" alt="">
+                     <?php echo $item->mainphone; ?>              </a> <?php endif; ?>
+<?php if(trim($item->email)): ?><a  style="    text-transform: lowercase;font-size: 13px;color: #002c59;"class="help-mail color-dark-2 link-dr-blue" href="mailto:<?php echo $item->email; ?>"><img src="<?php echo THEME_DIR ?>img/letter-dark.png" alt=""><?php echo $item->email; ?></a> <?php endif; ?>
+            </div>
+            <br/> <br/>
+<div class="sidebar-block">
+ <?php endforeach; ?>
+ 
+ 
+  
+
+<?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid' => $value->countryid ,'Active' => '0'  ), array('displayorder' => 'ASC')  , 3 );
+								foreach($toppages2 as $toppage2g): ?>
+ 
+ 
+ <?php if($toppage2g->id != $value->id ): ?>
+  
+<h3  ><?php echo $toppage2g->Name; ?> 
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destination_imgs';						                                       
+						        $toppagesimage2 = $model->selectForArray(array('Destination' => $toppage2g->id  ), array('DisplayOrderGal' => 'asc')  , 1 );
+								foreach($toppagesimage2 as $toppage2image): ?>
+ <a href="<?php echo LANG_URL ?><?php echo (trim($toppage2g->pagurl)?'Destinations/'.trim($toppagecountryid2->pagurl).'/'.trim($toppage2g->pagurl):'package/v/i/'.$toppage2g->id) ?>">
+ <img  style="width:100%;"src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$toppage2image->Img; ?>" alt="<?php echo $toppage2g->Name; ?>">  </a>
+        <?php endforeach; ?>
+
+ 
+<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2g->pagurl)?'Destinations/'.trim($toppagecountryid2->pagurl).'/'.trim($toppage2g->pagurl):'package/v/i/'.$toppage2g->id) ?>"   class=" sidebar-block c-button b-40 bg-red-3 hv-red-3-o" >Details</a>
+<br/><br/> </h3>
+ <?php endif; endforeach; ?>
+
+
+
+</div>
+ </div>
+
+</div>
+				    </div>	
+				 </div>
+				</div>
+
+	       		 
+                 
+                 
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="container-fluid">
+	 
+	 
+  </div>
+
+
+         
+ <?php endforeach; ?>
+
+

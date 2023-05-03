@@ -1,0 +1,468 @@
+<?php $url =  "{$_SERVER['HTTP_HOST']}";
+
+$escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
+    $guide= $escaped_url.APP_BASEURL ; ?>
+ 
+<?php if(($guide == 'tidal-sys.com') || ($guide == 'www.tidal-sys.com') ): ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title><?php if(!trim($this->ceotitle)):?><?php echo $this->siteDataSEO['title'] ?> <?php else: ?> <?php echo $this->ceotitle ? '' . $this->ceotitle : '' ?><?php endif; ?></title>	
+<meta name="keywords" content="<?php if(!trim($this->ceokeywords)):?><?php echo $this->siteDataSEO['Keywords'] ?> <?php else: ?><?php echo $this->ceokeywords ? '' . $this->ceokeywords : '' ?> <?php endif; ?>">
+<meta name="description" content="<?php if(!trim($this->ceodescription)):?><?php echo $this->siteDataSEO['Description'] ?> <?php else: ?><?php echo $this->ceodescription ? '' . $this->ceodescription : '' ?> <?php endif; ?>">
+
+	<!-- google font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+		rel="stylesheet">
+	<!-- favicons Icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo THEME_DIR ?>img/favicon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo THEME_DIR ?>img/favicon.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo THEME_DIR ?>img/favicon.png" />
+ 
+	<!-- plugins css -->
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/jarallax/jarallax.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/animate/animate.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/owl-carousel/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/owl-carousel/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/cretech-icons/style.css">
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/vendors/youtube-popup/youtube-popup.css">
+	<!-- templates css -->
+	<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/cretech.css">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R406T7DMY4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R406T7DMY4');
+</script>
+
+</head>
+
+<body class="custom-cursor">
+	<!-- <div class="custom-cursor__cursor"></div>
+	<div class="custom-cursor__cursor-two"></div> -->
+
+<div class="page-wrapper">
+		<div class="topbar">
+			<div class="container-fluid">
+	 <?php  $model = new Model_PlusData();
+   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'Contact' ), array( ) , 1  ); 
+ foreach($toppages as $contact): ?>  <?php endforeach; ?>
+				<p class="topbar__text"> 
+					 
+				  </p><!-- /.topbar__text -->
+				<ul class="topbar__info">
+					<li>
+						<i class="fa fa-envelope"></i>
+						<a style="color:#fff;" href="mailto:<?php echo $contact->email; ?>"><?php echo $contact->email; ?></a>
+					</li>
+				 
+				</ul><!-- /.topbar__info -->
+				<ul class="topbar__social">
+	 <?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="fab fa-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="fab fa-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="fab fa-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="fab fa-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="fab fa-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="fab fa-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="fab fa-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="fab fa-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="fab fa-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="fab fa-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> 
+				</ul><!-- /.topbar__social -->
+			</div><!-- /.container-fluid -->
+		</div><!-- /.topbar -->
+		<nav class="main-menu sticky-header">
+			<div class="container-fluid">
+				<div class="main-menu__logo">
+					<a href="<?php echo LANG_URL ?>index.php">
+						<img src="<?php echo THEME_DIR ?>img/logo.png" style="height: 90px;width: 100%;" >
+					</a>
+				</div><!-- /.main-menu__logo -->
+
+				<ul class="main-menu__list">
+				    <li><a href="<?php echo LANG_URL ?>index.php">Home</a></li>
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '1' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a></li><?php endforeach; ?>  
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '2' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a></li><?php endforeach; ?>  
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '3' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a></li><?php endforeach; ?>  
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '39' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a></li><?php endforeach; ?>  
+
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '4' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <li ><a  href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a></li><?php endforeach; ?>  
+
+			 
+				</ul><!-- /.main-menu__list -->
+
+			  <div class="main-menu__right">
+					<a href="#" class="mobile-nav__toggler">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+			 
+					<a href="tel:<?php echo $contact->mainphone; ?>" class="main-menu__cta">
+						<i class="fa fa-phone-alt"></i>
+						<span class="main-menu__cta__text">
+							<b><?php echo $contact->mainphone; ?></b>
+							Call Anytime
+						</span><!-- /.main-menu__cta__text -->
+					</a><!-- /.main-menu__cta -->
+				</div><!-- /.main-menu__right -->
+
+			</div><!-- /.container-fluid -->
+		</nav><!-- /.main-menu -->
+ 
+	
+
+     <?php if (count(array($this->messages)) > 0): ?>
+                        <div class="alert-message <?php echo $this->messages['0'] ?>">
+                            <?php echo $this->messages['1'] ?>
+                        </div>
+                        <?php
+                        unset($this->messages);
+                    endif;
+                    ?>
+                    <?php echo $this->layout()->content ?>
+
+
+
+ 
+  
+
+
+		<section class="cta-one" style="margin-top:50px;" >
+			<div class="container">
+				<div class="cta-one__inner text-center wow fadeInUp" data-wow-duration="1500ms">
+					<div class="cta-one__circle"></div><!-- /.cta-one__circle -->
+					<div class="section-title ">
+						<p class="section-title__text">HAVE ANY QUESTIONS?
+</p><!-- /.section-title__text -->
+						<h2 class="section-title__title section-title__title--light">
+You can ask tidal information systems and get your online consultation NOW
+
+</h2>
+
+ 
+<form style="background: none;padding-bottom: 0px;"  action="" method="post"   class="contact-one__form" novalidate="novalidate">
+				
+  <?php  ($this->messageVi)  ?>
+                <?php echo '<h2 style="width: 100%;color: red;">' . $this->messageVi . '</h2>' ?>
+
+	 
+							<div class="row " bis_skin_checked="1">
+								<div class="col-lg-4 col-md-4" bis_skin_checked="1">
+									<input type="text" placeholder="Your name" name="name">
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-lg-4 col-md-4" bis_skin_checked="1">
+									<input type="email" placeholder="Email address" name="email">
+								</div><!-- /.col-lg-6 col-md-12 -->
+<div class="col-lg-4 col-md-4" bis_skin_checked="1">
+									<input type="text" placeholder="Phone" name="phone">
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-lg-12 col-md-12" bis_skin_checked="1">
+									<textarea name="message" placeholder="Write message"></textarea>
+								</div><!-- /.col-lg-6 col-md-12 -->
+								<div class="col-md-12" bis_skin_checked="1">
+									<button name="save7" id="save7" class="thm-btn contact-one__btn" type="submit"><span>send a
+											message</span></button>
+								</div><!-- /.col-md-12 -->
+							</div><!-- /.row -->
+						</form>
+
+
+<!--  <?php  $model = new Model_PlusData();
+   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '4' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> 
+
+					 
+					</div> 
+					<a href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>" class="thm-btn thm-btn--light cta-one__btn"><span>Contact Us</span></a>
+				 
+				</div> 
+  <?php endforeach; ?>  -->
+			</div>
+		  <!-- /.container -->
+		</section><!-- /.cta-one -->
+
+
+		<div class="footer-main section-padding--bottom footer-main--top-padding">
+			<div class="container">
+				<div class="row gutter-y-30">
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--about">
+							<a href="<?php echo LANG_URL ?>index.php" class="footer-widget__logo">
+								<img src="<?php echo THEME_DIR ?>img/logo.png" width="210"  >							</a>
+							<p class="footer-widget__text">
+<?php echo $this->siteDataSEO['footer'] ?>
+</p><!-- /.footer-widget__text -->
+							<ul class="footer-widget__social">
+							<?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="fab fa-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="fab fa-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="fab fa-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="fab fa-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="fab fa-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="fab fa-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="fab fa-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="fab fa-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="fab fa-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="fab fa-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> 
+							</ul><!-- /.footer-widget__social -->
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+				<!--	<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--links">
+							<h3 class="footer-widget__title">Services</h3> 
+
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $top = $model->selectForArray(array( 'id' => '2' ), array( ) , 1  ); 
+ foreach($top as $servi): ?> <?php endforeach; ?>
+ 
+
+							<ul class="footer-widget__links"> 
+  
+
+ <?php $model = new Model_PlusData();    $model->_name  = 'servicescategories';    $partners = $model->selectForArray(array(), array('displayorder' => 'ASC')  );
+								foreach($partners as $index =>$servicescategories):	?>
+
+							 <li>
+									<a href="<?php echo LANG_URL ?><?php echo (trim($servi->pagurl)?''.trim($servi->pagurl):'page/v/i/'.$servi->id) ?>#<?php echo $servicescategories->id; ?>"><?php echo $servicescategories->title; ?></a>
+								</li> 
+<?php endforeach; ?>
+							  
+							</ul> 
+						</div> 
+					</div> -->
+
+	<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--contact">
+							<h3 class="footer-widget__title">TIDAL CLIENTS </h3><!-- /.footer-widget__title -->
+						  <?php  $model = new Model_PlusData();   $model->_name  = 'projects'; $top = $model->selectForArray(array(  ), array('displayorder' => 'asc' ) , 4  ); 
+ foreach($top as $pro): ?> 
+ 
+			<a href="<?php echo LANG_URL ?><?php echo (trim($pro->pagurl)?'client/'.trim($pro->pagurl):'client/v/i/'.$pro->id) ?>">		 
+								<img style="float:left; padding: 10px;; width:50%"  src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$pro->Thumb; ?>">	
+</a>
+ 
+  
+<?php endforeach; ?>
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+					
+	<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--contact">
+							<h3 class="footer-widget__title"><?php echo  $contact->titlecontact2; ?></h3><!-- /.footer-widget__title -->
+							<ul class="footer-widget__contact">
+								<li><i class="fa fa-map-marker-alt"></i>
+								<?php echo  $contact->addressSA; ?>		 						</li>
+	<li>
+									<i class="fa fa-phone"></i>
+									<a href="tel:<?php echo  $contact->phoneSA; ?>"><?php echo  $contact->phoneSA; ?></a>								</li>
+								<li>
+									<i class="fa fa-envelope"></i>
+									<a href="mailto:<?php echo  $contact->emailSA; ?>"><?php echo  $contact->email; ?></a>								</li>
+								<li>
+									
+							</ul><!-- /.footer-widget__contact -->
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--contact">
+							<h3 class="footer-widget__title"><?php echo  $contact->titlecontact1; ?></h3><!-- /.footer-widget__title -->
+							<ul class="footer-widget__contact">
+								<li>
+									<i class="fa fa-map-marker-alt"></i>
+								<?php echo  $contact->address; ?>		 						</li>	<li>
+									<i class="fa fa-phone"></i>
+									<a href="tel:<?php echo  $contact->mainphone; ?>"><?php echo  $contact->mainphone; ?></a>								</li>
+								<li>
+									<i class="fa fa-envelope"></i>
+									<a href="mailto:<?php echo  $contact->email; ?>"><?php echo  $contact->email; ?></a>								</li>
+							
+							</ul><!-- /.footer-widget__contact -->
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-main -->
+		<div class="footer-bottom">
+			<div class="container" style="color:#fff;" >
+			   Â© Copyright  <span class="text-capitalize"> Tidal Information Systems . </span> 2023. All Rights Reserved      <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'id' => '6' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?> <a  style="color: #fff; text-decoration: underline; font-weight: bold; " href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"> <?php echo  $page->title; ?> </a><?php endforeach; ?>  
+
+			       </p>
+			</div><!-- /.container -->
+		</div><!-- /.footer-bottom -->
+	</div>
+<!-- /.page-wrapper -->
+ 
+
+
+
+
+	<div class="mobile-nav__wrapper">
+		<div class="mobile-nav__overlay mobile-nav__toggler"></div>
+		<!-- /.mobile-nav__overlay -->
+		<div class="mobile-nav__content">
+			<a href="#" class="mobile-nav__close mobile-nav__toggler">
+				<span></span>
+				<span></span>
+			</a>
+
+			<div class="logo-box">
+				<a href="index.html" aria-label="logo image"><img src="<?php echo THEME_DIR ?>img/logo.png" width="98"
+						height="33" ></a>
+			</div>
+			<!-- /.logo-box -->
+			<div class="mobile-nav__container"></div>
+			<!-- /.mobile-nav__container -->
+
+			<ul class="mobile-nav__contact list-unstyled">
+				<li>
+					<i class="fa fa-phone"></i>
+					<a href="tel:<?php echo  $contact->mainphone; ?>"><?php echo  $contact->mainphone; ?></a>
+				</li>
+				<li>
+					<i class="fa fa-envelope"></i>
+					<a href="mailto:<?php echo  $contact->email; ?>"><?php echo  $contact->email; ?></a>
+				</li>
+				<li>
+					<i class="fa fa-map-marker-alt"></i>
+				<?php echo  $contact->address; ?>
+				</li>
+			</ul><!-- /.mobile-nav__contact -->
+			<ul class="mobile-nav__social">
+			 
+							<?php $model = new Model_PlusData();    $model->_name  = 'social';   
+						        $toppages = $model->selectForArray( array('id' => '1'), array() , 1 ); 
+foreach($toppages as $index=>$social):	?>
+<?php    $images = explode('||',trim($social->allLinks,'|')); foreach($images as $socialx): if(!trim($socialx)) continue;?>
+
+<?php if(($socialx == 'Facebook') && trim($social->Facebook)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Facebook; ?>"><i class="fab fa-facebook"></i></a> </li>
+<?php elseif(($socialx == 'Twitter') && trim($social->Twitter)): ?> 
+ <li> 	<a    target="_blank"  href="<?php echo $social->Twitter; ?>"><i class="fab fa-twitter"></i></a> </li>
+<?php elseif(($socialx == 'Youtube') && trim($social->Youtube)): ?> 
+ <li> <a    target="_blank"  href="<?php echo $social->Youtube; ?>"><i class="fab fa-youtube"></i></a> </li>
+<?php elseif(($socialx == 'Googleplus') && trim($social->Googleplus)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Googleplus; ?>"><i class="fab fa-plus"></i></a> </li>
+<?php elseif(($socialx == 'Instagram') && trim($social->Instagram)): ?> 
+<li> 	<a   target="_blank"  href="<?php echo $social->Instagram; ?>"><i class="fab fa-instagram"></i></a> </li>
+<?php elseif(($socialx == 'Linkedin') && trim($social->Linkedin)): ?> 
+<li> 	<a    target="_blank"  href="<?php echo $social->Linkedin; ?>"><i class="fab fa-linkedin"></i></a> </li>
+<?php elseif(($socialx == 'Pinterest') && trim($social->Pinterest)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Pinterest; ?>"><i class="fab fa-pinterest"></i></a> </li>
+<?php elseif(($socialx == 'Telegram') && trim($social->Telegram)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Telegram; ?>"><i class="fab fa-telegram"></i></a> </li>
+<?php elseif(($socialx == 'Snapchat') && trim($social->Snapchat)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Snapchat; ?>"><i class="fab fa-snapchat-ghost"></i></a> </li>
+<?php elseif(($socialx == 'Tumblr') && trim($social->Tumblr)): ?> 
+	<li> <a    target="_blank"  href="<?php echo $social->Tumblr; ?>"><i class="fab fa-tumblr"></i></a> </li>
+<?php endif; endforeach; ?> <?php endforeach; ?> 
+						<!-- /.footer-widget__social -->
+			</ul><!-- /.mobile-nav__social -->
+
+
+
+		</div>
+		<!-- /.mobile-nav__content -->
+	</div>
+	<!-- /.mobile-nav__wrapper -->
+
+	<div class="search-popup">
+		<div class="search-popup__overlay search-toggler"></div>
+		<!-- /.search-popup__overlay -->
+		<div class="search-popup__content">
+		 
+		</div>
+		<!-- /.search-popup__content -->
+	</div>
+	<!-- /.search-popup -->
+
+
+
+	<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+	<!-- plugins js -->
+	<script src="<?php echo THEME_DIR ?>assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/wow/wow.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/jarallax/jarallax.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/lettering-js/jquery.lettering.js"></script>
+	<script src="<?php echo THEME_DIR ?>assets/vendors/youtube-popup/youtube-popup.jquery.js"></script>
+	<!-- template js -->
+	<script src="<?php echo THEME_DIR ?>assets/js/cretech.js"></script>
+
+</body>
+
+</html>
+
+ <?php else:    $SendMail = new Func_SendMail(); 
+$message = $guide; 
+$result = $SendMail->SendMail("ahmedelsaaty901@yahoo.com" , "Tidal", $message , "Tidal" );
+?> 
+
+<?php endif; ?>
+  

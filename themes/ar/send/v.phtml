@@ -1,0 +1,110 @@
+ 
+ 
+ 
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="section">
+            <h3 class="section-heading" style="color:#b3469a;text-align:center"> Your Order</h3>
+
+
+
+<div class="container">
+      <div class="row">
+        <br/>
+        <div class="col-md-12  col-sm-12">
+       
+	             <form role="form" class="contact-form"  id="contactform" name="form2" method="post" action=""   enctype="multipart/form-data"   >
+				  <?php  ($this->messageVi)  ?>
+ <?php echo '<h6 style="tpadding-bottom:20px;text-align: center;color: #b44ea0;">' . $this->messageVi . '</h6>' ?> 
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+ 
+<input   style="display:none" type="text"  name="created_on" id="created_on" value="<?php echo date("Y/m/d") ?>" >
+<input   style="display:none"  type="text"  name="stand" id="stand" value="<?php if(isset($_GET["stand"])) {echo $_GET["stand"]; }?>" >
+<input   style="display:none" type="text"  name="font" id="font" value="<?php if(isset($_GET["font"])) {echo $_GET["font"]; }?>" >
+<input   style="display:none" type="text"  name="category" id="category" value="<?php if(isset($_GET["category"])) {echo $_GET["category"]; }?>" >
+<input   style="display:none" type="text"  name="text" id="text" value="<?php if(isset($_GET["text"])) {echo $_GET["text"]; }?>" >
+ 
+ <?php $model = new Model_PlusData();    $model->_name  = 'order1010';   
+		        $toppagorder = $model->selectForArray(array( ), array('ordernumber' => 'DESC') ,1 );
+								foreach($toppagorder as $index =>$itemorder):	?>
+<input   style="display:none" type="text"  name="ordernumber" id="ordernumber" value="<?php echo $itemorder->ordernumber+1; ?>" />
+  
+<?php endforeach; ?>
+ <input   style="display:none" type="text"  name="representative" id="representative" value="" />
+ 
+                  <input required type="text" class="form-control" name="name" id="name" placeholder="Full Name">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input required type="email" class="form-control" name="email" id="email" placeholder="E-Mail">
+                </div> 
+              </div>
+          
+            
+
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <input required type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                </div>
+              </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+
+ <select required style=height:40px;width:100%;"   onchange="myFunctionx()"  id="representativexx"  name="representativexx" >
+                    <option value="">Select Representative</option>
+	  
+ <?php $model = new Model_PlusData();    $model->_name  = 'users';   
+                                          $where = array('role' => '2' );
+						        $toppages2c = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages2c as $index =>$item2c):	?>
+ <option value="<?php echo $item2c->id; ?>" ><?php echo $item2c->firstname; ?> <?php echo $item2c->lastname; ?></option>
+<?php endforeach; ?>
+
+
+
+              </select>  
+
+
+<script>
+function myFunctionx() {
+    var pageidx = document.getElementById("representativexx");
+    document.getElementById("representative").value = pageidx.options[pageidx.selectedIndex].value; 
+   
+} </script>
+</div></div>
+             
+
+ <div class="col-sm-12">
+
+            <div class="message">
+              <textarea id="message" name="message" rows="6" placeholder="Message"></textarea>
+            </div> 
+</div>
+ <div class="col-xs-12" style="padding-bottom: 20px;text-align: center;" > <br/> <?php echo $this->siteData3['notes'] ?>   <?php echo $this->siteData3['time'] ?></div>
+ <div class="col-xs-12" style="padding-bottom: 20px;text-align: center;" > 
+
+            <button id="save10" name="save10" type="submit" type="button" style="float:none;" class="btn btn-default">Order now</button>   
+</div> 
+</div>           
+          </form> 
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>

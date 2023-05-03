@@ -1,0 +1,58 @@
+ <div class="main-content2">
+  <div class='news'>
+  
+  <div style=" position:absolute; margin-top:-50px; left:200px; "> <img  class="facebook"src="<?php echo THEME_DIR ?>images/logo44.png" width="345" height="53" /> </a> </div> 
+
+<div id="background_cycler" style="height: 548px; display: block;">
+
+ 
+										
+</div>                
+                </div>      
+      <div style="  width:100% ; margin-top:-390px; background-color:#EEEEEE ;PADDING-BOTTOM: 40PX;border-top-left-radius: 9px;border-top-right-radius: 9px;" >
+           
+		<div class="product-box2" >
+			<h11><?php echo $this->Page['title'] ?></h11>
+			<span style="font-size:16px;color:#000000;"><?php echo $this->Page['dataplus']; ?></span>
+			<br /><br />
+			<div class="block-content">
+				<?php if($this->Page['media']): ?>
+					<right><p><img src="<?php echo  APP_BASEURL.'/files/ful/i/'.$this->Page['media'] ?>" style="border: 1px solid #666; height: 240px;width: 410px; margin-right:10px; " /></p></center>
+				<?php endif ?>
+ 
+<article2>				<?php echo $this->Page['data']; ?> 
+
+ 
+  
+
+ 
+
+
+</article2>
+
+		 
+
+			 
+ 
+			<br />	<br /><div  style="position:absolute ; right:470px ; top:110px" ><?php echo $this->Page['dataplus1']; ?></div>
+			<p style="color:#f5382f; font-size:17px;text-align: right; padding-right:20px " >	<strong> اخر الاخبار 
+ </strong></p><br />
+				<ul style="padding-left:30px; color:#000000;direction: rtl;padding-right:30px  ">
+					<?php
+						$model = new Model_PlusData();
+						$model->_name  = 'data_stor';
+						$where = array('type' => 'news1');
+						$order = array('id'=>'ASC');
+						$news = $model->selectForArray($where, $order, 10);
+
+                    	$order2 = array('id'=>'DESC');
+						$news = $model->selectForArray($where, $order2, 10);
+                        
+						foreach($news as $new):
+					?>
+					<li style=" color:#000000;"><a href="<?php echo LANG_URL ?>ar/page/n/i/<?php echo $new->id ?>"><?php echo $new->title ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+		
+ 
+	</div>	</div>

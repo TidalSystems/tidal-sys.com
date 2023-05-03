@@ -1,0 +1,235 @@
+<?php if($this->Custom == 'blocks1')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/cats/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h1> Filter BY Main Category</h1>
+<div class="formAk" >
+    <form action="<?php echo $this->baseUrl() ?>/admin/cats/search" for="" class="" method="get" id="">
+        <?php echo $this->form->pageid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+<?php    
+}elseif($this->Custom == 'items')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/items/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h1> Filter By Category</h1>
+<div class="formAk" >
+    <form action="<?php echo $this->baseUrl() ?>/admin/items/search" for="" class="" method="get" id="">
+        <?php echo $this->form->catid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+<?php    
+}
+?>
+
+<h1><?php echo $this->typename ?></h1>
+    <script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+  </script>
+
+
+
+<?php
+$uri = $_SERVER["REQUEST_URI"];
+$sortUrl = explode('/', $uri);
+unset($sortUrl[count($sortUrl)-1]);
+$sortUrl = implode('/', $sortUrl);
+$sortUrl = $sortUrl . '/sort';
+?>
+<script type="text/javascript">
+/* when the DOM is ready */
+jQuery(document).ready(function() {
+	/* grab important elements */
+	var sortInput = jQuery('#sort_order');
+	var submit = jQuery('#autoSubmit');
+	var messageBox = jQuery('#message-box');
+	var list = jQuery('#sortable');
+	/* create requesting function to avoid duplicate code */
+	var request = function(sortOrder) {
+        console.log(sortOrder);
+		jQuery.ajax({
+			beforeSend: function() {
+				messageBox.text('Updating the sort order in the database.');
+			},
+			complete: function() {
+				messageBox.text('Database has been updated.');
+			},
+			data: {'sortOrder': sortOrder},
+			type: 'post',
+			url: '<?=$_SERVER["REQUEST_URI"]?>'
+		});
+	};
+	/* worker function */
+	var fnSubmit = function(save) {
+		var sortOrder = [];
+		list.children('tr').each(function(){
+			sortOrder.push(jQuery(this).data('id'));
+		});
+
+		if(save) {
+			request(sortOrder);
+		}
+	};
+	/* store values */
+	list.children('tr').each(function() {
+		var tr = jQuery(this);
+		tr.data('id',tr.attr('title')).attr('title','');
+	});
+	/* sortables */
+	list.sortable({
+		opacity: 0.7,
+		update: function() {
+			fnSubmit(true);
+		}
+	});
+	list.disableSelection();
+	/* ajax form submission */
+	jQuery('#dd-form').bind('submit',function(e) {
+		if(e) e.preventDefault();
+		fnSubmit(true);
+	});
+});
+
+</script>
+ <?php  if(!empty($message)): ?>
+    <div id="message-box"><?php echo $message; ?> Waiting for sortation submission...</div>
+<?php endif; ?>
+  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+    <table id="table1" class="table table-bordered table-striped dataTable">
+        <thead>
+            <tr >
+
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody  id="sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+                    else
+                    {
+if($type ==='order'){
+ 
+ echo   '<strong style="color:red">'. $values->idorder .'</strong>' ;
+}
+elseif($type ==='name'){
+  
+  echo 'Name: '. $values->name .'</br>';
+  echo 'Email: '. $values->email .'</br>';
+  echo 'Address: '. $values->address .'</br>';
+  echo 'Phone: '. $values->phone .'</br>';
+  echo 'Country: '. $values->country .'</br>';
+  echo 'Date: '. $values->created_on .'</br>';
+
+                      
+} 
+
+elseif($type ==='status1'){
+                        echo $values->status1;    
+                      
+} 
+
+elseif($type ==='package'){
+                        echo $values->package;    
+                      
+} 
+
+elseif($type ==='bank'){
+                        echo $values->bank;    
+                      
+} 
+
+
+$order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+                    
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+
+                   <a style=" border: 1px;  border-style: double;  padding: 4px;" href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/deleterequests/id/<?php echo $values['id'] ?>')" title="Delete">Delet </a> 
+                <?php
+                        }
+                    }
+ 
+                ?>
+                    
+ 
+
+                </td>
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+    <br>
+  
+ 
+
+ 
+ 
+
+
+
+ 
+
+
+
+<?php 
+
+ if(isset($_POST['do_submit']))  {
+	 $message = 'Sortation has been saved.'; 
+
+
+}
+
+?>
+
+</form>
+
+

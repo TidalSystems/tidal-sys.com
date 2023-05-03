@@ -1,0 +1,110 @@
+ <?php foreach($this->Page as $value): ?>
+
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'events' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?>  <?php endforeach; ?>  
+     <!--breadcumb area start -->
+        <div class="breadcumb-area breadcumb-2 overlay pos-rltv" style="background-image:url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$page->Header; ?>);    background-size: cover;">
+            <div class="bread-main">
+                <div class="bred-hading text-center">
+                    <h5><?php echo $value->title; ?></h5> </div>
+                <ol class="breadcrumb">
+                    <li class="home"><a   href="<?php echo LANG_URL ?>">Home</a></li>
+					 <li class="home"><a   href="<?php echo LANG_URL ?><?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>">Events</a></li>
+                   
+                </ol>
+            </div>
+        </div>
+        <!--breadcumb area end -->
+		
+ <style>
+ .about-des ul li {
+      display: revert;
+    margin-left: 20px;
+    list-style: square;
+	font-size: 16px;
+ }
+ </style>
+ 
+ 
+ 
+ 
+<div class="about-us-area ptb-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center" style="margin-bottom:20px;" >
+                        <div class="heading-title heading-style pos-rltv mb-20 text-center">
+                            <h5  class="uppercase"><?php echo $value->title; ?></h5>
+                        </div>
+                    </div>
+               
+                        <div class="col-lg-5">
+                            <div class="about-des">
+              <img style="width:100%;"  src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Thumb; ?>"  />
+                               
+                            </div>
+                        </div>
+						
+						
+						  <div class="col-lg-7">
+                            <div class="about-des">
+                                <p><?php echo $value->data; ?></p>
+                               
+                            </div>
+                        </div>
+						
+						
+						 
+                </div>
+            </div>
+        </div>
+		
+		
+			<div class="shop-main-area pt-70 pb-40">
+            <div class="container">
+                <div class="row">	
+					   <div class="col-lg-12 text-center" style="margin-bottom:20px;" >
+                        <div class="heading-title heading-style pos-rltv mb-20 text-center">
+                            <h5  class="uppercase">Other Events</h5>
+                        </div>
+                    </div>
+		
+		<div class="col-lg-12 col-md-12 order-lg-12 order-md-2">
+                       <div class="row"> 
+ <?php $indexx = 0;  $model = new Model_PlusData();  $model->_name  = 'events'; $events = $model->selectForArray(array(  ), array( 'displayorder' => 'ASC')   );  foreach($events as $index=>$event): ?><?php if($event->id != ($value->id) ): $indexx = $indexx+1; ?>
+ 
+                            <div class="col-lg-4">
+                                <div class="single-blog sb-2 mb-30">
+                                    <div class="blog-img pos-rltv product-overlay">
+                                        <a href="<?php echo LANG_URL ?><?php echo (trim($event->pagurl)?'event/'.trim($event->pagurl):'event/v/i/'.$event->id) ?>"><img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$event->Thumb; ?>" ></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <div class="blog-title">
+                                            <h5 class="uppercase font-bold"><a href="#"><?php echo $event->title; ?></a></h5>
+                                            <div class="like-comments-date">
+                                               <a href="<?php echo LANG_URL ?><?php echo (trim($event->pagurl)?'event/'.trim($event->pagurl):'event/v/i/'.$event->id) ?>" class="btn-def small" tabindex="0">Read More</a>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                  <?php if($index == 3){ break; } ; ?>
+                            <?php endif; endforeach; ?>
+                            
+                            
+                            
+                      
+                        </div>
+                    </div>
+     </div>    </div>    </div>
+		
+		
+	 
+		
+	
+					
+	   
+                      
+                             
+  
+ <?php endforeach ?>

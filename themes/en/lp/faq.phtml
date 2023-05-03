@@ -1,0 +1,75 @@
+ <div class="main-content2">
+  <div class='news'>
+  
+  <div style=" position:absolute; margin-top:-50px; left:200px; "> <img  class="facebook"src="<?php echo THEME_DIR ?>images/logo44.png" width="345" height="53" /> </a> </div> 
+
+<div id="background_cycler" style="height: 548px; display: block;">
+
+ 
+										
+</div>                
+                </div>      
+      <div style="  width:100% ; margin-top:-390px; background-color:#EEEEEE ;PADDING-BOTTOM: 40PX;border-top-left-radius: 9px;border-top-right-radius: 9px;" >
+         	          	<h11> اسئلة واجوبة للتعليم    </h11>    
+ 
+				<div style="padding-top: 30px;">
+
+
+<table class="tabel-contain11" style="padding-top:20px">
+  <tbody>
+    <tr>
+      <td class="td-center"><script language="JavaScript" type="text/javascript">
+function showOrHide(id) 
+{
+var div = document.getElementById("showOrHideDiv"+id);
+if (div.style.display == "block") 
+{
+div.style.display = "none";
+}
+else 
+{
+div.style.display = "block";
+}
+}
+
+</script>
+ 
+<?php
+						$model = new Model_PlusData();
+						$model->_name  = 'faq';
+				 
+						$order = array('id'=>'desc');
+						$news = $model->selectForArray($where, $order );
+
+						foreach($news as $new):
+ 
+					?>
+
+ 
+				 
+        <table class="tabel-1122">
+            <tbody>
+              <tr>
+                <td ><a href="javascript:showOrHide(<?php echo $new->displayorder ?>);"  class="tabel-1122-td2"> <?php echo $new->title ?>  </a> </td>
+              </tr>
+              <tr>
+                <td><table id="showOrHideDiv<?php echo $new->displayorder ?>" style="display: none;">
+                  <tbody>
+                    <tr>
+                        <td class="tabel-1133-td"><?php echo  $new->data  ?></td>
+                    </tr>
+                     
+                  </tbody>
+                </table></td>
+              </tr>
+            </tbody>
+          </table>
+<?php endforeach; ?>
+        <br /> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+	</div>		</div>	

@@ -1,0 +1,1369 @@
+<?php 
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;
+ $currentdate2 =  date("m/d/Y");   
+ 
+?>
+ 
+ 
+	
+	
+	
+		
+	 
+   
+ <?php foreach($this->Item as $value): ?>
+  <style type="text/css">
+<!--
+.style1 {color: #828283}
+.style2 {color: #2181c4}
+-->
+
+.complete{
+    display:none;
+}
+
+.more{
+       background: #f9b017;
+    color: navy;
+    font-size: 16px;
+   
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    float: right;
+    margin-right: 10px;
+}
+
+
+</style>
+
+
+<style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 35px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #124273 ;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #f9b017;
+}
+</style>
+
+ 
+	<!-- Hero Section
+		================================================== -->
+		<section class="hero small-hero" >
+			<div class="bg-overlay">
+				<div class="container" style="">
+					  
+			  </div>
+			</div>
+		</section>
+
+
+		<!-- Main Section
+		================================================== -->
+        
+        <section class="">
+			<div class="container">
+             <div class="col-sm-6"><h2><?php echo $value->data; ?> <spam style="color:#f9b017" > Vacations </spam></h2> </div>
+             <div class="col-sm-6" style="text-align: right;padding-top: 20px;">
+  </div>
+             
+              <div class="col-sm-12">  <?php echo $value->description; ?>
+ </div>
+
+</div></section>
+		<section class="main" style="padding-top:20px;" >
+			<div class="container">
+
+				  
+        <div class="container">
+    <div class="griddx well well-sm">
+        
+        <div class=" btn-group">
+            <a href="#"  style="    background: #f9b017;" id="list" class="griddx btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span> </a> <a style="background: #114172;" href="#" id="grid" class="griddx btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span> </a>
+        </div>
+    </div>
+    <div id="products" class="row list-group">
+                                        <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid' => $value->id , 'inactive' => '0' , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px; ">
+                              <h3 class="headerrr"><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" ><?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   <?php echo $toppage2->daynumber; ?> days 
+
+
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						          $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right; padding-top: 2px; "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;    height: 27px;  padding-top: 2px;">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                        
+                        <?php endforeach; ?>
+                          
+                    
+                            
+                        <!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid2' => $value->id , 'inactive' => '0'  , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid2 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   <?php echo $toppage2->daynumber; ?> days  
+ 
+
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						          $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+  <!--  //////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid3' => $value->id , 'inactive' => '0' , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid3 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   <?php echo $toppage2->daynumber; ?> days 
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						          $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+
+
+
+
+
+
+<!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid4' => $value->id , 'inactive' => '0'  , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid4 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   <?php echo $toppage2->daynumber; ?> days 
+
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						          $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+
+
+
+
+
+
+
+<!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid5' => $value->id , 'inactive' => '0'  , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid5 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   
+<?php echo $toppage2->daynumber; ?> days
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						          $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid6' => $value->id , 'inactive' => '0'  , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid6 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">  
+ <?php echo $toppage2->daynumber; ?> days 
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						        $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+
+
+<!--  //////////////////////////////////////////////////////////// -->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid7' => $value->id , 'inactive' => '0' , 'inactivedeal' => '0'), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+
+    <?php if( $toppage2->regionid7 != '0'): ?> 
+          <div class="item col-sm-4">
+                                             
+							<article class="place-box card">
+					 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'label';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages27 as $toppage27):
+									   
+							?>  		
+							
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+	<?php endforeach; ?>
+	
+	
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> 
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+ 				
+ 
+ </div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+                              <h3 class="headerrr" ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+                              <div class="blockpackagehome" > <?php echo $toppage2->shortdescription; ?>  </div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   
+<?php echo $toppage2->daynumber; ?> days 
+<?php if(trim($toppage2->prize2)): ?>  <spam style="color:#f9b017;"> From </spam>	    
+
+   <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+				   
+				   
+				 <?php 
+        $modelBlocks = new Model_PlusData();
+        $modelBlocks->_name = 'discount';
+        $toppages = $modelBlocks->selectForArray(array( ), array('displayorder' => 'ASC')  );
+        $pagesrow=  $toppages->count();
+?> <?php $numberdiscounr =  $pagesrow ;  ?> 
+
+
+ 
+<?php if(trim($toppage2->newprice2)) : ?> <?php   $finalvar = $toppage2->newprice2 ;  ?>  
+
+<?php elseif(!trim($toppage2->newprice2) && $numberdiscounr != '0' ) : ?> 
+<!--         //////////////////////////////////////////////////////////////// --> 
+ 
+ <?php  
+     $disc  ;
+ $discID  ;
+
+
+ 								$model = new Model_PlusData();
+						        $model->_name  = 'discount';						                                       
+						         $toppagesc = $model->selectForArray(array( 'type = ?' =>  ' ' ), array('id' => 'ASC')   );
+								foreach($toppagesc as $toppage2c):		   
+							?> 
+<?php if($currentdate2  < $toppage2c->datepicker) :?>
+ 
+<?php if($toppage2c->type == 'All'): ?> <?php  $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>  
+<!--         region////////////------------------/// --> 
+<?php elseif($toppage2c->type == 'Region'): ?>  
+<?php 
+
+$regionarray = array();
+          $images = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $regionarray []= $photo ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->regionid, $regionarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>    <?php endif; ?>
+<!--         region/////////////-----------------// --> 
+
+
+<?php elseif($toppage2c->type == 'Country'): ?>  
+<?php 
+
+$countryarray = array();
+          $images22c = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22c as $photocc): if(!trim($photocc) ) continue;?>
+
+<?php $countryarray []= $photocc ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->countryid, $countryarray )): ?><?php   $disc = $toppage2c->discount ; ?> <?php  $discID = $toppage2c->id; ?>   <?php endif; ?>
+
+<!--         country/////////////-----------------// --> 
+ 
+
+<?php elseif($toppage2c->type == 'Package'): ?>  
+<?php 
+
+$packagesarray = array();
+          $images22p = explode('||',trim($toppage2c->ids,'|'));
+            foreach($images22p as $photopp): if(!trim($photopp) ) continue;?>
+
+<?php $packagesarray []= $photopp ?>  <?php endforeach; ?> 
+<?php if(in_array($toppage2->id, $packagesarray )): ?><?php   $disc = $toppage2c->discount ; ?><?php  $discID = $toppage2c->id; ?>  <?php endif; ?>
+
+<?php else: ?><?php   $disc = '' ; $discID = '' ;     ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+ 
+ 
+<?php if(trim($disc)): ?> <?php   $finalvar = $toppage2->prize2 - $disc ;   ?>  
+<?php elseif(!trim($disc)): ?> <?php     $finalvar = $disc ; ?>  
+<?php endif; ?>
+ 
+<!--         //////////////////////////////////////////////////////////////// --> 
+
+<?php else :?>  <?php  $finalvar = ''  ;   ?> 
+<?php endif; ?>
+ 
+ 
+
+ <spam <?php if(trim($finalvar)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($finalvar)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize2) ?>   </spam> 
+
+
+ <?php if(trim($finalvar)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   <?php echo '$'. number_format($finalvar) ;?> </spam>
+  <?php endif; ?> 
+
+	 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  start from  - discount   ------------------------ --> 
+
+<?
+$disc = null;
+$discID = null;
+$finalvar = null;
+$discDATE = null;
+$finalvardate = null;
+$discID2 = null;
+$status = null;  ?>
+
+<?php endif; ?> <br/> 
+<?php echo $toppage2->pricedescription; ?>  </div>
+<div style="text-align:right; float:right;padding-top: 2px;  "> 
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F;height: 27px;padding-top: 2px; ">  
+ <?php echo $toppage2->ptdpage; ?>   </div>
+</div>
+							</article>
+                           
+						</div>
+                        
+                      
+                        <?php endif; ?> 
+ 
+                        <?php endforeach; ?>
+
+
+
+                          
+       
+                         
+                         
+						 
+					</div>
+				</div>
+			</div>
+		</section>
+
+  <section class="">
+			<div class="container">
+             <div class="col-sm-5"><h2>Know before you go </h2> </div>
+             <div class="col-sm-7" style="text-align: right;padding-top: 20px;"> 
+			 <?php if(trim($value->image)): ?> 
+			<a style="text-decoration:none" href="<?php echo  APP_BASEURL.'/MyUpload/'.$value->image ?> " download >  <h4 style="color:#000000">Download <?php echo $value->data; ?> Travel info <img   title="" src="<?php echo THEME_DIR ?>assets/images/download.png"></h4>  </a> 
+			<?php endif; ?>
+			 
+			 
+			 </div>
+             
+			 
+			 
+              <div class="col-sm-12 " style="padding-bottom:120px; padding-top:20px;">
+              
+               <span style="width:100%" class="  teaser">
+              <?php echo $value->shortdata; ?>
+			  </span>
+
+<span class="complete">  
+  <?php echo $value->longdata; ?>
+
+
+</span>
+<?php if(trim($value->longdata)): ?>
+<span class="more">More...</span>
+<?php endif; ?>
+
+
+ </div>
+ 
+
+</div></section>
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+ 
+       
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+        <script   src="https://code.jquery.com/jquery-1.5.2.js" ></script>
+ 
+ <script  language="javascript">
+ $(".more").toggle(function(){
+    $(this).text("Less..").siblings(".complete").show();    
+}, function(){
+    $(this).text("more..").siblings(".complete").hide();    
+});
+
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
+ <?php endforeach ?>

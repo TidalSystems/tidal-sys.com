@@ -1,0 +1,151 @@
+
+			  
+<?php $model = new Model_PlusData();    $model->_name  = 'contactsPage';     $where = array('id' => '1');
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages as $index =>$contacts):	?>
+
+
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$contacts->thumb; ?>);">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1> </h1>
+              
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+ 
+
+
+ 
+<section class="about-us style-two" style="padding: 40px 0 20px;">
+        <div class="auto-container">
+            <div class="row">
+                <!-- Info Column -->
+                <div class="info-column col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="sec-title">
+                   
+                            <h2 style="color:#164891" ><?php echo $contacts->title2; ?></h2>
+                        </div>
+
+                        <div class="text"><?php echo $contacts->data; ?>  </div>
+
+ 
+
+ 
+                
+            </div>
+        </div>
+    </section>
+  
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<section class="contact-section style-two">
+        <div class="auto-container">
+            <div class="row">
+                <!-- Form Column -->
+                <div class="form-column col-lg- col-md-6 col-sm-6">
+                    <div class="inner-column">
+ 
+                        <div class="contact-form">
+                            <form method="post" action="sendemail.php" id="contact-form" novalidate="novalidate">
+                                <div class="form-group">
+                                    <input type="text" name="username" placeholder="Name" required="">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Email" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="subject" placeholder="Subject" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea name="message" placeholder="Massage"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <button class="theme-btn btn-style-one" type="submit" name="submit-form">Send Now</button>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+<div class="info-column col-lg-6 col-md-6 col-sm-6">
+                    <div class="inner-column">
+                        <!-- Info Box -->
+                        <div class="contact-info-box">
+                            <div class="inner-box">
+                                <span class="icon la la-phone"></span>
+                                <h4>Phones</h4>
+                                <ul>
+                                    <li><?php echo $contacts->phone2 ?></li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Info Box -->
+                        <div class="contact-info-box">
+                            <div class="inner-box">
+                                <span class="icon la la-envelope-o"></span>
+                                <h4>Emails</h4>
+                                <ul>
+                                    <li><?php echo $contacts->email ?></li>
+                                    <li><?php echo $contacts->email2 ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Info Box -->
+                       <?php if(trim($contacts->title)): ?> <div class="contact-info-box">
+                            <div class="inner-box">
+                                <span class="icon la la-globe"></span>
+                                <h4>Address</h4>
+                                <ul>
+                                    <li><?php echo $contacts->title ?></li>
+                                </ul> 
+                            </div>
+                        </div><?php endif; ?>
+
+                       
+                    </div>
+                </div>
+
+         
+ 
+
+                       
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+<div class="info-column col-lg-12 col-md-12 col-sm-12">
+              <?php if(trim($contacts->map)): ?> <iframe src="https://www.google.com/maps/embed?pb=<?php echo $contacts->map; ?>" width="100%" height="405" frameborder="0" style="border:0" allowfullscreen></iframe><?php endif; ?>
+           </div>  
+
+
+ 
+
+<?php endforeach; ?>
+
+ 
+ 

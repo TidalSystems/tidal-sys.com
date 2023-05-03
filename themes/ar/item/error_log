@@ -1,0 +1,2 @@
+[20-Aug-2013 18:33:20] PHP Fatal error:  Using $this when not in object context in /home5/karmafou/public_html/themes/ar/item/v.phtml on line 10
+[20-Aug-2013 18:36:14] PHP Fatal error:  Using $this when not in object context in /home5/karmafou/public_html/themes/ar/item/v.phtml on line 10

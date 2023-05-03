@@ -1,0 +1,134 @@
+<script>
+    MYUPLOADPATH = '<?php  echo $this->baseUrl(); ?>/admin/upload/<?php  echo $this->attrib['MYUPLOADPATH'] ?>';
+    IDUPLOAD = '<?php  echo $this->name ?>';
+    AutoUpload = <?php  echo $this->attrib['AutoUpload'] ?>;
+    MaxNumberOfFiles = <?php  echo $this->attrib['MaxNumberOfFiles'] ?>;
+    AcceptFileTypes = <?php  echo $this->attrib['AcceptFileTypes'] ?>;
+    MYINPUTFIL = '<?php  echo $this->attrib['uploname'] ?>';
+</script>
+<link href="<?php  echo $this->baseUrl(); ?>/ui/upload/jquery.fileupload-ui.css" rel="stylesheet" title="style" media="all" />
+<tr>
+<td><?php  echo $this->label ?> </td>
+<td>
+<div id="<?php  echo $this->name ?>">
+
+    <input type="file" name="fileus" multiple>
+    <br>
+    <div class="fileupload-content">
+        <table class="files gtable"></table>
+        <div class="fileupload-progressbar"></div>
+    </div>
+</div>
+<script id="template-upload" type="text/x-jquery-tmpl">
+    <tr class="template-upload{{if error}} ui-state-error{{/if}}">
+        <td class="preview"></td>
+        <td class="name">${name}</td>
+        <td class="size">${uploadedname}</td>
+        
+        {{if error}}
+            <td class="error" colspan="2">
+                {{if error === 'maxFileSize'}}File exceeds MAX_FILE_SIZE
+                {{else error === 'minFileSize'}}File exceeds MAX_FILE_SIZE
+                {{else error === 'acceptFileTypes'}}Filetype not allowed
+                {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
+                {{else}}${error}
+                {{/if}}
+            </td>
+        {{else}}
+            <td class="progress"><div></div></td>
+            <td class="start"><button>Upload</button></td>
+        {{/if}}
+        <td class="cancel"><button>Delete</button></td>
+    </tr>
+</script>
+<script id="template-download" type="text/x-jquery-tmpl">
+    <tr class="template-download{{if error}}  bro  ui-state-error{{/if}}">
+        {{if error}}
+            <td></td>
+            <td class="name">${name}</td>
+            <td class="size">${sizef}</td>
+            <td class="error" colspan="2">Error:
+                {{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
+                {{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
+                {{else error === 3}}File was only partially uploaded
+                {{else error === 4}}No File was uploaded
+                {{else error === 5}}Missing a temporary folder
+                {{else error === 6}}Failed to write file to disk
+                {{else error === 7}}File upload stopped by extension
+                {{else error === 'maxFileSize'}}File is too big
+                {{else error === 'minFileSize'}}File is too small
+                {{else error === 'acceptFileTypes'}}Filetype not allowed
+                {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
+                {{else error === 'uploadedBytes'}}Uploaded bytes exceed file size
+                {{else error === 'emptyResult'}}Empty file upload result
+                {{else}}${error}
+                {{/if}}
+            </td>
+        {{else}}
+            <td class="preview">
+                {{if thumbnail_url}}
+                    <a href="${url}" target="_blank" class="highslide" onclick="return hs.expand(this)"><img src="${thumbnail_url}"></a>
+                    <input type="hidden" name="<?php  echo $this->attrib['uploname'] ?>" value="${uploadedname}" > 
+                {{/if}}
+            </td>
+            <td class="name">
+                <a href="${url}"{{if thumbnail_url}} target="_blank"{{/if}} ></a>
+            </td>
+            <td class="size">${uploadedname}</td>
+              
+
+        {{/if}}
+        <td class="delete">
+            <button data-type="${delete_type}" data-url="${delete_url}" >Delete</button>
+        </td>
+    </tr>
+</script>
+
+
+</td>
+</tr>
+
+
+<script src="<?php  echo $this->baseUrl() ?>/ui/upload/jquery.tmpl.min.js"></script>
+<script src="<?php  echo $this->baseUrl() ?>/ui/upload/jquery.iframe-transport.js"></script>
+<script src="<?php  echo $this->baseUrl() ?>/ui/upload/jquery.fileupload.js"></script>
+<script src="<?php  echo $this->baseUrl() ?>/ui/upload/jquery.fileupload-ui.js"></script>
+<script src="<?php  echo $this->baseUrl() ?>/ui/upload/application.js"></script>
+
+
+<?php  if($this->value){
+
+$fileValue = unserialize($this->value);
+
+
+foreach ($fileValue as $val)
+{
+        $arr['uploadedname'] = $val;
+        $arr['name'] = $val;
+        $arr['size'] = '';
+        $arr['url'] = $this->view->baseUrl().'/files/ful/i/'.$val;
+        $arr['thumbnail_url'] = $this->view->baseUrl().'/files/thmb/i/'.$val;
+        $my[] = $arr;
+}
+    $output =  Zend_Json::encode($my);
+    $fileValue =  ''.stripcslashes($output).'';
+
+
+?>
+<script>
+    $(function () {
+
+                var files = jQuery.parseJSON('[<?php  echo   $fileValue ?>]');
+			var fu = $('#fileupload').data('fileupload');
+			fu._adjustMaxNumberOfFiles(-files.length);
+			fu._renderDownload(files)
+				.appendTo($('#fileupload .files'))
+				.fadeIn(function () {
+					// Fix for IE7 and lower:
+					$(this).show();
+				});
+		});
+
+      
+</script>
+<?php  } ?>

@@ -1,0 +1,155 @@
+
+
+
+ 	<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo $this->typename ?> </span>  </h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+
+						  	</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="<?php echo $this->baseUrl() ?>/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<span class="breadcrumb-item active">Dashboard</span>
+						</div>
+ 
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+ 
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+ 
+  <div class="content">
+
+				<!-- Form inputs -->
+				<div class="card" style="padding:30px;" >
+
+ 
+ 
+<?php echo $this->form ?>
+
+</div></div>
+
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+  
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+<script type="text/javascript">
+
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/MyUpload/"+imgs3[i]+"'  width='250'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+        var button3 = '<div class="imageuploader3">  <div style="" class=" "><div  class="" ><button id="button3" class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 250px;" name="Logo" value="<?php echo $this->form->getElement('Logo')->getValue(); ?>" /><div class="files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+      $('#Logo').replaceWith(button3);
+      if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('uploading process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('uploading process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new Photo');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+ 

@@ -1,0 +1,8 @@
+[01-May-2013 09:03:53] PHP Fatal error:  Class 'Zend_Session_Namespace' not found in /home/kaizeneg/public_html/themes/admin/lang.phtml on line 2
+[01-May-2013 09:03:54] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/layout.phtml on line 7
+[01-May-2013 09:03:55] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/_messages.phtml on line 1
+[01-May-2013 09:03:56] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/login.phtml on line 8
+[17-Aug-2013 21:44:23] PHP Fatal error:  Class 'Zend_Session_Namespace' not found in /home/kaizeneg/public_html/themes/admin/lang.phtml on line 2
+[17-Aug-2013 21:44:24] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/layout.phtml on line 7
+[17-Aug-2013 21:44:25] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/_messages.phtml on line 1
+[17-Aug-2013 21:44:36] PHP Fatal error:  Using $this when not in object context in /home/kaizeneg/public_html/themes/admin/login.phtml on line 8

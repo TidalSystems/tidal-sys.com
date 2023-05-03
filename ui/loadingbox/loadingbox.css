@@ -1,0 +1,51 @@
+#processing_overlay
+{
+	position: absolute;
+	zIndex: 99999999999999998;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color:#000;
+	background:url('image/mask_grssadient_1800.jpg');
+	opacity:0.5;
+	cursor:wait;
+}						
+#processing_container {
+	zIndex: 9999999999;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+	border: solid 5px #5c9ccc;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#processing_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+	background-color:#5c9ccc;
+	color: #FFF;
+	/*border: solid 1px #FFF;*/
+	border-bottom: solid 1px #999;
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+
+#processing_content {
+	text-align: center;
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+#processing_message {
+	text-align:center;
+	vertical-align:middle;
+}

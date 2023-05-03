@@ -1,0 +1,9 @@
+<?php if(count($this->messages) > 0): ?>
+
+<div class="<?php if( $this->messages['1'] == 'Save Done'): ?> <?php echo 'alert alert-success'  ?> <?php else: ?> <?php echo 'alert alert-warning' ?><?php endif; ?> " >
+	<?php echo $this->messages['1'] ?>
+</div>
+
+<?php
+unset($this->messages); 
+endif; ?>

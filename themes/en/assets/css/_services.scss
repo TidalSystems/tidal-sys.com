@@ -1,0 +1,684 @@
+.service-details {
+	&--page {
+		.sidebar-column {
+			@media(min-width: 992px) {
+				order: -1;
+			}
+		}
+	}
+
+	&__image {
+		img {
+			max-width: 100%;
+		}
+	}
+
+	&__title {
+		margin: 0;
+		color: $cretech-black;
+		font-size: 36px;
+		font-weight: bold;
+		letter-spacing: -0.05em;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+	&__content {
+		margin-bottom: 30px;
+
+		p {
+			margin: 0;
+			margin-bottom: 25px;
+		}
+
+		h4 {
+			margin: 0;
+			font-weight: bold;
+			color: $cretech-secondary;
+			font-size: 22px;
+			line-height: 1.36em;
+			margin-bottom: 25px;
+
+			@media (min-width: 768px) {
+				margin-bottom: 32px;
+			}
+		}
+	}
+
+	&__sub-image {
+		margin-top: 30px;
+		max-width: 100%;
+
+		@media (min-width: 768px) {
+			margin-top: 0;
+		}
+	}
+
+	&__box {
+		background-color: $cretech-gray;
+		padding: 40px;
+
+		@media (min-width: 992px) {
+			display: flex;
+		}
+
+		&__content {
+			@media (min-width: 992px) {
+				padding-left: 34px;
+			}
+		}
+
+		&-wrapper {
+			@media (min-width: 768px) {
+				margin-top: 8px;
+				margin-bottom: 60px;
+			}
+		}
+
+		&__icon {
+			font-size: 49px;
+			color: $cretech-black;
+		}
+
+		&__title {
+			font-size: 20px;
+			margin: 0;
+			font-weight: bold;
+			color: $cretech-primary;
+			margin-bottom: 14px;
+			margin-top: 18px;
+
+			@media (min-width: 992px) {
+				margin-top: -5px;
+			}
+		}
+
+		&__text {
+			margin: 0;
+			margin-bottom: -7px;
+		}
+	}
+
+
+	&__caption {
+		&__title {
+			margin: 0;
+			font-size: 24px;
+			line-height: 1.4167em;
+			color: $cretech-black;
+			font-weight: bold;
+			letter-spacing: -0.05em;
+			margin-top: -8px;
+			margin-bottom: 31px;
+		}
+
+		&__text {
+			margin: 0;
+			font-size: 20px;
+			line-height: 1.7em;
+			color: $cretech-primary;
+			margin-bottom: 35px;
+		}
+
+		&__list {
+			@include reset-ul;
+			margin-bottom: -10px;
+
+			li {
+				position: relative;
+				font-size: 16px;
+				line-height: 34px;
+				font-weight: 500;
+				color: $cretech-text;
+				padding-left: 33px;
+
+				>i {
+					color: $cretech-secondary;
+					font-size: 16px;
+					position: absolute;
+					top: 8px;
+					left: 0;
+				}
+			}
+		}
+	}
+
+
+	&__accrodion {
+		margin-top: 60px;
+
+		.accrodion {
+			border: 1px solid $cretech-border;
+			transition: all 500ms ease-in-out;
+			background-color: #fff;
+
+			&.active {
+				box-shadow: 0px 13px 40px 0px rgba(0, 0, 0, 0.07);
+			}
+
+			+.accrodion {
+				margin-top: 20px;
+			}
+
+			&-title {
+
+				h4 {
+					font-size: 18px;
+					color: $cretech-black;
+					margin: 0;
+					letter-spacing: -0.05em;
+					font-weight: bold;
+					line-height: 1.5em;
+					padding-left: 40px;
+					padding-right: 40px;
+					padding-top: 24px;
+					padding-bottom: 26px;
+					position: relative;
+					cursor: pointer;
+					transition: all 500ms ease;
+				}
+			}
+
+			&.active .accrodion-title h4 {
+				color: $cretech-primary;
+			}
+
+
+			&-icon {
+				width: 12px;
+				height: 12px;
+				position: absolute;
+				top: 50%;
+				right: 40px;
+				transform: translateY(-50%);
+
+				&::before,
+				&::after {
+					content: '';
+					background-color: $cretech-black;
+					width: 100%;
+					height: 2px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
+					transition: all 0.5s ease-in-out;
+				}
+
+				&::after {
+					transform: translateX(-50%) translateY(-50%) rotate(90deg);
+				}
+			}
+
+			&.active .accrodion-icon {
+				&::after {
+					opacity: 0;
+				}
+			}
+
+			&-content {
+				.inner {
+					padding-left: 40px;
+					padding-right: 40px;
+					padding-bottom: 33px;
+
+					p {
+						margin: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.service-one {
+	@media(min-width: 1200px) {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	@media (min-width: 1440px) {
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+
+	@media (min-width: 1580px) {
+		padding-left: 75px;
+		padding-right: 75px;
+	}
+
+	&__carousel {
+		.owl-nav {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 40px;
+
+			button {
+				font-size: 14px;
+				width: 40px;
+				height: 40px;
+				background-color: $cretech-gray !important;
+				transition: all 500ms ease;
+
+				+button {
+					margin-left: 10px;
+				}
+
+				&:hover {
+					color: #fff;
+					background-color: $cretech-primary !important;
+				}
+			}
+		}
+	}
+}
+
+.service-card-one {
+	padding: 40px;
+	position: relative;
+
+	&::before {
+		content: '';
+		width: 70px;
+		background-color: #fff;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+
+		@media (min-width: 1700px) {
+			display: block;
+		}
+	}
+
+	@media (min-width: 768px) {
+		display: flex;
+		align-items: center;
+	}
+
+	@media (min-width: 1700px) {
+		padding-left: 0;
+	}
+
+	&__image {
+		position: relative;
+		display: inline-block;
+		flex-shrink: 0;
+		background-color: $cretech-black;
+
+
+		img {
+			max-width: 100%;
+			transition: all 500ms ease;
+			opacity: 1;
+		}
+	}
+
+	&:hover &__image img {
+		opacity: 0.7;
+	}
+
+	&__logo {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -31px;
+		width: 62px;
+		height: 62px;
+		background-image: linear-gradient(30deg, #ab32f2 0%, $cretech-primary 100%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		border-radius: 50%;
+		color: #fff;
+		font-size: 26px;
+		font-weight: bold;
+		letter-spacing: -0.05em;
+	}
+
+	&__content {
+		padding-top: 20px;
+
+		@media (min-width: 768px) {
+			padding-top: 0;
+			padding-left: 40px;
+		}
+	}
+
+	&__title {
+		color: $cretech-black;
+		margin: 0;
+		font-size: 22px;
+		font-weight: bold;
+		color: $cretech-black;
+		letter-spacing: -0.05em;
+		line-height: 1.154em;
+		margin-bottom: 10px;
+
+		@media (min-width: 768px) {
+			margin-top: -13px;
+		}
+
+		@media (min-width: 992px) {
+			font-size: 26px;
+			margin-bottom: 25px;
+		}
+
+
+		a {
+			background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95% / 0px 2px no-repeat;
+			color: inherit;
+			transition: all 500ms ease;
+
+			&:hover {
+				color: $cretech-primary;
+				background-size: 100% 2px;
+			}
+		}
+	}
+
+	&__text {
+		margin: 0;
+		margin-bottom: -15px;
+	}
+
+}
+
+
+.service-card-two {
+	position: relative;
+	padding: 40px;
+
+	transition: all 500ms ease;
+	background-color: $cretech-gray;
+
+	&::before {
+		content: '';
+		background-image: url(../images/shapes/service-card-two-bg-1-1.png);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0.3;
+		background-position: center center;
+		transition: all 500ms ease;
+	}
+
+	&:hover {
+		background-color: rgba($cretech-primary-rgb, 1);
+
+		&::before {
+			opacity: 0.4;
+		}
+	}
+
+	&__title {
+		position: relative;
+		font-size: 22px;
+		font-weight: bold;
+		color: $cretech-black;
+		letter-spacing: -0.05em;
+		margin: 0;
+		margin-top: 5px;
+		margin-bottom: 19px;
+
+		@media (min-width: 768px) {
+			font-size: 24px;
+		}
+
+		a {
+			background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95% / 0px 2px no-repeat;
+			color: inherit;
+			transition: all 500ms ease;
+
+			&:hover {
+				color: $cretech-primary;
+				background-size: 100% 2px;
+			}
+		}
+	}
+
+	&:hover &__title a {
+		color: #fff;
+	}
+
+	&__text {
+		position: relative;
+		margin: 0;
+		margin-bottom: 8px;
+		transition: all 500ms ease;
+	}
+
+	&:hover &__text {
+		color: #d9c7ff;
+	}
+
+	&__icon {
+		position: relative;
+		width: 120px;
+		height: 120px;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: auto;
+		margin-right: -17px;
+		margin-bottom: -10px;
+		box-shadow: 0px 15px 21px 0px rgba($cretech-primary-rgb, 0.16);
+		border-radius: 50%;
+
+		i {
+			color: $cretech-primary;
+			font-size: 64px;
+		}
+	}
+}
+
+
+.service-three {
+	&__block {
+		margin-bottom: 50px;
+
+		@media (min-width: 992px) {
+			display: flex;
+			align-items: center;
+		}
+
+		.section-title {
+
+			@media (min-width: 992px) {
+				padding-bottom: 0;
+			}
+		}
+
+		&__text {
+			margin-top: -20px;
+			color: $cretech-link-light;
+
+			@media (min-width: 768px) {
+				max-width: 460px;
+				width: 100%;
+			}
+
+			@media (min-width: 992px) {
+				margin-top: 33px;
+			}
+		}
+	}
+
+	&__list {
+		@include reset-ul;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 30px;
+
+		@media (min-width: 768px) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@media (min-width: 1200px) {
+			grid-template-columns: repeat(6, 1fr);
+		}
+
+		&__item {
+			padding-top: 30px;
+			padding-bottom: 22px;
+			border: 1px dashed #ab32f2;
+			text-align: center;
+			transition: all 500ms ease;
+
+			&:hover {
+				background-color: #ab32f2;
+			}
+		}
+
+		&__icon {
+			font-size: 48px;
+			color: #fff;
+		}
+
+		&__title {
+			margin: 0;
+			font-size: 18px;
+			font-weight: bold;
+			color: #fff;
+			margin-top: 20px;
+
+			a {
+
+				background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95% / 0px 2px no-repeat;
+				color: inherit;
+				transition: all 500ms ease;
+
+				&:hover {
+					color: #fff;
+					background-size: 100% 2px;
+				}
+			}
+		}
+	}
+}
+
+.service-four {
+
+	&__carousel {
+		.owl-item {
+			&:nth-of-type(even) {
+				@media (min-width: 576px) {
+					margin-top: 30px;
+				}
+			}
+		}
+	}
+}
+
+.service-card-three {
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.07);
+	position: relative;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 32px;
+	padding-top: 48px;
+
+	&::before {
+		content: '';
+		@include cretech-gradient;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transform-origin: bottom center;
+		transform: scale(1, 0);
+		transition: transform 500ms ease;
+	}
+
+	&:hover::before {
+		transform-origin: top center;
+		transform: scale(1, 1);
+	}
+
+	&__icon {
+		position: relative;
+		display: inline-block;
+
+		&::before {
+			content: '';
+			width: 70px;
+			height: 70px;
+			background-color: $cretech-gray;
+			position: absolute;
+			top: -4px;
+			left: -31px;
+			border-radius: 50%;
+			transition: all 800ms ease;
+			opacity: 1;
+		}
+
+		i {
+			position: relative;
+			font-size: 60px;
+			transition: all 500ms ease;
+			color: $cretech-primary;
+		}
+	}
+
+	&:hover &__icon {
+		&::before {
+			left: -15px;
+			background-color: rgba(255, 255, 255, .1);
+		}
+
+		i {
+			color: #fff;
+		}
+	}
+
+	&__content {
+		position: relative;
+	}
+
+	&__title {
+		color: $cretech-black;
+		font-size: 20px;
+		line-height: 1.2em;
+		letter-spacing: -0.025em;
+		margin-top: 21px;
+
+		a {
+			background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95% / 0px 2px no-repeat;
+			color: inherit;
+			transition: all 500ms ease;
+
+			&:hover {
+				color: #fff;
+				background-size: 100% 2px;
+			}
+		}
+	}
+
+	&:hover &__title a {
+		color: #fff;
+	}
+
+
+	&__text {
+		font-size: 14px;
+		line-height: 1.714em;
+		transition: all 500ms ease;
+		max-width: 175px;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&:hover &__text {
+		color: #fff;
+	}
+}

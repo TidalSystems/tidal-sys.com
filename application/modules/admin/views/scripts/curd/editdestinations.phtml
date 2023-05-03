@@ -1,0 +1,3503 @@
+ <link rel="stylesheet" media="screen" href="https://www.centralholidays.com/includes/jquery.timepicker.css" type="text/css" />
+<!--<link href="../includes/cal/jquery-ui.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+ 
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <?php  
+ if(isset($_GET['id']))
+{
+   $id = $_GET['id'];
+}
+else{
+$id = '';
+}
+ 
+ function reformateText( $text )
+{
+ 
+   return $text;
+}
+ 
+?>
+
+ <SCRIPT LANGUAGE="JavaScript">
+  $(function() {
+    $( "#list6" ).sortable();
+    $( "#list6" ).disableSelection();	  
+    $( ".date" ).datepicker();
+    $('.time').timepicker({timeFormat: 'HH:mm'});  
+	});
+  
+
+
+<!-- Begin
+var n;
+var p;
+var p1;
+function ValidatePhone(){
+p=p1.value
+if(p.length==3){
+	//d10=p.indexOf('(')
+	pp=p;
+	d4=p.indexOf('(')
+	d5=p.indexOf(')')
+	if(d4==-1){
+		pp="("+pp;
+	}
+	if(d5==-1){
+		pp=pp+") ";
+	}
+	//pp="("+pp+")";
+/*	document.frmPhone.txtphone.value="";
+	document.frmPhone.txtphone.value=pp;*/
+	
+	p1.value="";
+	p1.value=pp;
+}
+if(p.length>3){
+	d1=p.indexOf('(')
+	d2=p.indexOf(')')
+	if (d2==-1){
+		l30=p.length;
+		p30=p.substring(0,4);
+		//alert(p30);
+		p30=p30+")"
+		p31=p.substring(4,l30);
+		pp=p30+p31;
+		//alert(p31);
+/*		document.frmPhone.txtphone.value="";
+		document.frmPhone.txtphone.value=pp;*/
+		
+	p1.value="";
+	p1.value=pp;
+	}
+	}
+if(p.length>5){
+	p11=p.substring(d1+1,d2);
+	if(p11.length>3){
+	p12=p11;
+	l12=p12.length;
+	l15=p.length
+	//l12=l12-3
+	p13=p11.substring(0,3);
+	p14=p11.substring(3,l12);
+	//alert(p14);
+	p15=p.substring(d2+1,l15);
+	//document.frmPhone.txtphone.value="";
+	
+	p1.value="";
+
+	pp="("+p13+") "+p14+p15;
+	//document.frmPhone.txtphone.value=pp;
+	p1.value=pp;
+	//obj1.value="";
+	//obj1.value=pp;
+	}
+	l16=p.length;
+	p16=p.substring(d2+1,l16);
+	l17=p16.length;
+	if(l17>3&&p16.indexOf('-')==-1){
+		p17=p.substring(d2+1,d2+5);
+		p18=p.substring(d2+5,l16);
+		p19=p.substring(0,d2+1);
+		//alert(p19);
+	pp=p19+p17+"-"+p18;
+/*	document.frmPhone.txtphone.value="";
+	document.frmPhone.txtphone.value=pp;*/
+	p1.value="";
+	p1.value=pp;
+	//obj1.value="";
+	//obj1.value=pp;
+	}
+}
+//}
+//setTimeout(ValidatePhone,100)
+}
+function getIt(m){
+//n=m.name;
+//n=m.id;
+//p1=document.forms[0].elements[n]
+p1=m
+ValidatePhone()
+}
+function testphone(obj1){
+p=obj1.value
+//alert(p)
+p=p.replace("(","")
+p=p.replace(")","")
+p=p.replace("-","")
+p=p.replace("-","")
+//alert(isNaN(p))
+if (isNaN(p)==true){
+alert("Check phone");
+return false;
+}
+}
+//  End -->
+</script>
+	
+<script>
+function addNewDate(table, id , today , action )
+	{
+		var counterRows=new Array();
+   			for(i=0; i<document.getElementById(table).rows.length; i++)
+				{
+					counterRows[i]= document.getElementById(table).rows[i].id;
+   				}
+
+			if(counterRows.length > 0 )
+				{
+					counter = counterRows.length - 1;
+					x = counterRows[counter].match(/\d+/g);
+					ss= x.length - 1;
+					nRows= x[ss];
+					nRows++;
+
+				}
+			else
+				{
+					nRows= 1;
+				}
+
+
+	 
+			
+		var tr = document.createElement('tr');
+		tr.setAttribute('id', 'RateDateSub_'+id+'_'+nRows);
+		var td = document.createElement('td');
+		
+		if(action == "date")
+				{
+					td.innerHTML = '<input    type="date" size=12 value="'+today+'" id="datesID_'+id+'_'+nRows+'"   name="DDate'+id+'[]"  onclick=\'displayCalendar(this , "yyyy/mm/dd", this )\'        onchange="chkDupDate(this.value , this , 0)"  >&nbsp;<a href=\'javascript:removeFile( "RateDateSub_'+id+'_'+nRows+'" )\'  >Remove Date</a>';
+				}
+
+		else if(action == "month")
+				{
+					td.innerHTML = '<input   class="daterates"  type="text" size=12 value="'+today+'"   id="datesID_'+id+'_'+nRows+'"  name="FDate'+id+'[]"  onclick=\'displayCalendar(this , "yyyy/mm/dd", this )\'         onchange="chkDupDate(this.value , this , 0)" >&nbsp;<input  class="daterates"  type="text" size=12 value="'+today+'"   name="TDate'+id+'[]"  onclick=\'displayCalendar(this , "yyyy/mm/dd", this )\' >&nbsp;<a href=\'javascript:removeFile( "RateDateSub_'+id+'_'+nRows+'" )\'  >Remove</a>';
+				}
+		
+		
+		
+		tr.appendChild(td);
+		document.getElementById(table).appendChild(tr);
+	}
+
+
+function addFile2()
+{
+	   nRows=document.getElementById("files-root2").rows.length+1;
+var counterRows=new Array();
+   for(i=0; i<document.getElementById("files-root2").rows.length; i++){
+
+				counterRows[i]= document.getElementById("files-root2").rows[i].id;
+				
+			
+
+   }
+
+
+			for(i=0; i<counterRows.length; i++)
+					{
+						if(i+1==counterRows.length)
+							{
+								nRows = counterRows[i].match(/[\d\.]+/g);	
+								nRows++;
+							}
+					}
+	  //alert(nRows);
+			
+		var tr = document.createElement('tr');
+		tr.setAttribute('id', 'filess-' + nRows);
+		var td = document.createElement('td');
+		//td.className='det';
+				
+		td.innerHTML = '<input type="file" name="pic[]"  /><a href="javascript:removeFile(\'filess-' + nRows + '\')"  >Remove</a>';
+		tr.appendChild(td);
+		document.getElementById('files-root2').appendChild(tr);
+		
+}
+
+
+function removeFile(aId) {
+    var obj = document.getElementById(aId);
+	
+    obj.parentNode.removeChild(obj);
+}
+
+function removeFilegroup(aId) {
+    var obj = document.getElementById(aId);
+	
+    obj.parentNode.removeChild(obj);
+}
+
+
+function InitializeLociSearch2(){
+	document.form1.SearchVal.value = '';
+}	
+
+function SetLociSearchBoxOnSelect2(){
+
+	xx=document.form1.Tours.options
+	 myname=xx[xx.selectedIndex].text;
+	document.form1.SearchVal.value = myname;
+	
+}
+
+ function getRadioValue(RadioName)
+{
+var colRadio = document.getElementsByName(RadioName);
+	for (var i = 0; i < colRadio.length; i++)
+	{
+		if (colRadio[i].checked)
+		{
+			return colRadio[i].value;
+		}
+	}
+	return null;
+
+}
+</script>
+
+<script>
+function addNewDategroup(table, id , today , action )
+	{
+		var counterRows=new Array();
+   			for(i=0; i<document.getElementById(table).rows.length; i++)
+				{
+					counterRows[i]= document.getElementById(table).rows[i].id;
+   				}
+
+			if(counterRows.length > 0 )
+				{
+					counter = counterRows.length - 1;
+					x = counterRows[counter].match(/\d+/g);
+					ss= x.length - 1;
+					nRows= x[ss];
+					nRows++;
+
+				}
+			else
+				{
+					nRows= 1;
+				}
+		
+		var tr = document.createElement('tr');
+		tr.setAttribute('id', 'RateDateSubgroup_'+id+'_'+nRows);
+		var td = document.createElement('td');
+		
+		if(action == "date")
+				{
+					td.innerHTML = '<input    type="date" size=12 value="'+today+'" id="datesIDgroup_'+id+'_'+nRows+'"   name="DDategroup'+id+'[]"   >&nbsp;<a href=\'javascript:removeFilegroup( "RateDateSubgroup_'+id+'_'+nRows+'" )\'  >Remove Date</a>';
+				}
+
+		else if(action == "month")
+				{
+					td.innerHTML = '<input   type="date" size=12 value="'+today+'"   id="datesIDgroup_'+id+'_'+nRows+'"  name="FDategroup'+id+'[]"  >&nbsp;<input    type="date" size=12 value="'+today+'"   name="TDategroup'+id+'[]"  onclick=\'displayCalendar(this , "yyyy/mm/dd", this )\' >&nbsp;<a href=\'javascript:removeFilegroup( "RateDateSubgroup_'+id+'_'+nRows+'" )\'  >Remove</a>';
+				}
+		
+		
+		
+		tr.appendChild(td);
+		document.getElementById(table).appendChild(tr);
+	}
+
+
+ 
+function removeFilegroup(aId) {
+    var obj = document.getElementById(aId);
+	
+    obj.parentNode.removeChild(obj);
+}
+
+function removeFilegroup(aId) {
+    var obj = document.getElementById(aId);
+	
+    obj.parentNode.removeChild(obj);
+}
+
+
+ 
+</script>
+
+
+
+<script type=text/javascript src="https://centralholidays.com/includes/tablednd.js"></script>
+
+ <a  style="margin-left:11px;float:right;color:#fff;  float: right;" class="btn btn-primary" href="<?php echo $this->baseUrl() ?>/admin/destinations/indexdestinations" >
+  All <?php echo $this->typename ?></a>
+
+ <h3 class="widget-title"> <?php echo $this->typename ?></h3>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+   <script type="text/javascript" src="<?= $this->baseUrl(); ?>/ui/editor/tinymce/tiny_mce.js"></script>
+ 
+
+
+
+ 
+  <style>
+#elm1_tbl, #elm2_tbl ,#elm3_tbl ,#elm4_tbl ,#elm5_tbl ,#elm6_tbl ,#elm7_tbl ,#elm8_tbl ,#elm9_tbl, #elm10_tbl,#elm11_tbl, #elm12_tbl ,#elm13_tbl ,#elm14_tbl ,#elm15_tbl ,#elm16_tbl ,#elm17_tbl ,#elm18_tbl ,#elm19_tbl, #elm20_tbl,#elm21_tbl, #elm22_tbl ,#elm23_tbl ,#elm24_tbl ,#elm25_tbl ,#elm26_tbl ,#elm127_tbl ,#elm28_tbl ,#elm29_tbl  ,#elm40_tbl  ,#elm41_tbl ,#elm42_tbl ,#elm43_tbl ,#elm44_tbl ,#elm45_tbl  , #elm46_tbl , #elm47_tbl{
+    width: 100% !important;
+}
+
+ #elm-free {
+     width: 100% !important;
+     height: 120px;
+}
+
+  </style>
+
+<script type="text/javascript">
+
+ 
+    tinyMCE.init({
+            // General options
+            //mode : "textareas",
+            mode : "exact",
+            elements : "elm1,elm2,elm3,elm4,elm5,elm6,elm7,elm8,elm9,elm10,elm11,elm12,elm13,elm14,elm15,elm16,elm17,elm18,elm19,elm20,elm21,elm22,elm23,elm24,elm25,elm26,elm27,elm28,elm29,elm30,elm40,elm50,elm70,elm50,elm55,elm72,elm71,elm73,elm150,elm140,elm41,elm42,elm43,elm44,elm45,elm46,elm47",
+            language : "en",
+            theme : "advanced",
+min_height: "250", 
+ 
+            plugins : "openmanager,autolink,lists,pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
+             
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks,|,openmanager",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+		
+		//Open Manager Options
+		file_browser_callback: "openmanager",
+		open_manager_upload_path: '../../../../../MyUpload/images',
+
+		// Example content CSS (should be your site CSS)
+		content_css : "css/content.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Style formats
+		style_formats : [
+			{title : 'Bold text', inline : 'b'},
+			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+			{title : 'Example 1', inline : 'span', classes : 'example1'},
+			{title : 'Example 2', inline : 'span', classes : 'example2'},
+			{title : 'Table styles'},
+			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+		],
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "Some User",
+			staffid : "991234"
+		}
+	});
+</script>
+
+ 
+ 
+ 
+  <form role="form"  class="form-row" id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+<div class="col-md-12" ><?php echo $this->form->Name; ?> </div>
+ <div class="col-md-2" ><?php echo $this->form->Days; ?> </div>
+<div class="col-md-2" ><?php echo $this->form->Nights; ?> </div>
+<div class="col-md-2" ><?php echo $this->form->Price; ?> </div>
+ 
+ <div class="col-md-6" ><?php echo $this->form->plane; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->availability; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->max; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->min; ?> </div>
+<div class="col-md-6" ><?php echo $this->form->departure; ?> </div>
+<div class="col-md-6" ><?php echo $this->form->return; ?> </div>
+
+
+
+
+<!---              start destination                 --->
+
+<div class="col-md-4" ><?php echo $this->form->regionid; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->countryid; ?> </div>
+		
+<div class="col-md-12" >
+   <?php echo $this->form->cityidid ;  ?> 
+ 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favoritexx = [];
+            $.each($("input[name='sportxx']:checked"), function(){            
+                favoritexx.push($(this).val());
+            });
+            
+ $("#cityidid").val('||'+ (favoritexx.join("||")));  
+        });
+    });
+</script>
+ 
+<div id="success" class="form-row"> 
+<?php
+$tempwwaac = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppageww):
+							?> 
+
+ 							
+<?php 
+$countryidid = 	 $toppageww->countryid;
+          $images = explode('||',trim($toppageww->cityidid,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+<?php $tempwwaac []= $photo ?> 
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo) );
+								foreach($toppages2 as $toppagecc):?>
+ 
+ <div class="col-md-2" style="background: #e2e2e2;margin: 2px;" ><input  name="sportxx" type="checkbox" id="someid477"  value="<?php echo $toppagecc->id ?>"   checked  > <?php echo $toppagecc->title ?></input> </div> 
+ 	<?php endforeach; ?>
+<?php endforeach; ?><?php endforeach; ?>
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid' => $countryidid), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecc):?>
+<?php if(!in_array($toppagecc->id, $tempwwaac )): ?>
+ <div class="col-md-2"  style="background: #e2e2e2;margin: 2px;" >  <input   name="sportxx" type="checkbox" id="someid477"  value="<?php echo $toppagecc->id ?>"      > <?php echo $toppagecc->title ?></input> </div> 
+	<?php endif; ?>	<?php endforeach; ?>
+
+ </div>
+
+
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4 = $('input:checkbox').filter('#someid477');
+    $checks4.on('change', function() {
+        var string4 = $checks4.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid').val("||"+ string4);
+    });
+});
+
+  $( function() {
+    $( "#success" ).sortable();
+    $( "#success" ).disableSelection();
+  } );
+</script>
+
+</div>
+		
+
+
+<!---              end destination                 --->
+
+
+
+
+
+<!---              start gellery                 --->
+
+
+
+ <div class="col-md-12"  style="padding-top:20px"  >
+<h3 class="widget-title"> Gallery</h3>
+<? 
+ $conn=mysqli_connect("localhost","travelfayrouz","QP3*l{b6zdbv","fayrouz");
+mysqli_set_charset($conn,"utf8");
+ if(isset($_GET["action"]) && trim($_GET["action"])=="delPic1")
+   {
+        $conn->query("delete from destination_imgs where Id=".$_GET["Id"]);
+         header("location: ?id=".$_GET["id"]."&type=exist");
+        exit();
+   }
+
+?>
+<?php    if(isset($_GET['id'])): ?> 
+<div class="col-md-12" >
+ <input type="file" name="pic2[]" > 
+ 
+ <table align="center" width="100%" cellpadding="5">
+                                    <tbody id="files-root2" >
+
+
+
+                                    </tbody>
+                                </table>  <a href="javascript:addFile2();" >Add New File</a>
+
+                                <br/></div>
+ 
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
+                 <div class="form-row " id="sortable" style="padding:30px">         
+                        <?
+                            if(isset($_GET['id'])) {
+                               $result = $conn->query("select * from destination_imgs where Destination=".$_GET["id"]." order by DisplayOrderGal");
+                                
+                                while($r=$result->fetch_assoc()){
+                                    ?>
+                                <div class="col-md-3" style="padding-bottom:40px" >
+                                    <img src="<?php echo constant('APP_BASEURL') ?>/MyUpload/<?=$r["Img"]?>" width="100%" /> <input type="hidden" name="myspan[]"  value="<?=$r["Id"]?>">&nbsp;<br/>
+                                   
+                                    <a href="<?php echo constant('APP_BASEURL') .  '/admin/destinations/editdestinations/id/'.$id ?>/?action=delPic1&Id=<?=$r["Id"]?>&id=<?=$_GET["id"]?>">Delete</a>
+                                </div>
+                                    <?
+                                }
+                            }
+                            ?>
+
+                 </div>
+<?php endif; ?>
+
+
+<script>
+    function addFile2()
+    {
+        nRows=document.getElementById("files-root2").rows.length+1;
+        var counterRows=new Array();
+        for(i=0; i<document.getElementById("files-root2").rows.length; i++){
+
+            counterRows[i]= document.getElementById("files-root2").rows[i].id;
+
+
+
+        }
+
+
+        for(i=0; i<counterRows.length; i++)
+        {
+            if(i+1==counterRows.length)
+            {
+                nRows = counterRows[i].match(/[\d\.]+/g);
+                nRows++;
+            }
+        }
+        //alert(nRows);
+
+        var tr = document.createElement('tr');
+        tr.setAttribute('id', 'filess-' + nRows);
+        var td = document.createElement('td');
+        //td.className='det';
+
+        td.innerHTML = '<input type="file" name="pic2[]"  /><a href="javascript:removeFile(\'filess-' + nRows + '\')"  >Remove</a>';
+        tr.appendChild(td);
+        document.getElementById('files-root2').appendChild(tr);
+
+    }
+
+</script>
+
+
+</div>
+ 
+    
+<!---              end gellery                 --->
+<div class="col-md-12" >
+
+
+
+
+	<!--   start Tabs    -->
+<div class="proclinic-widget">
+ <div class="bd-example bd-example-tabs">
+ <ul class="nav nav-tabs" id="myTab" role="tablist">
+ <li class="nav-item">
+ <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#DESCRIPTION" role="tab" aria-controls="home" aria-selected="true">Description</a>
+ </li>
+ 
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#DAYS" role="tab" aria-controls="profile" aria-selected="false">Days</a>
+ </li>
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Include" role="tab" aria-controls="profile" aria-selected="false">Include</a>
+ </li>
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Exclude" role="tab" aria-controls="profile" aria-selected="false">Exclude</a>
+ </li>
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Notes" role="tab" aria-controls="profile" aria-selected="false">Notes</a>
+ </li>
+
+ 
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Video" role="tab" aria-controls="profile" aria-selected="false">Video</a>
+ </li>
+
+ 
+<li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Rates" role="tab" aria-controls="profile" aria-selected="false">Rates</a>
+ </li>									 
+ </ul>
+ <div class="tab-content" id="myTabContent">
+ <!-- ////////////////////////////     start   DESCRIPTION ///////////////////////////////  -->
+ <div class="tab-pane fade active show" id="DESCRIPTION" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Details; ?> 
+ </div>
+ <!--  ////////////////////////////     end   DESCRIPTION ///////////////////////////////  -->
+
+ <!-- ////////////////////////////     start   highlights ///////////////////////////////  -->
+ <div class="tab-pane fade " id="highlights" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->highlights; ?> 
+ </div>
+ <!--  ////////////////////////////     end   highlights ///////////////////////////////  -->
+
+                                    
+
+ <!-- ////////////////////////////     start   hotels ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Hotels" role="tabpanel" aria-labelledby="home-tab">
+<div class="form-row col-md-12">
+
+
+<div class="form-row col-md-4">
+<h4>Deluxe</h4>
+<?php echo $this->form->hotelsidg; ?>  
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<?php  $activehotels =array();  $activehotelsday =array(); 
+$images  = explode('||',trim($this->form->getElement('hotelsidg')->getValue(),'|'));  
+foreach($images as $photo): ?>
+<?php $images2  = explode('--',trim($photo,',')); ?>
+<?php  $activehotels[] =$images2[0] ;?> 
+<?php if($this->form->getElement('hotelsidg')->getValue() != ''): ?>
+<?php  $activehotelsday[] =$images2[1] ;?> <?php endif; ?>
+  
+<?php endforeach; ?> 
+
+<?php $allcity = array(); ?>
+<?php  $images  = explode('||',trim($this->form->getElement('cityidid')->getValue(),'|'));  foreach($images as $indexxxx=>$photo): ?><?php  $allcity[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images2 = explode('||',trim($this->form->getElement('cityidid2')->getValue(),'|'));  foreach($images2 as $indexxxx=>$photo): ?><?php  $allcity[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images3 = explode('||',trim($this->form->getElement('cityidid3')->getValue(),'|'));  foreach($images3 as $indexxxx=>$photo): ?><?php  $allcity[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images4 = explode('||',trim($this->form->getElement('cityidid4')->getValue(),'|'));  foreach($images4 as $indexxxx=>$photo): ?><?php  $allcity[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images5 = explode('||',trim($this->form->getElement('cityidid5')->getValue(),'|'));  foreach($images5 as $indexxxx=>$photo): ?><?php  $allcity[] =$photo ;?> <?php endforeach; ?> 
+ 
+<?php foreach($allcity as $item): ?> <div class="col-md-12" style="padding-bottom:0px;">
+<?php	$model = new Model_PlusData();  $model->_name  = 'city';						                                       
+						        $toppagescountry = $model->selectForArray(array('id' => $item ), array( )  );  ?>
+ <?php foreach ( $toppagescountry as  $toppageccx ): ?> 
+<h6 style="color: #df1b23;"> <?php echo $toppageccx->title; ?> </h6>
+<?php	$model = new Model_PlusData();  $model->_name  = 'hotels';  $toppagescountryx = $model->selectForArray(array('City' => $toppageccx->id ), array( )  );  ?> 	                                       
+<?php foreach ( $toppagescountryx as  $toppageccx11 ): ?> 
+<div class="col-md-12" style="padding-bottom:9px;">
+<?php if(in_array($toppageccx11->id , $activehotels)): ?>  <?php $key = array_search($toppageccx11->id , $activehotels); ?><?php endif; ?> 
+<input type="checkbox"  class="package" name="sportxx2h00" id="sportxx2h22" <?php if(in_array($toppageccx11->id , $activehotels)): ?> checked <?php endif; ?>  value="<?php echo $toppageccx11->id; ?>"><?php echo $toppageccx11->Name; ?> 
+<spam> <input style="height: 25px;width: 30px;" type="text"  class="hotelday" name="sportxx2h007" id="someid4ccx2"  <?php if(in_array($toppageccx11->id , $activehotels)): ?> value="<?php echo $activehotelsday[$key]?>"  <?php endif; ?>  /> </spam></div>
+<?php endforeach; ?>                  
+<?php endforeach; ?>             
+</div> <?php endforeach; ?> 
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favoritexx2h00 = [];
+            $.each($("input[name='sportxx2h00']:checked"), function(){ 
+                favoritexx2h00.push($(this).val()+'--'+$(this).next('spam').find('input:text').val());
+            });
+ $("#hotelsidg").val((favoritexx2h00.join("||")));  
+        });
+    });
+</script>
+</div>
+<!--          ///////      -->
+
+<div class="form-row col-md-4">
+<h4>First Class</h4>
+<?php echo $this->form->hotelsids; ?>  
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<?php  $activehotels =array();  $activehotelsday =array(); 
+$images  = explode('||',trim($this->form->getElement('hotelsids')->getValue(),'|'));  
+foreach($images as $photo): ?>
+<?php $images2  = explode('--',trim($photo,',')); ?>
+<?php  $activehotels[] =$images2[0] ;?> 
+<?php if($this->form->getElement('hotelsids')->getValue() != ''): ?>
+<?php  $activehotelsday[] =$images2[1] ;?> <?php endif; ?>
+  
+<?php endforeach; ?> 
+
+<?php $allcitys = array(); ?>
+<?php  $images  = explode('||',trim($this->form->getElement('cityidid')->getValue(),'|'));  foreach($images as $indexxxx=>$photo): ?><?php  $allcitys[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images2 = explode('||',trim($this->form->getElement('cityidid2')->getValue(),'|'));  foreach($images2 as $indexxxx=>$photo): ?><?php  $allcitys[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images3 = explode('||',trim($this->form->getElement('cityidid3')->getValue(),'|'));  foreach($images3 as $indexxxx=>$photo): ?><?php  $allcitys[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images4 = explode('||',trim($this->form->getElement('cityidid4')->getValue(),'|'));  foreach($images4 as $indexxxx=>$photo): ?><?php  $allcitys[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images5 = explode('||',trim($this->form->getElement('cityidid5')->getValue(),'|'));  foreach($images5 as $indexxxx=>$photo): ?><?php  $allcitys[] =$photo ;?> <?php endforeach; ?> 
+ 
+<?php foreach($allcitys as $item): ?> <div class="col-md-12" style="padding-bottom:0px;">
+<?php	$model = new Model_PlusData();  $model->_name  = 'city';						                                       
+						        $toppagescountry = $model->selectForArray(array('id' => $item ), array( )  );  ?>
+ <?php foreach ( $toppagescountry as  $toppageccx ): ?> 
+<h6 style="color: #df1b23;"> <?php echo $toppageccx->title; ?> </h6>
+<?php	$model = new Model_PlusData();  $model->_name  = 'hotels';  $toppagescountryx = $model->selectForArray(array('City' => $toppageccx->id ), array( )  );  ?> 	                                       
+<?php foreach ( $toppagescountryx as  $toppageccx11 ): ?> 
+<div class="col-md-12" style="padding-bottom:9px;">
+<?php if(in_array($toppageccx11->id , $activehotels)): ?>  <?php $key2 = array_search($toppageccx11->id , $activehotels); ?><?php endif; ?> 
+<input type="checkbox"  class="package" name="sportxx2h00s" id="sportxx2h22s" <?php if(in_array($toppageccx11->id , $activehotels)): ?> checked <?php endif; ?>  value="<?php echo $toppageccx11->id; ?>"><?php echo $toppageccx11->Name; ?> 
+<spam> <input style="height: 25px;width: 30px;" type="text"  class="hotelday" name="sportxx2h00s7" id="someid4ccx2"  <?php if(in_array($toppageccx11->id , $activehotels)): ?> value="<?php echo $activehotelsday[$key2]?>"  <?php endif; ?>  /> </spam></div>
+<?php endforeach; ?>                  
+<?php endforeach; ?>             
+</div> <?php endforeach; ?> 
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favoritexx2h00s = [];
+            $.each($("input[name='sportxx2h00s']:checked"), function(){ 
+                favoritexx2h00s.push($(this).val()+'--'+$(this).next('spam').find('input:text').val());
+            });
+ $("#hotelsids").val((favoritexx2h00s.join("||")));  
+        });
+    });
+</script>
+</div>
+
+<!--     ///////////////////   ---- -->
+
+<div class="form-row col-md-4">
+<h4>Tourists</h4>
+<?php echo $this->form->hotelsidb; ?>  
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<?php  $activehotels =array();  $activehotelsday =array(); 
+$images  = explode('||',trim($this->form->getElement('hotelsidb')->getValue(),'|'));  
+foreach($images as $photo): ?>
+<?php $images2  = explode('--',trim($photo,',')); ?>
+<?php  $activehotels[] =$images2[0] ;?> 
+<?php if($this->form->getElement('hotelsidb')->getValue() != ''): ?>
+<?php  $activehotelsday[] =$images2[1] ;?> <?php endif; ?>
+  
+<?php endforeach; ?> 
+
+<?php $allcityb = array(); ?>
+<?php  $images  = explode('||',trim($this->form->getElement('cityidid')->getValue(),'|'));  foreach($images as $indexxxx=>$photo): ?><?php  $allcityb[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images2 = explode('||',trim($this->form->getElement('cityidid2')->getValue(),'|'));  foreach($images2 as $indexxxx=>$photo): ?><?php  $allcityb[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images3 = explode('||',trim($this->form->getElement('cityidid3')->getValue(),'|'));  foreach($images3 as $indexxxx=>$photo): ?><?php  $allcityb[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images4 = explode('||',trim($this->form->getElement('cityidid4')->getValue(),'|'));  foreach($images4 as $indexxxx=>$photo): ?><?php  $allcityb[] =$photo ;?> <?php endforeach; ?> 
+<?php  $images5 = explode('||',trim($this->form->getElement('cityidid5')->getValue(),'|'));  foreach($images5 as $indexxxx=>$photo): ?><?php  $allcityb[] =$photo ;?> <?php endforeach; ?> 
+ 
+<?php foreach($allcityb as $item): ?> <div class="col-md-12" style="padding-bottom:0px;">
+<?php	$model = new Model_PlusData();  $model->_name  = 'city';						                                       
+						        $toppagescountry = $model->selectForArray(array('id' => $item ), array( )  );  ?>
+ <?php foreach ( $toppagescountry as  $toppageccx ): ?> 
+<h6 style="color: #df1b23;"> <?php echo $toppageccx->title; ?> </h6>
+<?php	$model = new Model_PlusData();  $model->_name  = 'hotels';  $toppagescountryx = $model->selectForArray(array('City' => $toppageccx->id ), array( )  );  ?> 	                                       
+<?php foreach ( $toppagescountryx as  $toppageccx11 ): ?> 
+<div class="col-md-12" style="padding-bottom:9px;">
+<?php if(in_array($toppageccx11->id , $activehotels)): ?>  <?php $key3 = array_search($toppageccx11->id , $activehotels); ?><?php endif; ?> 
+<input type="checkbox"  class="package" name="sportxx2h00b" id="sportxx2h22s" <?php if(in_array($toppageccx11->id , $activehotels)): ?> checked <?php endif; ?>  value="<?php echo $toppageccx11->id; ?>"><?php echo $toppageccx11->Name; ?> 
+<spam> <input style="height: 25px;width: 30px;" type="text"  class="hotelday" name="sportxx2h00b7" id="someid4ccx2"  <?php if(in_array($toppageccx11->id , $activehotels)): ?> value="<?php echo $activehotelsday[$key3]?>"  <?php endif; ?>  /> </spam></div>
+<?php endforeach; ?>                  
+<?php endforeach; ?>             
+</div> <?php endforeach; ?> 
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favoritexx2h00b = [];
+            $.each($("input[name='sportxx2h00b']:checked"), function(){ 
+                favoritexx2h00b.push($(this).val()+'--'+$(this).next('spam').find('input:text').val());
+            });
+ $("#hotelsidb").val((favoritexx2h00b.join("||")));  
+        });
+    });
+</script>
+</div>
+
+ </div> </div>
+ <!--  ////////////////////////////     end   hotels ///////////////////////////////  -->
+                                    
+                                    
+ <!-- ////////////////////////////     start  DAYS  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="DAYS" role="tabpanel" aria-labelledby="home-tab">
+ <?
+$conn=mysqli_connect("localhost","travelfayrouz","QP3*l{b6zdbv","fayrouz");
+mysqli_set_charset($conn,"utf8");
+		if ( isset($_GET["type"]) && trim($_GET["type"])=="exist" && isset($_GET["id"]) && (int)$_GET["id"]!=0 )
+				{
+					$result = $conn->query("select * from dest_days where Parent=".(int)$_GET["id"]);
+                    
+              
+					 
+					$num=mysqli_num_rows($result);
+						if( $num >0 )
+						{
+						$i=1;
+						?>
+						<div  class="col-md-12">
+						<?
+					 
+						while($row=$result->fetch_assoc())
+							{
+							?>
+							<div class="col-md-12" ><b>Day<?=$i?></b></td><td valign='top' ><input class="col-md-12" type="hidden" name="dayex[]" value="<?=$row["Id"]?>">
+							<input  class="col-md-12"type="text" name="dayarrTitle[]" value="<?= ($row["Title"])?>"  >
+							<br/>	<br/>
+<textarea name="dayarr[]" id="elm<?=$i+1?>" cols="63" rows="$rows = 40"><?php echo $row["Det"] ?></textarea>
+											 
+				
+				
+							
+							
+							</div>
+							<?
+							$i++;
+							}
+							?>
+							
+							
+						</table>
+						<?
+						}
+				}
+		else
+				{
+					echo "Select No Of days First";
+				}
+?>
+ </div> </div>
+ <!--  ////////////////////////////     end   DAYS ///////////////////////////////  -->
+                                    
+                                    
+
+
+ <!-- ////////////////////////////     start  Include  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Include" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DInclude; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Include ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Exclude  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Exclude" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DExclude; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Exclude ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Notes  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Notes" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DNotes; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Notes ///////////////////////////////  -->
+
+ <!-- ////////////////////////////     start  Video  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Video" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Video; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Video ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Groups  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Groups" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Groups; ?> 
+<TABLE class="col-md-12"  cellpadding="5" border="0" width="100%">
+						<tbody id="tRatesgroup">
+						<?
+                        $conn=mysqli_connect("localhost","travelfayrouz","QP3*l{b6zdbv","fayrouz");
+						$dayAfter7  = mktime(0, 0, 0, date("m")  , date("d")+7 , date("Y"));
+						$currentYear=(int)date("Y", $dayAfter7 );
+						$currentDay= date("Y-m-d", $dayAfter7 );
+						
+						if(isset($_GET["id"]))
+						{
+							$result =$conn->query("select dest_rates_group.* from dest_rates_group left outer join rates_dates_group on dest_rates_group.Id=rates_dates_group.IdRates where Destination=".$_GET["id"]."  group by dest_rates_group.Id ");
+							 
+							 $i=1;
+							
+							while($row=$result->fetch_assoc())
+								{
+
+								$rateIdgroup=$row["Id"];
+								?>
+							<tr  id="rategroup_<?=$i?>"><td class="form-row" style="    font-size: 13px;">
+							<!--begin existing rates-->
+<input type="hidden" name="RateIdgroup[]" value="<?=$i?>" >
+<input type="hidden" name="ERateIdgroup<?=$i?>[]" value="<?=$row["Id"]?>">							
+<div class="col-md-8" >
+						<div >
+							<fieldset>
+						 
+							<table cellpadding="5">
+								<tr>
+									<td align="center" >Air Adult</td>
+									<td align="center" >Air Child</td>
+									<td align="center" >1 private PAX Supp</td>
+									<td align="center" >P.P.DBL</td>
+									<td align="center" >SGL Supp</td>
+									<td align="center" >TRP Reduc</td>
+									<td align="center" >Child</td>
+								</tr>
+								<tr>
+									<td>$<input type="text" size="4" name="GoldenAir2<?=$i?>[]" value="<?=$row["GoldenAir"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenAirChild2<?=$i?>[]" value="<?=$row["GoldenAirChild"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenSingle2<?=$i?>[]"  value="<?=$row["GoldenSingle"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenDBL2<?=$i?>[]"  value="<?=$row["GoldenDBL"]?>" onKeyUp="dblChange(<?=$i?>)" ></td>
+									<td>$<input type="text" size="4" name="GoldenSGL2<?=$i?>[]" value="<?=$row["GoldenSGL"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenTRP2<?=$i?>[]" value="<?=$row["GoldenTRP"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenCHILD2<?=$i?>[]" value="<?=$row["GoldenCHILD"]?>" ></td>
+								</tr>
+
+							</table>
+							</fieldset>
+						</div>
+		
+					  
+			 
+					</div>
+				<div class="col-md-3">
+<?
+	 
+				$today = mktime(0,0,0,date("m"),date("d"),date("Y"));
+				$today =date("Y/m/d", $today );
+				
+				if('ss' != "extension")
+				{
+					//echo "select * from rates_dates where IdRates=".$row["Id"]."  and  TDate is  null and Dates>='".$currentDay."'  ";
+					$result4 = $conn->query("select * from rates_dates_group where IdRates=".$row["Id"]."   and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))   " );
+					$xxxx=$result4->fetch_assoc();
+					$nummm=mysqli_num_rows($result4);
+					if($nummm==0)
+						{
+					//	echo "select * from rates_dates where IdRates=".$row["Id"]."  and  TDate is  null and Dates>='".$currentDay."'  ";
+?>
+				<fieldset>
+
+				<h6>ADD DATES</h6>
+				<table cellpadding="3" width="100%    font-size: 13px;">
+					<tbody id="RateDategroup<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 = $conn->query("select * from rates_dates_group where IdRates=".$row["Id"]);
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						 <tr id="RateDateSubgroup<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EDateIdgroup<?=$i?>[]" value="<?=$row2["Id"]?>"><input  type="date" size=12 value="<?=$row2["Dates"]?>"   name="DDategroup<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["Dates"]?>' )" id="datesIDgroup_<?=$i?>_<?=$i2?>" >&nbsp;<a href="javascript:removeFile2group( 'RateDateSubgroup<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove Date</a>
+                      	<BR/>
+						<input type="checkbox" name="guaranteed<?=$row2["Id"]?>" <?=(trim($row2["Guaranteed"])=="1" ? 'checked="checked"' : "")?> >&nbsp;Guaranteed <br/>
+                        <input type="checkbox" name="sold<?=$row2["Id"]?>" <?=(trim($row2["sold"])=="1" ? 'checked="checked"' : "")?> >&nbsp;Sold Out
+						</td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+
+				<TABLE><TR><TD><a href="javascript:addNewDategroup('RateDategroup<?=$i?>' , <?=$i?> , '<?=$today?>' , 'date' )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+
+</div>
+	                                 
+ 
+				<?
+
+
+						}
+					else
+						{
+						?>
+				<fieldset>
+
+ 
+				<h6>ADD Date Range</h6>
+				<table cellpadding="3" width="100%">
+					<tbody id="RateDategroup<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 = $conn->query("select * from rates_dates_group where IdRates=".$row["Id"]." and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))  ");
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						<tr id="RateDateSubgroup<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EMonthId<?=$i?>[]" value="<?=$row2["Id"]?>">
+							<input type="text" size=12 value="<?=$row2["FDate"]?>"   name="FDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["FDate"]?>')" id="datesID_group<?=$i?>_<?=$i2?>" >&nbsp;<input type="text" size=12 value="<?=$row2["TDate"]?>"   name="TDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )' >
+							&nbsp;<a href="javascript:removeFile2group( 'RateDateSubgroup<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove</a></td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+				<TABLE><TR><TD><a href="javascript:addNewDategroup('RateDategroup<?=$i?>' , <?=$i?> , '<?=$today?>' , 'month'  )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+						<?
+						}
+
+				}
+				else
+				{
+?>
+				<fieldset>
+				<h6>ADD Date Range</h6>
+				<table cellpadding="3" width="100%">
+					<tbody id="RateDategroup<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 =$conn->query("select * from rates_dates_group where IdRates=".$row["Id"]." and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))");
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						<tr id="RateDateSubgroup<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EMonthId<?=$i?>[]" value="<?=$row2["Id"]?>">
+							<input type="text" size=12 value="<?=$row2["FDate"]?>" id="datesID_group<?=$i?>_<?=$i2?>"   name="FDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["FDate"]?>')" >&nbsp;<input type="text" size=12 value="<?=$row2["TDate"]?>"   name="TDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )' >
+							&nbsp;<a href="javascript:removeFile2group( 'RateDateSubgroup<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove</a></td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+				<TABLE><TR><TD><a href="javascript:addNewDategroup('RateDategroup<?=$i?>' , <?=$i?> , '<?=$today?>' , 'month'  )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+<?
+
+				}
+				?>	
+				</div>
+	<div class="col-md-12"  style="margin: 10px;width:100%;float:left;"><a href="javascript:removeFile2group( 'rategroup_<?=$i?>' , <?=$row["Id"]?> , 'Rate' )"  >Remove Rate</a></div>
+                                         
+ 
+
+<div class="col-md-12" style="margin:10px" > <hr/> </div>
+
+				
+				
+<?
+$i++;
+}
+?>
+
+<?
+
+}
+?>
+ 
+    </table>
+<?php $citiesStr ="56,373,168" ?>
+	<TABLE  border="0" width="100%">
+						<TR><TD><a href="javascript:AddRatesgroup('<?=$citiesStr?>');">Add New Rate</a></TD></TR>
+					</TABLE>	
+
+</div>
+ 
+ <!--  ////////////////////////////     end   Groups ///////////////////////////////  -->
+                                    
+  
+ <!-- ////////////////////////////     start  Rates  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Rates" role="tabpanel" aria-labelledby="home-tab">
+  <?php echo $this->form->Rates; ?> 
+ 
+ <TABLE class="col-md-12"  cellpadding="5" border="0" width="100%">
+						<tbody id="tRates">
+						<?
+                        $conn=mysqli_connect("localhost","travelfayrouz","QP3*l{b6zdbv","fayrouz");
+						$dayAfter7  = mktime(0, 0, 0, date("m")  , date("d")+7 , date("Y"));
+						$currentYear=(int)date("Y", $dayAfter7 );
+						$currentDay= date("Y-m-d", $dayAfter7 );
+						
+						if(isset($_GET["id"]))
+						{
+							$result =$conn->query("select dest_rates.* from dest_rates left outer join rates_dates on dest_rates.Id=rates_dates.IdRates where Destination=".$_GET["id"]."  group by dest_rates.Id ");
+							 
+							 $i=1;
+							
+							while($row=$result->fetch_assoc())
+								{
+
+								$rateId=$row["Id"];
+								?>
+							<tr  id="rate_<?=$i?>"><td class="form-row" style="    font-size: 13px;">
+							<!--begin existing rates-->
+<input type="hidden" name="RateId[]" value="<?=$i?>" >
+<input type="hidden" name="ERateId<?=$i?>[]" value="<?=$row["Id"]?>">							
+<div class="col-md-8" >
+						<div >
+							<fieldset>
+							<h6  style="color:red" >Deluxe  </h6>
+							<table cellpadding="5">
+								<tr>
+									<td align="center" >Air Adult</td>
+									<td align="center" >Air Child</td>
+									<td align="center" >1 private PAX Supp</td>
+									<td align="center" >P.P.DBL</td>
+									<td align="center" >SGL Supp</td>
+									<td align="center" >TRP Reduc</td>
+									<td align="center" >Child</td>
+								</tr>
+								<tr>
+									<td>$<input type="text" size="4" name="GoldenAir<?=$i?>[]" value="<?=$row["GoldenAir"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenAirChild<?=$i?>[]" value="<?=$row["GoldenAirChild"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenSingle<?=$i?>[]"  value="<?=$row["GoldenSingle"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenDBL<?=$i?>[]"  value="<?=$row["GoldenDBL"]?>" onKeyUp="dblChange(<?=$i?>)" ></td>
+									<td>$<input type="text" size="4" name="GoldenSGL<?=$i?>[]" value="<?=$row["GoldenSGL"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenTRP<?=$i?>[]" value="<?=$row["GoldenTRP"]?>" ></td>
+									<td>$<input type="text" size="4" name="GoldenCHILD<?=$i?>[]" value="<?=$row["GoldenCHILD"]?>" ></td>
+								</tr>
+
+							</table>
+							</fieldset>
+						</div>
+		
+						<div >
+							<fieldset>
+							<h6  style="color:red" >First Class</h6>
+							<table cellpadding="5">
+								<tr>
+									<td align="center" >Air Adult</td>
+									<td align="center" >Air Child</td>
+									<td align="center" >1 private PAX Supp</td>
+									<td align="center" >P.P.DBL</td>
+									<td align="center" >SGL Supp</td>
+									<td align="center" >TRP Reduc</td>
+									<td align="center" >Child</td>
+								</tr>
+								<tr>
+									<td>$<input type="text" size="4" name="SilverAir<?=$i?>[]" value="<?=$row["SilverAir"]?>" ></td>
+									<td>$<input type="text" size="4" name="SilverAirChild<?=$i?>[]" value="<?=$row["SilverAirChild"]?>" ></td>
+									<td>$<input type="text" size="4" name="SilverSingle<?=$i?>[]"  value="<?=$row["SilverSingle"]?>" ></td>
+									<td>$<input type="text" size="4" name="SilverDBL<?=$i?>[]" value="<?=$row["SilverDBL"]?>" onKeyUp="dblChange(<?=$i?>)" ></td>
+									<td>$<input type="text" size="4" name="SilverSGL<?=$i?>[]" value="<?=$row["SilverSGL"]?>" ></td>
+									<td>$<input type="text" size="4" name="SilverTRP<?=$i?>[]" value="<?=$row["SilverTRP"]?>" ></td>
+									<td>$<input type="text" size="4" name="SilverCHILD<?=$i?>[]" value="<?=$row["SilverCHILD"]?>" ></td>
+								</tr>
+
+							</table>
+							</fieldset>
+						</div>
+		
+		
+						<div >
+							<fieldset>
+							<h6  style="color:red" >Tourists</h6>
+							<table cellpadding="5">
+								<tr>
+									<td align="center" >Air Adult</td>
+									<td align="center" >Air Child</td>
+									<td align="center" >1 private PAX Supp</td>
+									<td align="center" >P.P.DBL</td>
+									<td align="center" >SGL Supp</td>
+									<td align="center" >TRP Reduc</td>
+									<td align="center" >Child</td>
+								</tr>
+								<tr>
+									<td>$<input type="text" size="4" name="BronzeAir<?=$i?>[]" value="<?=$row["BronzeAir"]?>" ></td>
+									<td>$<input type="text" size="4" name="BronzeAirChild<?=$i?>[]"  value="<?=$row["BronzeAirChild"]?>" ></td>
+									<td>$<input type="text" size="4" name="BronzeSingle<?=$i?>[]"  value="<?=$row["BronzeSingle"]?>" ></td>
+									<td>$<input type="text" size="4" name="BronzeDBL<?=$i?>[]" value="<?=$row["BronzeDBL"]?>" onKeyUp="dblChange(<?=$i?>)" ></td>
+									<td>$<input type="text" size="4" name="BronzeSGL<?=$i?>[]" value="<?=$row["BronzeSGL"]?>" ></td>
+									<td>$<input type="text" size="4" name="BronzeTRP<?=$i?>[]" value="<?=$row["BronzeTRP"]?>" ></td>
+									<td>$<input type="text" size="4" name="BronzeCHILD<?=$i?>[]" value="<?=$row["BronzeCHILD"]?>" ></td>
+								</tr>
+
+							</table>
+
+							</fieldset>
+						</div>
+			 
+					</div>
+				<div class="col-md-3">
+<?
+	//echo "select * from rates_dates where IdRates=".$row["Id"]."  and  TDate is  null and Dates>='".$currentDay."'  ";
+				$today = mktime(0,0,0,date("m"),date("d"),date("Y"));
+				$today =date("Y/m/d", $today );
+				
+				if('ss' != "extension")
+				{
+					//echo "select * from rates_dates where IdRates=".$row["Id"]."  and  TDate is  null and Dates>='".$currentDay."'  ";
+					$result4 = $conn->query("select * from rates_dates where IdRates=".$row["Id"]."   and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))   " );
+					$xxxx=$result4->fetch_assoc();
+					$nummm=mysqli_num_rows($result4);
+					if($nummm==0)
+						{
+					//	echo "select * from rates_dates where IdRates=".$row["Id"]."  and  TDate is  null and Dates>='".$currentDay."'  ";
+?>
+				<fieldset>
+
+				<h6>ADD DATES</h6>
+				<table cellpadding="3" width="100%    font-size: 13px;">
+					<tbody id="RateDate<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 = $conn->query("select * from rates_dates where IdRates=".$row["Id"]);
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						 <tr id="RateDateSub<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EDateId<?=$i?>[]" value="<?=$row2["Id"]?>"><input   type="date" size=12 value="<?=$row2["Dates"]?>"   name="DDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["Dates"]?>' )" id="datesID_<?=$i?>_<?=$i2?>" >&nbsp;<a href="javascript:removeFile2( 'RateDateSub<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove Date</a>
+                      	<BR/>
+						<input type="checkbox" name="guaranteed<?=$row2["Id"]?>" <?=(trim($row2["Guaranteed"])=="1" ? 'checked="checked"' : "")?> >&nbsp;Guaranteed <br/>
+                        <input type="checkbox" name="sold<?=$row2["Id"]?>" <?=(trim($row2["sold"])=="1" ? 'checked="checked"' : "")?> >&nbsp;Sold Out
+						</td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+
+				<TABLE><TR><TD><a href="javascript:addNewDate('RateDate<?=$i?>' , <?=$i?> , '<?=$today?>' , 'date' )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+
+</div>
+	                                 
+ 
+				<?
+
+
+						}
+					else
+						{
+						?>
+				<fieldset>
+
+ 
+				<h6>ADD Date Range</h6>
+				<table cellpadding="3" width="100%">
+					<tbody id="RateDate<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 = $conn->query("select * from rates_dates where IdRates=".$row["Id"]." and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))  ");
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						<tr id="RateDateSub<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EMonthId<?=$i?>[]" value="<?=$row2["Id"]?>">
+							<input type="date" size=12 value="<?=$row2["FDate"]?>"   name="FDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["FDate"]?>')" id="datesID_<?=$i?>_<?=$i2?>" >&nbsp;<input type="date" size=12 value="<?=$row2["TDate"]?>"   name="TDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )' >
+							&nbsp;<a href="javascript:removeFile2( 'RateDateSub<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove</a></td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+				<TABLE><TR><TD><a href="javascript:addNewDate('RateDate<?=$i?>' , <?=$i?> , '<?=$today?>' , 'month'  )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+						<?
+						}
+
+				}
+				else
+				{
+?>
+				<fieldset>
+				<h6>ADD Date Range</h6>
+				<table cellpadding="3" width="100%">
+					<tbody id="RateDate<?=$i?>">
+					<input type="hidden" name="rowsId[]" value="<?=$i?>">
+						<?
+						$result2 =$conn->query("select * from rates_dates where IdRates=".$row["Id"]." and ( ( FDate is not null and TDate>= '".$currentDay."' ) or (FDate is not null and  '".$currentDay."' between FDate and TDate))");
+						 
+						$i2=1;
+						while($row2=$result2->fetch_assoc())
+							{
+							?>
+								
+						<tr id="RateDateSub<?=$i?>_<?=$i2?>" ><td><input type="hidden" name="EMonthId<?=$i?>[]" value="<?=$row2["Id"]?>">
+							<input type="text" size=12 value="<?=$row2["FDate"]?>" id="datesID_<?=$i?>_<?=$i2?>"   name="FDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )'  onchange="chkDupDate(this.value , this , '<?=$row2["FDate"]?>')" >&nbsp;<input type="text" size=12 value="<?=$row2["TDate"]?>"   name="TDate<?=$i?>[]"  onclick='displayCalendar(this , "yyyy/mm/dd", this )' >
+							&nbsp;<a href="javascript:removeFile2( 'RateDateSub<?=$i?>_<?=$i2?>'  , <?=$row2["Id"]?> , 'Date' )"  >Remove</a></td></tr>
+						<?
+							$i2++;
+							}
+						?>
+						
+		
+				
+					</tbody>
+				</table>
+				<TABLE><TR><TD><a href="javascript:addNewDate('RateDate<?=$i?>' , <?=$i?> , '<?=$today?>' , 'month'  )">add NEW </a></TD></TR></TABLE>
+				</fieldset>
+<?
+
+				}
+				?>	
+				</div>
+	<div class="col-md-12"  style="margin: 10px;width:100%;float:left;"><a href="javascript:removeFile2( 'rate_<?=$i?>' , <?=$row["Id"]?> , 'Rate' )"  >Remove Rate</a></div>
+                                         
+ 
+
+<div class="col-md-12" style="margin:10px" > <hr/> </div>
+
+				
+				
+<?
+$i++;
+}
+?>
+
+<?
+
+}
+?>
+ 
+    </table>
+<?php $citiesStr ="56,373,168" ?>
+	<TABLE  border="0" width="100%">
+						<TR><TD><a href="javascript:AddRates('<?=$citiesStr?>');">Add New Rate</a></TD></TR>
+					</TABLE>	
+</div>
+ <!--  ////////////////////////////     end   Rates ///////////////////////////////  -->
+
+
+ <!--  ////////////////////////////     sart   AntherDestination ///////////////////////////////  -->
+ <div class="tab-pane fade" id="AntherDestination" role="tabpanel" aria-labelledby="home-tab">
+
+<!-- -------------------------- //////////////////////////// Add anther destination2  2222222222222222222222222222222222222 /////////////////////////////////////////// -->
+
+<div id="destination2" class="form-row"  style="display:none" >
+ <div class="form-row"  >
+ <div class="col-md-4"  ><?php echo $this->form->regionid2 ;  ?></div>
+ <div class="col-md-8"  ><?php echo $this->form->countryid2 ;  ?> </div>
+    
+ <div class="col-md-12" style="display:none" ><?php echo $this->form->cityidid2 ;  ?></div>
+ </div>
+<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport2']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+   $("#cityidid2").val((favorite.join("||"))); 
+        });
+    });
+</script>
+ 
+<div id="success2" class="form-row"> 
+<?php
+$tempwwaac2x2 = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwx2):
+							?> 	
+
+<?php  $countryidid2 =  $toppagewwx2->countryid2 ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwx2->cityidid2,'|'));
+            foreach($images as $index=>$photox2): if(!trim($photox2) ) continue;?>
+
+<?php $tempwwaac2x2 []= $photox2 ?> 
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photox2) );
+								foreach($toppages2 as $toppageccx2):?>
+ 
+ <div class="col-md-2" style="background: #e2e2e2;margin: 2px;" >  
+<input  name="sport2" type="checkbox" id="someid27702x2"  value="<?php echo $toppageccx2->id ?>"   checked  > <?php echo $toppageccx2->title ?></input> </div> 
+ 	<?php endforeach; ?>
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('countryid' => $countryidid2), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecczz2):?>
+<?php if(!in_array($toppagecczz2->id, $tempwwaac2x2 )): ?>
+ <div class="col-md-2"  style="background: #e2e2e2;margin: 2px;" >  
+<input   name="sport2" type="checkbox" id="someid27702x2"  value="<?php echo $toppagecczz2->id ?>"      > <?php echo $toppagecczz2->title ?></input> </div> 
+	<?php endif; ?>	<?php endforeach; ?>
+
+
+ 
+ </div>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks2e2 = $('input:checkbox').filter('#someid27702x2');
+    $checks2e2.on('change', function() {
+        var string2e2 = $checks2e2.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid2').val(string2e2);
+    });
+});
+
+   $( function() {
+    $( "#success2" ).sortable();
+    $( "#success2" ).disableSelection();
+  } );
+</script>
+</div>
+
+<!-- -------------------------- /////////////////////////////////////////////////////////////////////// -->
+<div id="add2" class="col-md-12" style="padding-top:20px;padding-bottom: 40px;border-bottom: 1px solid black; " >
+<a style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b23;padding: 4px;float: right;font-size: 14px;" onClick="addContainer2()">Add Other Destinations  2</a> </div>
+ 
+<div id="removebutton2" class="col-md-12" style="padding-top:20px;display:none ; padding-bottom: 40px;border-bottom: 1px solid black;" >
+<a  style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b23;padding: 4px;float: right;font-size: 14px;"  onClick="remove2()">Remove Other Destinations 2</a> </div>
+<script language="javascript">
+ 
+function remove2() {
+     regionid2.options[0].selected="selected";
+     countryid2.options[0].selected="selected";
+     document.getElementById("countryid2").selectedIndex = "0";
+      document.getElementById('cityidid2').value = "";
+	  document.getElementById("add2").style.display = "block";
+     document.getElementById("removebutton2").style.display = "none";
+	     document.getElementById("destination2").style.display = "none";
+  var el = document.getElementById('success2');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+} 
+ }  
+
+
+
+function addContainer2() {
+     
+     document.getElementById("destination2").style.padding = "0px";
+	 document.getElementById("destination2").style.display = "block";
+     document.getElementById("removebutton2").style.display = "block";
+     document.getElementById("add2").style.display = "none";
+
+  var el = document.getElementById('success2');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+}
+
+}
+
+
+</script>
+<?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppageszz = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppageszz as  $toppagewwx2z):
+							?>
+<?php if($toppagewwx2z->regionid2 != '' ): ?> 
+<script>
+     document.getElementById("destination2").style.display = "block";
+     document.getElementById("destination2").style.padding = "0px";
+     document.getElementById("removebutton2").style.display = "block";
+     document.getElementById("add2").style.display = "none";
+</script>
+
+<?php endif; ?> <?php endforeach; ?>
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid2"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid2"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.2');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value="" > ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'" >'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid2"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid2"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid2"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.2');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                             success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ 
+                                document.getElementById('cityidid2').value = "";
+
+                                for(var i=0;i<data.length;i++) 
+                      html = html + '<div class="col-md-2">'+'<input type="checkbox" id="someid2ccx2xs2"  name="sport2" value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success2');
+        $('#success2').html(html);
+		
+		 $checks2zaw2xs2 = $('input:checkbox').filter('#someid2ccx2xs2');
+    $checks2zaw2xs2.on('change', function() {
+        var string2zaw2xs2 = $checks2zaw2xs2.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid2').val("||"+ string2zaw2xs2);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid2"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+
+                 if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+<!-- -------------------------- ////////////////////////////// End anther destination2  222222222222222222222222222222222222222 ///////////////////////////////// -->
+
+
+<!-- -------------------------- //////////////////////////// Add anther destination3  3333333333333333333333333333333333333 /////////////////////////////////////////// -->
+
+<div id="destination3" class="form-row"  style="display:none" >
+ <div class="form-row"  style="padding-top:30px" >
+ <div class="col-md-4"  ><?php echo $this->form->regionid3 ;  ?></div>
+ <div class="col-md-8"  ><?php echo $this->form->countryid3 ;  ?> </div>
+    
+ <div class="col-md-12" style="display:none" ><?php echo $this->form->cityidid3 ;  ?></div>
+ </div>
+<script src="https://code.jquery.com/jquery-1.13.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport3']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+   $("#cityidid3").val((favorite.join("||"))); 
+        });
+    });
+</script>
+ 
+<div id="success3" class="form-row"> 
+<?php
+$tempwwaac3x3 = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwx3):
+							?> 	
+
+<?php  $countryidid3 =  $toppagewwx3->countryid3 ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwx3->cityidid3,'|'));
+            foreach($images as $index=>$photox3): if(!trim($photox3) ) continue;?>
+
+<?php $tempwwaac3x3 []= $photox3 ?> 
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages3 = $model->selectForArray(array('id' => $photox3) );
+								foreach($toppages3 as $toppageccx3):?>
+ 
+ <div class="col-md-2" style="background: #e3e3e3;margin: 3px;" >  
+<input  name="sport3" type="checkbox" id="someid37703x3"  value="<?php echo $toppageccx3->id ?>"   checked  > <?php echo $toppageccx3->title ?></input> </div> 
+ 	<?php endforeach; ?>
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages3 = $model->selectForArray(array('countryid' => $countryidid3), array('title' => 'ASC')  );
+								foreach($toppages3 as $toppagecczz3):?>
+<?php if(!in_array($toppagecczz3->id, $tempwwaac3x3 )): ?>
+ <div class="col-md-2"  style="background: #e3e3e3;margin: 3px;" >  
+<input   name="sport3" type="checkbox" id="someid37703x3"  value="<?php echo $toppagecczz3->id ?>"      > <?php echo $toppagecczz3->title ?></input> </div> 
+	<?php endif; ?>	<?php endforeach; ?>
+
+
+ 
+ </div>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks3e3 = $('input:checkbox').filter('#someid37703x3');
+    $checks3e3.on('change', function() {
+        var string3e3 = $checks3e3.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid3').val(string3e3);
+    });
+});
+
+   $( function() {
+    $( "#success3" ).sortable();
+    $( "#success3" ).disableSelection();
+  } );
+</script>
+</div>
+
+<!-- -------------------------- /////////////////////////////////////////////////////////////////////// -->
+<div id="add3" class="col-md-12" style="padding-top:30px;padding-bottom: 40px;border-bottom: 1px solid black; " >
+<a style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b23;padding: 4px;float: right;font-size: 14px;" onClick="addContainer3()">Add Other Destinations  3</a> </div>
+ 
+<div id="removebutton3" class="col-md-12" style="padding-top:30px;display:none ; padding-bottom: 40px;border-bottom: 1px solid black;" >
+<a  style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b23;padding: 4px;float: right;font-size: 14px;"  onClick="remove3()">Remove Other Destinations 3</a> </div>
+<script language="javascript">
+ 
+function remove3() {
+     regionid3.options[0].selected="selected";
+     countryid3.options[0].selected="selected";
+     document.getElementById("countryid3").selectedIndex = "0";
+      document.getElementById('cityidid3').value = "";
+	  document.getElementById("add3").style.display = "block";
+     document.getElementById("removebutton3").style.display = "none";
+	     document.getElementById("destination3").style.display = "none";
+  var el = document.getElementById('success3');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+} 
+ }  
+
+
+
+function addContainer3() {
+     
+     document.getElementById("destination3").style.padding = "0px";
+	 document.getElementById("destination3").style.display = "block";
+     document.getElementById("removebutton3").style.display = "block";
+     document.getElementById("add3").style.display = "none";
+
+  var el = document.getElementById('success3');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+}
+
+}
+
+
+</script>
+<?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppageszz = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppageszz as  $toppagewwx3z):
+							?>
+<?php if($toppagewwx3z->regionid3 != '' ): ?> 
+<script>
+     document.getElementById("destination3").style.display = "block";
+     document.getElementById("destination3").style.padding = "0px";
+     document.getElementById("removebutton3").style.display = "block";
+     document.getElementById("add3").style.display = "none";
+</script>
+
+<?php endif; ?> <?php endforeach; ?>
+
+ 
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid3"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid3"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.3');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value="" > ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'" >'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid3"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid3"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid3"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.3');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                             success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ 
+                                document.getElementById('cityidid3').value = "";
+
+                                for(var i=0;i<data.length;i++) 
+                      html = html + '<div class="col-md-2">'+'<input type="checkbox" id="someid3ccx2xs3"  name="sport3" value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success3');
+        $('#success3').html(html);
+		
+		 $checks3zaw2xs3 = $('input:checkbox').filter('#someid3ccx2xs3');
+    $checks3zaw2xs3.on('change', function() {
+        var string3zaw2xs3 = $checks3zaw2xs3.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid3').val("||"+ string3zaw2xs3);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid3"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+<!-- -------------------------- ////////////////////////////// End anther destination3  333333333333333333333333333333333333333 ///////////////////////////////// -->
+
+
+
+
+<!-- -------------------------- //////////////////////////// Add anther destination4  4444444444444444444444444444444444444 /////////////////////////////////////////// -->
+
+<div id="destination4" class="form-row"  style="display:none" >
+ <div class="form-row"  style="padding-top:40px" >
+ <div class="col-md-4"  ><?php echo $this->form->regionid4 ;  ?></div>
+ <div class="col-md-8"  ><?php echo $this->form->countryid4 ;  ?> </div>
+    
+ <div class="col-md-12" style="display:none" ><?php echo $this->form->cityidid4 ;  ?></div>
+ </div>
+ 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport4']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+   $("#cityidid4").val((favorite.join("||"))); 
+        });
+    });
+</script>
+ 
+<div id="success4" class="form-row"> 
+<?php
+$tempwwaac4x4 = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwx4):
+							?> 	
+
+<?php  $countryidid4 =  $toppagewwx4->countryid4 ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwx4->cityidid4,'|'));
+            foreach($images as $index=>$photox4): if(!trim($photox4) ) continue;?>
+
+<?php $tempwwaac4x4 []= $photox4 ?> 
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages4 = $model->selectForArray(array('id' => $photox4) );
+								foreach($toppages4 as $toppageccx4):?>
+ 
+ <div class="col-md-2" style="background: #e4e4e4;margin: 4px;" >  
+<input  name="sport4" type="checkbox" id="someid47704x4"  value="<?php echo $toppageccx4->id ?>"   checked  > <?php echo $toppageccx4->title ?></input> </div> 
+ 	<?php endforeach; ?>
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages4 = $model->selectForArray(array('countryid' => $countryidid4), array('title' => 'ASC')  );
+								foreach($toppages4 as $toppagecczz4):?>
+<?php if(!in_array($toppagecczz4->id, $tempwwaac4x4 )): ?>
+ <div class="col-md-2"  style="background: #e4e4e4;margin: 4px;" >  
+<input   name="sport4" type="checkbox" id="someid47704x4"  value="<?php echo $toppagecczz4->id ?>"      > <?php echo $toppagecczz4->title ?></input> </div> 
+	<?php endif; ?>	<?php endforeach; ?>
+
+
+ 
+ </div>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4e4 = $('input:checkbox').filter('#someid47704x4');
+    $checks4e4.on('change', function() {
+        var string4e4 = $checks4e4.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid4').val(string4e4);
+    });
+});
+
+   $( function() {
+    $( "#success4" ).sortable();
+    $( "#success4" ).disableSelection();
+  } );
+</script>
+</div>
+
+<!-- -------------------------- /////////////////////////////////////////////////////////////////////// -->
+<div id="add4" class="col-md-12" style="padding-top:40px;padding-bottom: 40px;border-bottom: 1px solid black; " >
+<a style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b24;padding: 4px;float: right;font-size: 14px;" onClick="addContainer4()">Add Other Destinations  4</a> </div>
+ 
+<div id="removebutton4" class="col-md-12" style="padding-top:40px;display:none ; padding-bottom: 40px;border-bottom: 1px solid black;" >
+<a  style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b24;padding: 4px;float: right;font-size: 14px;"  onClick="remove4()">Remove Other Destinations 4</a> </div>
+<script language="javascript">
+ 
+
+function remove4() {
+     regionid4.options[0].selected="selected";
+     countryid4.options[0].selected="selected";
+     document.getElementById("countryid4").selectedIndex = "0";
+      document.getElementById('cityidid4').value = "";
+	  document.getElementById("add4").style.display = "block";
+     document.getElementById("removebutton4").style.display = "none";
+	     document.getElementById("destination4").style.display = "none";
+  var el = document.getElementById('success4');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+} 
+ }  
+
+
+
+function addContainer4() {
+     
+     document.getElementById("destination4").style.padding = "0px";
+	 document.getElementById("destination4").style.display = "block";
+     document.getElementById("removebutton4").style.display = "block";
+     document.getElementById("add4").style.display = "none";
+
+  var el = document.getElementById('success4');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+}
+
+}
+
+
+</script>
+<?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppageszz = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppageszz as  $toppagewwx4z):
+							?>
+<?php if($toppagewwx4z->regionid4 != '' ): ?> 
+<script>
+     document.getElementById("destination4").style.display = "block";
+     document.getElementById("destination4").style.padding = "0px";
+     document.getElementById("removebutton4").style.display = "block";
+     document.getElementById("add4").style.display = "none";
+</script>
+
+<?php endif; ?> <?php endforeach; ?>
+
+ 
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid4"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid4"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.4');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value="" > ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'" >'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid4"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid4"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category4'])
+                    $('select[name="category4"] option[value="'+$.QueryString['category4']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid4"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.4');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                             success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ 
+                                document.getElementById('cityidid4').value = "";
+
+                                for(var i=0;i<data.length;i++) 
+                      html = html + '<div class="col-md-2">'+'<input type="checkbox" id="someid4ccx2xs4"  name="sport4" value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success4');
+        $('#success4').html(html);
+		
+		 $checks4zaw2xs4 = $('input:checkbox').filter('#someid4ccx2xs4');
+    $checks4zaw2xs4.on('change', function() {
+        var string4zaw2xs4 = $checks4zaw2xs4.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid4').val("||"+ string4zaw2xs4);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid4"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+
+                 if($.QueryString['category4'])
+                    $('select[name="category4"] option[value="'+$.QueryString['category4']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+<!-- -------------------------- ////////////////////////////// End anther destination4  444444444444444444444444444444444444444 ///////////////////////////////// -->
+
+
+
+
+<!-- -------------------------- //////////////////////////// Add anther destination5  5555555555555555555555555555555555555 /////////////////////////////////////////// -->
+
+<div id="destination5" class="form-row"  style="display:none" >
+ <div class="form-row"  style="padding-top:50px" >
+ <div class="col-md-4"  ><?php echo $this->form->regionid5 ;  ?></div>
+ <div class="col-md-8"  ><?php echo $this->form->countryid5 ;  ?> </div>
+    
+ <div class="col-md-12" style="display:none" ><?php echo $this->form->cityidid5 ;  ?></div>
+ </div>
+ 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport5']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+   $("#cityidid5").val((favorite.join("||"))); 
+        });
+    });
+</script>
+ 
+<div id="success5" class="form-row"> 
+<?php
+$tempwwaac5x5 = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwx5):
+							?> 	
+
+<?php  $countryidid5 =  $toppagewwx5->countryid5 ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwx5->cityidid5,'|'));
+            foreach($images as $index=>$photox5): if(!trim($photox5) ) continue;?>
+
+<?php $tempwwaac5x5 []= $photox5 ?> 
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages5 = $model->selectForArray(array('id' => $photox5) );
+								foreach($toppages5 as $toppageccx5):?>
+ 
+ <div class="col-md-2" style="background: #e5e5e5;margin: 5px;" >  
+<input  name="sport5" type="checkbox" id="someid57705x5"  value="<?php echo $toppageccx5->id ?>"   checked  > <?php echo $toppageccx5->title ?></input> </div> 
+ 	<?php endforeach; ?>
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages5 = $model->selectForArray(array('countryid' => $countryidid5), array('title' => 'ASC')  );
+								foreach($toppages5 as $toppagecczz5):?>
+<?php if(!in_array($toppagecczz5->id, $tempwwaac5x5 )): ?>
+ <div class="col-md-2"  style="background: #e5e5e5;margin: 5px;" >  
+<input   name="sport5" type="checkbox" id="someid57705x5"  value="<?php echo $toppagecczz5->id ?>"      > <?php echo $toppagecczz5->title ?></input> </div> 
+	<?php endif; ?>	<?php endforeach; ?>
+
+
+ 
+ </div>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks5e5 = $('input:checkbox').filter('#someid57705x5');
+    $checks5e5.on('change', function() {
+        var string5e5 = $checks5e5.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid5').val(string5e5);
+    });
+});
+
+   $( function() {
+    $( "#success5" ).sortable();
+    $( "#success5" ).disableSelection();
+  } );
+</script>
+</div>
+
+<!-- -------------------------- /////////////////////////////////////////////////////////////////////// -->
+<div id="add5" class="col-md-12" style="padding-top:50px;padding-bottom: 50px;border-bottom: 1px solid black; " >
+<a style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b25;padding: 5px;float: right;font-size: 14px;" onClick="addContainer5()">Add Other Destinations  5</a> </div>
+ 
+<div id="removebutton5" class="col-md-12" style="padding-top:50px;display:none ; padding-bottom: 50px;border-bottom: 1px solid black;" >
+<a  style="cursor: pointer;color: #fff;cursor: pointer;BACKGROUND: #df1b25;padding: 5px;float: right;font-size: 14px;"  onClick="remove5()">Remove Other Destinations 5</a> </div>
+<script language="javascript">
+ 
+
+function remove5() {
+     regionid5.options[0].selected="selected";
+     countryid5.options[0].selected="selected";
+     document.getElementById("countryid5").selectedIndex = "0";
+      document.getElementById('cityidid5').value = "";
+	  document.getElementById("add5").style.display = "block";
+     document.getElementById("removebutton5").style.display = "none";
+	     document.getElementById("destination5").style.display = "none";
+  var el = document.getElementById('success5');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+} 
+ }  
+
+
+
+function addContainer5() {
+     
+     document.getElementById("destination5").style.padding = "0px";
+	 document.getElementById("destination5").style.display = "block";
+     document.getElementById("removebutton5").style.display = "block";
+     document.getElementById("add5").style.display = "none";
+
+  var el = document.getElementById('success5');
+while( el.hasChildNodes() ){
+    el.removeChild(el.lastChild);
+}
+
+}
+
+
+</script>
+<?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'destinaions';
+						        $where = array();
+						        $toppageszz = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppageszz as  $toppagewwx5z):
+							?>
+<?php if($toppagewwx5z->regionid5 != '' ): ?> 
+<script>
+     document.getElementById("destination5").style.display = "block";
+     document.getElementById("destination5").style.padding = "0px";
+     document.getElementById("removebutton5").style.display = "block";
+     document.getElementById("add5").style.display = "none";
+</script>
+
+<?php endif; ?> <?php endforeach; ?>
+
+ 
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid5"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid5"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value="" > ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'" >'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid5"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid5"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category5'])
+                    $('select[name="category5"] option[value="'+$.QueryString['category5']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid5"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.5');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                             success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ 
+                                document.getElementById('cityidid5').value = "";
+
+                                for(var i=0;i<data.length;i++) 
+                      html = html + '<div class="col-md-2">'+'<input type="checkbox" id="someid5ccx2xs5"  name="sport5" value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success5');
+        $('#success5').html(html);
+		
+		 $checks5zaw2xs5 = $('input:checkbox').filter('#someid5ccx2xs5');
+    $checks5zaw2xs5.on('change', function() {
+        var string5zaw2xs5 = $checks5zaw2xs5.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid5').val("||"+ string5zaw2xs5);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid5"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+
+                 if($.QueryString['category5'])
+                    $('select[name="category5"] option[value="'+$.QueryString['category5']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+<!-- -------------------------- ////////////////////////////// End anther destination5  555555555555555555555555555555555555555 ///////////////////////////////// -->
+
+
+ 
+ </div>
+  <!--  ////////////////////////////     end   AntherDestination ///////////////////////////////  -->
+
+                                   
+                                      
+                                          
+									</div>
+								</div>
+							</div>
+
+
+<!--    end tabs     -->
+
+</div>
+
+ 
+
+<div class="col-md-12" style="padding:10px;" ><h3 class="widget-title">SEO </h3></div>
+<div class="col-md-12" style="background: #dadada;padding:10px;" >
+<?php echo $this->form->pagurl; ?>
+<?php echo $this->form->seohead; ?>
+<?php echo $this->form->seotitle; ?>
+<?php echo $this->form->seodescription; ?> 
+<?php echo $this->form->seokeywords; ?>
+ 
+</div>
+
+<div class="col-md-2" style="padding:10px;" ><?php echo $this->form->Active; ?> </div>
+ 
+
+ <div class="col-md-12"><?php echo $this->form->save; ?> </div>
+ 
+</form>
+ 
+
+
+
+
+
+
+  <script>
+function createRequestObject()
+{
+		var request_;
+		var browser = navigator.appName;
+		if(browser == "Microsoft Internet Explorer")
+		{
+		 request_ = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		else
+		{
+		 request_ = new XMLHttpRequest();
+		}
+		return request_;
+}
+ var http = new Array();
+ 
+	
+function removeFile2(aId , id , parent) {
+				var curDateTime = (new Date()).getTime();
+				
+					 http[curDateTime] = createRequestObject();
+				
+					 http[curDateTime].onreadystatechange = function ()
+					  {
+					  
+						  if (http[curDateTime].readyState<4) 
+						  {	  
+							document.getElementById(src).innerHTML="Loading...";
+						  }
+						  if (http[curDateTime].readyState==4) 
+						  {
+							   if (http[curDateTime].status==200 || http[curDateTime].status == 304)
+								{
+									var obj = document.getElementById(aId);
+									obj.parentNode.removeChild(obj);
+									
+				
+								} 
+						  }
+					 };
+					 http[curDateTime].open("GET", "https://www.centralholidays.net/ui/destChk.php?action=delRateDate&id="+id+"&parent="+parent);
+					 http[curDateTime].send(null);
+					 }
+
+
+	
+function removeFile2group(aId , id , parent) {
+				var curDateTime3 = (new Date()).getTime();
+				
+					 http[curDateTime3] = createRequestObject();
+				
+					 http[curDateTime3].onreadystatechange = function ()
+					  {
+					  
+						  if (http[curDateTime3].readyState<4) 
+						  {	  
+							document.getElementById(src).innerHTML="Loading...";
+						  }
+						  if (http[curDateTime3].readyState==4) 
+						  {
+							   if (http[curDateTime3].status==200 || http[curDateTime3].status == 304)
+								{
+									var obj = document.getElementById(aId);
+									obj.parentNode.removeChild(obj);
+									
+				
+								} 
+						  }
+					 };
+					 http[curDateTime3].open("GET", "https://www.centralholidays.net/ui/destChkgroup.php?action=delRateDategroup&id="+id+"&parent="+parent);
+					 http[curDateTime3].send(null);
+					 }
+
+
+
+  			
+  			
+function AddRates(citiesId)
+			{
+			
+			tours='www';
+			country='italy';
+			radioButton='destination';
+			
+			if(radioButton!="extension")
+				{
+					radioButton2=getRadioValue("ratestype");
+				}
+			//alert(radioButton);
+			var counterRows=new Array();
+   			for(i=0; i<document.getElementById("tRates").rows.length; i++)
+				{
+					counterRows[i]= document.getElementById("tRates").rows[i].id;
+   				}
+
+			if(counterRows.length > 0 )
+				{
+					counter = counterRows.length - 1;
+					//alert(counterRows[counter]);
+					x = counterRows[counter].match(/\d+/g);
+					ss= x.length - 1;
+					nRows= x[ss];
+					nRows++;
+
+				}
+			else
+				{
+					nRows= 1;
+				}
+
+   
+			var curDateTime = (new Date()).getTime();
+			
+				 http[curDateTime] = createRequestObject();
+			
+				 http[curDateTime].onreadystatechange = function ()
+				  {
+					  if (http[curDateTime].readyState<4) 
+					  {	  
+				   		
+					  }
+					  
+					  if (http[curDateTime].readyState==4) 
+					  {
+						   if (http[curDateTime].status==200 || http[curDateTime].status == 304)
+							{
+							//alert(val);
+								var tr = document.createElement('tr');
+								tr.setAttribute('id', 'rate_'+nRows);
+								var td = document.createElement('td');
+	                            td.setAttribute('style', 'font-size:13px');
+                            	td.setAttribute('class',  'form-row'); 
+								td.innerHTML =http[curDateTime].responseText; 
+								tr.appendChild(td);
+								document.getElementById('tRates').appendChild(tr);
+								
+							} 
+					  }
+				 };
+			if(radioButton=="extension")
+				{
+					 http[curDateTime].open("GET", "https://www.centralholidays.net/ui/destChk.php?action=getRates&nRows="+nRows+"&radio="+radioButton+"&cities="+citiesId+"&tour="+tours+"&country="+country);
+				}
+			else
+				{
+					http[curDateTime].open("GET", "https://www.centralholidays.net/ui/destChk.php?action=getRates&nRows="+nRows+"&radio="+radioButton+"&radio2="+radioButton2+"&cities="+citiesId+"&tour="+tours+"&country="+country);
+				}
+				 http[curDateTime].send(null); 
+			}	
+</script>
+
+
+
+
+
+
+
+<script>
+function AddRatesgroup(citiesId)
+			{
+			
+			tours='www';
+			country='italy';
+			radioButton='destination';
+			
+			if(radioButton!="extension")
+				{
+					radioButton2=getRadioValue("ratestype");
+				}
+			//alert(radioButton);
+			var counterRows=new Array();
+   			for(i=0; i<document.getElementById("tRatesgroup").rows.length; i++)
+				{
+					counterRows[i]= document.getElementById("tRatesgroup").rows[i].id;
+   				}
+
+			if(counterRows.length > 0 )
+				{
+					counter = counterRows.length - 1;
+					//alert(counterRows[counter]);
+					x = counterRows[counter].match(/\d+/g);
+					ss= x.length - 1;
+					nRows= x[ss];
+					nRows++;
+
+				}
+			else
+				{
+					nRows= 1;
+				}
+
+   
+			var curDateTime2 = (new Date()).getTime();
+			
+				 http[curDateTime2] = createRequestObject();
+			
+				 http[curDateTime2].onreadystatechange = function ()
+				  {
+					  if (http[curDateTime2].readyState<4) 
+					  {	  
+				   		
+					  }
+					  
+					  if (http[curDateTime2].readyState==4) 
+					  {
+						   if (http[curDateTime2].status==200 || http[curDateTime2].status == 304)
+							{
+							//alert(val);
+								var tr = document.createElement('tr');
+								tr.setAttribute('id', 'rate_group'+nRows);
+								var td = document.createElement('td');
+	                            td.setAttribute('style', 'font-size:13px');
+                            	td.setAttribute('class',  'form-row'); 
+								td.innerHTML =http[curDateTime2].responseText; 
+								tr.appendChild(td);
+								document.getElementById('tRatesgroup').appendChild(tr);
+								
+							} 
+					  }
+				 };
+			if(radioButton=="extension")
+				{
+					 http[curDateTime2].open("GET", "https://www.centralholidays.net/ui/destChkgroup.php?action=getRatesgroup&nRows="+nRows+"&radio="+radioButton+"&cities="+citiesId+"&tour="+tours+"&country="+country);
+				}
+			else
+				{
+					http[curDateTime2].open("GET", "https://www.centralholidays.net/ui/destChkgroup.php?action=getRatesgroup&nRows="+nRows+"&radio="+radioButton+"&radio2="+radioButton2+"&cities="+citiesId+"&tour="+tours+"&country="+country);
+				}
+				 http[curDateTime2].send(null); 
+			}	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    \\\\\\\\\\\\\\\\\\\\\\\\ script main destination   \\\\\\\\\\\\\\\\\\\\\\\\    --->
+
+ 
+ <script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value=""> ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.5');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ document.getElementById('cityidid').value = "";
+                                for(var i=0;i<data.length;i++) 
+                                    html = html + '<div class="col-md-2">'+'<input type="checkbox"   name="sport" id="someid4ccx"  value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success');
+        $('#success').html(html);
+		
+		 $checks4zaw = $('input:checkbox').filter('#someid4ccx');
+    $checks4zaw.on('change', function() {
+        var string4zaw = $checks4zaw.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid').val("||"+ string4zaw);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+ document.getElementById("cityidid-element").style.display = "none";
+</script>
+
+<!--    \\\\\\\\\\\\\\\\\\\\\\\\ script main destination   \\\\\\\\\\\\\\\\\\\\\\\\    --->
+
+
+
+
+
+
+ 
+
+ 
+    <script language="javascript">
+var imgs2 = new Array();
+
+function showimgs2(){
+    if(imgs2.length<=0){
+        $('.imageuploader2 .files2').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image2').val('');
+    }else{
+        $('.imageuploader2 .files2').html("<table><tr>");
+        $('.image2').val("");
+        for (var i = 0; i < imgs2.length; i++) {
+            // add file to the list
+            $('.imageuploader2 .files2').html($('.imageuploader2 .files2').html()+"<div > <a style='color:red;' href='javascript:removeimg2("+i+");'>Remove </a>  <?php echo $this->form->getElement('FlyerPDF')->getValue(); ?>   </div>");
+            $('.image2').val($('.image2').val()+''+imgs2[i]);
+        }
+    }
+}
+
+
+  
+function removeimg2(id){
+    imgs2.splice(id,1);
+    showimgs2();
+  
+}
+
+ (function($){
+               
+            var button2 = '<div class="imageuploader2"><div class="col-md-4 col-lg-4"><div class="" ><button  id="button2" class="btn btn-danger"> Add PDF</button></div></div>   <input id="content2" type="hidden" class="image2" style="width: 250px;" name="FlyerPDF" value="<?php echo $this->form->getElement('FlyerPDF')->getValue(); ?>" /><div class="col-md-6 col-lg-6  files2" style="cursor:pointer"  id="sortable2" ></div>  </div>';
+     $('#FlyerPDF').replaceWith(button2);
+  if($('#button2').length){
+         var button2 = $('#button2'), interval;    
+         new AjaxUpload(button2, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo2'?>', 
+             name: 'img2',
+             onSubmit : function(file, ext){
+                 if (ext && /^(pdf)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button2.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button2.text();
+                     if (text.length < 13){
+                         button2.text(text + '.');                    
+                     } else {
+                         button2.text('uploading.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  PDF extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button2.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs2.splice(response);
+                 imgs2.push( response );
+                 showimgs2();
+             }
+         });
+         if($('.image2').val()!=''){
+             imgs2=$('.image2').val().split(' ');
+                   
+             for (var i = 0; i < imgs2.length; i++) {
+                 if(imgs2[i]==''){
+                     imgs2.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs2();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+
+
+
+
+   <script language="javascript">
+var imgs3 = new Array();
+function showimgs3(){
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='100' height='63'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md col-lg-1" > </div><div style="display:block" class=" "><div class="" ><button  id="button3"  class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 250px;" name="Map" value="<?php echo $this->form->getElement('Map')->getValue(); ?>" /><div class="col-md-6 col-lg-6  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#Map').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('uploading');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('uploading .........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new ');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+ </script>
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('#Name').keyup(function() {
+        var txtClone2 = $(this).val();
+        
+        var txtClone =txtClone2.replace(/[-'`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+		 key=txtClone.replace(" ","-");
+       replaced = key.split(' ').join('-');
+        $('#pagurl').val(replaced);
+    });
+});
+</script>
+
+
+
+
+<script>
+  
+  $( function() {
+    $( ".daterates" ).datepicker({ dateFormat: 'yy-mm-dd' });
+ 
+  } );
+ 
+  </script>
+
+
+ 
+

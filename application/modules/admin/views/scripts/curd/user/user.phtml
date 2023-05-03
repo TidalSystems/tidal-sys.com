@@ -1,0 +1,67 @@
+<h1>Control <?php echo $this->typename ?></h1>
+<form>
+    <table id="table1" class="gtable sortable">
+        <thead>
+            <tr>
+                
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+            <tr>
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td>';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    elseif($type == 'date')
+                    {
+                        echo date("d-m-Y h:i A" ,$values[$variable]);
+                    }
+                    elseif($type == 'is_active')
+                    {
+                        if($values[$variable] == 2)
+                        {
+                            echo 'block';
+                        }
+                        else
+                        {
+                            echo 'allow';
+                        }
+                    }
+                    else
+                    {
+                        echo $values[$key];
+                    }
+                    echo '</td>';
+                }
+            ?>
+               
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+    </table>
+    <br>
+    <div class="tablefooter clearfix">
+        <div class="actions">
+           
+        </div>
+
+         
+    </div>
+</form>

@@ -1,0 +1,80 @@
+ <?php foreach($this->Page as $value): ?>
+
+  <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'news' ), array( ) , 1  ); 
+ foreach($toppages as $page): ?>  <?php endforeach; ?>  
+     <!--breadcumb area start -->
+        <div class="breadcumb-area breadcumb-2 overlay pos-rltv" style="background-image:url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$page->Header; ?>);    background-size: cover;">
+            <div class="bread-main">
+                <div class="bred-hading text-center">
+                    <h5><?php echo $value->titleAr; ?></h5> </div>
+                <ol class="breadcrumb">
+                    <li class="home"><a   href="<?php echo LANG_URL ?>index.php">الرئيسيه</a></li>
+ <li class="home"><a   href="<?php echo LANG_URL ?>ar/<?php echo (trim($page->pagurl)?''.trim($page->pagurl):'page/v/i/'.$page->id) ?>"><?php echo $page->titleAr; ?></a></li>
+                   
+                </ol>
+            </div>
+        </div>
+        <!--breadcumb area end -->
+		
+ <style>
+ .about-des ul li {
+      display: revert;
+    margin-left: 20px;
+    list-style: square;
+	font-size: 16px;
+ }
+.about-des p{
+text-align: right !important;
+    direction: rtl !important;
+}
+ </style>
+ 
+ 
+ 
+ 
+<div class="about-us-area ptb-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center" style="margin-bottom:20px;" >
+                        <div class="heading-title heading-style pos-rltv mb-20 text-center">
+                            <h5  class="uppercase"><?php echo $value->titleAr; ?></h5>
+                        </div>
+                    </div>
+               
+                        <div class="col-lg-5">
+                            <div class="about-des">
+              <img style="width:100%;"  src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->thumb; ?>"  />
+                               
+                            </div>
+                        </div>
+						
+						
+						  <div class="col-lg-7">
+                            <div class="about-des" style="text-align:right; text-decoration:rtl;">
+ <?php if(trim($value->descriptionAr)): ?>  <p><?php echo $value->descriptionAr; ?></p>  <?php endif; ?>
+ 					   
+							   
+ 							   
+                               
+                            </div>
+                        </div>
+						
+						
+						 
+                </div>
+            </div>
+        </div>
+		
+		
+			 
+		
+		
+	 
+		
+	
+					
+	   
+                      
+                             
+  
+ <?php endforeach ?>

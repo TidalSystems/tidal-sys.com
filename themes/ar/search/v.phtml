@@ -1,0 +1,143 @@
+  <div class="main-content44">
+ 
+ <div class="main-content2">
+  
+
+<header2  >
+              
+    
+<div style=" position:absolute; margin-top:-550px; left:10px;z-index:0; ">  
+              
+   <?php
+            $model = new Model_PlusData();
+            $model->_name = 'offers';
+            $select = $model->select()->from($model->_name)->order('displayorder DESC');
+            $slider2 = $model->fetchAll($select);
+         
+            if (count($slider2)):
+                ?>
+ 
+  
+
+                <div class="slider lof-slidecontent"  id="jslidernews1" style="width:882px; height:443px;">
+                    <div class="preload"><div></div></div>
+                    <div class="main-slider-content"  style="width:882px; height:443px;">
+                        <ul class="sliders-wrap-inner">
+                            <?php foreach ($slider2 as $item): ?>
+                            <li><img height='443' width='980' src="<?php echo APP_BASEURL.'/MyUpload/'.  $item->image ?> "  /></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="navigator-content">
+                        <div class="button-next"></div>
+                        <div class="button-previous"></div>
+                    </div>
+                    <div class="button-control"><span></span></div>
+
+</div>
+ 
+            <?php endif ?>
+
+</div>
+              
+    <div class="faceface">
+
+<?php
+            $model = new Model_PlusData();
+            $model->_name = 'social';
+      
+            $adapter = $model->selectForPager(array('desp' => 1) , ('displayorder ASC'));
+            $paginator = new Zend_Paginator($adapter);
+ 
+            $news = $paginator;
+            if (count($news)):
+                ?>
+
+
+         
+                <?php foreach ($news as $item): ?>
+ <a href="<?php echo $item->url;  ?>" target="_blank" ><img style="margin-right:0px; "  src="<?php echo APP_BASEURL.'/MyUpload/'. $item->image;  ?>" /></a>
+            
+                <?php endforeach; ?>
+              
+                
+            <?php endif ?>  
+
+
+</div>               
+</header2   >
+ 
+ 
+  
+
+
+<div id="background_cycler" style="height: 439px; display: block;"> 
+<div  >
+ 
+
+  
+ </div>
+                 
+                </div>           
+                 
+    
+ 
+ 
+<div style="background-color: #eeeeee; width: 100%; margin-top: 552px; direction: rtl;">
+
+ 
+ 
+
+
+ 
+      <div style=" padding-right: 2px; margin-top: 0px;   width: 999px;"  >
+ 
+ 
+<div class="center-block">
+
+ 
+ 
+ 	<article>   
+
+ <h2>نتيجة البحث عن (<?php echo isset($_GET['q'])?$_GET['q']:'' ?>)</h2>
+<div class="clear"></div>
+<?php foreach($this->paginator as $i=>$item): ?>
+	<div class="product-box<?php echo (($i)%3==0?' first':'')?>">
+		<img class="product-image" src="<?php echo constant('LANG_URL').'MyUpload/'.$item->table_image ?>" />
+		<a href="<?php echo constant('LANG_URL') ?>item/v/i/<?php echo $item->id ?>"><?php echo $item->title ?></a>
+	</div>
+<?php endforeach ?>
+<div class="clear"></div>
+            <?php echo $this->paginationControl($this->paginator,'Sliding','patrial/pagination-control.phtml'); ?>
+<div class="clear"></div>
+ 
+	
+
+    </article>
+ 
+ <div class="clear"></div>
+		
+	</div>
+ 
+ 
+
+</div></div></div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+

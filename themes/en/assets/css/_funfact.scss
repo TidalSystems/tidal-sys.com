@@ -1,0 +1,74 @@
+.funfact-one {
+	padding-top: 80px;
+
+	@media (min-width: 1200px) {
+		padding-top: 0;
+	}
+
+	&__inner {
+		padding-top: 45px;
+		padding-bottom: 40px;
+		padding-left: 15px;
+		padding-right: 15px;
+		background-position: center center;
+		@include cretech-gradient;
+
+		@media (min-width: 992px) {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+
+		@media (min-width: 1200px) {
+			padding-left: 100px;
+			padding-right: 100px;
+			padding-top: 70.5px;
+			padding-bottom: 73px;
+		}
+	}
+
+	&__list {
+		display: flex;
+		@include reset-ul;
+		flex-wrap: wrap;
+		flex-direction: column;
+		text-align: center;
+
+		@media (min-width: 768px) {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			text-align: left;
+		}
+
+		&__item:not(:last-of-type) {
+			margin-bottom: 20px;
+
+			@media (min-width: 768px) {
+				margin-bottom: 0;
+			}
+		}
+
+		&__title {
+			margin: 0;
+			color: #fff;
+			font-size: 38px;
+			font-weight: bold;
+			letter-spacing: -0.025em;
+
+			@media (min-width: 768px) {
+				font-size: 42px;
+			}
+
+			@media (min-width: 992px) {
+				font-size: 48px;
+				margin-bottom: 4px;
+			}
+
+		}
+
+		&__text {
+			margin: 0;
+			color: #e4d3ff;
+		}
+	}
+}

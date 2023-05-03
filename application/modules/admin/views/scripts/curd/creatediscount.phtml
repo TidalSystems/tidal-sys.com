@@ -1,0 +1,3104 @@
+   
+<?php  
+ if(isset($_GET['imagename']))
+{
+   $imagename = $_GET['imagename'];
+}
+else{
+$imagename = '';
+}
+ 
+?>
+ 
+
+   <script type="text/javascript" src="https://www.mainlyeurope.com/ui/editor/tinymce/tiny_mce.js"></script>
+
+<script>
+#elm1 {
+ width: 90% !important;
+ 
+}
+
+</script>
+   
+<script type="text/javascript">
+    tinyMCE.init({
+            // General options
+            //mode : "textareas",
+            mode : "exact",
+            elements : "elm1,elm2,elm3,elm4,elm5,elm6,elm7,elm8,elm9",
+            language : "en",
+            theme : "advanced",
+            plugins : "openmanager,autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
+             
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks,|,openmanager",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+		
+		//Open Manager Options
+		file_browser_callback: "openmanager",
+		open_manager_upload_path: '../../../../../MyUpload/images',
+
+		// Example content CSS (should be your site CSS)
+		content_css : "css/content.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Style formats
+		style_formats : [
+			{title : 'Bold text', inline : 'b'},
+			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+			{title : 'Example 1', inline : 'span', classes : 'example1'},
+			{title : 'Example 2', inline : 'span', classes : 'example2'},
+			{title : 'Table styles'},
+			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+		],
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "Some User",
+			staffid : "991234"
+		}
+	});
+</script>
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+            <img id="preview" height="300" width="575">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+
+<h1> <?php echo $this->typename ?></h1>
+<?php 
+$str = $this->typename ;
+
+$exclude_list = array("Discount","Guest Comments","Gallery","Hotels" , "Pages" , "Free Pages" , "Package Type" , "Deals & Offers"   , "Travel Stories"  , "Requests" , "Requests Group" , "Customize Vacation") ;
+?>
+
+
+ 
+<?php if(!in_array($str, $exclude_list)): ?> <?php echo $this->form ?> <?php endif; ?>
+
+
+
+
+
+ <?php if($this->typename == 'Discount' ): ?>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+<form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+<?php  
+ if(isset($_GET['id']))
+{
+   $id= $_GET['id'];
+
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'discount';
+						        $where = array();
+						        $toppagesw = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppagesw as  $toppagewswx){
+   $type =  $toppagewswx->type ; 
+} 
+ 
+    
+}
+else{ $id = ''; $type = '' ;  } ?>
+ 
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->name ;  ?></td>
+    <td><?php echo $this->form->title ;  ?> </td>
+     <td><?php echo $this->form->discount ;  ?></td>
+    <td><?php echo $this->form->datepicker ;  ?> </td>
+  </tr>
+
+
+</table>
+
+<table width="100%" border="0">
+  <tr>
+     
+    <td><?php echo $this->form->notes ;  ?> </td>
+  </tr>
+
+
+</table>
+
+
+
+ 
+
+<?php echo $this->form->type ;  ?> 
+
+<?php echo $this->form->ids ;  ?> 
+ 
+<table width="60%" border="0" style="margin-top:10px;">
+  <tr>
+    <td>
+  <input  <?php if($type =="All"): ?>  <?php echo 'checked="checked" ' ?>  <?php endif; ?> onclick="showall();" id="allid" type="radio" name="radio"> All Site
+ <label class=""> <span class="checkmark"></span>
+</label></td>
+    <td><label class="">
+  <input <?php if($type =="Region"): ?>  <?php echo 'checked="checked" ' ?>  <?php endif; ?>   onclick="showregion();"  id="regionid" type="radio" name="radio"> Region
+  <span class="checkmark"></span>
+</label></td>
+    <td><label class="">
+  <input  <?php if($type =="Country"): ?>  <?php echo 'checked="checked" ' ?>  <?php endif; ?> onclick="showcountry();"  id="countryid"  type="radio" name="radio"> Country
+  <span class="checkmark"></span>
+</label></td>
+    <td><label class="">
+  <input  <?php if($type =="Package"): ?>  <?php echo 'checked="checked" ' ?>  <?php endif; ?> onclick="showpackage();"  id="packageid"  type="radio" name="radio"> Package
+  <span class="checkmark"></span>
+</label></td>
+  </tr>
+</table>
+
+
+ 
+ 
+ 
+ 
+<div id="regiondiv" <?php if($type !="Region"): ?>  style="display:none" <?php endif; ?>   >  
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+
+<?php
+$tempwwaac2x = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'discount';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwx):
+							?> 	
+
+<?php  $ids =  $toppagewwx->ids ; ?>  
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwx->ids,'|'));
+            foreach($images as $index=>$photox): if(!trim($photox) ) continue;?>
+
+<?php $tempwwaac2x []= $photox ?> 
+
+ 
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+<div class="col-md-12"  style="background: #fff;margin-top: 20px;" > 
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'region';						                                       
+						        $toppages2 = $model->selectForArray(array( ), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecczz):?>
+
+  
+ <div class="col-md-2"  style=" background: #e2e2e2;margin: 2px;" >  
+<input class="sport2"  name="sport"  type="checkbox" id="someid477region"  value="<?php echo $toppagecczz->id ?>"  <?php if(in_array($toppagecczz->id, $tempwwaac2x )): ?> <?php echo 'checked' ?> <?php endif; ?>    > <?php echo $toppagecczz->title ?></input> </div> 
+		<?php endforeach; ?>
+
+
+ 
+ </div> 
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+  
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4e2cdregion = $('input:checkbox').filter('#someid477region');
+    $checks4e2cdregion.on('change', function() {
+        var string4e2cdcd = $checks4e2cdregion.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#ids').val("||"+ string4e2cdcd);
+    });
+});
+
+
+</script>
+
+
+
+
+</div> 
+<div id="countrydiv" <?php if($type !="Country"): ?>  style="display:none" <?php endif; ?> >  
+
+ 
+
+<?php
+$tempwwaac2xc = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'discount';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwxc):
+							?> 	
+
+<?php  $ids =  $toppagewwxc->ids ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwxc->ids,'|'));
+            foreach($images as $index=>$photox): if(!trim($photox) ) continue;?>
+
+<?php $tempwwaac2xc []= $photox ?> 
+
+ 
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'region';						                                       
+						        $toppages2 = $model->selectForArray(array( ), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecczz3ww):?>
+
+
+
+<div class="col-md-12"  style="background: #fff;margin-top: 20px;" > 
+<div class="col-md-12" style="padding:0px"  ><h4><?php echo $toppagecczz3ww->title; ?></h4> </div>
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages2 = $model->selectForArray(array( 'regionid' => $toppagecczz3ww->id ), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecczz3):?>
+
+  
+ <div class="col-md-2"  style=" background: #e2e2e2;margin: 2px;" >  
+<input class="sport3"  name="sport"  type="checkbox" id="someid47country"  value="<?php echo $toppagecczz3->id ?>"  <?php if(in_array($toppagecczz3->id, $tempwwaac2xc )): ?> <?php echo 'checked' ?> <?php endif; ?>    > <?php echo $toppagecczz3->data ?></input> </div> 
+		<?php endforeach; ?>
+
+
+ 
+ </div> 
+<?php endforeach; ?>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4e2country = $('input:checkbox').filter('#someid47country');
+    $checks4e2country.on('change', function() {
+        var ddddcountrys = $checks4e2country.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#ids').val("||"+ ddddcountrys);
+    });
+});
+
+
+</script>
+
+</div> 
+
+
+
+<div id="packagediv"  <?php if($type !="Package"): ?>  style="display:none" <?php endif; ?> >  
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+ $("#ids").val('||'+ (favorite.join("||")));  
+        });
+    });
+</script>
+
+<?php
+$tempwwaac2xcp = array();
+								$model = new Model_PlusData();
+						        $model->_name  = 'discount';
+						        $where = array();
+						        $toppages = $model->selectForArray(array('id' => $id), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages as  $toppagewwxcp):
+							?> 	
+
+<?php  $ids =  $toppagewwxcp->ids ; ?> 
+ 							
+<?php 
+          $images = explode('||',trim($toppagewwxcp->ids,'|'));
+            foreach($images as $index=>$photox): if(!trim($photox) ) continue;?>
+
+<?php $tempwwaac2xcp []= $photox ?> 
+
+ 
+
+
+<?php endforeach; ?><?php endforeach; ?>
+
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages2 = $model->selectForArray(array( ), array('title' => 'ASC')  );
+								foreach($toppages2 as $toppagecczz3wwp):?>
+
+
+
+<div class="col-md-12"  style="background: #fff;margin-top: 20px;" > 
+ 
+
+<div class="col-md-12" style="padding:0px"  ><h4><?php echo $toppagecczz3wwp->data; ?></h4> </div>
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2p = $model->selectForArray(array( 'countryid' => $toppagecczz3wwp->id ), array('title' => 'ASC')  );
+								foreach($toppages2p as $toppagecczz3p):?>
+
+  
+ <div class="col-md-3"  style=" background: #e2e2e2;margin: 2px;" >  
+<input class="sport4"  name="sport"  type="checkbox" id="someid47702xxx3301"  value="<?php echo $toppagecczz3p->id ?>"  <?php if(in_array($toppagecczz3p->id, $tempwwaac2xcp )): ?> <?php echo 'checked' ?> <?php endif; ?>    > <?php echo $toppagecczz3p->title ?></input> </div> 
+		<?php endforeach; ?>
+
+
+ 
+ </div> 
+<?php endforeach; ?>
+ 
+<script  language="javascript">
+$(document).ready(function(){
+    $checks4e2cp = $('input:checkbox').filter('#someid47702xxx3301');
+    $checks4e2cp.on('change', function() {
+        var ddddpackage = $checks4e2cp.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#ids').val("||"+ ddddpackage);
+    });
+});
+
+
+</script>
+
+
+
+
+
+</div> 
+
+
+<script type="text/javascript">
+function showall(){
+document.getElementById('regiondiv').style.display ='none';
+document.getElementById('countrydiv').style.display ='none';
+document.getElementById('packagediv').style.display ='none';
+document.getElementById("type").value = 'All'; 
+
+ 
+ $('.sport2').removeAttr('checked');
+ $('.sport3').removeAttr('checked');
+ $('.sport4').removeAttr('checked');
+
+ document.getElementById("ids").value = '0'; 
+ 
+}
+
+function showregion(){
+document.getElementById('regiondiv').style.display ='block';
+document.getElementById('countrydiv').style.display ='none';
+document.getElementById('packagediv').style.display ='none';
+ document.getElementById("type").value = 'Region'; 
+ 
+ $('.sport3').removeAttr('checked');
+ $('.sport4').removeAttr('checked');
+
+document.getElementById("ids").value = ''; 
+}
+
+
+
+function showcountry(){
+ document.getElementById('regiondiv').style.display ='none';
+document.getElementById('countrydiv').style.display ='block';
+document.getElementById('packagediv').style.display ='none';
+ document.getElementById("type").value = 'Country'; 
+ $('.sport2').removeAttr('checked');
+ 
+ $('.sport4').removeAttr('checked');
+
+document.getElementById("ids").value = ''; 
+}
+
+
+
+function showpackage(){
+document.getElementById('regiondiv').style.display ='none';
+document.getElementById('countrydiv').style.display ='none';
+document.getElementById('packagediv').style.display ='block';
+ document.getElementById("type").value = 'Package'; 
+ $('.sport2').removeAttr('checked');
+ $('.sport3').removeAttr('checked');
+ 
+document.getElementById("ids").value = ''; 
+}
+
+</script>
+
+
+<?php echo $this->form->save ;  ?> 
+</form>
+
+ 
+<?php endif; ?>
+
+
+
+
+ <?php if($this->typename == 'Comments added' ): ?>
+<script type="text/javascript">
+document.getElementById("displayorder-label").style.display = "none";
+ 
+document.getElementById("displayorder").style.display = "none";
+ 
+</script>
+<?php endif; ?>
+
+
+
+<?php if($this->typename == 'Hotels' ||  $this->typename == 'Excursions'): ?>
+
+   
+<?php  
+ if(isset($_GET['id']))
+{
+   $idid= $_GET['id'];
+   
+}
+else{
+$idid = '';
+ 
+}
+ 
+?>
+
+
+<h4> <i class="fa fa-files-o"></i>
+<a href="<?php echo constant('APP_BASEURL') .  '/admin/items2/create' ?> "> Add New </a>  
+<spam style="margin-left: 40px;">  
+ <i class="fa fa-files-o"></i> 
+<a href="<?php echo constant('APP_BASEURL') .  '/admin/items2/index' ?>"> Update Existing </a>  </spam> 
+</h4>
+ 
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+
+<table width="400px" border="0">
+  <tr>
+ <td style="padding-right:20px ; text-align:left" ><?php echo $this->form->regionid ;  ?></td>
+     <td style="padding-right:20px ; text-align:left" ><?php echo $this->form->countryid ;  ?></td>
+    <td style="padding-right:20px ; text-align:left" ><?php echo $this->form->cityid ;   ?></td>
+  </tr>
+</table>
+ <?php echo $this->form->data5 ;  ?>
+  <?php echo $this->form->data55 ;  ?>
+ 
+ <?php echo $this->form->title ;  ?>
+ <?php echo $this->form->description ;  ?>
+  <?php echo $this->form->rooms ;  ?>
+   <?php echo $this->form->facilities ;  ?>
+    <?php echo $this->form->resturant ;  ?>
+	 <?php echo $this->form->amenities ;  ?>
+ 
+
+ <?php echo $this->form->pagurl ;  ?> 
+
+<div class="col-sm-12 " id="galleryimage" ><?php echo $this->form->table_image ;  ?> </div>
+ 
+<?php if(!isset($_GET['id'])): ?>
+<script type="text/javascript">
+document.getElementById("galleryimage").style.display = "none";
+</script>
+<?php endif; ?>
+
+
+<div class="col-sm-12 "  ><?php echo $this->form->save ;   ?></div>
+
+</form>
+ <script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid"] ');
+                    
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/items2/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value=""> ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                       
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['country'])
+                    $('select[name="country"] option[value="'+$.QueryString['country']+'"]').attr('selected', 'selected').parent().change();
+                
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/items2/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region+'</option>';
+                                region.html(html);
+                                
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+ 
+                                region.hide();
+                                region.fadeIn();
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"] ').change();
+               
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+  
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+  
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+<script>
+$(document).ready(function (){
+    $("input.xxxx").click(function(){
+      var con = []
+ 
+
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+con.push(file);
+ 
+     
+  });
+    
+     
+     
+    
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt);   
+    });
+});
+
+
+</script>
+  
+ 
+
+<script type="text/javascript">
+<!--
+
+ 
+var imgs = new Array();
+
+function showimgs(){
+
+ 
+
+    if(imgs.length<=0){
+        $('.imageuploader .files').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image').val('');
+    }else{
+        $('.imageuploader .files').html("<table ><tr><td >   ");
+        $('.image').val("");
+        for (var i = 0; i < imgs.length; i++) {
+            // add file to the list
+            $('.imageuploader .files').html($('.imageuploader .files').html()+"<div class='col-md-1 col-sm-12 ' style='background:#fff; '>  <a id="+i+" href='javascript:removeimg("+i+");'><br />Remove</a><br /> <img    id="+i+" src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs[i]+"'     width='120' height='48'></img> <br/>     </div>");
+            $('.image').val($('.image').val()+'||'+imgs[i]);
+        }
+    }
+}
+
+
+
+  $(function  () {
+  $( "#sortable" ).sortable();
+         });
+
+function removeimg(id){
+    imgs.splice(id,1);
+  showimgs();
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+con.push(file);
+ 
+     
+  });
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt); 
+    
+
+
+   
+}
+
+	(function($){
+            
+            var button1 = '<div class="imageuploader"><div class=" "><a  href="<?php echo  $this->baseUrl();?>/admin/indexgallery?widthw=855&heighth=345&id=<?php echo $idid ?>&tt=items2&ff=table_image&countryid=0"> Upload image </a><div id="button1" class="btn btn-danger" style="display:none" ><button class="btn btn-danger"> Add Photo</button></div></div> <br/><input type="button" value="Save Gallery Order" class="xxxx"></input><input id="content" type="hidden" class="image" style="width: 250px;" name="table_image" value="<?php echo $this->form->getElement('table_image')->getValue(); ?>" /><div class="files" style="cursor:pointer"  id="sortable" >11</div>  </div>';
+	    $('#table_image').replaceWith(button1);
+		if($('#button1').length){
+	        var button = $('#button1'), interval;    
+	        new AjaxUpload(button, {
+	            action: '<?php echo $this->baseUrl().'/admin/upload/photo'?>', 
+	            name: 'img',
+	            onSubmit : function(file, ext){
+	                if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+	                    // change button text, when user selects file            
+	                button.text('upload process');
+	                                
+	                // If you want to allow uploading only 1 file at time,
+	                // you can disable upload button
+	                this.disable();
+	                
+	                // Uploding -> Uploading. -> Uploading...
+	                interval = window.setInterval(function(){
+	                    var text = button.text();
+	                    if (text.length < 13){
+	                        button.text(text + '.');                    
+	                    } else {
+	                        button.text('upload till process.........');                
+	                    }
+	                }, 200);
+	                    
+	                } else {
+	                    // cancel upload
+	                    alert("  gif,jpg,jpeg,png extention allow");
+	                    return false;                
+	                }
+	            },
+	            onComplete: function(file, response){
+
+	                button.text('Upload new image');
+	                      
+	                window.clearInterval(interval);
+	                            
+	                // enable upload button
+	                this.enable();
+	                
+	                imgs.push( response );
+//	                console.log(imgs, i,response);
+	                showimgs();
+                    window.top.window.show_popup_crop('<?= $this->baseUrl()?>/files/ful/i/'+response);
+	            }
+	        });
+	        if($('.image').val()!=''){
+	            imgs=$('.image').val().split('||');
+                   
+	            for (var i = 0; i < imgs.length; i++) {
+	                if(imgs[i]==''){
+	                    imgs.splice(i,1);
+	                    i=i-1;
+	                }
+	            }
+	        }
+	        showimgs();
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+//con.push(file);
+ 
+     
+  });
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt); 
+
+
+	    }
+
+
+
+
+
+
+
+ 
+ 
+	})(jQuery);
+//-->
+
+</script>
+ 
+
+
+
+ <script>
+$( '#cityid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#countryid' ).attr( 'onchange' , 'myFunction22()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+$( '#data55' ).attr( 'type' , 'hidden'  );
+document.getElementById("data5-label").style.display = "none";
+document.getElementById("data55-label").style.display = "none";
+</script>
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("cityid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text; 
+     
+}
+</script>
+
+
+<script>
+function myFunction22() {
+ 
+    var pageidx = document.getElementById("countryid");
+    document.getElementById("data55").value = pageidx.options[pageidx.selectedIndex].text; 
+     
+}
+</script>
+
+
+
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if($this->typename == 'Free Pages'): ?>
+
+   
+<?php  
+ if(isset($_GET['id']))
+{
+   $idid= $_GET['id'];
+   
+}
+else{
+$idid = '';
+ 
+}
+ 
+?>
+
+
+ 
+ 
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+
+ 
+ <?php echo $this->form->title ;  ?>
+  <?php echo $this->form->decription ;  ?>
+ 
+ 
+ <div class="col-sm-12 " id="galleryimage" ><?php echo $this->form->table_image ;  ?> </div>
+ 
+<?php if(!isset($_GET['id'])): ?>
+<script type="text/javascript">
+document.getElementById("galleryimage").style.display = "none";
+</script>
+<?php endif; ?>
+
+ <?php echo $this->form->pagurl ;  ?>
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages4';
+						        $where = array();
+						        $toppages222244x = $model->selectForArray(array('id' => $idid ), array('displayorder' => 'ASC') , 1 );
+						
+								foreach($toppages222244x as  $toppageww22x):
+							?> 	
+<br/>
+
+ <a target="_blank"  href="http://www.mainlyeurope.com/mainly/<?php echo $toppageww22x->pagurl; ?>"> http://www.mainlyeurope.com/mainly/<?php echo $toppageww22x->pagurl; ?>  </a>
+<?php endforeach; ?> 
+
+
+
+
+
+<div class="col-sm-12 "  ><?php echo $this->form->save ;   ?></div>
+
+</form>
+  
+<script type="text/javascript">
+ document.getElementById("title").style.width = "800px";
+ document.getElementById("pagurl").style.width = "800px";
+ document.getElementById("elm1").style.width = "800px";
+ 
+</script>
+  
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+  
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+  <script language="javascript">
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='150' height='31'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md-2 col-lg-2" ></div><div  class=" "><div id="button3" class="btn btn-danger" ><button class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 250px;" name="table_image" value="<?php echo $this->form->getElement('table_image')->getValue(); ?>" /><div class="col-md-6 col-lg-6  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#table_image').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+
+ 
+
+
+ 
+
+
+
+<?php endif; ?>
+
+
+
+<?php if($this->typename == 'Advertise' ): ?>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+ <script>
+$( '#catid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+$( '#pageiditem' ).attr( 'type' , 'hidden'  );
+</script>
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("catid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text; 
+    document.getElementById("pageiditem").value = (pageidx.options[pageidx.selectedIndex].text).split("-").pop();
+}
+</script>
+  <?php endif ?>
+
+
+
+
+
+
+<?php if($this->typename == 'City' ): ?>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+ <script>
+$( '#countryid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+document.getElementById("data5-label").style.display = "none";
+$( '#data5-label' ).attr( 'type' , 'hidden'  );
+ 
+</script>
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("countryid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text; 
+    document.getElementById("pageiditem").value = (pageidx.options[pageidx.selectedIndex].text).split("-").pop();
+}
+</script>
+  <?php endif ?>
+
+
+
+
+
+
+
+<?php if($this->typename == 'Country' ): ?>
+ 
+
+ <script>
+$( '#data' ).attr( 'onchange' , 'myFunction()'  );
+$( '#regionid' ).attr( 'onchange' , 'myFunction2()'  );
+ 
+ document.getElementById("data5").style.display = "none";
+ document.getElementById("data5-label").style.display = "none";
+</script>
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("data");
+    document.getElementById("pagurl").value = (pageidx.options[pageidx.selectedIndex].text).split(' ').join('-');
+	 
+}
+
+function myFunction2() {
+ 
+    
+	
+	  var pageidx = document.getElementById("regionid");
+    document.getElementById("data5").value = (pageidx.options[pageidx.selectedIndex].text);
+}
+</script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+ 
+  
+ 
+    <script language="javascript">
+var imgs2 = new Array();
+
+function showimgs2(){
+    if(imgs2.length<=0){
+        $('.imageuploader2 .files2').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image2').val('');
+    }else{
+        $('.imageuploader2 .files2').html("<table><tr>");
+        $('.image2').val("");
+        for (var i = 0; i < imgs2.length; i++) {
+            // add file to the list
+            $('.imageuploader2 .files2').html($('.imageuploader2 .files2').html()+"<div > <a href='javascript:removeimg2("+i+");'><br />Remove</a><br /> <img src='<?php echo $this->themeUrl ?>pdf.jpg'     width='64' height='23'></img>      </div>");
+            $('.image2').val($('.image2').val()+''+imgs2[i]);
+        }
+    }
+}
+
+
+  
+function removeimg2(id){
+    imgs2.splice(id,1);
+    showimgs2();
+  
+}
+
+ (function($){
+               
+            var button2 = '<div class="imageuploader2"><div class=" "><div id="button2" class="btn btn-danger" ><button class="btn btn-danger"> Add PDF</button></div></div>   <input id="content2" type="hidden" class="image2" style="width: 250px;" name="image" value="<?php echo $this->form->getElement('image')->getValue(); ?>" /><div class="files2" style="cursor:pointer"  id="sortable2" ></div>  </div>';
+     $('#image').replaceWith(button2);
+  if($('#button2').length){
+         var button2 = $('#button2'), interval;    
+         new AjaxUpload(button2, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo2'?>', 
+             name: 'img2',
+             onSubmit : function(file, ext){
+                 if (ext && /^(pdf)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button2.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button2.text();
+                     if (text.length < 13){
+                         button2.text(text + '.');                    
+                     } else {
+                         button2.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  PDF extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button2.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs2.splice(response);
+                 imgs2.push( response );
+                 showimgs2();
+             }
+         });
+         if($('.image2').val()!=''){
+             imgs2=$('.image2').val().split(' ');
+                   
+             for (var i = 0; i < imgs2.length; i++) {
+                 if(imgs2[i]==''){
+                     imgs2.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs2();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+  <?php endif ?>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<?php if($this->typename == 'Gallery' ): ?>
+
+ 
+<form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+
+<?php echo $this->form->title ;  ?>
+<?php echo $this->form->image ;  ?>
+<?php echo $this->form->table_image ;  ?>
+
+<?php echo $this->form->save ;   ?>
+
+</form>
+<script>
+  document.getElementById("submit" ).style.float = "left";
+  </script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+ 
+
+<script>
+$(document).ready(function (){
+    $("#save").click(function(){
+      var con = []
+ 
+
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+con.push(file);
+ 
+     
+  });
+    
+     
+     
+    
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt);   
+    });
+});
+
+
+</script>
+ 
+ 
+
+
+
+
+<script>
+$(document).ready(function (){
+    $("input.xxxx2").click(function(){
+      var con2 = []
+ 
+
+$('#sortable2 img' ).each(function myFunction (index, value){
+ 
+var src2 = $(this).attr('src'); 
+var tarr = src2.split('/');       
+var file2 = tarr[tarr.length-1]; 
+var data = file2.split('.')[0]; 
+ 
+    
+con2.push(file2);
+ 
+     
+  });
+    
+     
+     
+    
+var txt = "";
+var x;
+for (x in con2) {
+    txt += con2[x] + "||";
+} 
+      $("#content2").val('||'+ txt);   
+    });
+});
+
+
+</script>
+ 
+
+
+<script type="text/javascript">
+<!--
+
+var imgs = new Array();
+function showimgs(){
+    if(imgs.length<=0){
+        $('.imageuploader .files').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image').val('');
+    }else{
+        $('.imageuploader .files').html("<div >    ");
+        $('.image').val("");
+        for (var i = 0; i < imgs.length; i++) {
+            // add file to the list
+            $('.imageuploader .files').html($('.imageuploader .files').html()+"<div class='col-md-1 col-sm-12 ' style='background:#fff; width:10%'> <a id="+i+" href='javascript:removeimg("+i+");'><br />Remove</a><br /> <img    id="+i+" src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs[i]+"'     width='50' height='50'></img> <br/>     </div>");
+            $('.image').val($('.image').val()+'||'+imgs[i]);
+        }
+    }
+}
+
+
+
+  $(function  () {
+  $( "#sortable" ).sortable();
+         });
+ 
+   
+
+function removeimg(id){
+    imgs.splice(id,1);
+  showimgs();
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+con.push(file);
+ 
+     
+  });
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt); 
+    
+
+
+   
+}
+
+	(function($){
+            
+            var button1 = '<div class="imageuploader"><div class=" "><div id="button1" class="btn btn-danger" ><a class="btn btn-danger"> Add Photo</button></a></div> <br/> <input id="content" type="hidden" class="image" style="width: 250px;" name="table_image" value="<?php echo $this->form->getElement('table_image')->getValue(); ?>" /><div class="files" style="cursor:pointer"  id="sortable" ></div>  </div>';
+	    $('#table_image').replaceWith(button1);
+		if($('#button1').length){
+	        var button = $('#button1'), interval;    
+	        new AjaxUpload(button, {
+	            action: '<?php echo $this->baseUrl().'/admin/upload/photo'?>', 
+	            name: 'img',
+	            onSubmit : function(file, ext){
+	                if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+	                    // change button text, when user selects file            
+	                button.text('upload process');
+	                                
+	                // If you want to allow uploading only 1 file at time,
+	                // you can disable upload button
+	                this.enable();
+	                
+	                // Uploding -> Uploading. -> Uploading...
+	                interval = window.setInterval(function(){
+	                    var text = button.text();
+	                    if (text.length < 13){
+	                        button.text(text + '.');                    
+	                    } else {
+	                        button.text('upload till process.........');                
+	                    }
+	                }, 200);
+	                    
+	                } else {
+	                    // cancel upload
+	                    alert("  gif,jpg,jpeg,png extention allow");
+	                    return false;                
+	                }
+	            },
+	            onComplete: function(file, response){
+	                button.text('Upload new image');
+	                      
+	                window.clearInterval(interval);
+	                            
+	                // enable upload button
+	                this.enable();
+	                
+	                imgs.push( response );
+	                showimgs();
+	            }
+	        });
+	        if($('.image').val()!=''){
+	            imgs=$('.image').val().split('||');
+                   
+	            for (var i = 0; i < imgs.length; i++) {
+	                if(imgs[i]==''){
+	                    imgs.splice(i,1);
+	                    i=i-1;
+	                }
+	            }
+	        }
+	        showimgs();
+$('#sortable img' ).each(function myFunction (index, value){
+ 
+var src = $(this).attr('src'); 
+var tarr = src.split('/');       
+var file = tarr[tarr.length-1]; 
+var data = file.split('.')[0]; 
+ 
+    
+con.push(file);
+ 
+     
+  });
+var txt = "";
+var x;
+for (x in con) {
+    txt += con[x] + "||";
+} 
+      $("#content").val('||'+ txt); 
+
+
+	    }
+
+ 
+ 
+	})(jQuery);
+//-->
+
+</script>
+
+
+
+<?php endif ?>
+
+
+<?php if($this->typename == 'Requests' ): ?>
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >  
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->package ;  ?></td>
+    <td><?php echo $this->form->leave ;  ?></td>
+  </tr>
+ <tr>
+    <td><?php echo $this->form->datepicker ;  ?></td>
+    <td><?php echo $this->form->night ;  ?></td>
+  </tr>
+</table>
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>NUMBER OF TRAVELERS</h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->num1 ;  ?></td>
+     <td><?php echo $this->form->num2 ;  ?></td>
+ <td><?php echo $this->form->num3 ;  ?></td>
+ <td><?php echo $this->form->num4 ;  ?></td>
+  </tr>
+   
+</table>
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>* HOW MUCH</h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->budget ;  ?></td>
+     <td><?php echo $this->form->youbudgetis1 ;  ?></td>
+ <td><?php echo $this->form->youbudgetis2 ;  ?></td>
+ 
+  </tr>
+
+
+<tr>
+    <td><?php echo $this->form->whendescrip1 ;  ?></td>
+     <td><?php echo $this->form->whendescrip2 ;  ?></td>
+  
+ 
+  </tr>
+   
+</table>
+
+
+
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>FLIGHTS
+</h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->flight ;  ?></td>
+ 
+ 
+  </tr>
+
+ 
+   
+</table>
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>HOTELS & LODGING </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->hotel1 ;  ?></td>
+  <td><?php echo $this->form->hotel2 ;  ?></td>
+ <td><?php echo $this->form->hotel3 ;  ?></td>
+ <td><?php echo $this->form->hotel4 ;  ?></td>
+  <td><?php echo $this->form->hotel5 ;  ?></td>
+  </tr>
+
+ 
+   
+</table>
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>LOCAL TRANSPORTATION </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->transport1 ;  ?></td>
+  <td><?php echo $this->form->transport2 ;  ?></td>
+ <td><?php echo $this->form->transport3 ;  ?></td>
+ <td><?php echo $this->form->transport4 ;  ?></td>
+   
+  </tr>
+</table>
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>CRUISES & BOATS </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->cruise1 ;  ?></td>
+  <td><?php echo $this->form->cruise2 ;  ?></td>
+ <td><?php echo $this->form->cruise3 ;  ?></td>
+ 
+   
+  </tr>
+</table>
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>  ABOUT MY TRIP </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->trip1 ;  ?></td>
+  <td><?php echo $this->form->trip2 ;  ?></td>
+  </tr>
+
+<tr>
+    <td><?php echo $this->form->message ;  ?></td>
+  </tr>
+</table>
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3> ABOUT ME  </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->occasion ;  ?></td>
+  <td><?php echo $this->form->lifestyle ;  ?></td>
+ <td><?php echo $this->form->activities ;  ?></td>
+  </tr>
+ 
+</table>
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3> REGISTRATION  </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->email ;  ?></td>
+  <td><?php echo $this->form->email2 ;  ?></td>
+ 
+  </tr>
+ <tr>
+    <td><?php echo $this->form->firstname ;  ?></td>
+  <td><?php echo $this->form->lastname ;  ?></td>
+  <td><?php echo $this->form->phone ;  ?></td>
+
+  </tr>
+
+
+<tr>
+    <td><?php echo $this->form->country ;  ?></td>
+  <td><?php echo $this->form->state ;  ?></td>
+  <td><?php echo $this->form->zip ;  ?></td>
+
+  </tr>
+ 
+</table>
+
+ <?php echo $this->form->save ;  ?>
+ </form > 
+
+
+
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if($this->typename == 'Customize Vacation' ): ?>
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >  
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->destination ;  ?></td>
+    <td><?php echo $this->form->leave ;  ?></td>
+  </tr>
+ <tr>
+    
+    <td><?php echo $this->form->night ;  ?></td>
+  </tr>
+</table>
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>NUMBER OF TRAVELERS</h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->num1 ;  ?></td>
+     <td><?php echo $this->form->num2 ;  ?></td>
+ <td><?php echo $this->form->num3 ;  ?></td>
+ <td><?php echo $this->form->num4 ;  ?></td>
+  </tr>
+   
+</table>
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>* HOW MUCH</h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->budget ;  ?></td>
+     <td><?php echo $this->form->youbudgetis1 ;  ?></td>
+ <td><?php echo $this->form->youbudgetis2 ;  ?></td>
+ 
+  </tr>
+
+
+<tr>
+    <td><?php echo $this->form->whendescrip1 ;  ?></td>
+     <td><?php echo $this->form->whendescrip2 ;  ?></td>
+  
+ 
+  </tr>
+   
+</table>
+
+
+
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>FLIGHTS
+</h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->flight ;  ?></td>
+ 
+ 
+  </tr>
+
+ 
+   
+</table>
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>HOTELS & LODGING </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->hotel1 ;  ?></td>
+  <td><?php echo $this->form->hotel2 ;  ?></td>
+ <td><?php echo $this->form->hotel3 ;  ?></td>
+ <td><?php echo $this->form->hotel4 ;  ?></td>
+  <td><?php echo $this->form->hotel5 ;  ?></td>
+  </tr>
+
+ 
+   
+</table>
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>LOCAL TRANSPORTATION </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->transport1 ;  ?></td>
+  <td><?php echo $this->form->transport2 ;  ?></td>
+ <td><?php echo $this->form->transport3 ;  ?></td>
+ <td><?php echo $this->form->transport4 ;  ?></td>
+   
+  </tr>
+</table>
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>CRUISES & BOATS </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->cruise1 ;  ?></td>
+  <td><?php echo $this->form->cruise2 ;  ?></td>
+ <td><?php echo $this->form->cruise3 ;  ?></td>
+ 
+   
+  </tr>
+</table>
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>  ABOUT MY TRIP </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->trip1 ;  ?></td>
+  <td><?php echo $this->form->trip2 ;  ?></td>
+  </tr>
+
+<tr>
+    <td><?php echo $this->form->message ;  ?></td>
+  </tr>
+</table>
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3> ABOUT ME  </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->occasion ;  ?></td>
+  <td><?php echo $this->form->lifestyle ;  ?></td>
+ <td><?php echo $this->form->activities ;  ?></td>
+  </tr>
+ 
+</table>
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3> REGISTRATION  </h3>
+ 
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->email ;  ?></td>
+  <td><?php echo $this->form->email2 ;  ?></td>
+ 
+  </tr>
+ <tr>
+    <td><?php echo $this->form->firstname ;  ?></td>
+  <td><?php echo $this->form->lastname ;  ?></td>
+  <td><?php echo $this->form->phone ;  ?></td>
+
+  </tr>
+
+
+<tr>
+    <td><?php echo $this->form->country ;  ?></td>
+  <td><?php echo $this->form->state ;  ?></td>
+  <td><?php echo $this->form->zip ;  ?></td>
+
+  </tr>
+ 
+</table>
+
+ <?php echo $this->form->save ;  ?>
+ </form > 
+
+
+
+<?php endif; ?>
+
+
+
+
+
+
+<?php if($this->typename == 'Open window message' ): ?>
+<script>
+document.getElementById("elm1").style.width = "90%";
+ 
+
+</script>
+<?php endif; ?>
+
+
+
+
+
+<?php if($this->typename == 'Requests Group' ): ?>
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+
+ <script>
+  $( function() {
+    $( "#datepicker2" ).datepicker();
+  } );
+  </script>
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >  
+<h3>Section 1. CONTACT INFO </h3>
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->firstname ;  ?></td>
+    <td><?php echo $this->form->lastname ;  ?></td>
+  </tr>
+ <tr>
+    <td><?php echo $this->form->email ;  ?></td>
+    <td><?php echo $this->form->phone ;  ?></td>
+    <td><?php echo $this->form->ext1 ;  ?></td>
+  </tr>
+
+ <tr>
+    <td><?php echo $this->form->phone2 ;  ?></td>
+    <td><?php echo $this->form->ext2 ;  ?></td>
+    <td><?php echo $this->form->fax ;  ?></td>
+  </tr>
+</table>
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>Section 2. ORGANIZATION / AGENCY / COMPANY INFO</h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->name ;  ?></td>
+     <td><?php echo $this->form->address1 ;  ?></td>
+     <td><?php echo $this->form->address2 ;  ?></td> 
+  </tr>
+
+
+  <tr>
+    <td><?php echo $this->form->city ;  ?></td>
+     <td><?php echo $this->form->state ;  ?></td>
+     <td><?php echo $this->form->zip ;  ?></td> 
+  </tr>
+
+
+
+  <tr>
+    <td><?php echo $this->form->iata ;  ?></td>
+     <td><?php echo $this->form->website ;  ?></td>
+   
+  </tr>
+   
+</table>
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>Section 3. GROUP INFO </h3>
+
+<table width="100%" border="0">
+  <tr>
+    <td><?php echo $this->form->groupname ;  ?></td>
+     <td><?php echo $this->form->country ;  ?></td>
+     <td><?php echo $this->form->paxe ;  ?></td> 
+ 
+  </tr>
+
+
+  <tr>
+  <td><?php echo $this->form->datepicker ;  ?></td>
+  <td><?php echo $this->form->datepicker2 ;  ?></td>
+  <td><?php echo $this->form->interest ;  ?></td>
+   
+  </tr>
+
+  <tr>
+  
+  <td><?php echo $this->form->age ;  ?></td>
+ <td><?php echo $this->form->flexible ;  ?></td>
+ <td><?php echo $this->form->tour ;  ?></td>
+ 
+   
+  </tr>
+
+  <tr>
+  <td><?php echo $this->form->affiliation ;  ?></td>
+ 
+ 
+   
+  </tr>
+ 
+</table>
+
+ <table>
+  <tr>
+  <td>
+  <?php echo $this->form->message ;  ?></td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<hr style=" border: 1px solid #dc1f26;" ></hr>
+<h3>Section 4. LAND INFO </h3>
+
+<table width="100%" border="0">
+  
+   <tr>
+    <td><?php echo $this->form->cruise ;  ?></td>
+    <td><?php echo $this->form->citynum ;  ?></td>
+    <td><?php echo $this->form->hotel ;  ?></td>
+  </tr>
+   <tr>
+    <td><?php echo $this->form->meal ;  ?></td>
+ <td><?php echo $this->form->optiontour ;  ?></td>
+ <td><?php echo $this->form->insurance ;  ?></td>
+ 
+  </tr>
+   
+</table>
+
+
+
+
+
+<table width="50%" border="0">  
+   <tr> <td ><?php echo $this->form->message2 ;  ?></td>  </tr>
+</table>
+
+
+
+ <?php echo $this->form->save ;  ?>
+ </form > 
+
+
+
+<?php endif; ?>
+
+
+
+<?php if($this->typename == 'News-Press Room' ): ?>
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+  
+<?php endif; ?>
+
+
+
+
+<?php if($this->typename == 'Guest Comments' ): ?>
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   
+
+<?php echo $this->form->title ;  ?>
+<?php echo $this->form->signature ;  ?>
+
+
+
+  
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+  
+ 
+ <?php echo $this->form->datepicker ;  ?>
+ 
+ 
+
+<?php echo $this->form->data ;  ?>
+<?php echo $this->form->image ;  ?>
+<?php echo $this->form->type ;  ?>
+ <?php echo $this->form->from ;  ?>  
+<script>
+document.getElementById("from").value = 'backend';
+document.getElementById("from-label").style.display = "none";
+document.getElementById("from").style.display = "none";
+</script> 
+
+<?php echo $this->form->save ;   ?>
+
+</form>
+
+<?php endif; ?>
+
+
+
+
+
+<?php if($this->typename == 'Project Category' ): ?>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+ <script>
+$( '#pageid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+</script>
+
+
+<script type="text/javascript">
+
+function myFunction() {
+
+    var pageidx = document.getElementById("pageid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text;
+}
+</script>
+
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/resources/scripts/jquery.Jcrop.js"></script>
+
+
+
+<?php endif ?>
+
+
+
+
+
+ <?php if($this->typename == 'Pages'  ): ?>
+<?php $numpageid=  $this->serv2;  ?>
+ 
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+ 
+ 
+ <?php echo $this->form->pageid ;  ?>
+<?php echo $this->form->data5 ;  ?>
+<table>
+<td><?php echo $this->form->footerright ;  ?></td>
+<td style="padding-left:50px; "  ><?php echo $this->form->footerleft ;  ?></td>
+<td style="padding-left:50px; " ><?php echo $this->form->menu ;  ?></td>
+<td style="padding-left:50px; " ><?php echo $this->form->top ;  ?></td></table>
+<?php echo $this->form->title ;  ?>
+
+ <?php echo $this->form->type2 ;  ?>
+<?php echo $this->form->decription ;  ?>
+<?php echo $this->form->decription2 ;  ?>
+<?php echo $this->form->pagurl ;  ?>
+ 
+ <?php echo $this->form->save ;   ?>
+
+
+</form>
+
+  
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script type="text/javascript">
+
+        $( document ).ready(function() {
+                $("select#pageid option").filter(function() {
+                    return $(this).val() == <?php echo $numpageid;   ?>; 
+                }).prop('selected', true);
+var pageidx = document.getElementById("pageid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text;
+
+        });        
+        </script>
+
+ 
+ <script>
+$( '#pageid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+document.getElementById("data5-label").style.display = "none";
+</script> 
+
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("pageid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text;
+}
+</script>
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+  
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+   
+ 
+    <script language="javascript">
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='100' height='63'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md-4 col-lg-4" ><a class="btn btn-danger" href="<?php echo  $this->baseUrl();?>/admin/cropthumb?widthw=400&heighth=250&id=<?php echo $id ?>&tt=items&ff=thumb&countryid=<?php echo $countryidid; ?>"> Upload image </a></div><div style="display:none" class=" "><div id="button3" class="btn btn-danger" ><button class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 250px;" name="thumb" value="<?php echo $this->form->getElement('thumb')->getValue(); ?>" /><div class="col-md-6 col-lg-6  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#thumb').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+
+<?php endif ?>
+
+
+
+
+
+
+
+
+
+
+
+
+ <?php if($this->typename == 'Package Type'  ): ?>
+ 
+ 
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+ 
+ <?php  
+ if(isset($_GET['id']))
+{
+   $idid= $_GET['id'];
+   
+}
+else{
+$idid = '';
+ 
+}
+ 
+?>
+ 
+<?php echo $this->form->title ;  ?>
+
+ <?php echo $this->form->title2 ;  ?>
+ <spam>(Maximum characters: 300) You have <input style=" border: 0px; color: red; width: 20px;" readonly type="text" name="countdown2" size="3" value="300"> characters left.</spam>
+
+
+  
+<script language="javascript" type="text/javascript">
+function limitText2(limitField, limitCount, limitNum) {
+    if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+    } else {
+        limitCount.value = limitNum - limitField.value.length;
+    }
+}
+</script>
+
+
+<script> 
+$('#elm150').attr('onKeyDown', 'limitText2(this.form.title2,this.form.countdown2,300);');
+$('#elm150').attr('onKeyUp', 'limitText2(this.form.title2,this.form.countdown2,300);');
+$('#elm150').attr('maxlength', '300');
+</script>
+
+
+ <?php echo $this->form->descriptionhome ;  ?>
+
+ 
+<spam>(Maximum characters: 180) You have <input style=" border: 0px; color: red; width: 20px;" readonly type="text" name="countdown" size="3" value="180"> characters left.</spam>
+
+
+
+<script language="javascript" type="text/javascript">
+function limitText(limitField, limitCount, limitNum) {
+    if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+    } else {
+        limitCount.value = limitNum - limitField.value.length;
+    }
+}
+</script>
+
+
+<script> 
+$('#elm180').attr('onKeyDown', 'limitText(this.form.descriptionhome,this.form.countdown,180);');
+$('#elm180').attr('onKeyUp', 'limitText(this.form.shortdescription,this.form.countdown,180);');
+$('#elm180').attr('maxlength', '180');
+</script>
+
+
+<div class=" " id="galleryimage" ><?php echo $this->form->thumb ;  ?> </div>
+ 
+ 
+ <?php if(!isset($_GET['id'])): ?>
+<script type="text/javascript">
+document.getElementById("galleryimage").style.display = "none";
+
+</script>
+<?php endif; ?>
+<div style="margin-top:140px;"  > <?php echo $this->form->pagurl ;  ?>  </div> 
+
+
+
+ <?php echo $this->form->save ;   ?>
+
+
+</form>
+<script>
+document.getElementById("elm180").style.width = "80% ";
+document.getElementById("elm150").style.width = "80% ";
+document.getElementById("elm150").style.height = "80px";
+
+
+</script>
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+         <script language="javascript">
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='100' height='63'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md-4 col-lg-4" ><a class="btn btn-danger" href="<?php echo  $this->baseUrl();?>/admin/cropthumb?widthw=400&heighth=250&id=<?php echo $idid ?>&tt=packagetype&ff=thumb&countryid=0"> Upload image </a></div><div style="display:none" class=" "><div id="button3" class="btn btn-danger" ><button class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 300px;" name="thumb" value="<?php echo $this->form->getElement('thumb')->getValue(); ?>" /><div class="col-md-12 col-lg-12  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#thumb').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+       
+ <script>
+document.getElementById("title").style.width = "500px ";
+ 
+
+</script>
+<?php endif ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <?php if($this->typename == 'Deals & Offers'  ): ?>
+ 
+ 
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+ 
+ <?php  
+ if(isset($_GET['id']))
+{
+   $idid= $_GET['id'];
+   
+}
+else{
+$idid = '';
+ 
+}
+ 
+?>
+ 
+<?php echo $this->form->title;  ?>
+
+ <?php echo $this->form->title2 ;  ?>
+ <?php echo $this->form->data1 ;  ?>
+ <?php echo $this->form->data2 ;  ?>
+ <?php echo $this->form->pagurl ;  ?>
+<div class=" " id="galleryimage" ><?php echo $this->form->thumb ;  ?> </div>
+ 
+ 
+ <?php if(!isset($_GET['id'])): ?>
+<script type="text/javascript">
+document.getElementById("galleryimage").style.display = "none";
+
+</script>
+<?php endif; ?>
+ 
+
+
+ <?php echo $this->form->save ;   ?>
+
+
+</form>
+
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+         <script language="javascript">
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='100' height='63'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md-4 col-lg-4" ><a class="btn btn-danger" href="<?php echo  $this->baseUrl();?>/admin/cropthumb?widthw=400&heighth=250&id=<?php echo $idid ?>&tt=coupon&ff=thumb&countryid=0"> Upload image </a></div><div style="display:none" class=" "><div id="button3" class="btn btn-danger" ><button class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 300px;" name="thumb" value="<?php echo $this->form->getElement('thumb')->getValue(); ?>" /><div class="col-md-12 col-lg-12  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#thumb').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+       
+ <script>
+document.getElementById("title").style.width = "500px ";
+document.getElementById("elm111").style.width = "700px ";
+document.getElementById("title2").style.width = "500px ";
+document.getElementById("elm111").style.height = "100px ";
+
+
+</script>
+<?php endif ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <?php if($this->typename == 'Travel Stories'  ): ?>
+ 
+ 
+
+ <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+ 
+ <?php  
+ if(isset($_GET['id']))
+{
+   $idid= $_GET['id'];
+   
+}
+else{
+$idid = '';
+ 
+}
+ 
+?>
+ 
+<?php echo $this->form->title;  ?>
+
+ 
+ <?php echo $this->form->data ;  ?>
+  <?php echo $this->form->pagurl ;  ?>
+<div class=" " id="galleryimage" ><?php echo $this->form->thumb ;  ?> </div>
+ 
+ 
+ <?php if(!isset($_GET['id'])): ?>
+<script type="text/javascript">
+document.getElementById("galleryimage").style.display = "none";
+
+</script>
+<?php endif; ?>
+ 
+
+
+ <?php echo $this->form->save ;   ?>
+
+
+</form>
+
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+  
+
+         <script language="javascript">
+var imgs3 = new Array();
+
+function showimgs3(){
+ 
+
+    if(imgs3.length<=0){
+        $('.imageuploader3 .files3').html("<div style=\"font-size: small;\">No image uploaded</div>");
+        $('.image3').val('');
+    }else{
+        $('.imageuploader3 .files3').html("<table><tr>");
+        $('.image3').val("");
+        for (var i = 0; i < imgs3.length; i++) {
+            // add file to the list
+            $('.imageuploader3 .files3').html($('.imageuploader3 .files3').html()+"<div > <a href='javascript:removeimg3("+i+");'>Remove</a><br /> <img src='<?php echo $this->baseUrl() ?>/files/ful/i/"+imgs3[i]+"'     width='80' height='80'></img>      </div>");
+            $('.image3').val($('.image3').val()+''+imgs3[i]);
+        }
+    }
+}
+
+
+  
+function removeimg3(id){
+    imgs3.splice(id,1);
+    showimgs3();
+  
+}
+
+ (function($){
+               
+            var button3 = '<div class="imageuploader3"> <div class="col-md-4 col-lg-4" ><a class="btn btn-danger" href="<?php echo  $this->baseUrl();?>/admin/cropthumb?widthw=300&heighth=300&id=<?php echo $idid ?>&tt=stories&ff=thumb&countryid=0"> Upload image </a></div><div style="display:none" class=" "><div id="button3" class="btn btn-danger" ><button class="btn btn-danger"> Add Photo</button></div></div>   <input id="content3" type="hidden" class="image3" style="width: 300px;" name="thumb" value="<?php echo $this->form->getElement('thumb')->getValue(); ?>" /><div class="col-md-12 col-lg-12  files3" style="cursor:pointer"  id="sortable3" ></div>  </div>';
+     $('#thumb').replaceWith(button3);
+  if($('#button3').length){
+         var button3 = $('#button3'), interval;    
+         new AjaxUpload(button3, {
+             action: '<?php echo $this->baseUrl().'/admin/upload/photo3'?>', 
+             name: 'img3',
+             onSubmit : function(file, ext){
+                 if (ext && /^(jpg|jpeg|gif|png)$/i.test(ext)){
+                     // change button text, when user selects file            
+                 button3.text('upload process');
+                                 
+                 // If you want to allow uploading only 1 file at time,
+                 // you can disable upload button
+                 this.disable();
+                 
+                 // Uploding -> Uploading. -> Uploading...
+                 interval = window.setInterval(function(){
+                     var text = button3.text();
+                     if (text.length < 13){
+                         button3.text(text + '.');                    
+                     } else {
+                         button3.text('upload till process.........');                
+                     }
+                 }, 200);
+                     
+                 } else {
+                     // cancel upload
+                     alert("  image extention allow");
+                     return false;                
+                 }
+             },
+             onComplete: function(file, response){
+                 button3.text('Upload new PDF');
+                       
+                 window.clearInterval(interval);
+                             
+                 // enable upload button
+                 this.enable();
+                 imgs3.splice(response);
+                 imgs3.push( response );
+                 showimgs3();
+             }
+         });
+         if($('.image3').val()!=''){
+             imgs3=$('.image3').val().split(' ');
+                   
+             for (var i = 0; i < imgs3.length; i++) {
+                 if(imgs3[i]==''){
+                     imgs3.splice(i,1);
+                     i=i-1;
+                 }
+             }
+         }
+         showimgs3();
+ 
+     }
+ })(jQuery);
+//-->
+
+                  
+    
+
+ </script>
+       
+ <script>
+document.getElementById("title").style.width = "500px ";
+document.getElementById("elm111").style.width = "700px ";
+document.getElementById("title2").style.width = "500px ";
+document.getElementById("elm111").style.height = "100px ";
+
+
+</script>
+<?php endif ?>
+
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('#title').keyup(function() {
+        var txtClone = $(this).val();
+		 key=txtClone.replace(" ","-");
+       replaced = key.split(' ').join('-');
+        $('#pagurl').val(replaced);
+    });
+});
+</script>
+
+
+<?php if($this->typename == 'FAQ, Accordion Page Style'   || $this->typename == 'Page Style Contact Us'   ||   $this->typename == 'Page Style'): ?>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ <script>
+$( '#pageid' ).attr( 'onchange' , 'myFunction()'  );
+$( '#data5' ).attr( 'type' , 'hidden'  );
+</script> 
+
+
+<script>
+function myFunction() {
+ 
+    var pageidx = document.getElementById("pageid");
+    document.getElementById("data5").value = pageidx.options[pageidx.selectedIndex].text;
+}
+</script>
+<?php endif ?>  
+<script>
+document.getElementById('type').style.display ='none';
+document.getElementById('type-label').style.display ='none';
+document.getElementById('ids').style.display ='none';
+ 
+ 
+document.getElementById('ids-label').style.display ='none';
+document.getElementById('elm5588').style.width ='800px';
+
+ 
+</script>
+ 
+
+ <?php if($this->typename == '3rd party code' ): ?>
+
+<script>
+document.getElementById('elm40122').style.width ='800px';
+document.getElementById('elm40133').style.width ='800px';
+document.getElementById('elm40122').style.height ='150px';
+document.getElementById('elm40133').style.height ='150px';
+
+</script>
+
+<?php endif; ?>
+
+ 

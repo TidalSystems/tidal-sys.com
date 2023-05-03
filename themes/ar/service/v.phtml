@@ -1,0 +1,174 @@
+<?php foreach($this->Page as $value) : ?> 
+<?php  $check = 0; $currentdate2 = date("Y-m-d") ;  
+                        $modelCities = new Model_PlusData();
+                        $modelCities->_name = 'Popup'; 
+                        $where = array();
+                        $toppages = $modelCities->selectForArray(array( 'show_home' => '1' ,  'style' => 'Pages' ), array('displayorder' => 'DESC')  );
+                        foreach ($toppages as $values):
+                        ?>
+<?php $allpagesid= explode('||',trim($values->pagesid,'|')); if(in_array('8' , $allpagesid)): ?> 
+<?php if(($values->expiredate == '') || ($values->expiredate > $currentdate2) ):  ?>
+<?php if($check == '0'): $check=$check+1;?>
+ <div id="thover"></div>  <div id="tpopup"><h3 style="margin: 0px;"  > <?php  echo $values->title; ?> </h3>
+ <div style="padding: 20px;"> <?php echo $values->data; ?>  </div><div id="tclose">X</div> </div>
+  <?php endif; ?> 
+ <?php endif; ?> 
+
+<?php  endif; endforeach; ?>
+<?php if($check == '0'): ?>
+
+
+<?php    
+                        $modelCities = new Model_PlusData();
+                        $modelCities->_name = 'Popup'; 
+                        $where = array();
+                        $toppages = $modelCities->selectForArray(array( 'show_home' => '1' ,  'style' => 'All' ), array('displayorder' => 'DESC')  );
+                        foreach ($toppages as $values):
+                        ?>
+<?php if(($values->expiredate == '') || ($values->expiredate > $currentdate2) ):  ?>
+<?php if($check == '0'): $check=$check+1;?>
+ <div id="thover"></div>  <div id="tpopup"><h3 style="margin: 0px;"  > <?php  echo $values->title; ?> </h3>
+ <div style="padding: 20px;"> <?php echo $values->data; ?>  </div><div id="tclose">X</div> </div>
+ <?php endif; ?> 
+<?php  endif; endforeach; ?>
+
+<?php endif; ?>
+
+ <?php  $model = new Model_PlusData();   $model->_name  = 'Pages'; $toppages = $model->selectForArray(array( 'type2' => 'services' ), array( ) , 1  ); 
+ foreach($toppages as $Header): ?>  <?php endforeach; ?>
+ 
+
+
+	<!-- SubHeader =============================================== -->
+	<section class="parallax_window_in" data-parallax="scroll" data-image-src="<?php if(trim($value->Background)): ?> <?php echo constant('APP_BASEURL').'/MyUpload/'.$value->Background ; ?><?php else: ?><?php echo constant('APP_BASEURL').'/MyUpload/'.$Header->Header ; ?><?php endif; ?>" data-natural-width="1400" data-natural-height="470">
+		<div id="sub_content_in">
+			<div id="animate_intro">
+				<h1><?php echo $value->title ; ?></h1>
+			 
+			</div>
+		</div>
+	</section>
+
+
+ 
+
+
+
+
+
+	<section class="wrapper" style="padding: 20px 0 35px 0;" >
+		<div class="divider_border"></div>
+
+		<div class="container">
+		 
+
+			<div class="row">
+				<div class="col-sm-12">
+<h3><?php echo substr($value->title, 0, strrpos($value->title, ' ')); ?>  <span><?php echo strstr($value->title," ");  ?></span> </h3>
+				<?php echo $value->data ; ?> </div>
+			</div>
+			<!-- End row -->
+			<hr>
+
+
+
+
+
+
+
+
+
+
+<section id="main-container" class="main-container" style="    margin-top: 50px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-xs-12">
+
+<!-- Sections -->
+<?php $model = new Model_PlusData();    $model->_name  = 'ServicesSections';     $where = array('serviceid' => ($value->id));
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+								foreach($toppages as $index =>$PageSections):	?>
+
+ <?php if($PageSections->style == '1'): ?> 
+ <div class="col-md-8">
+<?php if(trim($PageSections->title)): ?> <h3 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3> <?php endif; ?>
+<?php if(trim($PageSections->subtitle)): ?><h5 style="margin: 0px 0px 10px 0px;">  <?php echo $PageSections->subtitle; ?></h5> <?php endif; ?>
+                        
+<?php echo $PageSections->description; ?>	</div>
+ <div class="col-md-4"> 	<div class="item"> <img class="img-responsive" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb ; ?>" >
+ <h4 style="text-align:center; margin-bottom: 0px;" >  	</h4></div> </div>
+
+<div class="gap-30" style="margin-bottom: 20px;">&nbsp;</div> 
+ <div class="col-md-12">	<hr></div>
+
+
+<?php elseif($PageSections->style == '2'): ?> 
+ <div class="col-md-12">
+<?php if(trim($PageSections->title)): ?> <h3 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3> <?php endif; ?>
+<?php if(trim($PageSections->subtitle)): ?><h5 style="margin: 0px 0px 10px 0px;">  <?php echo $PageSections->subtitle; ?></h5> <?php endif; ?>
+                        
+<?php echo $PageSections->description; ?>	</div>
+ 
+<div class="gap-30" style="margin-bottom: 20px;">&nbsp;</div>
+ <div class="col-md-12">	<hr></div>
+
+
+<?php elseif($PageSections->style == '3'): ?>
+ <div class="col-md-4"> 	<div class="item"> <img class="img-responsive" src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$PageSections->Thumb ; ?>" >  <h4 style="text-align:center; margin-bottom: 0px;" >  	</h4>	</div> </div>
+ <div class="col-md-8">
+<?php if(trim($PageSections->title)): ?> <h3 style="margin: 0px 0px 5px 0px;;"> <?php echo $PageSections->title; ?> </h3> <?php endif; ?>
+<?php if(trim($PageSections->subtitle)): ?><h5 style="margin: 0px 0px 10px 0px;">  <?php echo $PageSections->subtitle; ?></h5> <?php endif; ?>                      
+<?php echo $PageSections->description; ?>	</div>
+ <div class="col-md-12">	<hr></div>
+
+<div class="gap-30" style="margin-bottom: 20px;">&nbsp;</div>
+ 
+<?php endif; ?>
+
+<?php endforeach; ?>
+
+
+</div></div></div></section>
+
+<!-- Sections -->
+
+ 
+
+		</div>
+		<!-- End container -->
+	</section>
+	<!-- End section -->
+
+
+
+	<section id="main-container" class="main-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+ 		  
+
+
+
+				</div><!-- Content Col end -->
+
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="sidebar sidebar-right">
+                   
+                          
+          			<div class="widget box solid" style="float:left;" >
+					 
+						</div><!-- Widget end -->
+                        
+                     
+
+					</div><!-- Sidebar end -->
+				</div><!-- Sidebar Col end -->
+
+			</div><!-- Main row end -->
+
+		</div><!-- Conatiner end -->
+	</section><!-- Main container end -->
+
+
+<?php endforeach; ?>

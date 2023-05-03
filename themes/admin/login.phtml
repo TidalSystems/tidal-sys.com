@@ -1,0 +1,93 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title> Tidal </title>
+ 
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="<?php echo $this->themeUrl ?>css/bootstrap.min.css">
+	<!-- themify icons CSS -->
+	<link rel="stylesheet" href="<?php echo $this->themeUrl ?>css/themify-icons.css">
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="<?php echo $this->themeUrl ?>css/styles.css">
+	<link rel="stylesheet" href="<?php echo $this->themeUrl ?>css/red.css" id="style_theme">
+	<link rel="stylesheet" href="<?php echo $this->themeUrl ?>css/responsive.css">
+
+	<script src="<?php echo $this->themeUrl ?>js/modernizr.min.js"></script>
+</head>
+
+<body class="auth-bg" style="    background: #5f5e5e;">
+	<!-- Pre Loader -->
+ 
+	<!--/Pre Loader -->
+	<div class="wrapper" style="background-color: #5f5e5e;">
+		<!-- Page Content  -->
+		<div id="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6 auth-box">
+ <br/>
+						<div class="proclinic-box-shadow">
+				<h3>	Tidal</h3>
+					 
+ <?php echo $this->FlashMessenger() ?>
+							<form   action="" method="post">
+								<!-- form-group -->
+								<div class="form-group row">
+									<div class="col-sm-12">
+										<input id="username" name="username" placeholder="Username" class="form-control" required="" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"  >
+									</div>
+								</div>
+								<!-- /.form-group -->
+								<!-- form-group -->
+								<div class="form-group row">
+									<div class="col-sm-12">
+										<input type="password" placeholder="Password" name="password"  id="password" class="form-control"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"  >
+									</div>
+								</div>
+								<!-- /.form-group -->
+								<!-- Check Box -->		
+								<div class="form-check row">
+									<div class="col-sm-12 text-center">
+
+										 <?php echo $this->form->captchaField ?>
+<p style="font-size: 12px; color: red;">Please type the letters/Numbers shown </p>
+									</div>
+								</div>
+								<!-- /Check Box -->	
+								<!-- Login Button -->			
+								<div class="button-btn-block">
+									<button style="background: #111111;" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+								</div>
+								<!-- /Login Button -->	
+								<!-- Links -->	
+								<div class="auth-footer-text">
+									 
+								</div>
+								<!-- /Links -->
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Page Content  -->
+	</div>
+	<!-- Jquery Library-->
+	<script src="<?php echo $this->themeUrl ?>js/jquery-3.2.1.min.js"></script>
+	<!-- Popper Library-->
+	<script src="<?php echo $this->themeUrl ?>js/popper.min.js"></script>
+	<!-- Bootstrap Library-->
+	<script src="<?php echo $this->themeUrl ?>js/bootstrap.min.js"></script>
+	<!-- Custom Script-->
+	<script src="<?php echo $this->themeUrl ?>js/custom.js"></script>
+</body>
+
+</html>
+
+
+
+

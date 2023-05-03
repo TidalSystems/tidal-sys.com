@@ -1,0 +1,262 @@
+<?php  
+ if(isset($_GET['changefreq']))
+{    $changefreq = $_GET['changefreq'];
+} else{
+$changefreq = 'daily';
+}
+
+
+ if(isset($_GET['priority']))
+{    $priority = $_GET['priority'];
+} else{
+$priority = '0.9';
+}
+
+ 
+?>
+ 	<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">XML file - Sitemap </span>  </h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+
+						  	</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="<?php echo $this->baseUrl() ?>/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<span class="breadcrumb-item active">Dashboard</span>
+						</div>
+ 
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+ 
+
+ 
+
+
+
+ 
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+
+
+  <div class="content">
+
+				<!-- Form inputs -->
+				<div class="card" style="padding:30px;" >
+  <div class="content">
+
+				<!-- Form inputs -->
+				<div class="card" style="padding:30px;" >
+
+
+ 
+ 
+	<!-- Widget Item -->
+			 
+				<?php
+function GetToday()
+{
+
+    $today = mktime(0,0,0,date("m"),date("d"),date("Y"));
+
+    $today =date("Y-m-d", $today );
+
+    return $today;
+
+}
+
+function amp($str)
+{
+    $newStr=str_replace("&","&amp;",$str);
+    return $newStr;
+}
+function escapeThis($str)
+{
+    $newStr=str_replace("&","&amp;",$str);
+    $newStr=str_replace("\"","&quot;",$newStr);
+    $newStr=str_replace("'","&apos;",$newStr);
+    $newStr=str_replace("<","&lt;",$newStr);
+    $newStr=str_replace(">","gt;",$newStr);
+    $newStr=str_replace(",","&apos;",$newStr);
+    $newStr=str_replace("-","&#45;",$newStr);
+ 
+    $newStr=str_replace("|","-",$newStr);
+
+
+
+        return $newStr;
+}
+
+function word($str){
+    return preg_replace('/<g (.*?)>(.*?)<\/g>/', '$2', $str);
+}
+
+function escapeThisxxx($str)
+{
+
+     $x = html_entity_decode(htmlentities($str));
+    return str_ireplace("&nbsp;","&amp;nbsp;",$x);
+}
+
+?>
+<?php 
+header('Content-Type: text/html; charset=utf-8'); 
+$xml="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
+<Content>\n
+";
+ ?>  
+
+
+<?php  $xml .= "<url>" ; ?>
+
+<?php $xml .= "<loc>https://www.ebbandtide.com</loc>"; ?>
+<?php $xml .= "<lastmod>".date('Y-m-d')."</lastmod>"; ?>
+<?php $xml .= "<changefreq>".$changefreq."</changefreq>"; ?>
+<?php $xml .= "<priority>".$priority."</priority>"; ?>
+<?php $xml.="</url>\n"; ?>
+
+ 
+
+<?php
+$model = new Model_PlusData();      $model->_name  = 'Pages';						                                       
+$toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')   );
+foreach($toppages2 as $page): ?>
+<?php  $xml .= "<url>" ; ?>
+ <?php $xml .= "<loc>https://www.ebbandtide.com/" . preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $page->pagurl )."</loc>"; ?>
+<?php $xml .= "<lastmod>".date('Y-m-d')."</lastmod>"; ?>
+<?php $xml .= "<changefreq>".$changefreq."</changefreq>"; ?>
+<?php $xml .= "<priority>".$priority."</priority>"; ?>
+
+<?php $xml.="</url>\n"; ?>
+<?php endforeach; ?>
+
+
+
+
+
+<?php
+$model = new Model_PlusData();      $model->_name  = 'LandingPage';						                                       
+$toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')   );
+foreach($toppages2 as $page): ?>
+<?php  $xml .= "<url>" ; ?>
+<?php $xml .= "<loc>https://www.ebbandtide.com/landingpage/" . preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $page->pagurl )."</loc>"; ?>
+<?php $xml .= "<lastmod>".date('Y-m-d')."</lastmod>"; ?>
+<?php $xml .= "<changefreq>".$changefreq."</changefreq>"; ?>
+<?php $xml .= "<priority>".$priority."</priority>"; ?>
+<?php $xml.="</url>\n"; ?>
+<?php endforeach; ?>
+
+
+
+
+<?php
+$model = new Model_PlusData();      $model->_name  = 'Services';						                                       
+$toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')   );
+foreach($toppages2 as $page): ?>
+<?php  $xml .= "<url>" ; ?>
+<?php $xml .= "<loc>https://www.ebbandtide.com/Service/" . preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $page->pagurl )."</loc>"; ?>
+<?php $xml .= "<lastmod>".date('Y-m-d')."</lastmod>"; ?>
+<?php $xml .= "<changefreq>".$changefreq."</changefreq>"; ?>
+<?php $xml .= "<priority>".$priority."</priority>"; ?>
+<?php $xml.="</url>\n"; ?>
+<?php endforeach; ?>
+
+
+
+
+<?php
+$model = new Model_PlusData();      $model->_name  = 'Blogs';						                                       
+$toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')   );
+foreach($toppages2 as $page): ?>
+<?php  $xml .= "<url>" ; ?>
+<?php $xml .= "<loc>https://www.ebbandtide.com/Blog/" . preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $page->pagurl )."</loc>"; ?>
+<?php $xml .= "<lastmod>".date('Y-m-d')."</lastmod>"; ?>
+<?php $xml .= "<changefreq>".$changefreq."</changefreq>"; ?>
+<?php $xml .= "<priority>".$priority."</priority>"; ?>
+<?php $xml.="</url>\n"; ?>
+<?php endforeach; ?>
+
+
+
+
+
+
+<?php
+
+$xml.='</Content>';
+ 
+$dom = new DOMDocument;
+$dom->preserveWhiteSpace = FALSE;
+$result =$dom->loadXML($xml);
+$base = constant('APP_BASEURL').'/sitemap.xml';
+ 
+if($result = true){
+$dom->save('sitemap.xml');
+echo " <h4 style='text-align:center' >XML  File Created   <a style='text-decoration: underline;color: red' target='_blank' href='". $base ."' > Browse File </a></h4> " ;
+}
+else {
+echo 'Error in Update File' ;
+}
+
+
+?>
+<div class="col-xl-12" style="text-align: center;    margin-top: 20px;" >
+<form action="<?php echo $this->baseUrl().'/admin/xml'; ?>" method="get">
+  <label for="fname">Changefreq</label>
+
+<select name="changefreq" id="changefreq" style="margin-right:10px;" >
+<option value="daily">daily</option> 
+<option value="always">always</option>
+<option value="hourly">hourly</option>
+<option value="weekly">weekly</option>
+<option value="monthly">monthly</option>
+<option value="yearly">yearly</option>
+<option value="never">never</option>
+</select>
+
+  <label for="lname">Priority</label>
+
+<select name="priority" id="priority" style="margin-right:10px;" >
+<option value="0.9">0.9</option> 
+<option value="0.8">0.8</option>
+<option value="0.7">0.7</option>
+<option value="0.6">0.6</option>
+<option value="0.5">0.5</option>
+<option value="0.4">0.4</option>
+<option value="0.3">0.3</option>
+</select>
+
+  <input type="submit" value="Create">
+</form>
+</div>
+
+ <br/>
+ <br/>
+ 
+					<!-- /Widget Item -->
+
+ 
+ <br/> <br/> <br/>
+ 
+
+</div>
+ </div>
+ </div>
+ </div>
+ 

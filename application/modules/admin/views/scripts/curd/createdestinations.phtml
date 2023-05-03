@@ -1,0 +1,490 @@
+ <?php  
+ if(isset($_GET['id']))
+{
+   $id = $_GET['id'];
+}
+else{
+$id = '';
+}
+ 
+ function reformateText( $text )
+{
+ 
+   return $text;
+}
+require_once APPLICATION_PATH . '/editor/spaw.inc.php';
+
+?>
+ <h3 class="widget-title"> <?php echo $this->typename ?></h2>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl ?>js/jquery.ajup.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+   <script type="text/javascript" src="<?= $this->baseUrl(); ?>/ui/editor/tinymce/tiny_mce.js"></script>
+ 
+ 
+  <style>
+#elm1_tbl, #elm2_tbl ,#elm3_tbl ,#elm4_tbl ,#elm5_tbl ,#elm6_tbl ,#elm7_tbl ,#elm8_tbl ,#elm9_tbl, #elm10_tbl,#elm11_tbl, #elm12_tbl ,#elm13_tbl ,#elm14_tbl ,#elm15_tbl ,#elm16_tbl ,#elm17_tbl ,#elm18_tbl ,#elm19_tbl, #elm20_tbl,#elm21_tbl, #elm22_tbl ,#elm23_tbl ,#elm24_tbl ,#elm25_tbl ,#elm26_tbl ,#elm127_tbl ,#elm28_tbl ,#elm29_tbl  ,#elm40_tbl  ,#elm41_tbl ,#elm42_tbl ,#elm43_tbl ,#elm44_tbl ,#elm45_tbl  , #elm46_tbl , #elm47_tbl{
+    width: 100% !important;
+}
+
+ #elm-free {
+     width: 100% !important;
+     height: 120px;
+}
+
+  </style>
+
+<script type="text/javascript">
+
+ 
+    tinyMCE.init({
+            // General options
+            //mode : "textareas",
+            mode : "exact",
+             elements : "elm1,elm2,elm3,elm4,elm5,elm6,elm7,elm8,elm9,elm10,elm11,elm12,elm13,elm14,elm15,elm16,elm17,elm18,elm19,elm20,elm21,elm22,elm23,elm24,elm25,elm26,elm27,elm28,elm29,elm30,elm40,elm50,elm70,elm50,elm55,elm72,elm71,elm73,elm150,elm140,elm41,elm42,elm43,elm44,elm45,elm46,elm47",
+            language : "en",
+            theme : "advanced",
+            min_height: "250", 
+ 
+            plugins : "openmanager,autolink,lists,pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
+             
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks,|,openmanager",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+		
+		//Open Manager Options
+		file_browser_callback: "openmanager",
+		open_manager_upload_path: '../../../../../MyUpload/images',
+
+		// Example content CSS (should be your site CSS)
+		content_css : "css/content.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Style formats
+		style_formats : [
+			{title : 'Bold text', inline : 'b'},
+			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+			{title : 'Example 1', inline : 'span', classes : 'example1'},
+			{title : 'Example 2', inline : 'span', classes : 'example2'},
+			{title : 'Table styles'},
+			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+		],
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "Some User",
+			staffid : "991234"
+		}
+	});
+</script>
+
+ 
+ 
+ 
+  <form role="form"  class="form-row" id="form" name="form2" method="post" action=""    enctype="multipart/form-data" >
+<div class="col-md-12" ><?php echo $this->form->Name; ?> </div>
+
+
+<div class="col-md-2" ><?php echo $this->form->Days; ?> </div>
+<div class="col-md-2" ><?php echo $this->form->Nights; ?> </div>
+<div class="col-md-2" ><?php echo $this->form->Price; ?> </div>
+ 
+ <div class="col-md-6" ><?php echo $this->form->plane; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->availability; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->max; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->min; ?> </div>
+<div class="col-md-6" ><?php echo $this->form->departure; ?> </div>
+<div class="col-md-6" ><?php echo $this->form->return; ?> </div>
+
+
+
+<!---              start destination                 --->
+   
+<div class="col-md-4" ><?php echo $this->form->regionid; ?> </div>
+<div class="col-md-4" ><?php echo $this->form->countryid; ?> </div>
+		
+<div class="col-md-12" >
+<?php echo $this->form->cityidid ;  ?>
+
+ 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#save").click(function(){
+            var favorite = [];
+            $.each($("input[name='sport']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            
+ $("#cityidid").val('||'+ (favorite.join("||")));  
+        });
+    });
+</script>
+ 
+<div id="success" class="form-row" style="margin-bottom:34px"> 
+ 
+
+</div>
+		
+
+
+<!---              end destination                 --->
+
+
+
+
+<div class="col-md-12" style="padding-top:10px"  >
+
+	<!--   start Tabs    -->
+<div class="proclinic-widget">
+ <div class="bd-example bd-example-tabs">
+ <ul class="nav nav-tabs" id="myTab" role="tablist">
+ <li class="nav-item">
+ <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#DESCRIPTION" role="tab" aria-controls="home" aria-selected="true">Description</a>
+ </li>
+ 
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Include" role="tab" aria-controls="profile" aria-selected="false">Include</a>
+ </li>
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Exclude" role="tab" aria-controls="profile" aria-selected="false">Exclude</a>
+ </li>
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Notes" role="tab" aria-controls="profile" aria-selected="false">Notes</a>
+ </li>
+ 
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Video" role="tab" aria-controls="profile" aria-selected="false">Video</a>
+ </li>
+
+ <li class="nav-item">
+ <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Rates" role="tab" aria-controls="profile" aria-selected="false">Rates</a>
+ </li>
+										 
+ </ul>
+ <div class="tab-content" id="myTabContent">
+ <!-- ////////////////////////////     start   DESCRIPTION ///////////////////////////////  -->
+ <div class="tab-pane fade active show" id="DESCRIPTION" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Details; ?> 
+ </div>
+ <!--  ////////////////////////////     end   DESCRIPTION ///////////////////////////////  -->
+                                    
+                                    
+                                    
+ <!-- ////////////////////////////     start  DAYS  ///////////////////////////////  -->
+  
+ <!--  ////////////////////////////     end   DAYS ///////////////////////////////  -->
+                                    
+                                    
+
+ <!-- ////////////////////////////     start  Include  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Include" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DInclude; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Include ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Exclude  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Exclude" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DExclude; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Exclude ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Notes  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Notes" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->DNotes; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Notes ///////////////////////////////  -->
+
+ <!-- ////////////////////////////     start  Video  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Video" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Video; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Video ///////////////////////////////  -->
+
+
+ <!-- ////////////////////////////     start  Groups  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Groups" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Groups; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Groups ///////////////////////////////  -->
+                                    
+ 
+ <!-- ////////////////////////////     start  Groups  ///////////////////////////////  -->
+ <div class="tab-pane fade " id="Rates" role="tabpanel" aria-labelledby="home-tab">
+ <?php echo $this->form->Rates; ?> 
+ </div>
+ <!--  ////////////////////////////     end   Groups ///////////////////////////////  -->
+                                    
+                                    
+                                   
+                                    
+                                          
+									</div>
+								</div>
+							</div>
+
+
+<!--    end tabs     -->
+
+</div>
+
+
+ 
+<div class="col-md-12" style="padding:10px;" ><h3 class="widget-title">SEO </h3></div>
+<div class="col-md-12" style="background: #dadada;padding:10px;" >
+<?php echo $this->form->pagurl; ?>
+<?php echo $this->form->seohead; ?>
+<?php echo $this->form->seotitle; ?>
+<?php echo $this->form->seodescription; ?> 
+<?php echo $this->form->seokeywords; ?>
+ 
+</div>
+ 
+
+<div class="form-row col-md-12" style=" padding:10px;" >
+<div class="col-md-2" style="padding:10px;" ><?php echo $this->form->Active; ?> </div>
+ 
+</div>
+
+ <div class="col-md-12"><?php echo $this->form->save; ?> </div>
+ 
+</form>
+ 
+
+
+
+
+
+
+
+<!--    \\\\\\\\\\\\\\\\\\\\\\\\ script main destination   \\\\\\\\\\\\\\\\\\\\\\\\    --->
+
+ 
+ <script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="regionid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="countryid"],select[name="cityid"]');
+                    var region1c = form.find('select[name="cityid"]');
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value=""> ( ----------Select Country----------- ) </option>';
+                        region1.html(html);
+                        region1c.html(html);
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select Country-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="regionid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+<!--
+	(function($){
+		 
+                
+               
+                
+                $('select[name="countryid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+
+                    var region = form.find('select[name="cityid"] ');
+                    var prevVal = region.find('option[selected]').attr('value');
+                    region.html('');
+                    region.attr('disabled','disabled');
+                    region.css('opacity','0.5');
+                    
+             
+                    var url = '<?php echo $this->baseUrl().'/admin/destinations/regions' ?>';
+ 
+                    var city = $(this).val();
+                    region.data('city', city);
+                    if(!city)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region.html(html);
+                        
+                        return;
+                    }
+                    
+                    var data = {city: city};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<div class="col-md-12">'+'City'+'</div>';
+ document.getElementById('cityidid').value = "";
+                                for(var i=0;i<data.length;i++) 
+                                    html = html + '<div class="col-md-2">'+'<input type="checkbox"   name="sport" id="someid4ccx"  value="'+data[i].id+'">'+data[i].region+'</input>'+'</div>';
+									    
+									                    data=$(data).find('div#success');
+        $('#success').html(html);
+		
+		 $checks4zaw = $('input:checkbox').filter('#someid4ccx');
+    $checks4zaw.on('change', function() {
+        var string4zaw = $checks4zaw.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join("||");
+        $('#cityidid').val("||"+ string4zaw);
+    });
+ 
+
+
+                                region.html(html);
+                                console.log( $(data) );
+                                region.removeAttr('disabled');
+                                region.css('opacity','1');
+   
+                                if($.QueryString['region'])
+                                    $('select[name="region"] option[value="'+$.QueryString['region']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+                $('select[name="city"],select[name="countryid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category3'])
+                    $('select[name="category3"] option[value="'+$.QueryString['category3']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+ document.getElementById("cityidid-element").style.display = "none";
+</script>
+
+<!--    \\\\\\\\\\\\\\\\\\\\\\\\ script main destination   \\\\\\\\\\\\\\\\\\\\\\\\    --->
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('#Name').keyup(function() {
+        var txtClone2 = $(this).val();
+        
+        var txtClone =txtClone2.replace(/[-'`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+		 key=txtClone.replace(" ","-");
+       replaced = key.split(' ').join('-');
+        $('#pagurl').val(replaced);
+    });
+});
+</script>
+ 

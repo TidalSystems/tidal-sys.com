@@ -1,0 +1,75 @@
+<h1>Control <?php echo $this->typename ?></h1>
+
+
+    <table id="table1" class="gtable sortable">
+        <thead>
+            <tr><td colspan="5" ><form><b>معرف : </b><input type="text" name="id2" >  <input type="submit" name="submitB" id="submitB" value="بحث" class="button large blue submit"> </form></tr>
+            <tr>
+                
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if($this->paginator):
+
+            $i = 1; foreach($this->paginator as $values) { ?>
+            <tr>
+                 <?php
+                foreach((array)$this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td>';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    else
+                    {
+                        echo $values[$key];
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+                    <a href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edit/id/<?php echo $values[id] ?>" title="تعديل"><img src="<?php echo $this->themeUrl; ?>/images/icons/edit.png" alt="تعديل" /></a>
+                   
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+
+                    <a href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/delete/id/<?php echo $values[id] ?>')" title="حذف"><img src="<?php echo $this->themeUrl; ?>/images/icons/cross.png" alt="حذف" /></a>
+                <?php
+                        }
+                    }
+                ?>
+
+                    <a href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/report/i/<?php echo $values[id] ?>" title="تقرير">  <img src="<?php echo $this->themeUrl; ?>/images/icons/user-silhouette.png" alt="تقرير" /></a>
+                </td>
+            </tr>
+          <?php $i++; }
+          endif;
+          ?>
+            
+        </tbody>
+    </table>
+    <br>
+    <div class="tablefooter clearfix">
+        <div class="actions">
+            <a href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/create">إضافة جديد</a>
+        </div>
+
+         <?php echo ($this->paginator)?$this->paginationControl($this->paginator,'Sliding','partials/pagination-control.phtml'):'' ; ?>
+    </div>

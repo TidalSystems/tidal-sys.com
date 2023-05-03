@@ -1,0 +1,271 @@
+<script>
+jQuery(document).ready(function($) {
+  $('body').addClass('sidebar-xs');
+});
+
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="<?php echo constant('APP_BASEURL'); ?>/themes/admin/js/crop.js"></script>
+  
+<link rel="stylesheet" href="<?php echo constant('APP_BASEURL'); ?>/themes/admin/js/crop.css">
+ 
+<div class="container">
+   <button href="aventuraworld.com" onclick="history.go(-1); return false;"  style="display:none;"  type="button" id="go" >Crop</button>
+	<div class="panel panel-default">
+	  <div class="panel-body">
+	  	<div class="row">
+         	<div class="col-md-12" style="margin:30px;text-align: center;" >
+<input style="display: inline-block;" onchange="ValidateSingleInput(this);" type="file" id="images"> <img id="image" style="margin-top:4px;display:none;width: 70px ;"  src="<?php echo constant('APP_BASEURL'); ?>/themes/admin/js/crop2.jpg" /> 
+
+ 
+<!-- <input id="alt"  style="display:none" name="alt" value=""  placeholder="Alt" /> -->
+<button id="cropped_image" disabled style="margin-right:30px;" class="btn btn-primary btn-lg  cropped_image">Crop and Save</button>
+ 
+		   
+	  		</div>
+	  		<div class="col-md-12 text-center">
+				<div id="upload-image"></div>
+	  		</div>
+	  				
+	  		<div class="col-md-12 crop_preview">
+				<div id="upload-image-i"></div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>			
+</div>
+
+
+
+<script language="javascript">
+var _validFileExtensions = [".jpg", ".jpeg", ".png"];    
+function ValidateSingleInput(oInput) {
+    if (oInput.type == "file") {
+        var sFileName = oInput.value;
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert("Sorry Extension File NOT allowed");
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+$(document).ready(function(){    
+	$image_crop = $('#upload-image').croppie({
+		enableExif: true,
+		viewport: {
+			width: <?php echo $_GET['width']; ?>,
+			height: <?php echo $_GET['height']; ?>,
+			type: 'square'
+		},
+		boundary: {
+			width: <?php echo $_GET['width']; ?>,
+			height: 600
+		}
+	});
+	$('#images').on('change', function () { 
+
+document.getElementById('cropped_image').disabled = false;
+   $("#alt").removeAttr("style");
+
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$image_crop.croppie('bind', {
+				url: e.target.result
+			}).then(function(){
+				console.log('jQuery bind complete');
+			});			
+		}
+		reader.readAsDataURL(this.files[0]);
+	});
+	$('.cropped_image').on('click', function (ev) {
+ var name = $('#images').val().split('\\').pop();
+    name=name.split('.')[0];
+ 
+    var txt3 =name.replace(/[-'`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+		 key1= txt3.replace( /\s\s+/g, ' ' );
+         imageName = key1.split(' ').join('-');
+ 
+$("#image").removeAttr( 'style' );
+$('#image').css('width', '100px');
+ 
+
+		$image_crop.croppie('result', {
+			type: 'canvas',
+			size: 'viewport'
+		}).then(function (response) {
+			$.ajax({
+				url: "<?php echo $this->baseUrl().'/upload/photo7'?>",
+				type: "POST",
+				data: {"image":response , "alt":imageName },
+				success: function (data) {
+					html = '<img src="' + response + '" />';
+ 
+
+ sessionStorage.clear()
+
+sessionStorage.pic =data;
+ 
+<?php if($_GET['page'] == 'Pages'): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/<?php echo $_GET['page']; ?>/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&HeadrPage="+data;
+
+ 
+<?php elseif(($_GET['page'] == 'Pagesections') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Pagesections/createlp2?pageid=<?php echo $_GET['pageid']; ?>&pagesectionImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Pagesections') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Pagesections/editlp2/id/<?php echo $_GET['id']; ?>?pageid=<?php echo $_GET['pageid']; ?>&id=<?php echo $_GET['id']; ?>&pagesectionImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Servicessections') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicessections/createlp3?serviceid=<?php echo $_GET['serviceid']; ?>&catid=<?php echo $_GET['catid']; ?>&ServicesectionsImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Servicessections') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicessections/editlp3/id/<?php echo $_GET['id']; ?>?serviceid=<?php echo $_GET['serviceid']; ?>&id=<?php echo $_GET['id']; ?>&catid=<?php echo $_GET['catid']; ?>&ServicesectionsImage="+data;
+
+
+
+
+<?php elseif(($_GET['page'] == 'Blogs') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Blogs/create?blogImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Blogs') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Blogs/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&blogImage="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'Meals') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Meals/create?mealImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Meals') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Meals/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&mealImage="+data;
+
+
+ 
+ 
+
+<?php elseif(($_GET['page'] == 'Slider') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Homeslider/create?SlderImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Slider') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Homeslider/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&SlderImage="+data;
+
+
+
+
+
+
+<?php elseif(($_GET['page'] == 'Products') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Products/create?ProductsImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Products') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Products/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ProductsImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'ProductsHeader') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Products/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ProductsHeaderImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'ProductsGallery') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Products/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ProductsGalleryImage="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'ServicescategoriesH') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicescategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ServicesCatImage="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'ServicescategoriesT') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicescategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ServicesCatImageThumb="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'ServicessubcategoriesH') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicessubcategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&catid=<?php echo $_GET['catid']; ?>&ServicesSubImage="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'ServicessubcategoriesT') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicessubcategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&catid=<?php echo $_GET['catid']; ?>&ServicesSubImageThumb="+data;
+
+
+
+<?php elseif(($_GET['page'] == 'Servicescategories') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Servicescategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ServicesCatImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Productssubcategories') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Productssubcategories/create?ProductsSubCatImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Productssubcategories') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Productssubcategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&ProductsSubCatImage="+data;
+
+
+
+
+<?php elseif(($_GET['page'] == 'Testimonials') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Testimonials/create?TestimoinalImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Testimonials') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Testimonials/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&TestimoinalImage="+data;
+
+
+
+
+ 
+<?php elseif(($_GET['page'] == 'productCat') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Productscategories/create?productCatImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'productCat') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Productscategories/edit/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&productCatImage="+data;
+
+ 
+
+ 
+<?php elseif(($_GET['page'] == 'Users') &&  ($_GET['id'] == '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Users/createuser?UserImage="+data;
+
+
+<?php elseif(($_GET['page'] == 'Users') &&  ($_GET['id'] != '')): ?>
+    window.location = "<?php echo $this->baseUrl(); ?>/admin/Users/edituser/id/<?php echo $_GET['id']; ?>?id=<?php echo $_GET['id']; ?>&UserImage="+data;
+
+
+
+
+
+<?php endif; ?>
+
+					$("#upload-image-i").html(html);
+				}
+			});
+		});
+	});	
+});
+</script>
+ 
+
+    

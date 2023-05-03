@@ -1,0 +1,196 @@
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$model = new Model_PlusData();
+$model->_name = 'pages';
+?>
+
+
+
+   <div class="main-content44">
+ 
+ <div class="main-content2">
+  
+
+<header2  >
+              
+    
+<div style="   margin-left:10px;z-index:0; ">  
+              
+   <?php
+            $model = new Model_PlusData();
+            $model->_name = 'offers';
+            $select = $model->select()->from($model->_name)->order('displayorder DESC');
+            $slider2 = $model->fetchAll($select);
+         
+            if (count($slider2)):
+                ?>
+ 
+  
+
+                <div class="slider lof-slidecontent"  id="jslidernews1" style="width:950px;     height: 265px;;">
+                    <div class="preload"><div></div></div>
+                    <div class="main-slider-content"  style="width:950px; height:251px;">
+                        <ul class="sliders-wrap-inner"  >
+                            <?php foreach ($slider2 as $item): ?>
+                            <li  ><img height='237' width='950' src="<?php echo APP_BASEURL.'/MyUpload/'.  $item->image ?> "  /></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="navigator-content">
+                       <div class="button-next"></div>
+                        <div class="button-previous"></div> 
+                    </div>
+                    <div class="button-control"><span></span></div>
+
+</div>
+ 
+            <?php endif ?>
+
+</div>
+              
+ 
+                 
+</header2   >
+ 
+ 
+  
+<div style="    background-color: #D8DBE0 ; width:950px;    height: 120px;  margin-left: 10px; margin-top: 0px; direction: ltr; float:left;">
+
+ 
+<img  class="facebook"src="<?php echo THEME_DIR ?>images/lang1.png"   />   </div>
+ 
+    
+ 
+ 
+<div style="    background-color: #D8DBE0 ; width:475px;    height: 400px;  margin-left: 10px; margin-top: 0px; direction: ltr; float:left;">
+
+ 
+ 
+ <div style="padding-left:160px;padding-top:2px ;   padding-bottom:20px"  >
+<img  class="facebook"src="<?php echo THEME_DIR ?>images/ara_09.jpg" width="15" height="10" /> Version English<br/> </div>
+ 
+ 
+
+ 
+                    <ul style="padding-left: 210px;">
+                         					
+								 
+<li style="padding-bottom:7px;">	<a href=" /en">Home </a> </li>	
+                        
+                        <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages';
+						 
+                               $toppages = $model->select()->from($model->_name)->order('displayorder ASC');
+						        $toppages = $model->fetchAll($toppages);
+					
+								foreach($toppages as $toppage):
+									if($toppage['level'] == 1 && $toppage['lang'] == en ):   
+							?>
+							   <li  style="padding-bottom:7px;" >
+	<a href="/en/<?php echo (trim($toppage->pagurl)?'hossamylaw/'.trim($toppage->pagurl):'page/v/i/'.$toppage->id) ?>"<?php echo ($request->getModuleName()=='default' && $request->getControllerName()=='page' && $request->getActionName()=='v' && $request->getParam('i')==$toppage->id?' ':'')?>><?php echo $toppage->title ?></a> 
+									
+
+									 
+ 								 
+  <?php
+$model = new Model_PlusData();
+$model->_name = 'pages';
+      $where = array();
+$categories1 = $model->selectForArray(array('level' => '2'), array('displayorder' => 'ASC'));
+			
+foreach ($categories1 as $i => $category):
+
+	  
+ ?>
+
+                                 
+									<?  if($category->pageid==$toppage->id):?>
+									
+								  <div  class="zzzz">	<a<? if($_SERVER['REQUEST_URI']=='/page/v/i/'.				
+										
+									$category->id) :?> <? endif ?>   style="color:#4E8FD3;padding-left: 20px; "  href="/en/<?php echo (trim($category->pagurl)?'hossamylaw/'.trim($category->pagurl):'page/v/i/'.$category->id) ?>"<?php echo ($request->getModuleName()=='default' && $request->getControllerName()=='page' && $request->getActionName()=='v' && $request->getParam('i')==$category->id?' class="active"':'')?>><?php echo $category->title ?></a> </div> 
+                               
+ <? 
+								endif;
+							
+								endforeach; ?>
+
+                 
+									
+									
+							<?php 	
+							endif;endforeach; ?> 	
+											 
+   <br/> 
+  <br/> 
+  <br/> 
+  <br/>
+ </div>
+ 
+ 
+
+
+
+  
+<div style="background-color: #D8DBE0;     height: 400px; width:475px; margin-left: 0px; margin-top: 0px; direction: ltr; float:left;">
+
+ <div style="padding-left:160px;padding-top:0px; padding-bottom:20px"><img  class="facebook"src="<?php echo THEME_DIR ?>images/eng-1_13.jpg" width="15" height="10" /> Version Francaise </div>
+ 
+ 
+ 
+                    <ul style="padding-left: 210px;">
+                         					
+								 
+<li style="padding-bottom:7px;">	<a href="<?php echo LANG_URL ?>">Le Cabinet </a> </li>	
+                        
+                        <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages';
+						 
+                               $toppages = $model->select()->from($model->_name)->order('displayorder ASC');
+						        $toppages = $model->fetchAll($toppages);
+					
+								foreach($toppages as $toppage):
+									if($toppage['level'] == 1 && $toppage['lang'] == fr ):   
+							?>
+							   <li  style="padding-bottom:7px;" >
+	<a href="<?php echo LANG_URL ?><?php echo (trim($toppage->pagurl)?'hossamylaw/'.trim($toppage->pagurl):'page/v/i/'.$toppage->id) ?>"<?php echo ($request->getModuleName()=='default' && $request->getControllerName()=='page' && $request->getActionName()=='v' && $request->getParam('i')==$toppage->id?' ':'')?>><?php echo $toppage->title ?></a> 
+									
+
+									 
+ 								 
+  <?php
+$model = new Model_PlusData();
+$model->_name = 'pages';
+      $where = array();
+$categories1 = $model->selectForArray(array('level' => '2'), array('displayorder' => 'ASC'));
+			
+foreach ($categories1 as $i => $category):
+
+	  
+ ?>
+
+                                 
+									<?  if($category->pageid==$toppage->id):?>
+									
+								  <div  class="zzzz">	<a<? if($_SERVER['REQUEST_URI']=='/page/v/i/'.				
+										
+									$category->id) :?> <? endif ?>   style="color:#4E8FD3;padding-left: 20px; "  href="<?php echo LANG_URL ?><?php echo (trim($category->pagurl)?'hossamylaw/'.trim($category->pagurl):'page/v/i/'.$category->id) ?>"<?php echo ($request->getModuleName()=='default' && $request->getControllerName()=='page' && $request->getActionName()=='v' && $request->getParam('i')==$category->id?' class="active"':'')?>><?php echo $category->title ?></a> </div> 
+                               
+ <? 
+								endif;
+							
+								endforeach; ?>
+
+                 
+									
+									
+							<?php 	
+							endif;endforeach; ?> 	
+ 
+  <br/> 
+  <br/> 
+  <br/> 
+  <br/>
+ </div>

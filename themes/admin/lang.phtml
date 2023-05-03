@@ -1,0 +1,18 @@
+<?php
+
+$this->session = new Zend_Session_Namespace('Default');
+
+$request = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+
+$uri = strtolower($request);
+
+$uri = rtrim($uri, '/') . '/';
+
+$ex = explode('admin', $uri);
+
+$uri = 'admin' . $ex[1];
+
+$langselect = $this->session->lang;
+
+?>
+

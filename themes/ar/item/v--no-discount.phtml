@@ -1,0 +1,2784 @@
+
+
+
+
+ <?php foreach($this->Item as $value): ?>
+ <?php if($value->drop == '1'): ?> 
+ 
+<?php  header("Location: http://mainlyeurope.com/errorpage");?> 
+
+<?php endif; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		 <title><?php if(trim($value->pagetitle)): ?><?php echo $value->pagetitle ?><?php elseif(!trim($value->pagetitle)): ?><?php echo $this->siteData['homepage'] ?> <?php echo $this->PageTitle ? '' . $this->PageTitle : '' ?><?php endif; ?></title>
+        <meta name="keywords" content="<?php if(trim($value->pagekeywords)): ?><?php echo $value->pagekeywords ?><?php elseif(!trim($value->pagekeywords)): ?><?php echo $this->siteData['keywords'] ?><?php endif; ?>" />
+		<meta name="description"  content="<?php if(trim($value->pagekeywords)): ?><?php echo $value->pagedescription ?><?php elseif(!trim($value->pagedescription)): ?><?php echo $this->siteData['metatag'] ?><?php endif; ?>" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/imports.css" media="screen">
+		<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/bootstrap.min.css" media="screen">
+		<link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/owl-carousel.css" media="screen">
+        <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/tour-search.css" media="screen">
+          <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/css/plugins.css" media="screen">
+           <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/owl-carousel/owl.carousel.css" media="screen">
+               <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/owl-carousel/owl.theme.css" media="screen">
+            <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/owl-carousel/owl.transitions.css" media="screen">
+        <link href="<?php echo THEME_DIR ?>assets/js/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
+        <script src="<?php echo THEME_DIR ?>assets/n/nouislider.js"></script>
+            <script src="<?php echo THEME_DIR ?>assets/n/nouislider.min.js"></script>
+        <script src="<?php echo THEME_DIR ?>assets/n/nouislider.js.download.js"></script>
+        
+        
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	    <style type="text/css">
+<!--
+.style1 {color: #828283}
+.style2 {color: #2181c4}
+-->
+        </style>
+        
+        
+        <style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 35px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #124273 ;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #dc1f26;
+}
+</style>
+
+
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function cycleImages(){
+      var $active = $('#background_cycler .active');
+      var $next = ($('#background_cycler .active').next().length > 0) ? $('#background_cycler .active').next() : $('#background_cycler div:first');
+      $next.css('z-index',2);//move the next image up the pile
+	  // $('#background_cycler').css('height','100%');
+	  $active.fadeOut(1500,function(){//fade out the top image
+	  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
+      $next.css('z-index',3).addClass('active');//make the next image the top one
+      });
+    }
+
+    $(window).load(function(){
+		$('#background_cycler').fadeIn(1500);//fade the background back in once all the images are loaded
+		  // run every 7s
+		  setInterval('cycleImages()', 3000);
+    })
+</script>
+</head>
+
+	<body class="home">
+<button onClick="topFunction()" id="myBtn" title="Go to top">Back to Top</button>
+		<div id="top"></div>
+
+		<!-- Navigation (main menu)
+		================================================== -->
+
+ <?php
+ 
+ if (isset($_POST["type"]) == 'add') {
+  session_destroy();
+        session_start(); 
+ 
+$_SESSION['products'] =  $_COOKIE["height"] ;
+
+ 
+ } 
+
+
+?>
+
+
+
+ <script  >
+          function getdata11(){
+createCookie("height", $(window).height(), "10");
+ 
+
+ function createCookie(name, value, days) {
+ var expires;
+  
+  var date = new Date();
+   
+  expires = (document.getElementById("name").value) ;
+<1--  alert(expires); --> 
+ 
+  document.cookie = escape(name) + "=" + expires  ;
+
+ }
+          
+}
+       </script>
+
+		<div class="navbar-wrapper">
+			<header class="navbar navbar-default navbar-fixed-top" id="MainMenu">
+				<div class="navbar-extra-top clearfix" style="background:#124273 ; color:#FFFFFF">
+					<div class="navbar container-fluid">
+						<div class="col-md-3" style="padding:0PX; " ><h5 style="padding-top:1PX; color:#FFFFFF"> Get instant access to the best travel deals </h4></div>
+                        <div class="col-md-4" style="padding-top:10px;padding-right:0px;"> 
+
+
+ 
+
+ 
+ <form id="maillistform" method="post" action="<?php echo LANG_URL ?>addon/maillist" name="subscribe_form" role="form">
+
+                                        <div class=" ">
+
+
+                                          <div class="col-md-8" style="padding: 0px;">  
+           <input class="form-control"   id="name" dir="ltr"   name="name" type="email"  value="Email Address" />  </div>
+                                             <input    type="hidden" name="type" value="add" /><input name="maillist" type="hidden" value="1" />
+                                        <div class="col-md-4"><input type="submit" value="Register" class="btn" style="background:#FF0000"> </div>
+                                                 
+                                            </button>
+                                        </div>
+                                    </form> 
+                                    <script type="text/javascript">
+                                        <!--
+                                                               (function ($) {
+                                            $(document).ready(function () {
+                                                $('form#maillistform').submit(function (e) {
+                                                    e.preventDefault();
+                                                    var form = $(this);
+                                                    var url = form.attr('action') + '?is_ajax=true';
+                                                    var data = form.serialize();
+                                                    form.find('input,textarea,select').attr('disabled', 'disabled');
+                                                    $.ajax({
+                                                        url: url,
+                                                        data: data,
+                                                        dataType: 'json',
+                                                        type: 'POST',
+                                                        success: function (data) {
+                                                            if (data.success)
+                                                            {
+                                                                form.slideUp('slow', function () {
+                                                                    form.html(data.message);
+                                                                    form.slideDown('slow');
+                                                                });
+                                                            } else
+                                                            {
+                                                                form.find('input,textarea,select').removeAttr('disabled');
+                                                                form.find('.error').remove();
+                                                                if (typeof data.error.name != 'undefined')
+                                                                {
+                                                                    var len = data.error.name.length;
+                                                                    for (var i = 0; i < len; i++)
+                                                                    {
+                                                                        form.find('#name').after('<div class="error" style="color:#ff0000;">' + data.error.name[i] + '</div>');
+                                                                    }
+                                                                }
+                                                                if (typeof data.error.email != 'undefined')
+                                                                {
+                                                                    var len = data.error.email.length;
+                                                                    for (var i = 0; i < len; i++)
+                                                                    {
+                                                                        form.find('#email').after('<div class="error" style="color:#ff0000;">' + data.error.email[i] + '</div>');
+                                                                    }
+                                                                }
+                                                                form.find('.error').hide();
+                                                                form.find('.error').fadeIn();
+                                                            }
+                                                        },
+                                                        error: function () {
+                                                            form.unbind('submit');
+                                                            form.submit();
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        })(jQuery);
+                                        //-->
+                                    </script>
+
+                                             
+                         </div>
+						<div class="col-md-5" style="padding:0px;text-align: center; padding-top:19px; height: 64px; ">
+                         <a  class="topa"  href="<?php echo LANG_URL ?>"> Home</a>    
+ 
+                         <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages';						                                       
+						        $toppages = $model->selectForArray(array('top' => '1'    ), array('displayorder' => 'ASC')  );
+								foreach($toppages as $toppage):
+								   
+							?>
+
+  <i style="padding: 5px; color:#FFFFFF" > | </i>
+
+<a  class="topa" 
+<?php if($toppage->type2 == 'text'  ): ?>
+ href="<?php echo LANG_URL ?><?php echo (trim($toppage->pagurl)?'mainlyeurope/'.trim($toppage->pagurl):'page/v/i/'.$toppage->id) ?>" 
+<?php elseif($toppage->type2 == 'textdrop'  ): ?>
+
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages';						                                       
+						        $toppages77 = $model->selectForArray(array('pageid' => $toppage->id  ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages77 as $toppage77):
+								   
+							?>
+href="<?php echo LANG_URL ?><?php echo (trim($toppage77->pagurl)?'mainlyeurope/'.trim($toppage77->pagurl):'page/v/i/'.$toppage77->id) ?>" 
+
+<?php endforeach; ?>
+
+
+<?php endif; ?> >
+<?php echo $toppage->title ?>   
+
+</a> 
+						 
+                             
+                             <?php endforeach; ?>   
+                         
+						   
+											 <i style="padding: 5px; color:#FFFFFF" > | </i>
+ <a class="topa" button onclick="myFunction2()"  href="" target="_blank"> Passports & Visas</a> 
+
+<i style="padding: 5px; color:#FFFFFF" > | </i>
+ <a  class="topa" button onclick="myFunction()"  href=""  target="_blank" > View My Booking</a>  
+			
+ 
+<script>
+function myFunction() {
+    window.open("https://tours.mainlyeurope.com/Account/LogOn?ReturnUrl=%2f");
+}
+</script>
+
+<script>
+function myFunction2() {
+    window.open("http://www.visahq.com/?a_aid=vaff10075");
+}
+</script>						 
+					  </div>
+                      
+					
+						
+					</div>
+				</div>
+
+				<div class="container-fluid collapse-md" id="navbar-main-container">
+					<div class="col-md-3 navbar-header">
+	<a href="<?php echo LANG_URL ?>index.php" style="padding-left:0px;" class="navbar-brand"><img style="margin-top:-12px;"  src="<?php echo THEME_DIR ?>assets/images/logo.png"> </a>
+						
+						 
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+
+					<nav class="col-md-7 navbar-collapse collapse" id="navbar-main">
+                     
+						<ul class="nav navbar-nav navbar-right">
+							 <li class="dropdown show-on-hover">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Destinations </a>
+								<ul class="dropdown-menu">
+                                         
+                              <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'region';						                                       
+						        $toppages = $model->selectForArray(array(), array('displayorder' => 'ASC')  );
+								foreach($toppages as $toppage):
+									   
+							?>
+								    <div class="col-md-3" style="" >
+                          <h4  style="color:#999999;border-bottom: 1px solid #fff;padding-bottom: 5px;font-family:main" > <?php echo $toppage->title; ?> </h4>	
+                                    <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages2 = $model->selectForArray(array('regionid' => $toppage->id), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2):
+									   
+							?>  
+										
+							<?php
+							$tempwwaac4x4 = array(); ?>
+							<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+			  $toppages2item = $model->selectForArray(array('countryid' => $toppage2->id , 'inactive' => '0' ,'regionid = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid2' => $toppage2->id , 'inactive' => '0'  ,'regionid2 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid3' => $toppage2->id , 'inactive' => '0'  ,'regionid3 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid4' => $toppage2->id , 'inactive' => '0'  ,'regionid4 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid5' => $toppage2->id , 'inactive' => '0'  ,'regionid5 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid6' => $toppage2->id , 'inactive' => '0'  ,'regionid6 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 
+							 
+							 	<?php 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages2item = $model->selectForArray(array('countryid7' => $toppage2->id , 'inactive' => '0'  ,'regionid7 = ?' =>  '0'  ), array('displayorder' => 'ASC')  );
+								foreach($toppages2item as $toppage2items):
+									   
+							?> 
+							 <?php $tempwwaac4x4 []= $toppage2items->id ?> 
+							 <?php endforeach; ?>
+							 
+							 <?php $countcontry =  count($tempwwaac4x4);
+							 if($countcontry != 0  ) : 
+							 
+							 ; ?>
+							  
+							
+									<li style="padding-bottom: 5px;" ><a style="color:#FFFFFF"  href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'europe-vacations/'.trim($toppage2->pagurl):'country/v/i/'.$toppage2->id) ?>"><?php echo $toppage2->data; ?>  </a></li>
+									<?php endif; ?>
+
+<?php endforeach; ?>
+									</div>
+                                    <?php endforeach; ?>
+                                    
+                                  
+                                    
+                                <div class="col-md-12"  style="color:#fff" ><div class="bannermenu" >
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'boxes';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => '8' ), array('displayorder' => 'ASC')  );
+								foreach($toppages2 as $toppage2xx):
+									   
+							?> 
+
+								 <div class="col-md-8" style="padding-top:20px;"  > <?php echo $toppage2xx->data; ?> </div>
+                                 <div class="col-md-4" style="padding-top:20px;"  ><img style="margin-top:px;padding-bottom:20px;  "  src="<?php echo constant('APP_BASEURL') . '/MyUpload/' . $toppage2xx->thumb ?>"> </div> 
+								
+                                <?php endforeach; ?>
+								
+								</div></div>
+								
+								 
+									 
+								 
+								</ul>
+
+							</li> 
+ 
+  
+  <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'pages';						                                       
+						        $toppages = $model->selectForArray(array('menu' => '1'    ), array('displayorder' => 'ASC')  );
+								foreach($toppages as $toppage):
+								   
+							?>
+
+
+							<li><a href="<?php echo LANG_URL ?><?php echo (trim($toppage->pagurl)?'mainlyeurope/'.trim($toppage->pagurl):'page/v/i/'.$toppage->id) ?>"> <?php echo $toppage->title ?>  </a></li>
+                             
+                             <?php endforeach; ?>
+                         
+						</ul>
+                       
+					</nav>
+                <div class="heddennn col-md-2" style="padding: 0px;text-align: right;padding-top: 10px;">    <div class="fa fa-phone" style="color:#dc1f26; font-size: 20px;margin-top: 15px;padding-left: 10px;"></div> <spam style="color:#124273;font-size: 23px;  "><strong>  <?php echo $this->siteData['phone'] ?></strong> </spam>  </div>
+                   
+				</div><!-- /.container-fluid -->
+			</header>
+		</div><!-- /.navbar-wrapper -->
+		
+	
+	
+	
+		
+	 
+   
+ 
+<?php $xxxx = $value->id; ?>
+ 
+ <style>
+		   .complete{
+    display:none;
+}
+
+.more{
+       background: #dc1f26;
+    color: navy;
+    font-size: 16px;
+   
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    float: right;
+    margin-right: 10px;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 35px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #124273 ;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #dc1f26;
+}
+
+ spam.hiddendash:last-child {
+    display:none
+}
+
+
+
+ul li  spam.hiddendashw:last-child {
+    display:none
+}
+
+		   </style>
+		   <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>assets/n/demo.css">
+		<!-- Hero Section
+				================================================== -->
+		 <section class="hero small-hero" style="height:100px; " >
+			<div class="bg-overlay">
+				<div class="container" style="">
+					<div class="intro-wrap">					</div>
+			  </div>
+			</div>
+		</section>
+
+
+		<!-- Sub Navigation
+		================================================== -->
+		 
+
+
+		<!-- Main Section
+				================================================== -->
+
+		<section class="main"   >
+			<div class="container">
+
+ 
+
+				<div class="row">
+
+
+
+					<div class="griddxwwww col-sm-12 col-fixed-sidebar"   >
+						<div class="sidebar-padder" ">
+							
+								
+                             <aside class="widget widget_text">  
+                                <div class="textwidget">
+                                 
+										<article class="page-box">
+											<ul class="nav nav-pills">
+			 <?php if(trim($value->description)):   ?>	<li  ><a href="#Overview" >Overview</a></li> <?php endif; ?>
+              
+
+ <?php $i =  $value->daynumber; ?>
+ <?php $tempwwaacww = array(); ?>
+				  
+  <?php  for ($x = 1; $x <= $i; $x++): ?> 		
+  <?php 
+       $nametitle =  'tit'.$x ;
+	   $namedescription =  'int'.$x ;
+  ?>
+  
+  <?php $tempwwaacww[]= $value->$nametitle.$value->$namedescription ; ?> 
+
+  <?php endfor; ?>
+ 
+ 
+ <?php  if(count(array_filter($tempwwaacww)) != 0): ?>
+
+
+ <li><a href="#Itinerary"  >Itinerary </a></li>
+<?php endif; ?>
+
+
+
+
+			 <?php if(trim($value->include) || trim($value->includedid , "||") ): ?>   <li><a href="#Includes"  >Includes</a></li><?php endif; ?>
+			 <?php if(trim($value->exclude) || trim($value->excludesid , "||") ): ?>   <li><a href="#Excludes" >Excludes</a></li> <?php endif; ?>
+                <?php if(trim($value->optional) || trim($value->optionalidid , "||") ): ?>   <li><a href="#Optional"   >Optional Tours</a></li><?php endif; ?>
+              
+           <?php if($value->close == '0'): ?>  <?php if(trim($value->rates) || trim($value->rates2 , "||") ): ?><li ><a href="#Dates"  >Dates & Rates </a></li><?php endif; ?> <?php endif; ?>
+                                 <!--  <li><a href="#Map"  >Map</a></li> --> 
+             <li><a href="#Go"  >Before You Go</a></li> 
+                                <li><a href="#Similar"  >Similar Packages</a></li>
+							              </ul>	
+
+ <?php if(trim($value->pdf)): ?> 
+			<a style="text-decoration:none" href="<?php echo  APP_BASEURL.'/MyUpload/'.$value->pdf ?> " download >  
+			<img   style="padding-top: 10px;    padding-left: 25px;" src="<?php echo THEME_DIR ?>assets/images/download.png">   </a> 
+			<?php endif; ?>
+
+			 
+										</article>
+
+
+
+								 <a class="btn btn-primary " style="width:100%; color:#fff; font-family:arial;" href="<?php echo LANG_URL ?>request?title=<?php echo $variation; ?>&nights=<?php echo  $value->nightnumber;?>"> Request a Quote
+									<i class="fa fa-angle-right"></i>
+								</a>	
+								</div>
+							</aside>
+ 
+						 
+						</div>
+					</div>
+                    
+                    
+                
+                <div id="sliders" class="col-sm-12 " style=" margin-bottom:50px ;margin-top: 40px;"> 
+
+<div class="swiper-container " style="width:100%;">
+ 							<div class="swiper-wrapper" style="width:100%;">
+								<!-- Slide 01 -->
+								
+ 
+  <?php 
+          $images = explode('||',trim($value->table_image,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+  
+    
+  <div class="swiper-slide"   >
+    <img class="fullwidth" src="<?php echo  APP_BASEURL.'/MyUpload/'.$photo ?>"  style="width:100%" >
+	</div>
+    <?php endforeach; ?>
+    
+     
+							 
+							</div>
+   <div class="swiper-pagination" ></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+						</div>
+
+          <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/dist/css/swiper.min.css">
+   
+ 
+    <!-- Swiper JS -->
+    <script src="<?php echo THEME_DIR ?>assets/dist/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+    </script>
+
+<div class="col-sm-12 " style=" margin-top:10px;">
+<div class="col-sm-1 ">  </div>
+<?php if($value->close == '1'): ?> 
+<div class="col-sm-10 " style="    border-radius: 25px;color: #fff;background-color: #dc1f26;border: 1px solid #b3b0b0; #fff;margin-top:10px;"> 
+ <i style="font-size:70px;padding-right: 10px;float:left;color:#fff" class="fa fa-times" aria-hidden="true"></i> 
+ 
+<h4 style="color:#fff; margin:0px;padding-top:10px;" ><?php echo $this->siteData3['title1'] ?></h4>
+<?php echo $this->siteData3['title2'] ?>
+ 
+ </div><?php endif; ?>
+<div class="col-sm-1 ">  </div>
+</div>
+
+     
+            
+            </div> 
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                    
+
+
+
+            
+         <?php 
+									 
+  
+$variation = str_replace("&", "", $value->title);
+?>  
+
+ 
+					<div id="mainmain"   class="col-sm-12 col-fixed-content" style=" margin-top:-60px ;">
+ 
+ 
+ 
+ 
+  
+                    
+                    
+                    
+                    
+
+
+						<section class="narrow page-info">
+                        
+                        <!-- /.col-md-6 -->
+
+						<div class="col-md-12">
+
+							<h2 class="text-primary" style="color:#124273;font-size: 32px;">  <?php echo $value->title; ?>  <br/> 
+                            <spam style="color:#dc1f26;font-size: 24px;" >
+                              <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'packagetype';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->packagetype), array('displayorder' => 'ASC')  );
+								foreach($toppages24 as $toppage24):
+									   
+							?> <?php echo $toppage24->title; ?> <?php endforeach; ?></spam> </h3>
+                            
+                    <h3 style="padding-bottom: 10px;">
+
+<div class="col-md-12" style="padding:0px;">
+<div class="col-md-2"  style="padding:0px;width: 12%;" >   <?php echo $value->daynumber; ?> days  </div>
+
+
+ <?php if(trim($value->prize)): ?><div class="col-md-3" style="padding:0px;    width: auto;padding-right:10px">  <spam style="color:#dc1f26;font-size: 15px;">From </spam>	
+				  
+				  <spam <?php if(trim($value->newprice)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($value->newprice)): ?><?php echo 'style="color:#dc1f26;" ' ?><?php endif; ?>  >  $<?php echo number_format($value->prize) ?>   </spam>   
+				   
+				   
+				 <?php if(trim($value->newprice)): ?>  <spam style="color:#dc1f26; padding-left:8px;" >   $<?php echo number_format($value->newprice) ?>  </spam> <?php endif; ?> <br/>
+<div style="font-size:12px;text-align:center; padding-top: 4px;" >TOUR ONLY </div></div> <?php endif; ?>
+
+
+
+<?php if(trim($value->prize2)): ?>
+
+<div class="col-md-3" style="padding:0px; width: auto;padding-right:10px">  <spam style="color:#dc1f26;font-size: 15px;">From </spam>	
+				   
+				  <spam <?php if(trim($value->newprice2)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($value->newprice2)): ?><?php echo 'style="color:#dc1f26;" ' ?><?php endif; ?>  >  $<?php echo number_format($value->prize2) ?>   </spam>   
+				   
+				   
+				 <?php if(trim($value->newprice2)): ?>  <spam style="color:#dc1f26; padding-left:8px;" >   $<?php echo number_format($value->newprice2) ?>  </spam> <?php endif; ?> <br/>
+<div style="font-size:12px;text-align:center;padding-top: 4px;" >TOUR + FLIGHTS </div></div>
+
+<?php endif;?> 
+
+
+
+
+<?php if(trim($value->prize3)): ?>
+<div class="col-md-3" style="padding:0px;width: auto;padding-right:10px">  <spam style="color:#dc1f26;font-size: 15px;">From </spam>	
+				   
+				  <spam <?php if(trim($value->newprice3)): ?><?php echo 'style="color:#000;text-decoration: line-through;" ' ?> <?php elseif(!trim($value->newprice3)): ?><?php echo 'style="color:#dc1f26;" ' ?><?php endif; ?>  >  $<?php echo number_format($value->prize3) ?>   </spam>   
+				   
+				   
+				 <?php if(trim($value->newprice3)): ?>  <spam style="color:#dc1f26; padding-left:8px;" >   $<?php echo number_format($value->newprice3) ?>  </spam> <?php endif; ?> <br/>
+<div style="font-size:12px;text-align:center; width: auto;padding-top: 4px;" > CRUISE </div></div><?php endif;?> 
+
+<spam style="font-size:14px;" >  <?php echo $value->pricedescription; ?>  </spam>
+
+</div>
+                  
+				   
+				     <br/>
+ 
+ </h3>
+
+
+<h2 style="color:#124273;font-size: 19px;padding-top:20px;" > 
+				   
+				   <?php 
+          $images = explode('||',trim($value->cityidid,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+  
+  
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?>
+	 
+
+ 
+
+ <?php endforeach; ?>
+
+
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid2,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid3,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid4,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid5,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+ 
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid6,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->cityidid7,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+  <?php echo $toppage->title;   ?> <spam class="hiddendash" >  -  </spam>
+	<?php endforeach; ?> 
+ <?php endforeach; ?>
+
+
+  </h2>
+
+  <spam style="font-size:16px;color:#000;;" >  <?php echo $value->pricenotes; ?>  </spam>
+								</div>
+                  
+							<div class="col-md-12">
+							<div class="tab-content" id="tab-content" >
+								<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+					<?php if(trim($value->description)):   ?>	
+                        <div class="  active" id="Overview"   style="padding-top:50px; ">
+							<div class="row">
+								<div class="col-sm-12 col-lg-13">
+									<a class="page-box-link"  >
+										<article class="page-box">
+										 <div class="col-md-12" >  
+	<?php echo $value->description; ?>
+  </div>
+ 
+    <?php if(trim($value->featureid) || trim($value->featureid , "||") ): ?>
+							 
+ <div class="col-md-12 iconsxx "  style="linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;">  
+ <div class="col-md-2" style="padding: 10px;width: 90px;" > Featuring </div>
+ 
+<div class="col-md-10 iconsxxz " style="background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" > 
+   <?php 
+          $images = explode('||',trim($value->featureid,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+ 
+<?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'featuring';						                                       
+						        $toppages244 = $model->selectForArray(array('id' =>$photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages244 as $toppage44):?>
+
+<div style="text-align:center;float:left;margin-right: 10px;" >
+   <img  src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage44->image ?>"  title="<?php echo $toppage44->title;   ?> " alt="<?php echo $toppage44->title;   ?> " > <br/>
+	<p style="font-size: 12px; color: #124173;"><?php echo $toppage44->title;   ?> </p>
+</div>
+
+<?php endforeach; ?> 
+	<?php endforeach; ?></div>
+   </div>
+<?php endif; ?>
+<?php if(trim($value->gateway) ): ?>
+<div class="col-md-12" style="background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" >  
+ <div class="col-md-2" style="padding: 10px;width: 90px;" > Gateway Departures	 </div>
+  <div class="col-md-10" style="  padding: 10px;background: #fff;min-height:70px;background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" > <?php echo $value->gateway;   ?>   </div>
+
+</div>
+<?php endif; ?>
+
+
+
+
+ 
+<div class="col-md-12" style="background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;">  
+ <div class="col-md-2" style="padding: 10px;width: 90px;" > Package Type	 </div>
+  <div class="col-md-10" style="  padding: 10px;background: #fff;min-height:70px;background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" >
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'packagetype';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->packagetype), array('displayorder' => 'ASC')  );
+								foreach($toppages24 as $toppage24):
+									   
+							?>  <h4 style="margin:0px; font-family:main" ><?php echo $toppage24->title;   ?> </h4> <?php endforeach; ?>
+ <?php echo $value->descriptiontype;   ?>  </div>
+
+</div>
+ 
+
+
+
+
+<?php if(trim($value->highlightid) ): ?>
+<div class="col-md-12" style="background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" >  
+ <div class="col-md-2" style="padding: 10px;width: 90px;" > Highlights	 </div>
+  <div class="col-md-10" style="  padding: 10px;background: #fff;background-image: linear-gradient(to bottom, #9d9d9e 1px, rgba(255,255,255,0) 1px), linear-gradient(to left, #000 0.1rem, rgba(255,255,255,0) 1px);
+    background-position: bottom;background-size: 100% 02px;background-repeat: no-repeat;" > 
+ <ul>
+								<?php 
+          $images = explode('||',trim($value->highlightid,'|'));
+            foreach($images as $photo): if(!trim($photo) ) continue;
+ ?>
+
+						<li>				<?php echo $photo ?> </li>
+<?php endforeach; ?>
+</ul>
+</div>
+
+</div>
+<?php endif; ?>
+
+
+
+
+<?php if(trim($value->noteoverview) ): ?>
+<div class="col-md-12"   >  
+ <div class="col-md-2" style="padding: 10px;width: 90px;" > Notes  	 </div>
+  <div class="col-md-10" style="  padding: 10px;background: #fff;" > <?php echo $value->noteoverview;   ?> </div>
+
+</div>
+<?php endif; ?>
+	
+	
+	
+											 
+										</article>
+									</a>
+								</div></div></div>
+<?php endif; ?>
+								   
+							
+								
+                        <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->       
+							
+ <?php $i =  $value->daynumber; ?>
+ <?php $tempwwaacww = array(); ?>
+				  
+  <?php  for ($x = 1; $x <= $i; $x++): ?> 		
+  <?php 
+       $nametitle =  'tit'.$x ;
+	   $namedescription =  'int'.$x ;
+  ?>
+  
+  <?php $tempwwaacww[]= $value->$nametitle.$value->$namedescription ; ?> 
+
+  <?php endfor; ?>
+ 
+ 
+ <?php  if(count(array_filter($tempwwaacww)) != 0): ?>
+ 
+ 
+
+
+
+	
+								<div class="" id="Itinerary" style="padding-top:50px;">
+									<h3>Itinerary</h3>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+									 <a class="page-box-link"  >
+
+										<article class="page-box">
+								 
+<div class="col-md-12"><div> 
+							 								     	
+			
+				  <?php $i =  $value->daynumber; ?>
+				  
+				  <?php  for ($x = 1; $x <= $i; $x++): ?> 
+			
+    <?php 
+       $nametitle =  'tit'.$x ;
+	   $namedescription =  'int'.$x ;
+       $namehot =  'hot'.$x ;
+       $namecruise =  'crus'.$x ;
+       $namecruisetext =  'crustext'.$x ;
+       $dinner =  'dinner'.$x ;
+  ?>
+	
+    <div class='accordion-section-title'> <?php echo  'Day '. $x." - "  . $value->$nametitle ; ?> </div> 
+
+	 <div id='accordion-1' class='accordion-section-content' style='overflow: hidden; display: block;'> 
+					<?php  echo $value->$namedescription; ?> 
+ 
+ <?php if(trim($value->$dinner , "||") ): ?>
+<p style="font-weight:bold" > (
+<?php 
+          $imagesdinner = explode('||',trim($value->$dinner,'|'));
+            foreach($imagesdinner as $index=>$photodinner): if(!trim($photodinner) ) continue;
+ ?>
+ <?php if ($index ==0 ): ?><?php echo $photodinner; ?> <?php elseif ($index !=0 ): ?> - <?php echo $photodinner; ?><?php endif; ?>
+<?php endforeach; ?>
+ )</p>
+
+
+
+<?php endif; ?> 
+
+
+
+
+ 
+  <div>
+ <?php if(trim($value->$namehot , "||") || trim($value->$namecruise , "||")): ?><spam style="font-weight: bold;color: #dc1f26;"> Accommodation:  </spam> <?php endif; ?>  
+
+
+
+
+
+
+
+
+
+
+<!--  7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777     --> 
+
+ <?php 
+$cruisedddtext  = array();
+
+          $imagesscruisetext = explode('||',trim($value->$namecruisetext,'|'));
+            foreach($imagesscruisetext as $index=>$phototest): if(!trim($phototest) ) continue;?>
+<?php $cruisedddtext  []= $phototest ?> 
+<?php endforeach; ?>
+
+ 
+<?php 
+          $images = explode('||',trim($value->$namecruise,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+
+  <?php if ($index ==0 ): ?> 
+<!--aaa -->
+
+<!--aaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->  
+  <div class="modal fade" id="xhotel<?php echo $x; ?><?php echo $photo; ?>" data-target="#xhotel<?php echo $x; ?><?php echo $photo; ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+
+  
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items3';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+
+                 <h4 class="modal-title"><strong></strong> <?php echo $toppage->title;   ?>   
+								
+ 
+
+</h4>
+
+   <?php if(trim($toppage->table_image , "||") ): ?>
+  
+ 
+<div id="swiper-container2" class="swiper-container"   style="width:100%;">
+ <div class="swiper-wrapper" style="width:100%;">
+								<!-- Slide 01 -->
+								
+<?php 
+          $imageszaza = explode('||',trim($toppage->table_image,'|'));
+            foreach($imageszaza as $photozaza): if(!trim($photozaza) ) continue;
+ ?>
+<div class="swiper-slide"  >
+      <img  style="width:100%" class="fullwidth" src="<?php echo  APP_BASEURL.'/MyUpload/'.$photozaza ?>" />
+	</div>
+
+ <?php endforeach; ?>
+ 
+     
+							 
+							</div>
+   <div id="swiper-pagination2"  class="swiper-pagination" ></div>
+        <!-- Add Arrows -->
+        <div id="swiper-button-next2" class="swiper-button-next"></div>
+        <div id="swiper-button-prev2" class="swiper-button-prev"></div>
+					 
+
+
+	</div>
+
+
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/dist/css/swiper.min.css">
+
+    <script src="<?php echo THEME_DIR ?>assets/dist/js/swiper.min.js"></script>
+
+
+ 
+
+  <script >
+        var swiper= new Swiper('#swiper-container2', {
+        pagination: '#swiper-pagination2',
+        nextButton: '#swiper-button-next2',
+        prevButton: '#swiper-button-prev2',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false; 
+ debugger: false; 
+    });
+
+ swiper.update();
+
+    </script>
+ 
+<?php endif; ?>
+
+ 
+
+<?php if(trim($toppage->description)) : ?>
+ 
+					<p> <h4>Summary</h4>
+									  <?php echo $toppage->description;  ?>
+<?php endif; ?>
+   
+
+ <?php if(trim($toppage->room)) : ?>
+ 
+					<p> <h4>Rooms</h4>
+									  <?php echo $toppage->room;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->facilities)) : ?>
+ 
+					<p> <h4>Facilities</h4>
+									  <?php echo $toppage->facilities;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->resturant)) : ?>
+ 
+					<p> <h4>Resturant</h4>
+									  <?php echo $toppage->resturant;  ?>
+<?php endif; ?>
+
+
+<?php if(trim($toppage->amenities)) : ?>
+ 
+					<p> <h4>Amenities</h4>
+									  <?php echo $toppage->amenities;  ?>
+<?php endif; ?>
+
+</p>
+
+<?php endforeach; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+ <!--aaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items3';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $index2 =>$toppage):?>
+
+
+<a style="cursor: pointer;text-decoration: underline;"  id="hotel<?php echo $x; ?><?php echo $photo; ?>" > <?php echo $toppage->title;   ?></a>   
+ 
+<?php if(isset($cruisedddtext[$index])) : ?><?php if (trim($cruisedddtext[$index])): ?>   <spam style="color:000;font-weight: bold;" > ( <?php echo $cruisedddtext[$index]; ?> ) </spam> <?php endif; ?><?php endif; ?>
+
+
+ <?php if(trim($value->$namehot , "||") ): ?>
+<?php echo ' , ' ; ?>
+
+<?php endif; ?>
+
+<script language="javascript">
+ $("#hotel<?php echo $x; ?><?php echo $photo; ?>").click(function () {
+     
+        $('#xhotel<?php echo $x; ?><?php echo $photo; ?>').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> 
+<!--aaa -->
+
+ 
+
+
+
+
+
+
+
+
+  <?php elseif ($index !=0 ): ?> 
+<!--aaa -->
+ 
+<!--aaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->  
+  <div class="modal" id="xhotel<?php echo $x; ?><?php echo $photo; ?>" data-target="#xhotel<?php echo $x; ?><?php echo $photo; ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items3';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+   <h4 class="modal-title"><strong></strong> <?php echo $toppage->title;   ?>   
+								
+ 
+
+</h4>
+  
+    <?php if(trim($toppage->table_image , "||") ): ?>
+
+<div id="swiper-container" class="swiper-container"   style="width:100%;">
+ <div class="swiper-wrapper" style="width:100%;">
+								<!-- Slide 01 -->
+								
+<?php 
+          $imageszaza = explode('||',trim($toppage->table_image,'|'));
+            foreach($imageszaza as $photozaza): if(!trim($photozaza) ) continue;
+ ?>
+<div class="swiper-slide"  >
+      <img  style="width:100%" class="fullwidth" src="<?php echo  APP_BASEURL.'/MyUpload/'.$photozaza ?>" />
+	</div>
+
+ <?php endforeach; ?>
+ 
+     
+							 
+							</div>
+   <div id="swiper-pagination"  class="swiper-pagination" ></div>
+        <!-- Add Arrows -->
+        <div id="swiper-button-next" class="swiper-button-next"></div>
+        <div id="swiper-button-prev" class="swiper-button-prev"></div>
+					 
+
+
+	</div>
+
+
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/dist/css/swiper.min.css">
+
+    <script src="<?php echo THEME_DIR ?>assets/dist/js/swiper.min.js"></script>
+
+
+
+
+
+  <script >
+        var swiper= new Swiper('#swiper-container', {
+        pagination: '#swiper-pagination',
+        nextButton: '#swiper-button-next',
+        prevButton: '#swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+    </script>
+ 
+    <?php endif; ?>
+
+
+
+<?php if(trim($toppage->description)) : ?>
+ 
+					<p> <h4>Summary</h4>
+									  <?php echo $toppage->description;  ?>
+<?php endif; ?>
+   
+
+ <?php if(trim($toppage->room)) : ?>
+ 
+					<p> <h4>Rooms</h4>
+									  <?php echo $toppage->room;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->facilities)) : ?>
+ 
+					<p> <h4>Facilities</h4>
+									  <?php echo $toppage->facilities;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->resturant)) : ?>
+ 
+					<p> <h4>Resturant</h4>
+									  <?php echo $toppage->resturant;  ?>
+<?php endif; ?>
+
+
+<?php if(trim($toppage->amenities)) : ?>
+ 
+					<p> <h4>Amenities</h4>
+									  <?php echo $toppage->amenities;  ?>
+<?php endif; ?>
+
+</p>
+<?php endforeach; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+ <!--aaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items3';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $index2 =>$toppage):?>
+
+
+ <spam  > &nbsp; , &nbsp;  </spam> <a style="cursor: pointer;text-decoration: underline;" id="hotel<?php echo $x; ?><?php echo $photo; ?>" > <?php echo $toppage->title;   ?></a> 
+<?php if(isset($cruisedddtext[$index])) : ?><?php if (trim($cruisedddtext[$index])): ?>   <spam style="color:000;font-weight: bold;" > ( <?php echo $cruisedddtext[$index]; ?> ) </spam> <?php endif; ?><?php endif; ?>
+ <?php if(trim($value->$namehot , "||") ): ?>
+<?php echo ' , ' ; ?>
+
+<?php endif; ?>
+
+
+<script language="javascript">
+ $("#hotel<?php echo $x; ?><?php echo $photo; ?>").click(function () {
+     
+        $('#xhotel<?php echo $x; ?><?php echo $photo; ?>').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> 
+<!--aaa -->
+
+
+<?php endif; ?>
+
+
+
+<?php endforeach; ?> 
+
+ 
+
+
+
+<!--                  77777777777777777777777777777 Hotel Hotel Hotel Hotel rybbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb   --> 
+
+
+
+
+
+
+
+<?php 
+          $images = explode('||',trim($value->$namehot,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+
+
+  <?php if ($index ==0 ): ?> 
+<!--aaa -->
+ 
+<!--aaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->  
+  <div class="modal fade" id="xhotel<?php echo $x; ?><?php echo $photo; ?>" data-target="#xhotel<?php echo $x; ?><?php echo $photo; ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items2';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+
+                 <h4 class="modal-title"><strong></strong> <?php echo $toppage->title;   ?>   <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages244 = $model->selectForArray(array('id' => $toppage->cityid ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages244 as $toppage44):?>
+
+ <spam style="color: #dc1f26;">  ( <?php echo $toppage44->title;   ?>  ) </spam> 
+	<?php endforeach; ?>
+</h4>
+
+   <?php if(trim($toppage->table_image , "||") ): ?>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <div id="myCarousel<?php echo $x; ?>" class="carousel slide" data-ride="carousel">
+ <div class="carousel-inner">
+		
+<ol class="carousel-indicators">
+						
+<?php 
+          $imageszaza = explode('||',trim($toppage->table_image,'|'));
+            foreach($imageszaza as $index1=>$photozaza): if(!trim($photozaza) ) continue;
+ ?>
+      <li style=" background: #ae2b30;" data-target="#myCarousel<?php echo $x; ?>" data-slide-to="<?php echo $index1; ?>" class="<?php if ($index1 ==0 ) {echo 'active';} ?>"></li>
+       <?php endforeach; ?>
+<?php  $slidercount =  count($imageszaza); ?>
+    </ol>
+						
+<?php 
+          $imageszaza = explode('||',trim($toppage->table_image,'|'));
+            foreach($imageszaza as $index2=>$photozaza): if(!trim($photozaza) ) continue;
+ ?>
+      <div class="item <?php if ($index2 ==0 ) {echo 'active';} ?>">
+        <img src="<?php echo  APP_BASEURL.'/MyUpload/'.$photozaza ?>" alt="Los Angeles" style="width:100%;">
+      </div>
+
+<?php endforeach; ?>
+
+</div>
+<?php if($slidercount>1): ?> 
+ <a style=" background: #114073;"  class="left carousel-control" href="#myCarousel<?php echo $x; ?>" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a  style=" background: #114073;" class="right carousel-control" href="#myCarousel<?php echo $x; ?>" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+<?php endif; ?>
+</div>
+
+   
+ 
+ 
+<?php endif; ?>
+
+ 
+
+<?php if(trim($toppage->description)) : ?>
+ 
+					<p> <h4>Summary</h4>
+									  <?php echo $toppage->description;  ?>
+<?php endif; ?>
+   
+
+ <?php if(trim($toppage->rooms)) : ?>
+ 
+					<p> <h4>Rooms</h4>
+									  <?php echo $toppage->rooms;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->facilities)) : ?>
+ 
+					<p> <h4>Facilities</h4>
+									  <?php echo $toppage->facilities;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->resturant)) : ?>
+ 
+					<p> <h4>Resturant</h4>
+									  <?php echo $toppage->resturant;  ?>
+<?php endif; ?>
+
+
+<?php if(trim($toppage->amenities)) : ?>
+ 
+					<p> <h4>Amenities</h4>
+									  <?php echo $toppage->amenities;  ?>
+<?php endif; ?>
+
+</p>
+
+<?php endforeach; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+ <!--aaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items2';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $index2 =>$toppage):?>
+
+
+<a style="cursor: pointer;text-decoration: underline;"  id="hotel<?php echo $x; ?><?php echo $photo; ?>" > <?php echo $toppage->title;   ?>  </a>   
+ 
+
+
+
+<script language="javascript">
+ $("#hotel<?php echo $x; ?><?php echo $photo; ?>").click(function () {
+     
+        $('#xhotel<?php echo $x; ?><?php echo $photo; ?>').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> 
+<!--aaa -->
+
+ 
+
+
+
+
+
+
+
+
+  <?php elseif ($index !=0 ): ?> 
+<!--aaa -->
+ 
+<!--aaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->  
+  <div class="modal" id="xhotel<?php echo $x; ?><?php echo $photo; ?>" data-target="#xhotel<?php echo $x; ?><?php echo $photo; ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items2';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+ <h4 class="modal-title"><strong></strong> <?php echo $toppage->title;   ?>   <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'city';						                                       
+						        $toppages244 = $model->selectForArray(array('id' => $toppage->cityid ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages244 as $toppage44):?>
+
+ <spam style="color: #dc1f26;">  ( <?php echo $toppage44->title;   ?> ) </spam> 
+	<?php endforeach; ?>
+</h4>
+  
+    <?php if(trim($toppage->table_image , "||") ): ?>
+
+<div id="swiper-container" class="swiper-container"   style="width:100%;">
+ <div class="swiper-wrapper" style="width:100%;">
+								<!-- Slide 01 -->
+								
+<?php 
+          $imageszaza = explode('||',trim($toppage->table_image,'|'));
+            foreach($imageszaza as $photozaza): if(!trim($photozaza) ) continue;
+ ?>
+<div class="swiper-slide"  >
+      <img  style="width:100%" class="fullwidth" src="<?php echo  APP_BASEURL.'/MyUpload/'.$photozaza ?>" />
+	</div>
+
+ <?php endforeach; ?>
+ 
+     
+							 
+							</div>
+   <div id="swiper-pagination"  class="swiper-pagination" ></div>
+        <!-- Add Arrows -->
+        <div id="swiper-button-next" class="swiper-button-next"></div>
+        <div id="swiper-button-prev" class="swiper-button-prev"></div>
+					 
+
+
+	</div>
+
+
+    <link rel="stylesheet" href="<?php echo THEME_DIR ?>assets/dist/css/swiper.min.css">
+
+    <script src="<?php echo THEME_DIR ?>assets/dist/js/swiper.min.js"></script>
+
+
+
+
+
+  <script >
+        var swiper= new Swiper('#swiper-container', {
+        pagination: '#swiper-pagination',
+        nextButton: '#swiper-button-next',
+        prevButton: '#swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+    </script>
+ 
+    <?php endif; ?>
+
+
+
+<?php if(trim($toppage->description)) : ?>
+ 
+					<p> <h4>Summary</h4>
+									  <?php echo $toppage->description;  ?>
+<?php endif; ?>
+   
+
+ <?php if(trim($toppage->rooms)) : ?>
+ 
+					<p> <h4>Rooms</h4>
+									  <?php echo $toppage->rooms;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->facilities)) : ?>
+ 
+					<p> <h4>Facilities</h4>
+									  <?php echo $toppage->facilities;  ?>
+<?php endif; ?>
+
+<?php if(trim($toppage->resturant)) : ?>
+ 
+					<p> <h4>Resturant</h4>
+									  <?php echo $toppage->resturant;  ?>
+<?php endif; ?>
+
+
+<?php if(trim($toppage->amenities)) : ?>
+ 
+					<p> <h4>Amenities</h4>
+									  <?php echo $toppage->amenities;  ?>
+<?php endif; ?>
+
+</p>
+<?php endforeach; ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+ <!--aaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+ 
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'items2';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $index2 =>$toppage):?>
+
+
+ <spam  > &nbsp; , &nbsp;  </spam> <a style="cursor: pointer;text-decoration: underline;" id="hotel<?php echo $x; ?><?php echo $photo; ?>" > <?php echo $toppage->title;   ?>  </a> 
+ 
+
+
+
+<script language="javascript">
+ $("#hotel<?php echo $x; ?><?php echo $photo; ?>").click(function () {
+     
+        $('#xhotel<?php echo $x; ?><?php echo $photo; ?>').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> 
+<!--aaa -->
+
+
+<?php endif; ?>
+
+
+
+<?php endforeach; ?> 
+
+ 
+ <?php if(trim($value->$namehot , "||") ): ?><spam style="font-weight: bold;color: #000;padding-left:4px;">   (or similar)  </spam> <?php endif; ?> 			 
+ </div></div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php endfor; ?>
+				
+								         
+            
+             
+
+
+       
+             
+            
+            
+            </div></div>
+            
+										</article>
+									</a>
+								</div>
+                                
+            
+            
+            
+            
+							 <?php endif; ?>
+	 
+                               
+                         <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+							   
+                             	     
+								<?php if(trim($value->include) || trim($value->includedid , "||") ): ?>  
+                               
+                               
+                                     
+								<div class="" id="Includes" style="padding-top:50px;">
+										<h3>Includes</h3>
+									<a class="page-box-link"  >
+										<article class="page-box">
+								 
+						 
+    <ul>
+								<?php 
+          $images = explode('||',trim($value->include,'|'));
+            foreach($images as $photo): if(!trim($photo) ) continue;
+ ?>
+
+						<li>				<?php echo $photo ?> </li>
+<?php endforeach; ?>
+
+<?php 
+          $images = explode('||',trim($value->includedid,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+  
+  
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'defaultincluded';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+   <li> <?php echo $toppage->title;   ?> </li>
+	<?php endforeach; ?>
+
+ 
+
+ <?php endforeach; ?>
+ 
+	 
+										</article>
+									</a>
+								</div>
+								<?php endif; ?>
+                               <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+							   
+                             	 
+								<?php if(trim($value->exclude) || trim($value->excludesid , "||") ): ?>   
+                                	<div class="" id="Excludes" style="padding-top:50px;">
+										<h3>Excludes</h3>
+									<a class="page-box-link"  >
+										<article class="page-box">
+										
+										  <ul>
+								<?php 
+          $images = explode('||',trim($value->exclude,'|'));
+            foreach($images as $photo): if(!trim($photo) ) continue;
+ ?>
+
+						<li>				<?php echo $photo ?> </li>
+<?php endforeach; ?>
+
+								 
+  <?php 
+          $images = explode('||',trim($value->excludesid,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+ ?>
+ 
+  
+  
+
+ <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'defaultexcluded';						                                       
+						        $toppages2 = $model->selectForArray(array('id' => $photo ), array('displayorder' => 'ASC') , 1 );
+								foreach($toppages2 as $toppage):?>
+
+   <li> <?php echo $toppage->title;   ?> </li>
+	<?php endforeach; ?>
+
+ 
+
+ <?php endforeach; ?>
+	 
+										</article>
+									</a>
+								</div>
+                                
+                            <?php endif;?>
+						
+							 
+							 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+                               
+                                <?php if(trim($value->optional) || trim($value->optionalidid , "||") ): ?>  
+                                	<div class="" id="Optional" style="padding-top:50px;">
+										<h3>Optional Tours</h3>
+								 	<a class="page-box-link"  >
+										<article class="page-box">
+										 <div class="col-md-12" >
+
+							 
+                             <?php echo $value->optional; ?>
+<br/>
+       
+                        
+ <?php 
+          $images = explode('||',trim($value->optionalidid,'|'));
+            foreach($images as $index=>$photo):  ?>
+
+ <?php 
+  
+								$model = new Model_PlusData();
+						        $model->_name  = 'items7';
+						        $where = array();
+						        $toppages22cd = $model->selectForArray(array('id' => $photo), array('displayorder' => 'ASC')  );
+								foreach($toppages22cd as  $toppageww22cd):
+							?>
+
+
+ <p><strong> <?php echo $toppageww22cd->title; ?></strong></p>
+<p><img style="float: left; margin: 5px;" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppageww22cd->thumb ?>" width="293" height="150"><?php echo $toppageww22cd->description; ?> </p>
+<?php if(trim($toppageww22cd->include)) :?><p><strong>Included:</strong></p> 
+<p><?php echo $toppageww22cd->include; ?></p> <?php endif; ?>
+
+
+
+<?php if(trim($toppageww22cd->exclude)) :?><p><strong>Not Included:</strong></p> 
+<p><?php echo $toppageww22cd->exclude; ?></p> <?php endif; ?>
+
+
+
+<?php if(trim($toppageww22cd->duration)) :?><p><strong>Duration:</strong> 
+ <?php echo $toppageww22cd->duration; ?></p> <?php endif; ?>
+
+
+<?php if(trim($toppageww22cd->price)) :?><p><strong>Price: 
+ $<?php echo $toppageww22cd->price; ?> <?php echo $toppageww22cd->pricedescription; ?> </strong> </p> <?php endif; ?>
+ <?php if(trim($toppageww22cd->notes)) :?><p><strong>Notes:</strong></p> 
+<p><?php echo $toppageww22cd->notes; ?></p> <?php endif; ?>
+ 
+ <?php endforeach; ?>
+<hr>
+<?php endforeach; ?>
+
+
+
+</div>
+	 
+										</article>
+									</a>
+								</div>
+                                
+                               <?php endif; ?>
+        				 
+
+ <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+ 	
+ <?php if($value->close == '0'): ?>  <?php if(trim($value->rates) || trim($value->rates2 , "||") ): ?>		
+ <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+                                <div class="" id="Dates"  style="padding-top:50px; ">
+									<h3>Dates, Prices & Options</h3>
+								<div class="row">
+								<div class="col-sm-12 col-lg-13">
+									<a class="page-box-link"  >
+										<article class="page-box">
+								 
+
+<div class="headerate col-md-12" style="padding-top:10px;padding-bottom:10px;margin-bottom:4px;" >
+<?php echo $value->rates2 ?>
+<br/> 
+ <?php if(trim($value->rates)   ): ?>	
+<div class="col-md-3"  style="padding:0px;padding-right:4px;    font-weight: bold;"> Departure/Return Dates </div>
+ 
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;    font-weight: bold;"  > Original Rate  <br/><spam style="font-size:12px" > per person <br/>double occupancy </spam></div>
+<div class="col-md-1"  style="padding:0px;font-weight; text-align: center; color:#dc232a;     font-weight: bold;"  ><?php echo $value->discount; ?> </div>
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;    font-weight: bold;"  > New Rate <br/><spam style="font-size:12px" > per person <br/>double occupancy </spam> </div>
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;    font-weight: bold;"  > <?php echo  $value->discountdate; ?><br/ >to Save</div>
+
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;"  > 
+  </div>			 
+		<?php endif; ?>								
+
+ </div>
+
+
+ <?php 
+          $images = explode('||',trim($value->rates,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+ 
+
+<div class="headerate col-md-12" style="background: #f4f7f9;padding-top:10px;padding-bottom:10px;margin-bottom:4px;" >
+<?php 
+          $images2 = explode(',,',trim($photo,','));
+            ?>
+ 
+ <?php if( $images2[2] != '' &&  $images2[2] != '0' ): ?> 
+<div class="col-md-12" style="padding:0px;margin-bottom: -10px;" ><spam style="color:#fff; font-size: 12px;background: #124273;padding-left: 7px;padding-right: 10px;padding-bottom: 2px;" > <img style="margin-top:26px;    margin-left: -7px;"  src="<?php echo THEME_DIR ?>assets/images/button.png" /> <?php echo   $images2[2];?>  </spam> </div> <?php endif; ?>
+
+<div class="col-md-3"  style="padding:0px;padding-right:4px;">
+
+<div  class="col-md-1"  style="float: left;padding:0px;padding-top: 12px;margin-right: 5px;"  >  <i class="fa fa-calendar"></i>   </div> 
+<div  class="col-md-5"  style="float: left;padding:0px;"  > <spam style="font-size:11px"><?php  echo date('D', strtotime($images2[0]) ) ;?> </spam><br/><spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[0]) ) ;?> </spam></div>
+
+<div class="col-md-5"  style="float: right;padding:0px;    margin-left: 5px;"   ><spam style="font-size:11px"><?php  echo date('D', strtotime($images2[1]) ) ;?> </spam> <br/><spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[1]) ) ;?> </spam></div>
+  
+<br/> <?php if($images2[8] != '') : ?>   <spam style="color: #dc1f26;font-size:12px"> <?php echo  $images2[8];?> Seats Available </spam> <?php endif; ?> 
+ </div>
+ 
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;font-size:13px;padding-top: 24px;"  > 
+ <?php if( $images2[3] != '' &&  $images2[3] != '0' ): ?> <?php echo '$'. $images2[3];?> <?php endif; ?> </div>
+<div class="col-md-1"  style="padding:0px;font-weight; text-align: center; color:#dc232a; padding-top: 24px;"  >
+<?php if(trim($images2[4])) : ?>
+ <?php echo '- $'. $images2[4];?>  <?php endif; ?> </div>
+
+
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;font-size:13px;padding-top: 24px;"  > 
+ <?php if(trim($images2[4])) : ?> <?php echo '$'. ($images2[3] - $images2[4]) ;?> <?php endif; ?>  </div>
+
+
+<div class="col-md-2"  style="padding:0px;font-weight; text-align: center;font-size:13px;"  > 
+  <?php if(trim($images2[5])) : ?> <spam style="font-size:11px;    margin-right: 50px;"><?php  echo date('D', strtotime($images2[5]) ) ;?> </spam> <br/><spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[5]) ) ;?> </spam><?php endif; ?>  </div>
+
+
+
+<div class="col-md-2"  style="height: 30px;padding:0px;font-weight; text-align: right;"  > 
+
+<?php  $actualdate =    ($images2[0]) ;?> <br/>
+<?php  $currentdate =  date("m/d/Y");   ?> 
+
+<?php if ($currentdate >= $actualdate): ?> 
+<spam style="color:#dc1f26; font-size: 16px;" > Departed </spam>
+<?php endif; ?>
+<?php if ($currentdate < $actualdate): ?> 
+
+<?php if(trim($images2[6]) && $images2[7] == 'nocall') : ?>  
+<a class="btn btn-primary2 " target="_blank" style="float: left; margin-left: 0px;color:#fff;font-size:13px;padding: 5px;" href="<?php echo $this->siteData4['copyright'].$images2[6] ?> ">Book Now</a>
+<?php elseif($images2[7] == 'call') : ?> 
+<spam class="btn btn-primary2 " target="_blank" style="float: left;margin-left:0px; color:#fff;font-size:12px;padding: 5px;cursor: unset;background: #dc1f26;"  >Please Call</spam>
+
+ <?php endif; ?>
+<?php if($images2[9] != 'request') : ?>  
+ <a class="btn btn-primary " style="float: right; font-size:13px; color:#fff;padding: 5px;" href="<?php echo LANG_URL ?>requestbydates?title=<?php echo $variation; ?>&depart=<?php echo  $images2[0];?>">Request</a>  
+  <?php endif; ?>
+
+  <?php endif; ?>
+
+ 
+
+  </div>
+			 
+								
+ 
+ </div>
+
+ <?php endforeach; ?>
+
+
+
+
+
+<!--         /////////////////////////////////   -->
+
+
+
+
+
+
+
+
+ <?php 
+          $images = explode('||',trim($value->rates,'|'));
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;?>
+
+ 
+
+<div class="griddxwwww col-md-12" style="background: #f4f7f9;padding-top:10px;padding-bottom:10px;margin-bottom:4px;" >
+<?php 
+          $images2 = explode(',,',trim($photo,','));
+            ?>
+ 
+ <?php if( $images2[2] != '' &&  $images2[2] != '0' ): ?> 
+<div class="col-md-12" style="padding:0px;margin-bottom: -10px;" ><spam style="color:#fff; font-size: 12px;background: #124273;padding-left: 7px;padding-right: 10px;padding-bottom: 2px;" > <img style="margin-top:26px;    margin-left: -7px;"  src="<?php echo THEME_DIR ?>assets/images/button.png" /> <?php echo   $images2[2];?>  </spam> </div> <?php endif; ?>
+ 
+ 
+<div  class="col-md-12"   > <i class="fa fa-calendar"></i>  Departure: <spam style="font-size:11px"><?php  echo date('D', strtotime($images2[0]) ) ;?> </spam><spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[0]) ) ;?> </spam></div>
+
+<div class="col-md-12"     >  <i class="fa fa-calendar"></i> Return: <spam style="font-size:11px"><?php  echo date('D', strtotime($images2[1]) ) ;?> </spam> <spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[1]) ) ;?> </spam></div>
+  
+  <?php if($images2[8] != '') : ?>   <div  class="col-md-12"   style="color: #dc1f26;font-size:12px"> <?php echo  $images2[8];?> Seats Available </div> <?php endif; ?> 
+ 
+ 
+<div class="col-md-12"  style=" text-align: left; "  > 
+<spam style="color:#dc232a" >  Original Rate: </spam> <?php if( $images2[3] != '' &&  $images2[3] != '0' ): ?> <?php echo '$'. $images2[3];?> <?php endif; ?> </div>
+
+
+<div class="col-md-12"  style="  text-align: left; "  >
+<?php if(trim($images2[4])) : ?>
+<spam style="color:#dc232a" ><?php echo $value->discount; ?> </spam> <?php echo '- $'. $images2[4];?>  <?php endif; ?> </div>
+
+
+<div class="col-md-12"  style="  text-align: left;"  > 
+<spam style="color:#dc232a" >New Rate:  </spam> <?php if(trim($images2[4])) : ?> <?php echo '$'. ($images2[3] - $images2[4]) ;?> <?php endif; ?>  </div>
+
+
+<div class="col-md-12"  style="  text-align: left;"  > 
+<spam style="" > <i class="fa fa-calendar"></i>   <?php echo  $value->discountdate; ?> to Save  : </spam> <br/> <?php if(trim($images2[5])) : ?> <spam ><?php  echo date('D', strtotime($images2[5]) ) ;?> </spam> <spam style="font-size:13px"><?php  echo date('d M Y', strtotime($images2[5]) ) ;?> </spam><?php endif; ?>  </div>
+
+
+
+<div class="col-md-12"  style="margin-top:10px;height: 50px;font-weight; text-align: right;"  > 
+
+<?php if(trim($images2[6]) && $images2[7] == 'nocall') : ?>  
+<a class="btn btn-primary2 " target="_blank" style="float: left; margin-left: 0px;color:#fff;font-size:13px;padding: 5px;" href="<?php echo $this->siteData4['copyright'].$images2[6] ?> ">Book Now</a>
+<?php elseif($images2[7] == 'call') : ?> 
+<spam class="btn btn-primary2 " target="_blank" style="float: left;margin-left:0px; color:#fff;font-size:13px;padding: 5px;cursor: unset;background: #dc1f26;"  >Please Call</spam>
+
+ <?php endif; ?>
+<?php if($images2[9] != 'request') : ?>  
+ <a class="btn btn-primary " style="float: right; font-size:13px; color:#fff;padding: 5px;" href="<?php echo LANG_URL ?>requestbydates?title=<?php echo $variation; ?>&depart=<?php echo  $images2[0];?>">Request</a>  
+  
+
+ <?php endif; ?>
+
+ 
+
+  </div>
+			 
+   </div>
+
+ <?php endforeach; ?>
+ 
+	 
+										</article>
+									</a>
+                                    
+                                    
+                                     
+	  
+								</div></div>
+
+								   
+							
+								</div>
+                               
+                          
+                               							 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+ 	<?php endif; ?>	 	<?php endif; ?>	
+
+                                
+                                <!--	<div class="" id="Map" style="padding-top:50px;">
+										<h3>Map</h3>
+									<a class="page-box-link"  >
+										<article class="page-box">
+								    
+
+	 
+										</article>
+									</a>
+								</div> -->
+                                
+                                
+                    							 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+              
+                                 	<div class="" id="Go" style="padding-top:50px;">
+										<h3>Before You Go</h3>
+
+
+
+	<a class="page-box-link"  >
+										<article class="page-box">
+										 <div class="col-md-12" >
+
+							 
+                             <?php echo $value->befor; ?>
+
+ 
+</div>
+<div class="col-md-12" style="margin-left:20px;"  >
+  
+
+
+
+<?php if( $value->regionid != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="xdregion0" data-target="#xdregion0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="buutonxdregion0"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#buutonxdregion0").click(function () {
+     
+        $('#xdregion0').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?><?php endif; ?>
+
+               
+
+
+<?php if( $value->regionid2 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid2" data-target="#regionid2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid2 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid2 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid2button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid2button").click(function () {
+     
+        $('#regionid2').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+
+
+
+
+
+
+
+
+<?php if( $value->regionid3 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid3" data-target="#regionid3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid3 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid3 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid3button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid3button").click(function () {
+     
+        $('#regionid3').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+
+<?php if( $value->regionid4 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid4" data-target="#regionid4">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid4 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages24 = $model->selectForArray(array('id' => $value->countryid4 ), array('displayorder' => 'ASC')   );
+								foreach($toppages24 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid4button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid4button").click(function () {
+     
+        $('#regionid4').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+<?php if( $value->regionid5 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid5" data-target="#regionid5">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages25 = $model->selectForArray(array('id' => $value->countryid5 ), array('displayorder' => 'ASC')   );
+								foreach($toppages25 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages25 = $model->selectForArray(array('id' => $value->countryid5 ), array('displayorder' => 'ASC')   );
+								foreach($toppages25 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid5button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid5button").click(function () {
+     
+        $('#regionid5').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+
+<?php if( $value->regionid6 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid6" data-target="#regionid6">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages26 = $model->selectForArray(array('id' => $value->countryid6 ), array('displayorder' => 'ASC')   );
+								foreach($toppages26 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages26 = $model->selectForArray(array('id' => $value->countryid6 ), array('displayorder' => 'ASC')   );
+								foreach($toppages26 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f26;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid6button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid6button").click(function () {
+     
+        $('#regionid6').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+<?php if( $value->regionid7 != '0'): ?> 
+
+ 
+
+<div class="modal fade" id="regionid7" data-target="#regionid7">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+                 <?php
+ 
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $value->countryid7 ), array('displayorder' => 'ASC')   );
+								foreach($toppages27 as $toppage2zz):
+									   
+							?>  
+                
+                 <h3>  <spam style="font-weight: bold;color: #dc1f27;"> Before You Go:  </spam><?php echo $toppage2zz->data; ?></h3>
+<?php echo $toppage2zz->shortdata; ?> <br/><?php echo $toppage2zz->longdata; ?>
+                <?php endforeach; ?>
+                </div></div></div></div>
+
+<?php
+ 
+
+								$model = new Model_PlusData();
+						        $model->_name  = 'country';						                                       
+						        $toppages27 = $model->selectForArray(array('id' => $value->countryid7 ), array('displayorder' => 'ASC')   );
+								foreach($toppages27 as $toppage2):
+									   
+							?>  
+    
+         
+<div>  <spam style="font-weight: bold;color: #dc1f27;"> Before You Go:  </spam> 
+<a style="cursor: pointer;text-decoration: underline;" id="regionid7button"> <?php echo $toppage2->data; ?>   </a>
+ </div>
+
+<script language="javascript">
+ $("#regionid7button").click(function () {
+     
+        $('#regionid7').modal('show');
+ 
+     
+ });
+ </script>
+
+<?php endforeach; ?> <?php endif; ?>
+
+
+
+
+
+ 
+
+   
+   
+</div>
+	 
+										</article>
+									</a>
+								</div>
+							 
+                                
+                  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->              
+                           
+                                <div class="" id="Similar" style="padding-top:50px;">
+										<h3>Similar Packages</h3>
+									<a class="page-box-link"  >
+										<article class="page-box">
+								 </a>
+       
+                        
+                        
+                        
+                        
+                    
+                        
+                     <?php
+ $tempww7788 = array($xxxx);
+								$model = new Model_PlusData();
+						        $model->_name  = 'items';						                                       
+						        $toppages24 = $model->selectForArray(array('countryid' => $value->countryid   , 'inactive' => '0'     ), array('displayorder' => 'ASC')  , 2 );
+								foreach($toppages24 as $toppage2):
+									   
+							?>      
+          <?php if(!in_array($toppage2->id, $tempww7788 )): ?>                
+                        
+                        <div class="col-sm-6">
+                                             
+							<article class="place-box card">
+							 	<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+									 
+									<div class="entry-thumbnail"> <img width="960" height="540" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>"></div>
+							  </a>
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #fff;border-radius: 0 0 6px 6px;">
+                               <h3 class="headerrr"  ><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" >  <?php echo $toppage2->title; ?>  </a> </h3>
+                              <div class="blockpackagehome" ><?php echo $toppage2->shortdescription; ?></div>
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">   <?php echo $toppage2->daynumber; ?>  days  • <spam style="color:#dc1f26;"> From </spam>	    
+<spam <?php if(trim($toppage2->newprice)): ?><?php echo 'style="color:#dc1f26;text-decoration: line-through;" ' ?> <?php elseif(!trim($toppage2->newprice)): ?><?php echo 'style="color:#dc1f26;" ' ?><?php endif; ?>  >  $<?php echo $toppage2->prize; ?>  </spam>
+<?php if(trim($toppage2->newprice)): ?>  <spam style="color:#dc1f26; padding-left:8px;" >   $<?php echo $toppage2->newprice; ?>  </spam> <?php endif; ?>   <br/>
+<?php echo $toppage2->pricedescription; ?><br/></div>
+<div style="text-align:right;float: right; "> <a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+<div style="text-align:left; color:#28272F; ">  
+ <?php echo $toppage2->ptdpage; ?>  </div>
+</div>
+							</article>
+                           
+						</div>
+                         
+					<?php endif; ?>	 
+						 
+						 <?php endforeach; ?>
+						 
+						 
+                                
+                                
+                                
+                                
+                           
+							</div><!-- /.tab-content -->
+						</div><!-- /.col-md-6 -->
+                        
+                        
+					 
+                            
+                            
+  
+						</section>
+
+					 
+					</div>
+                     
+
+					<div class="col-sm-12 col-fixed-sidebar" id="floating-container"    >
+						<div class="sidebar-padder">
+							
+								
+                             <aside class="widget widget_text">  <br>
+                                <div class="textwidget">
+                                
+										<article class="page-box">
+											<ul class="nav nav-pills">
+			 <?php if(trim($value->description)):   ?>	<li  ><a href="#Overview" >Overview</a></li> <?php endif; ?>
+              
+
+ <?php $i =  $value->daynumber; ?>
+ <?php $tempwwaacww = array(); ?>
+				  
+  <?php  for ($x = 1; $x <= $i; $x++): ?> 		
+  <?php 
+       $nametitle =  'tit'.$x ;
+	   $namedescription =  'int'.$x ;
+  ?>
+  
+  <?php $tempwwaacww[]= $value->$nametitle.$value->$namedescription ; ?> 
+
+  <?php endfor; ?>
+ 
+ 
+ <?php  if(count(array_filter($tempwwaacww)) != 0): ?>
+
+
+ <li><a href="#Itinerary"  >Itinerary </a></li>
+<?php endif; ?>
+
+
+
+
+			 <?php if(trim($value->include) || trim($value->includedid , "||") ): ?>   <li><a href="#Includes"  >Includes</a></li><?php endif; ?>
+			 <?php if(trim($value->exclude) || trim($value->excludesid , "||") ): ?>   <li><a href="#Excludes" >Excludes</a></li> <?php endif; ?>
+               <?php if(trim($value->optional) || trim($value->optionalidid , "||") ): ?>  <li><a href="#Optional"   >Optional Tours</a></li><?php endif; ?>
+              
+           <?php if($value->close == '0'): ?>  <?php if(trim($value->rates) || trim($value->rates2 , "||") ): ?><li ><a href="#Dates"  > Dates & Rates </a></li><?php endif; ?><?php endif; ?>
+                                 <!--  <li><a href="#Map"  >Map</a></li> --> 
+             <li><a href="#Go"  >Before You Go</a></li> 
+                                <li><a href="#Similar"  >Similar Packages</a></li>
+							              </ul>	
+
+ <?php if(trim($value->pdf)): ?> 
+			<a style="text-decoration:none" href="<?php echo  APP_BASEURL.'/MyUpload/'.$value->pdf ?> " download >  
+			<img   style="padding-top: 10px;    padding-left: 25px;" src="<?php echo THEME_DIR ?>assets/images/download.png">   </a> 
+			<?php endif; ?>
+
+			 
+										</article>
+
+
+
+								 <a class="btn btn-primary " style="width:100%; color:#fff;font-family:arial;" href="<?php echo LANG_URL ?>requestbydates?title=<?php echo $variation; ?>"> Request a Quote
+									<i class="fa fa-angle-right"></i>
+								</a>
+ 
+ <a class="btn btn-primary " style="width:100%; margin-top:20px; color:#fff;font-family:arial;" href="<?php echo LANG_URL ?>requestgroup"> Request A Group Quote
+									<i class="fa fa-angle-right"></i>
+								</a>	
+								</div>
+							</aside>
+ 
+						 
+						</div>
+					</div>
+                    
+                    
+                    
+                    
+                    
+                    
+				</div>
+			</div>
+		</section>
+ 
+ <script>
+   $(document).ready(function(){
+
+
+    var swiper = new Swiper('.s22', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+  });
+    </script>
+ 
+        
+ <?php endforeach ?>

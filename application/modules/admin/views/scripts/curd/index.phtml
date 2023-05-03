@@ -1,0 +1,1000 @@
+ <?php
+$this->session = new Zend_Session_Namespace('Default');
+$request = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+ $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()) {
+$userInfo = Zend_Auth::getInstance()->getStorage()->read(); 
+$userid =  $userInfo->id;
+} ?>
+
+<?php  	$model = new Model_PlusData();   $model->_name  = 'users';                                
+			 $toppages2item = $model->selectForArray(array('id' => $userid ), array('displayorder' => 'ASC')  );
+ foreach($toppages2item as $toppage2items):?>    <?php endforeach; ?>
+ <?php  $allpermission = array() ;
+ $all = explode('||',trim($toppage2items->permissions ,'|')); foreach($all as $photo): ?>
+<?php $allpermission []= $photo ?> <?php endforeach; ?> 
+
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+ <?php if($this->Custom == 'city')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/city/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h3 class="widget-title"> Filter By  Country </h3>
+<div class="formAk" >
+    <form class="form-row"  action="<?php echo $this->baseUrl() ?>/admin/city/search" for="" class="" method="get" id="">
+        <?php echo $this->form->countryid ?>
+        <input class="btn btn-primary"  style="margin-left: 11px;"  type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+
+<?php    
+}elseif($this->Custom == 'Country')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/country/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h3 class="widget-title"> Filter By  Region</h3>
+<div class="formAk" >
+     <form class="form-row" action="<?php echo $this->baseUrl() ?>/admin/country/search" for="" class="" method="get" id="">
+        <?php echo $this->form->regionid ?>
+        <input class="btn btn-primary"  style="margin-left: 11px;"   type="submit" class="buttons" value="Search" id="save" name="save">
+    </form>
+</div>
+
+
+ <?php    
+}elseif($this->Custom == 'tags')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/tags/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h3 class="widget-title"> Filter By  Country </h3>
+<div class="formAk" >
+    <form class="form-row"  action="<?php echo $this->baseUrl() ?>/admin/tags/search" for="" class="" method="get" id="">
+        <?php echo $this->form->countryid ?>
+        <input class="btn btn-primary"  style="margin-left: 11px;"  type="submit" class="buttons" value="Search" id="save" name="filter">
+    </form>
+</div>
+
+
+
+<?php    
+}elseif($this->Custom == 'items')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/items/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+<h1> Filter By  </h1>
+<div class="formAk" >
+     <form action="<?php echo $this->baseUrl() ?>/admin/items/search" for="" class="" method="get" id="">
+        <?php echo $this->form->pageid ?>
+        <input type="submit" class="buttons" value="Search" id="save" name="save">
+    </form>
+</div>
+
+
+
+<?php    
+}elseif($this->Custom == 'Missing Packages Content')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/hotels/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+
+ <h3 class="widget-title"> Filter By Country <a href="<?php echo $this->baseUrl() ?>/admin/hotels/" >
+ <input  style="margin-left:11px;float:right;" type="submit" class="btn btn-primary" value="All Hotels" id="All Hotels" name="All Hotels"></a> </h3>
+
+ 
+<div class="formAk" >
+     <form class="form-row" action="<?php echo $this->baseUrl() ?>/admin/hotels/search" for=""   method="get" id="">
+  <div class="col-sm-4" > <?php echo $this->form->countryid;  ?> </div>
+    <div class="col-sm-3" > <?php echo $this->form->City  ;  ?>  </div>
+ <div class="col-sm-3" style="    margin-top: 27px;"> 
+<input  style="margin-left:11px;" type="submit" class="btn btn-primary" value="Search" id="save" name="save">
+
+ </div>
+ 
+           </form>
+	 
+</div>
+  <script type="text/javascript">
+<!--
+	(function($){
+		 
+   
+                $('select[name="countryid"]').change(function(){
+                    var form = $(this).parents('form').first();
+                    
+                    var region1 = form.find('select[name="City"] ');
+                    
+                    var prevVal = region1.find('option[selected]').attr('value');
+                    region1.html('');
+                    region1.attr('disabled','disabled');
+                    region1.css('opacity','0.5');
+                    
+                    
+                    var url = '<?php echo $this->baseUrl().'/admin/hotels/regions2' ?>';
+ 
+                    var country = $(this).val();
+                    region1.data('country', country);
+                    if(!country)
+                    {
+                        var html = '<option value=""> ( ----------Select City----------- ) </option>';
+                        region1.html(html);
+                       
+                        return;
+                    }
+                    
+                    var data = {country: country};
+                    $.ajax({
+                            url:url,
+                            data:data,
+                            dataType:'json',
+                            type:'POST',
+                            success:function(data){
+                                var html = '<option value=""> ( ----------Select City-----------  ) </option>';
+                                for(var i=0;i<data.length;i++)
+                                    html = html + '<option value="'+data[i].id+'">'+data[i].region2+'</option>';
+                                region1.html(html);
+                                
+                                region1.removeAttr('disabled');
+                                region1.css('opacity','1');
+                                region1.hide();
+                                region1.fadeIn();
+                                if($.QueryString['region1'])
+                                    $('select[name="countryid"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected');
+                                
+                                if(prevVal)
+                                    region1.find('option[value="'+prevVal+'"]').attr('selected', 'selected');
+                            }
+                        });
+                })
+         
+
+  $('select[name="countryid"]').change();
+                
+                (function($) {
+                    $.QueryString = (function(a) {
+                        if (a == "") return {};
+                        var b = {};
+                        for (var i = 0; i < a.length; ++i)
+                        {
+                            var p=a[i].split('=');
+                            if (p.length != 2) continue;
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                        }
+                        return b;
+                    })(window.location.search.substr(1).split('&'))
+                })(jQuery);
+                
+                if($.QueryString['city'])
+                    $('select[name="city"] option[value="'+$.QueryString['city']+'"]').attr('selected', 'selected').parent().change();
+                
+                if($.QueryString['category'])
+                    $('select[name="category"] option[value="'+$.QueryString['category']+'"]').attr('selected', 'selected');
+
+                if($.QueryString['category2'])
+                    $('select[name="category2"] option[value="'+$.QueryString['category2']+'"]').attr('selected', 'selected');
+
+                 if($.QueryString['category4'])
+                    $('select[name="category4"] option[value="'+$.QueryString['category4']+'"]').attr('selected', 'selected');
+                 
+	})(jQuery);
+//-->
+
+</script>
+ 
+ 
+
+<?php    
+}
+?>
+ 
+
+	<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo $this->typename ?>
+						<?php if($this->typename == 'Products' ){
+						 $model = new Model_PlusData();$model->_name  = 'ProductsCategories';  $toppages = $model->selectForArray(array('id' => ($_GET['catid'])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -- '.$toppage2->title ; } } ?>
+
+
+ </span>  <i class="icon-arrow-right52 mr-2"></i></h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+							  
+						 	</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<span class="breadcrumb-item active">Dashboard</span>
+						</div>
+
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+					<?php $str = $this->Custom ;
+$exclude_list = array("Products" , "Partners"  , "Order","Requests A Quote" ,"items5", "Logs") ;
+?>
+
+
+<?php if(!in_array($str, $exclude_list)): ?>
+<?php if(in_array(($this->typename.'_add') , $allpermission)): ?>
+            <a class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/create">Add New</a>
+<?php endif; ?>
+<?php endif; ?>
+
+
+
+
+
+ 
+ <?php if($this->typename2 == 'Redirect301'): ?>
+ <a style="margin-left:27px;"  class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/Haccess">Generate Haccess File</a>
+ <?php endif; ?>
+
+<?php if($this->typename2 == 'Partners'): ?>
+ <a class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/create">Add New</a>
+ <?php endif; ?>
+
+
+
+<?php if($this->typename2 == 'Products'): ?>
+ <a class="btn btn-primary" href="<?php echo $this->baseUrl(); ?>/admin/<?php echo $this->contName ?>/create?catid=<?php echo $_GET['catid'] ?>">Add New</a>
+ <a style="margin-left:20px;" class="btn btn-secondary" href="<?php echo $this->baseUrl(); ?>/admin/Productscategories/index">Main Category</a>
+ <?php endif; ?>
+
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+
+ 
+   
+
+
+  
+  
+
+<?php
+$uri = $_SERVER["REQUEST_URI"];
+$sortUrl = explode('/', $uri);
+unset($sortUrl[count($sortUrl)-1]);
+$sortUrl = implode('/', $sortUrl);
+$sortUrl = $sortUrl . '/sort';
+?>
+
+ 
+
+<script type="text/javascript">
+/* when the DOM is ready */
+jQuery(document).ready(function() {
+	/* grab important elements */
+	var sortInput = jQuery('#sort_order');
+	var submit = jQuery('#autoSubmit');
+	var messageBox = jQuery('#message-box');
+	var list = jQuery('#sortable');
+	/* create requesting function to avoid duplicate code */
+	var request = function(sortOrder) {
+        console.log(sortOrder);
+		jQuery.ajax({
+			beforeSend: function() {
+				messageBox.text('Updating the sort order in the database.');
+			},
+			complete: function() {
+				 location.reload();
+			},
+			data: {'sortOrder': sortOrder},
+			type: 'post',
+			url: '<?=$_SERVER["REQUEST_URI"]?>'
+		});
+	};
+	/* worker function */
+	var fnSubmit = function(save) {
+		var sortOrder = [];
+		list.children('tr').each(function(){
+			sortOrder.push(jQuery(this).data('id'));
+		});
+
+		if(save) {
+			request(sortOrder);
+		}
+	};
+	/* store values */
+	list.children('tr').each(function() {
+		var tr = jQuery(this);
+		tr.data('id',tr.attr('title')).attr('title','');
+	});
+	/* sortables */
+	list.sortable({
+		opacity: .7,
+
+		update: function() {
+			fnSubmit(true);
+ 
+		}
+
+	});
+	list.disableSelection();
+	/* ajax form submission */
+	jQuery('#dd-form').bind('submit',function(e) {
+		if(e) e.preventDefault();
+		fnSubmit(true);
+     
+
+	});
+});
+
+</script>
+ <?php  if(!empty($message)): ?>
+    <div id="message-box"><?php echo $message; ?> Waiting for sortation submission...</div>
+<?php endif; ?>
+		<!-- Content area -->
+			<div class="content">
+
+				<!-- HTML sourced data -->
+				<div class="card">
+<?php    
+if($this->Custom == 'Portfolio')
+{
+    $form = $this->form;
+    $form->setAction($this->baseUrl().'/admin/Portfolio/search');
+    $form->getElement('save')->setLabel('Search'); 
+?>
+
+ 
+<div class="formAk col-sm-12"  style="padding-top:20px;" >
+ <form class="form-row" action="<?php echo $this->baseUrl() ?>/admin/Portfolio/search" for=""   method="get" id="dynamic_select">
+ <div class="col-sm-4" ><?php echo $this->form->PortfolioCatid;  ?> </div>
+ <div class="col-sm-2" style="margin-top: 27px;"><input  style="margin-left:11px;" type="submit" class="btn btn-primary" value="Search" id="save" name="save">  
+ <a href="<?php echo $this->baseUrl() ?>/admin/Portfolio" > All </a>  </div>
+           </form>
+	 
+</div>
+
+<script>
+    $(function(){
+      // bind change event to select
+      $('#dynamic_select').on('change', function () {
+          var url = $(this).val(); // get selected value
+
+          if (url == "all"  ) { // require a URL
+              window.location = "https://www.ebbandtide.com/new/admin/Portfolio"; // redirect
+alert('xxx');
+          }
+          return false;
+      });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        ></script>
+
+
+  <?php } ?>
+
+   <?php if($this->Custom !== 'Products'  ): ?>
+<div class="content">
+
+				<!-- Page length options -->
+				<div class="card">
+
+
+	<!-- Content area -->
+			
+   
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+ 
+   <table <?php if($this->Sort !== 'no'  ): ?>id="tableId" <?php endif; ?>  class="table datatable-show-all">
+        <thead>
+            <tr >
+ <th ># </th> 
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+            <?php if($this->contName != 'logs' ): ?>     <th></th> <?php endif; ?>
+            </tr>
+        </thead>
+
+ 
+ 
+
+        <tbody  <?php if($this->Sort !== 'no'  ): ?>id="sortable" <?php endif; ?>  class="ui-sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+
+            <tr   title="<?php  echo  !empty($values->id) ? $values->id : '' ?>" id="<?php  echo  !empty($values->id) ? $values->id : '' ?>" >
+ <td > <?php echo $i ?> </td> 
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td>';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+if($values[$variable] != '') {
+                        echo $this->ImgView($values[$variable]);
+}
+                    }
+  elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+ 
+elseif($type == 'Thumb' ){
+      if($values[$variable] != ''){                
+ echo  "<img style='height:50px' src=".APP_BASEURL."/MyUpload/".$values[$variable]." >" ;
+} 
+		           
+}
+ 
+
+ 
+elseif($type == 'created_on' ){
+ echo '<div style="width:100px;">'.date("m-d-Y", strtotime($values[$variable])).'</div>';
+}
+
+
+ 
+elseif($type == 'type2' ){
+ echo '<div style="width:100px;">'. $values[$variable].'</div>';
+}
+ 
+ 
+
+elseif($type == 'thumb'){
+ if($values[$variable] != ''){                
+ echo  "<img style='height:50px' src=".APP_BASEURL."/MyUpload/".$values[$variable]." >" ;
+} 
+}
+
+
+
+elseif($type == 'ProductsCatid'){
+ $model = new Model_PlusData();$model->_name  = 'ProductsCategories';  $toppages = $model->selectForArray(array('id' => ($values[$variable])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title ; }
+}
+
+
+
+elseif($type == 'ProductsSubCatid'){
+ $model = new Model_PlusData();$model->_name  = 'ProductsSubCategories';  $toppages = $model->selectForArray(array('id' => ($values[$variable])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title ; }
+}
+
+
+elseif($type == 'colorIDS'){
+ $allcolorIDS = explode('||',trim($values[$variable],'|'));
+$model = new Model_PlusData();    $model->_name  = 'Color';   $toppages = $model->selectForArray(array( ), array('displayorder' => 'ASC') );
+								foreach($toppages as  $toppage){
+ if(in_array($toppage->id , $allcolorIDS)){
+
+ echo '<div style="float: left;margin-right:10px;width:17px; height:17px;background:#'.$toppage->title.'"></div>';
+}
+}
+}
+ 
+elseif($type == 'showhome' )
+      { 
+if($values[$variable] == '1'){ echo '<i style="color:green; "  class="icon-check" aria-hidden="true"></i>'; }
+else{   echo ' '; }
+
+}
+
+elseif($type == 'Active' )
+                    {
+if($values[$variable] == '1'){
+                        echo '<spam style="color:red">'.'Inactive'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Active'.'</spam>';
+}
+                    }
+
+elseif($type == 'PageName' ){
+
+$data['subject'] = array_map('trim', explode('-', $values[$variable])); // Explode data and trim all spaces 
+echo $data['subject'][0];
+
+if($data['subject'][0] == 'Page'){
+ $model = new Model_PlusData();$model->_name  = 'Pages';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; } 
+}
+elseif($data['subject'][0] == 'Products Category'){
+ $model = new Model_PlusData();$model->_name  = 'ProductsCategories';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; }
+}
+elseif($data['subject'][0] == 'Services Category'){
+ $model = new Model_PlusData();$model->_name  = 'servicescategories';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; }
+}
+
+elseif($data['subject'][0] == 'Blogs Category'){
+ $model = new Model_PlusData();$model->_name  = 'BlogsCategories';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title; }
+}
+
+elseif($data['subject'][0] == 'Products'){
+ $model = new Model_PlusData();$model->_name  = 'Products';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; }
+}
+elseif($data['subject'][0] == 'Services'){
+ $model = new Model_PlusData();$model->_name  = 'Services';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; }
+}
+elseif($data['subject'][0] == 'Products'){
+ $model = new Model_PlusData();$model->_name  = 'Products';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title; }
+}
+
+elseif($data['subject'][0] == 'Blogs'){
+ $model = new Model_PlusData();$model->_name  = 'Blogs';  $toppages = $model->selectForArray(array('id' => ($data['subject'][1])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo ' -'.$toppage2->title ; }
+}
+ 
+ 
+
+}
+
+elseif($type == 'PortfolioCatid'){
+ $model = new Model_PlusData();$model->_name  = 'PortfolioCategories';  $toppages = $model->selectForArray(array('id' => ($values[$variable])), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title ; }
+}
+
+
+elseif($type == 'Inactive' )
+                    {
+if($values[$variable] == '1'){
+                        echo '<spam style="color:red">'.'Inactive'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Active'.'</spam>';
+}
+                    }
+
+
+
+elseif($type == 'action' )
+                    {
+if($values->action == 'Edit'){
+   echo '<spam style="background:yellow;padding: 4px;">'.$values[$variable].'</spam>'; }
+elseif($values->action == 'Creat'){
+   echo '<spam style="background:#01fc01;padding: 4px;">'.$values[$variable].'</spam>'; }
+elseif($values->action == 'Delete'){
+   echo '<spam style="background:red;padding: 4px;color:#fff">'.$values[$variable].'</spam>'; }
+                    }
+
+
+elseif($type == 'position' )
+                    {
+if($values[$variable] == 'main'){
+                        echo '<spam style="color:red">'.'Main Menu'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Other Destinations'.'</spam>';
+}
+                    }
+
+
+elseif($type == 'show_home' ){
+                    {
+if ($values->expiredate == ''){
+if(($values[$variable] == '0') ){
+                        echo '<spam style="color:red">'.'Inactive'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Active'.'</spam>';
+}
+}
+
+else if ($values->expiredate != ''){
+$currentdate2 = date("Y-m-d") ; 
+if(($values[$variable] == '0') || ($values->expiredate <= $currentdate2) ){
+                        echo '<spam style="color:red">'.'Inactive'.'</spam>';
+}
+else{
+   echo '<spam style="">'.'Active'.'</spam>';
+}
+
+ }}
+
+}
+ 
+ 
+
+
+
+elseif($type == 'catID')
+                    {
+
+         $model = new Model_PlusData();$model->_name  = 'servicescategories';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title; }
+ 
+                    }
+
+elseif($type == 'countryid' || $type == 'Country' ){
+                    {
+if($values[$variable] == '0011' ) { echo 'General' ;}
+else {
+		           $model = new Model_PlusData();$model->_name  = 'country';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->country_name; } 
+                       
+                    }
+}
+}
+
+
+elseif($type == 'expiredate' ){
+                     
+if($values[$variable] != '' ) { echo  date("m-d-Y", strtotime($values[$variable])) ; }
+		           
+}
+
+elseif($type == 'representative' )
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'users';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array(),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->firstname.$toppage2->lastname ; } 
+                       
+                    }
+elseif($type == 'ServicesCatid' )
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'servicescategories';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title; } 
+                       
+                    }
+
+
+elseif($type == 'districtid')
+                    {
+		           $model = new Model_PlusData();$model->_name  = 'districts';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->Name; } 
+                       
+                    }
+
+
+  
+
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+               <?php if($this->contName != 'logs' ): ?>   <td >
+<?php if(in_array(($this->typename.'_edit') , $allpermission)): ?>
+                <a  class="badge badge-success"    href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edit/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?><?php if($this->contName == 'Products' ): ?>&catid=<?php echo $_GET['catid'] ?><?php endif; ?>" title="Edit">Edit</a>
+<?php endif; ?>
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                         if($values['id'] != 0)
+                        {
+                    ?>
+<?php if(in_array(($this->typename.'_delete') , $allpermission)): ?>
+                   <a class="badge badge-danger"   href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/delete/id/<?php echo $values['id'] ?><?php if($this->contName == 'Products' ): ?>?catid=<?php echo $_GET['catid'] ?><?php endif; ?>')" title="Delete">Delet </a> 
+<?php endif; ?>
+
+ 
+            <?php if($this->contName == 'Productscategories' ): ?>  
+                <a  class="badge badge-warning"    href="<?php echo  $this->baseUrl();?>/admin/Products/index?catid=<?php echo $values['id'] ?>" >Products </a>
+<?php endif; ?>
+
+<?php
+                        }
+                    }
+ 
+                ?>
+                    
+
+
+                </td> <?php endif; ?>
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+ 
+  
+  <?php endif;  ?>
+
+
+			 
+   <?php if($this->Custom == 'Products'  ): ?>
+<div class="content">
+
+				<!-- Page length options -->
+				<div class="card">
+
+
+	<!-- Content area -->
+			
+   
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+ 
+   <table <?php if($this->Sort !== 'no'  ): ?>id="tableId" <?php endif; ?>  class="table datatable-show-all">
+        <thead>
+            <tr >
+ <th ># </th> 
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+             <th></th>  
+            </tr>
+        </thead>
+
+ 
+ 
+
+        <tbody  <?php if($this->Sort !== 'no'  ): ?>id="sortable" <?php endif; ?>  class="ui-sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+<?php if($values->catid == $_GET['catid']): ?> 
+            <tr   title="<?php  echo  !empty($values->id) ? $values->id : '' ?>" id="<?php  echo  !empty($values->id) ? $values->id : '' ?>" >
+ <td > <?php echo $i ?> </td> 
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td>';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+if($values[$variable] != '') {
+                        echo $this->ImgView($values[$variable]);
+}
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+   
+ 
+
+elseif($type == 'catid')
+                    {
+
+         $model = new Model_PlusData();$model->_name  = 'Productscategories';
+		           $toppages = $model->selectForArray(array('id' => $values[$variable]), array('displayorder' => 'ASC'),1 ); 
+                   foreach ($toppages  as  $toppage2 ){ echo $toppage2->title; }
+ 
+                    }
+     
+
+
+  
+
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+               <?php if($this->contName != 'logs' ): ?>   <td >
+<?php if(in_array(($this->typename.'_edit') , $allpermission)): ?>
+                <a  class="badge badge-success"    href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edit/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?><?php if($this->contName == 'Products' ): ?>&catid=<?php echo $_GET['catid'] ?><?php endif; ?>" title="Edit">Edit</a>
+<?php endif; ?>
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                         if($values['id'] != 0)
+                        {
+                    ?>
+<?php if(in_array(($this->typename.'_delete') , $allpermission)): ?>
+ <a class="badge badge-danger"   href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/delete/id/<?php echo $values['id'] ?><?php if($this->contName == 'Products' ): ?>?catid=<?php echo $_GET['catid'] ?><?php endif; ?>')" title="Delete">Delet </a> 
+<?php endif; ?>
+
+
+<?php
+                        }
+                    }
+
+ 
+                ?>
+                    
+
+
+                </td> <?php endif; ?>
+            </tr>
+<?php endif; ?>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+ 
+  
+  <?php endif;  ?>
+
+
+
+
+ <?php if($this->Custom == 'comment' ): ?>
+  
+<form id="dd-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+    <table id="table1" class="table table-bordered table-striped dataTable">
+        <thead>
+            <tr >
+
+                <?php
+                foreach($this->listValue as $listValue)
+                {
+                    echo '<th>'.$listValue.'</th>';
+                }
+                ?>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody  id="sortable">
+            <?php $i = 1; foreach($this->paginator as $values) { ?>
+            <tr  title="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+                 id="<?php  echo  !empty($values->id) ? $values->id : '' ?>"
+            >
+                 <?php
+                foreach($this->listValue as $key=>$listValue)
+                {
+
+                    echo '<td >';
+                    $exm = explode(':', $key);
+                    $type = reset($exm);
+                    $variable = end($exm);
+                    if($type == 'img')
+                    {
+                        echo $this->ImgView($values[$variable]);
+                    }
+                    elseif($type == 'DATE')
+                    {
+                        echo date("d-m-Y" ,$values[$variable]);
+                    }
+                    else
+                    {
+                        echo $values[$key];
+                       $order[] = $values['id'];
+
+                    }
+                    echo '</td>';
+                }
+            ?>
+                <td>
+  
+                  <a   style=" border: 1px;  border-style: double;  padding: 4px;"  href="<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/edit3/id/<?php echo $values['id'] ?>?id=<?php echo $values['id'] ?>" title="Edit">Edit</a>
+                   
+                     <?php
+                    if($this->OffActions != 'delete')
+                    {
+                        if($values['id'] != 0)
+                        {
+                    ?>
+
+                   <a style=" border: 1px;  border-style: double;  padding: 4px;" href="javascript:confdelete('<?php echo  $this->baseUrl();?>/admin/<?php echo $this->contName ?>/delete/id/<?php echo $values['id'] ?>')" title="Delete">Delet </a> 
+                
+ 
+<?php
+                        }
+                    }
+ 
+                ?>
+                    
+ 
+
+                </td>
+            </tr>
+          <?php $i++; } ?>
+            
+        </tbody>
+
+    </table>
+    <br>
+  
+  <?php endif;  ?>
+<?php $str = $this->Custom ;
+$exclude_list = array("contact","items2" ) ;
+?>
+
+ 
+
+
+ 
+ 
+
+
+
+ 
+
+
+
+<?php 
+
+ if(isset($_POST['do_submit']))  {
+	 $message = 'Sortation has been saved.'; 
+
+
+}
+
+?>
+ 
+</form>
+<?php if($this->Custom == '3rd Parties code' ): ?>
+ 
+ 
+ 
+<br/><br/><br/>
+<?php endif; ?>
+
+
+
+
+<?php if($this->Custom == 'Plans Names' ): ?>
+<h3 class="widget-title">Default  Plans Names </h3>
+
+<form   id="form2" name="form3" method="post" action="<?php echo  $this->baseUrl().'/admin/'.'Plans/index' ?>"     enctype="multipart/form-data"   >
+   <div class="form-row col-sm-12" >   <div class="col-sm-4" >
+Bronze <input name="Bronze" id="Bronze"   value="<?php $model = new Model_PlusData();	        $model->_name  = 'socialiconscode';						                                       
+						        $toppages2 = $model->selectForArray(array( 'id' => '2' ), array( ),1  );
+								foreach($toppages2 as $toppage):?><?php echo $toppage->Bronze ?><?php endforeach; ?> "  > </input>  </div>
+
+
+
+ <div class="col-sm-4" >
+Silver <input name="Silver" id="Silver"    value="<?php $model = new Model_PlusData();	        $model->_name  = 'socialiconscode';						                                       
+						        $toppages2 = $model->selectForArray(array( 'id' => '2' ), array( ),1  );
+								foreach($toppages2 as $toppage):?><?php echo $toppage->Silver ?><?php endforeach; ?> "  > </input>  </div>
+
+
+ <div class="col-sm-4" >
+Golden <input name="Golden" id="Golden"  value="<?php $model = new Model_PlusData();	        $model->_name  = 'socialiconscode';						                                       
+						        $toppages2 = $model->selectForArray(array( 'id' => '2' ), array( ),1  );
+								foreach($toppages2 as $toppage):?><?php echo $toppage->Golden ?><?php endforeach; ?> "  > </input>  </div>
+
+
+</div>
+ 
+<input type="submit" name="save3" id="save3" value="Save" class="btn btn-primary btn-lg" style="margin:20px">
+
+</form>
+<br/><br/><br/>
+<?php endif; ?>
+
+</div></div>
+ 

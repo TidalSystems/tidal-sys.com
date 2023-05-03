@@ -1,0 +1,51 @@
+<?php if ($this->pageCount){
+// you need to add each of the request parameters to url
+$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
+// remove the system parameters
+unset($params['module']);
+unset($params['controller']);
+unset($params['action']);
+function queryStr($p){
+    $params = $array = Zend_Controller_Front::getInstance()->getRequest()->getQuery();
+    $params['page']=$p;
+    $str='?';
+    foreach($params as $k=>$v){
+        if($v)
+           $str .= $k.'='.$v.'&';
+    }
+    return $str;
+}
+
+?>
+ 
+<ul class="pager">
+<!-- Previous page link -->
+<?php if (isset($this->previous)){ ?>
+<li><a href="<?php echo $this->url ; ?><?php echo LANG_URL2 ?><?php echo $this->url(array_merge($params,array('page' =>  $this->previous))); ?>">
+ <span aria-hidden="true">&laquo;</span><span class="sr-only">Prev</span>
+</a></li>
+<?php } else { ?>
+<li  ><span aria-hidden="true">&laquo;</span><span class="sr-only">Prev</span></li>  
+<?php } ?>
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page){ ?>
+<?php if ($page != $this->current){ ?>
+<li><a href="<?php echo queryStr($page); ?>">
+
+<?php echo $page; ?>
+</a></li>
+<?php } else { ?>
+<li class="current" style="background-color: #df1b23; border-radius: 15px; color: #fff;padding: 11px;"><?php echo $page; ?></li>  
+<?php }}?>
+<!-- Next page link -->
+<?php if (isset($this->next)){ ?>
+<li><a href="<?php echo $this->url ; ?><?php echo LANG_URL2 ?><?php echo $this->url(array_merge($params,array('page' => $page))).queryStr($page) ; ?>">
+<span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span> </li>
+</a>
+<?php } else { ?>
+<li class="disabled"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next </span></li>
+<?php } ?>
+
+</ul>
+</div>
+<?php } ?>

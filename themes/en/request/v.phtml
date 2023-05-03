@@ -1,0 +1,452 @@
+ 
+		
+	 
+    
+  <style type="text/css">
+<!--
+.style1 {color: #828283}
+.style2 {color: #2181c4}
+-->
+
+.complete{
+    display:none;
+}
+
+.more{
+       background: #dc1f26;
+    color: navy;
+    font-size: 16px;
+   
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    float: right;
+    margin-right: 10px;
+}
+
+
+</style>
+
+
+<style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 35px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #124273 ;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #dc1f26;
+}
+</style>
+
+ 
+	<!-- Hero Section
+		================================================== -->
+		<section class="hero small-hero" >
+			<div class="bg-overlay">
+				<div class="container" style="">
+					  
+			  </div>
+			</div>
+		</section>
+
+
+		<!-- Main Section
+		================================================== -->
+        
+        <section class="">
+			<div class="container">
+             <div class="col-sm-12"><h2> Request  <spam style="color:#dc1f26" >  a Quote </spam></h2> </div>
+              
+             
+              <div class="col-sm-12">  
+
+
+
+
+
+								 <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+                                <!-- Field 1 -->
+       <?php  ($this->messageVi)  ?>
+
+                <?php echo '<p style="color:red" >' . $this->messageVi . '</p>' ?>
+                                
+    
+
+                     
+ 
+                                <!-- Field 4 -->
+<div class="col-md-12"  style="padding-left:0px;" >
+<div class="col-md-6" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->leave ?></div>
+<div class="col-md-6" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->package ?> </div>
+</div>
+
+
+<p>Select your departure date and enter the number of nights you wish to stay </p>
+ 
+
+
+                                <!-- Field 4 -->
+<div class="col-md-12"  style="padding-left:0px;" >
+<div class="col-md-3" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->datepicker ?></div>
+<div class="col-md-3" style="padding-left:0px;padding-bottom:12px"  > <?php echo $this->form->night ?> </div>
+</div>
+
+
+
+
+
+ 
+
+
+ <div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5>* NUMBER OF TRAVELERS </h5>
+
+<div class="col-md-3" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->num1 ?></div>
+<div class="col-md-3" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->num2 ?> </div>
+<div class="col-md-3" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->num3 ?> </div>
+<div class="col-md-3" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->num4 ?> </div>
+</div>
+
+
+
+
+
+
+
+ <div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5>* HOW MUCH  </h5>
+<p style="    color: #dc1f26;" >Tell us what your travel budget is, include all the travel components your party is interested in such as accommodations, flights, cruise, car rental, activities/tours and more.
+</p>
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->budget ?></div>
+</div>
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px "  >
+<div class="col-md-2" style="padding-left:0px;padding-bottom:12px "  >
+<p style="color: #124173;"  >YOU BUDGET IS:</p>
+
+<?php echo $this->form->youbudgetis1 ?>  </div>
+
+
+<div class="col-md-3" style="padding-left:0px;padding-bottom:12px;padding-top: 25px; "  >
+<p> </p>
+
+<?php echo $this->form->youbudgetis2 ?></div>
+</div>
+
+ 
+</div>
+
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px "  > 
+<p style="color: #124173;" >* WHEN DESCRIBING THE BUDGET AMOUNT YOU SELECTED ABOVE, YOU: </p>
+<?php echo $this->form->whendescrip1 ?>
+</div>
+ 
+
+ 
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px "  > 
+ 
+<?php echo $this->form->whendescrip2 ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+ <div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5> * WHAT TRAVEL SERVICES  </h5>
+<p style="    color: #dc1f26;" >  Must select at least one service.</p>
+ <p style="margin: 0px;color: #124173;"> FLIGHTS</p>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->flight ?></div>
+
+<div class="col-md-12"  style="padding-left:0px;" > 
+
+
+
+
+
+<div class="col-md-4"  style="padding-left:0px;" > 
+<p style="margin: 0px;color: #124173;margin-top: 50px;margin-bottom: 0px;">HOTELS & LODGING</p> 
+
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->hotel1 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->hotel2 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->hotel3 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->hotel4 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->hotel5 ?></div>
+</div>
+
+
+
+<div class="col-md-4"  style="padding-left:0px;" > 
+<p style="margin: 0px;color: #124173;margin-top: 50px;margin-bottom: 0px;">LOCAL TRANSPORTATION</p> 
+
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->transport1 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->transport2 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->transport3 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->transport4 ?></div>
+</div>
+
+
+
+
+
+
+<div class="col-md-4"  style="padding-left:0px;" > 
+<p style="margin: 0px;color: #124173;margin-top: 50px;margin-bottom: 0px;"> CRUISES & BOATS</p> 
+
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->cruise1 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->cruise2 ?></div>
+ <div class="col-md-12"  style="padding-left:0px;" > <?php echo $this->form->cruise3 ?></div>
+
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+ <div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5>ABOUT MY TRIP  </h5>
+<p style="    color: #dc1f26;" >* WHERE ARE YOU IN THE PLANNING PROCESS?</p>
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->trip1 ?></div>
+<div class="col-md-12" style="padding-left:0px;padding-bottom:12px"  > <?php echo $this->form->trip2 ?>  </div>
+ 
+ 
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px"  >
+<h6 style="padding-top:10px;" >COMMENTS</h6>
+
+<p style="margin: 0px; color: #dc1f26; " >* For best results, include comments about:</p>
+<ul>  <li> Your flight, lodging and budget
+ <li>Specific places you'd like to visit
+ <li>Things you'd like to do
+ <li>Previous travel experience
+ <li>Any trip quotes you've received </li> </ul>
+</div>
+
+<div class="col-md-6" style="padding-left:0px;padding-bottom:12px;margin-top: 30px;"  ><?php echo $this->form->message ?> </div>
+
+</div>
+ 
+
+
+
+
+
+ <div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5>* ABOUT ME </h5>
+
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->occasion ?></div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->lifestyle ?> </div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->activities ?> </div>
+ 
+</div>
+ 
+
+
+
+
+<div class="col-md-12"  style="padding-left:0px;" >
+<hr/>
+<h5>REGISTRATION </h5>
+<div class="col-md-12" style="padding:0px; "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->email ?></div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->email2 ?> </div>
+  </div>
+
+<div class="col-md-12" style="padding:0px; "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->firstname ?></div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->lastname ?> </div>
+ </div>
+
+
+<div class="col-md-12" style="padding:0px; "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->country ?></div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->state ?> </div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  >  </div>
+  </div>
+
+
+<div class="col-md-12" style="padding:0px; "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->phone ?></div>
+<div class="col-md-4" style="padding-right:0px;padding-bottom:12px"  > <?php echo $this->form->zip ?> </div>
+ 
+  </div>
+
+<div class="col-md-12" style="padding:0px; "  >
+<div class="col-md-4" style="padding-left:0px;padding-bottom:12px "  ><?php echo $this->form->captchaField ?></div>
+
+</div>
+<div class="col-md-12" style="padding:0px;margin-bottom:20px;color: #dc1f26; "  >To prevent spam, Please type the letters shown above</div>
+ 
+
+</div>
+  
+ 
+                                <!-- Button -->
+	                        	<input type="hidden" name="action" value="contact_form" />
+                                <button  style="margin-left: 20px;color:#ffffff;background: #172548;" class="col-md-3  btn  " id="SEND" type="submit">Send Request 
+                                <i class="icon-paper-plane"></i></button>
+                            </form>
+					 
+
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+
+
+<?php if (isset($_GET['title'])) : ?>
+<?php $title = $_GET['title'];  ?>
+<script>
+document.getElementById("package").value = '<?php echo $title ; ?>';
+document.getElementById("package").disabled = 'disabled';
+ 
+</script>
+<?php endif; ?>
+
+
+
+
+<?php if (isset($_GET['depart'])) : ?>
+<?php $depart = $_GET['depart'];  ?>
+<script>
+document.getElementById("datepicker").value = '<?php echo $depart ; ?>';
+document.getElementById("datepicker").disabled = 'disabled';
+</script>
+<?php endif; ?>
+
+
+
+
+<?php if (isset($_GET['nights'])) : ?>
+<?php $nights = $_GET['nights'];  ?>
+<script>
+document.getElementById("night").value = '<?php echo $nights ; ?>';
+document.getElementById("night").disabled = 'disabled';
+</script>
+<?php endif; ?>
+
+<script>
+
+
+ 
+ document.getElementById("trip1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("trip2-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("youbudgetis1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("youbudgetis2-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("whendescrip1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("whendescrip2-label").setAttribute("style", "position:absolute;margin-left:20px");
+
+
+
+ document.getElementById("flight-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("cruise1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("cruise2-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("cruise3-label").setAttribute("style", "position:absolute;margin-left:20px");
+
+
+
+ document.getElementById("transport1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("transport2-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("transport3-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("transport4-label").setAttribute("style", "position:absolute;margin-left:20px");
+
+
+ document.getElementById("hotel1-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("hotel2-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("hotel3-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("hotel4-label").setAttribute("style", "position:absolute;margin-left:20px");
+ document.getElementById("hotel5-label").setAttribute("style", "position:absolute;margin-left:20px");
+ 
+ document.getElementById("captchas").setAttribute("style", "margin-top:10px");
+</script>
+
+
+
+
+ </div>
+
+</div></section>
+		<section class="main" style="padding-top:20px;" >
+			<div class="container">
+
+				  
+        <div class="container">
+  
+    <div id="products" class="row list-group">
+                                        
+                          
+                    
+                            
+                        
+       
+                         
+                         
+						 
+					</div>
+				</div>
+			</div>
+		</section>
+
+  
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+ 
+       
+
+ 
+ 
+ 

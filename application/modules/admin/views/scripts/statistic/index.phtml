@@ -1,0 +1,268 @@
+
+<?php
+if(isset($_GET['fromdate'])) {$from=  $_GET['fromdate']; } else { $from=  date('Y-m-01'); } 
+if(isset($_GET['todate'])) {$to=  $_GET['todate']; } else { $to= date('Y-m-d'); } ; 
+?>
+
+ <style>
+table tr td{
+
+padding-left: 4px;
+}
+</style>
+<?php
+
+$this->session = new Zend_Session_Namespace('Default');
+
+$request = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+
+ 
+
+ $auth = Zend_Auth::getInstance();
+ 
+
+        if($auth->hasIdentity())
+
+        {
+$userInfo = Zend_Auth::getInstance()->getStorage()->read();
+ 
+
+}
+
+ 
+?>
+
+
+
+
+	<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container-fluid home">
+
+
+<div class="col-md-12">
+ <a href="<?php echo  $this->baseUrl();?>/admin/statistic" class="" type="submit"   style="boardr:0px; background:#df1b23; color:#fff;float: right;height: 30px;padding: 4px;">  Current Month </a> 
+ <form  action="<?php echo  $this->baseUrl();?>/admin/statistic"  method="get"   >
+From <input required style="width:150px;" name="fromdate" id"fromdate" class="fromdate" />  
+To  <input  required style="width: 150px;" name="todate" id"todate" class="todate" /> 
+ 
+ <input class="btn btn-primary" type="submit" value="Search" style="position: absolute;height: 30px;padding: 4px;"> 
+</form>
+
+<br/>
+ 
+<spam style="color:red"> From </spam><?php echo  date("m-d-Y", strtotime($from)); ?><spam style="color:red; padding-left:50px"> To </spam> <?php echo  date("m-d-Y", strtotime($to)); ?> 
+ 
+ 
+
+  <?php	$allnumb1111= 0 ;		$model = new Model_PlusData();
+                                $model->_name  = 'requestsbrouchure';  
+                                $toppagescountry = $model->selectForArray(array( ), array(  )  );                              
+                                 foreach($toppagescountry as $toppage211): ?> 
+<?php if($toppage211->created_on >= $from && $toppage211->created_on <= $to): ?><?php $allnumb1111 += (integer)$toppage211->ITALY_BROCHURE_QUANTITY2 ?> <?php endif; ?><?php endforeach; ?>
+
+ <?php $allnumb11112= 0 ;		$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array( ), array(  )  );
+								foreach($toppagescountry as $toppage244): ?>
+<?php if($toppage244->created_on >= $from && $toppage244->created_on <= $to): ?><?php $allnumb11112 +=  (integer)$toppage244->MEDITERRANEAN_BROCHURE_QUANTITY2	 ?>  <?php endif; ?><?php endforeach; ?>
+ <?php	$allnumb11113= 0 ;		$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array( ), array(  )  );
+								foreach($toppagescountry as $toppage255): ?>
+<?php if($toppage255->created_on >= $from && $toppage255->created_on <= $to): ?><?php $allnumb11113 += (integer)$toppage255->EGYPT_BROCHURE_QUANTITY2	 ?>  <?php endif; ?><?php endforeach; ?>
+  <?php	$allnumb11114= 0 ;		$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array( ), array(  )  );
+								foreach($toppagescountry as $toppage266): ?>
+<?php if($toppage266->created_on >= $from && $toppage266->created_on <= $to): ?><?php $allnumb11114 +=  (integer)$toppage266->LATIN_AMERICA_BROCHURE_QUANTITY2 ?> <?php endif; ?> <?php endforeach; ?>
+  <?php	$allnumb11115= 0 ;		$model = new Model_PlusData();
+						        $model->_name  = 'requestsbrouchure';						                                       
+						        $toppagescountry = $model->selectForArray(array( ), array(  )  );
+								foreach($toppagescountry as $toppage277): ?>
+<?php if($toppage277->created_on >= $from && $toppage277->created_on <= $to): ?><?php $allnumb11115 += (integer)$toppage277->AFRICA_BROCHURE_QUANTITY2 ?> <?php endif; ?> <?php endforeach; ?>
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-red">
+							<div class="widget-left"><br/>
+								<span class="ti-book" style="color:#a19d9d; font-size: 35px;"  ></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title"  style="color:#000 ;font-size:17px;" >Brochures Order</h4>
+								<h3 class="numeric color-red" style="color:#df1b23;font-size: 40px;" ><?php echo $allnumb1111+$allnumb11112+$allnumb11113+$allnumb11114+$allnumb11115 ?></h3>
+								<p class="inc-dec mb-0"></p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-green">
+							<div class="widget-left"><br/>
+								<span class="ti-map-alt" style="color:#a19d9d;font-size: 35px;" ></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="color:#000;font-size:17px;" >Detination Request</h4>
+								<h3 class="numeric color-green" style="color:#df1b23;font-size: 40px;" >
+<?php	$destintionno = array(); 	$model = new Model_PlusData();
+						        $model->_name  = 'requests';						                                       
+						        $toppagescountry = $model->selectForArray(array(  ), array( )  );
+								foreach($toppagescountry as $toppage2): ?>
+<?php if($toppage2->created_on >= $from && $toppage2->created_on <= $to): ?><?php $destintionno[] = $toppage2->id ?><?php endif; ?> <?php endforeach; ?> <?php echo count($destintionno); ?></h3>
+								<p class="inc-dec mb-0"></p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-yellow">
+							<div class="widget-left"><br/>
+								<span class="ti-flag" style="color:#a19d9d;    font-size: 35px;" ></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="color:#000;font-size:17px;"  >Packages Request</h4>
+								<h3 class="numeric color-yellow" style="color:#df1b23;font-size: 40px;" ><?php	$packageno = array(); 	$model = new Model_PlusData();
+						        $model->_name  = 'requests';						                                       
+						        $toppagescountry = $model->selectForArray(array(  ), array( )  );
+								foreach($toppagescountry as $toppage2): ?>
+<?php if($toppage2->PACKAGE_NAME2 != ''  && $toppage2->created_on >= $from && $toppage2->created_on <= $to): ?> <?php $packageno[] = $toppage2->id ?> <?php endif; endforeach; ?> <?php echo count($packageno); ?></h3>
+								<p class="inc-dec mb-0"></p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Offers/Newsletter Registration</h3>
+							<div id="lineMorris2" class="chart-home"></div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title"> Brochures Orders </h3>
+							<div id="barMorris2d" class="chart-home"></div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+
+
+
+
+
+
+
+
+
+
+	<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-6">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Destinations Requests</h3>
+<table cellspacing="0" cellpadding="0" style="width:100% ;font-size: 14px;" border="1">
+  <col width="57">
+  <col width="331">
+  <col width="67">
+  <tr height="19">
+    <td height="19" width="57" style="text-align:center;font-weight: bold;">#</td>
+    <td width="331" style="text-align:center;font-weight: bold;" >Destination    Name</td>
+    <td width="67" style="text-align:center;font-weight: bold;">Count</td>
+  </tr>
+<?php	$allrequest = array();	$allrequest2= array();		$model = new Model_PlusData();
+						        $model->_name  = 'requests';						                                       
+						        $toppagescountry = $model->selectForArray(array(  ), array( )  );
+								foreach($toppagescountry as $toppage2): ?>
+ 
+<?php if(!in_array($toppage2->DESTINATION2,$allrequest ) && $toppage2->created_on >= $from && $toppage2->created_on <= $to): ?>
+<?php  $allrequest[]= $toppage2->DESTINATION2; ?> <?php endif; ?>
+<?php  $allrequest2[]= $toppage2->DESTINATION2; ?>
+<?php endforeach; ?>
+<?php sort($allrequest); ?>
+<?php $result = array_unique($allrequest); ?>
+ 
+<?php 	foreach($result as $index11=>$items): ?>
+<?php  $i = 0; ;?>
+  <tr height="19">
+    <td height="19" style="text-align:center"  width="57"><?php echo $index11+1; ?></td>
+    <td width="331"><?php echo $items; ?></td>
+    <td width="67" style="text-align:center" ><?php $tmp = array_count_values($allrequest2); echo $tmp[$items]; ?>
+ </td>
+  </tr>
+   <?php endforeach; ?>
+</table>
+<br/><br/>
+						 
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-6">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Packages Requests</h3>
+						 <table cellspacing="0" cellpadding="0" style="width:100% ;font-size: 14px;" border="1">
+ 
+     <col width="67">
+     <col width="365">
+     <col width="67">
+     <tr height="19">
+       <td height="19" style="text-align:center;font-weight: bold;" width="67">#</td>
+       <td width="365" style="text-align:center;font-weight: bold;">Package Name</td>
+       <td width="67" style="text-align:center;font-weight: bold;">Count</td>
+     </tr>
+       
+     <?php  $xx= 'PACKAGE_NAME2';	$allrequestd = array();	$allrequest2d= array();		$model = new Model_PlusData();
+						        $model->_name  = 'requests';						                                       
+						        $toppagescountry = $model->selectForArray(array(  ), array( )  );
+								foreach($toppagescountry as $toppage21):  ?>
+<?php if($toppage21->$xx != ''): ?>
+<?php if(!in_array($toppage21->$xx,$allrequestd ) && $toppage21->created_on >= $from && $toppage21->created_on <= $to): ?>
+<?php  $allrequestd[]= $toppage21->$xx; ?> <?php endif; ?>
+<?php  $allrequest2d[]= $toppage21->$xx; ?>
+
+<?php endif; endforeach; ?>
+
+<?php sort($allrequestd); ?>
+<?php $result = array_unique($allrequestd); ?>
+ 
+<?php 	foreach($result as $index11=>$items): ?>
+<?php  $i = 0; ;?>
+  <tr height="19">
+    <td height="19" style="text-align:center"  width="57"><?php echo $index11+1; ?></td>
+    <td width="331"><?php echo $items; ?></td>
+    <td width="67" style="text-align:center" ><?php $tmpd = array_count_values($allrequest2d); echo $tmpd[$items]; ?>
+ </td>
+  </tr>
+   <?php endforeach; ?>
+
+   </table>
+<br/><br/>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+ 
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script>
+ $(".fromdate").datepicker({ dateFormat: 'yy-mm-dd' });
+ $(".todate").datepicker({ dateFormat: 'yy-mm-dd' });
+ </script>
+
+ 
+
+
+
+<br/><br/><br/><br/>
+

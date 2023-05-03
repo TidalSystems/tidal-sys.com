@@ -1,0 +1,19 @@
+<input type="file" id="<?php  echo $this->ele->getFullyQualifiedName() ?>" name="<?php  echo $this->ele->getFullyQualifiedName() ?>" class="files" />
+
+<div class="form-msg-info-advanced" align="center">Allow Ex:-
+        <?php  echo $this->ele->getAttrib('ext') ?> </div>
+
+<br>
+
+
+
+<?php 
+if($this->ele->getValue())
+{
+echo '<div class="Avb-img">
+
+    <img src="'. $this->view->baseUrl().'/files/thmb/i/'.$this->ele->getValue().'" class="frame" >
+';
+}
+?>
+

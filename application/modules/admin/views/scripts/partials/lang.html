@@ -1,0 +1,31 @@
+﻿<?php
+$this->session = new  Zend_Session_Namespace('Default');
+
+
+$request = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+
+/*
+    build uri
+*/
+
+$uri = strtolower($request);
+$uri = rtrim($uri, '/') . '/';
+
+
+
+$langselect =  $this->session->langCode;
+
+?>
+
+<div class="box" dir=rtl>
+<div class="title" dir="rtl"><h5>اختر لغه </h5> <div class="search">
+<form action="<?= $this->baseUrl() ?>/admin/changelang/do" method="post" name="formchlang">
+<select name="langCode" onChange="Javascript:document.formchlang.submit();" >
+<option value="ar" <?php if($langselect == 'ar') { echo 'selected="selected"'; } ?> >اللغه العربيه</option>
+<option value="en" <?php if($langselect == 'en') { echo 'selected="selected"'; } ?> >اللغه الانجليزيه</option>
+</select>
+    <input type="hidden" name="lasturl" value="<?php echo $this->baseUrl().$uri  ; ?>" >
+<input type="submit" name="fghjk" value="تغير" />
+</form>
+</div>
+</div>

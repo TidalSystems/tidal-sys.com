@@ -1,0 +1,210 @@
+<?php foreach($this->Item as $value) : ?> 
+
+ 
+    <!--Page Title-->
+    <section class="page-title" style="background-image:url(<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->headetimg; ?>);">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1> </h1>
+              
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+ 
+
+
+ 
+<section class="about-us style-two"  style="padding: 40px 0 20px;" >
+        <div class="auto-container">
+            <div class="row">
+                <!-- Info Column -->
+                <div     <?php if($value->thumb != ''): ?> <div class="video-column col-xl-6 col-lg-6 col-md-6 col-sm-12"><?php else: ?>class="info-column col-xl-12 col-lg-12 col-md-12 col-sm-12" <?php endif; ?>>
+                    <div class="inner-column">
+                        <div class="sec-title">
+                   
+                            <h2 style="color:#164891" ><?php echo $value->title; ?></h2>
+<?php if($value->id =='4' ): ?>
+
+ <div class="info-column col-xl-12 col-lg-12 col-md-12 col-sm-12" style="position: absolute;
+    top: 0px;float: left; text-align: right;">
+    	 <?php $allt = array(); $model = new Model_PlusData();    $model->_name  = 'moretestimonial'; $where = array();
+						        $mhoem = $model->selectForArray($where,  array('displayorder' => 'ASC')   );
+								foreach($mhoem as $mtestimonail):	?><?php  $allt[] = $mtestimonail->id; ?>   <?php endforeach; ?>
+    	<?php if(!empty($allt )): ?>
+<spam style="font-size:19px;font-weight: bold;">More Testimonials:</spam> 
+ <?php $model = new Model_PlusData();    $model->_name  = 'moretestimonial';     $where = array();
+						        $mhoemw = $model->selectForArray($where,  array('displayorder' => 'ASC')   );
+								foreach($mhoemw as $mtestimonailw):	?>
+ <a  target="_blank"  style="color:#164891"  href="<?php echo $mtestimonailw->url ?>" targrt="_blank" > 
+<img  style="padding:4px;" src="<?php echo  APP_BASEURL.'/MyUpload/'.$mtestimonailw->image ?>" alt="<?php echo $mtestimonailw->name ?>"  title="<?php echo $mtestimonailw->name ?>"   /> <?php echo $mtestimonailw->webtext; ?></a>
+<?php endforeach; ?>
+<?php endif; ?>		
+
+    	 
+</div>
+<?php endif; ?>
+                        </div>
+
+                        <div class="text"><?php echo $value->Summary; ?>  </div>
+
+                        
+                    </div>
+                </div>
+
+                <!-- Video Column -->
+<?php if($value->thumb != ''): ?>
+<div class="video-column col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="inner-column">
+                        <div class="video-box">
+                            <figure class="image"><img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$value->thumb; ?>" ></figure>
+                        </div>
+                    </div>
+                </div>
+<?php endif; ?>
+                
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+<?php if($value->id =='2' ): ?> 
+    <!-- Agents Section -->
+    <div class="agents-section">
+        <div class="auto-container">
+            <div class="sec-title">
+
+                <h2>OUR SERVICES</h2>
+            </div> <div class="agents-carousel owl-carousel owl-theme">
+ <?php $model = new Model_PlusData(); $model->_name  = 'pages';						                                       
+ $toppages2xx = $model->selectForArray(array('level' => 2 ), array('displayorder' => 'ASC')  );
+ foreach($toppages2xx as $toppage2):  	?>      
+					
+           <?php if($toppage2->thumb != ''): ?>
+                <!-- Agent Block -->
+                <div class="agent-block">
+                    <div class="inner-box">
+                        <div class="image-box">
+  <figure class="image">
+<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?''.trim($toppage2->pagurl):'page/v/i/'.$toppage2->id) ?>">
+<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$toppage2->thumb; ?>" ></a></figure>
+                           
+                        </div>
+                        <div class="info-box">
+                            <h4 class="name"><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?''.trim($toppage2->pagurl):'page/v/i/'.$toppage2->id) ?>"><?php echo $toppage2->title ?></a></h4>
+                       
+                        </div>
+                    </div>
+                </div>
+ 
+
+<?php endif; endforeach; ?>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- End Agents Section -->
+
+
+<?php endif; ?>
+
+
+
+<?php if($value->id =='3' ): ?> 
+
+
+  <!--Popular Places Section-->
+    <section class="news-section" style="    padding: 0px 0 80px;" >
+    <div class="auto-container">
+        <div class="row">
+         
+<?php $model = new Model_PlusData();    $model->_name  = 'Articel';   
+						        $hoem = $model->selectForArray( array(), array('displayorder' => 'ASC')  );
+								foreach($hoem as $gallery):	?> 
+
+        	<!-- Popular item two -->
+        	<div class="news-block col-lg-4 col-md-6 col-sm-12">
+        		<div class="inner-box">
+        			<div class="image-box">
+        				<figure class="image">
+<?php $id4= $gallery->id ; ?>
+<?php 
+          $images = explode('||',trim($gallery->Img4,'|'));
+             ?>
+ 
+<img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$images[0]; ?>" > </figure>
+        				<div class="overlay-box">
+                    <h4 class="category"><a href="<?php echo LANG_URL ?><?php echo (trim($gallery->pagurl)?'gallery/'.trim($gallery->pagurl):'gallery/v/i/'.$gallery->id) ?>"><?php echo $gallery->title; ?></a></h4>
+
+                            <div class="view-all"><a href="<?php echo LANG_URL ?><?php echo (trim($gallery->pagurl)?'gallery/'.trim($gallery->pagurl):'gallery/v/i/'.$gallery->id) ?>">More...</a></div>
+
+                        </div>
+        			</div>
+        		 
+        		</div>
+        	</div>
+
+        	<!-- Popular item two -->
+         <?php endforeach; ?>
+
+        </div>
+    </section>
+    <!--Portfolio Section-->
+
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if($value->id =='4' ): ?>
+
+
+<section class="about-us style-two">
+        <div class="auto-container">
+            <div class="row">
+                
+
+<?php $model = new Model_PlusData();    $model->_name  = 'testmonial';     $where = array();
+						        $hoem = $model->selectForArray($where, array( )  );
+								foreach($hoem as $testimonail):	?> 
+
+                <div class="info-column col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="sec-title" style="    margin-bottom: 30px;">
+                            <span class="title"><?php  echo $testimonail->signature ?></span>
+         <h5 style="color:#164891;" ><?php  echo $testimonail->title ?></h5>
+ 
+                        </div>
+
+                        <div class="text" style="    margin-bottom: 60px;padding:0px 20px 20px 20px;"> <?php  echo $testimonail->data ?> </div>
+
+                        
+                    </div>
+                </div>
+
+                <?php endforeach; ?>
+                
+            </div>
+        </div>
+    </section>
+
+<?php endif; ?>
+
+ <?php endforeach; ?>
+
+     
+
+ 

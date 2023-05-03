@@ -1,0 +1,75 @@
+<?php foreach($this->Item as $value) : ?> 
+
+ 
+    <!--Page Title-->
+    <section class="page-title" style="padding: 125px 0px 45px 0px;">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1><br/> <?php echo $value->title; ?></h1>
+              
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+ 
+ 
+<section class="about-us style-two">
+        <div class="auto-container">
+            <div class="row">
+                <!-- Info Column -->
+                <div class="info-column col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+                    <div class="inner-column">
+                       <div class="text"><?php echo $value->data; ?>  </div>                        
+                    </div>
+                </div>
+
+ 
+                
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+  <!-- News Section -->
+    <section class="news-section" style="padding: 50px 0 80px;">
+        <div class="auto-container">
+ 
+            <div class="row">
+                <!-- News Block -->
+              <div class="news-block col-lg-2 col-md-2 col-sm-12"></div>
+                <div class="news-block col-lg-8 col-md-8 col-sm-12">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <div class="single-item-carousel owl-carousel owl-theme">
+<?php 
+          $images = explode('||',trim($value->Img4,'|'));
+            foreach($images as $index=>$photox): if(!trim($photox) ) continue;?>
+ <figure class="image"> <img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$photox; ?>" > <p><br/> </p></figure>
+                          <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="lower-content">
+                            
+                        </div>
+                    </div>
+                </div>
+
+              
+ 
+ 
+ 
+ 
+            </div>
+        </div>
+    </section>
+    <!--End News Section -->
+ <?php endforeach; ?>
+
+     
+
+ 

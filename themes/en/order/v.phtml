@@ -1,0 +1,170 @@
+ <?php $total = 0; $order = ''; ?> 
+
+
+<?php  if (isset($_SESSION["products"])):   ?> 
+<?php $query_string = '?'.$_SERVER['QUERY_STRING'];
+ 
+ 
+//remove item from shopping cart
+if (isset($_GET["removepH"]) && isset($_GET["return_urlH"]) && isset($_SESSION["products"])) {
+    $productid = $_GET["removepH"]; //get the product code to remove
+    $return_urlH = base64_decode($_GET["return_urlH"]); //get return url
+
+    foreach ($_SESSION["products"] as $cart_itm) { //loop through session array var
+        if ($cart_itm["productid"] != $productid) { //item does,t exist in the list
+            $product[] = array('productid' => $cart_itm["productid"]  ,'restaurantid' => $cart_itm["restaurantid"] , 'qty' => $cart_itm["qty"]   );
+        }
+
+        //create a new product list for cart
+        $_SESSION["products"] = $product;
+    $referer = $_SERVER['HTTP_REFERER'];
+  $retunURL2= 'http://ebbandtideclients.com/AirForceHome/restaurant/'.$_GET['return'];  
+echo  $retunURL2;
+
+ if($this->pagename == 'result'){
+
+    header("Location:$retunURL2");
+}else{
+
+  header("Location:$referer");
+}
+
+    }
+
+    //redirect back to original page
+
+
+}
+    
+?>
+
+
+
+ <!--  gallery -->
+	  <div id="work-gallery" class="work-gallery-main-block" style="background:#fff;margin-top:0px;" >
+    
+      <div class="container">
+        <div class="section text-rights"> 
+ 
+<div class="col-md-12" style="text-align: right;"> 
+ 
+<h3 style="text-align:center; margin-bottom: 30;width:100$" >عر ض الطلب  </h3>
+
+
+  <?php  foreach ($_SESSION["products"] as $indexz=>$cart_itm): ?> 
+
+                    <div class="col-md-12" style="direction: rtl;float: right;background: #f1f1f1;padding:5px; border:5px solid #fff;"> 
+ 
+ <div class="access"><a class="btn-remove1"  href="?removepH=<?php echo $cart_itm["productid"]; ?>&return_urlH=1" ><i class="fa fa-window-close" style="float:right; padding-left:10px; font-size:18px;color:red"></i></a></div>
+
+                              <!--access--> 
+ <spam class="col-md-2" style="float:right;  color:red;font-size:17px;" > عدد <?php  echo $cart_itm["qty"]; ?></spam> 
+      <spam class="col-md-5" style="float: right;margin-left: 0px;"><?php $model = new Model_PlusData();$model->_name  = 'Menu';
+		           $toppages = $model->selectForArray(array('id' => $cart_itm["productid"] ), array('displayorder' => 'ASC') , 1 ); 
+    foreach ($toppages  as  $menu ): ?> <?php  $total +=$menu->Price;  echo $menu->Name; ?> <spam style="font-size: 15px;" > (<?php  echo $menu->Price; ?> جنيه)</spam><?php endforeach; ?> 
+
+ </spam>
+ 
+    <spam class="col-md-3" style="float:right; margin-top:0px;margin-left:0px;"><?php $model = new Model_PlusData();$model->_name  = 'Restaurants';
+		           $Restaurants = $model->selectForArray(array('id' => $cart_itm["restaurantid"] ), array( ) , 1 ); 
+    foreach ($Restaurants  as  $rest ): ?> <spam style="font-size: 15px;" >المطعم (<?php   echo $rest->Name; ?>) </spam><?php endforeach; ?> 
+
+ </spam>
+                                
+       <?php $order .=$cart_itm["qty"].',,'.$menu->id.',,'.$menu->Price.',,'.$rest->id.'||' ; ?>                      </div>
+                        
+              <?php endforeach;  ?>           
+                       
+                
+                   
+                </div>
+                <!--mini-cart-->
+<?php endif; ?>  
+
+ <?php if($total != 0 ): ?>
+<div class="col-md-12" style="text-align: right;width: 100%; float: left;">
+
+<div class="col-sm-12" style="padding:20px">
+ <div class="col-sm-3"></div>
+ <div class="col-sm-4" style="padding: 0px;" ><spam style="padding-left: 20px; color: #a5a5a5;font-size:20px;"> من اعضاء الدار (خصم  50%)</spam> <input onclick="document.getElementById('chgPrice').innerHTML = this.value;document.getElementById('total').value = this.value;document.getElementById('status').value = 'member'; " type="radio" name="ratestype" id="ratestype" value="<?php echo $total/2; ?>"> </div>
+ <div class="col-sm-2" style="padding: 0px;" ><spam style="padding-left: 20px; color: #a5a5a5;font-size:20px;"> من غير الاعضاء  </spam> <input checked onclick=" document.getElementById('chgPrice').innerHTML = this.value;document.getElementById('total').value = this.value;document.getElementById('status').value = 'nomember';" value="<?php echo $total; ?>" id="Address" type="radio" name="ratestype"> </div>
+
+
+</div>
+
+</div>
+<div class="col-md-12" style="text-align: right;width: 100%; float: left;">
+<br/>
+<h3 style="text-align:center; margin-bottom: 30;" >اجمالى السعر  <spam id="chgPrice" style="font-family:arial; background: #cea937;color: #fff;padding: 0px 10px 0px 10px;" > <?php echo $total; ?> </spam><spam  style="font-family:arial; background: #cea937;color: #fff;padding: 0px 0px 0px 10px;" > جنيه </spam></h3> 
+</div>
+
+
+
+<div class="col-md-12" style="text-align: right;width: 100%; float: left;">
+<h5 style="text-align:center; margin-bottom: 30;" > لاستكمال الطلب يرجى ملاء البيانات  الاتيه </h3>
+<form style="direction: ltr;" role="form" id="request" name="form2" method="post" action="" class="contact-form" enctype="multipart/form-data">
+				                <div class="static-contain" style="padding-top:0px;" >
+ <?php  ($this->messageVi)  ?>
+              <?php if($this->messageVi != '' ): ?>   <?php echo '<h4  style="text-align: center;padding-bottom:20px;color:#760b0c;">' . $this->messageVi . '</h4>' ?>  <?php endif; ?>
+
+
+<div class="col-md-6" style="margin-bottom:20px;" ><input style="text-align: right;" required type="text" class="form-control" name="phone" id="phone" placeholder="رقم الموبيل ">  </div>
+<div class="col-md-6" style="margin-bottom:20px;" ><input style="text-align: right;" required type="text" class="form-control" name="name" id="name" placeholder="الاسم بالكامل ">  </div>
+
+<input type="hidden"  name="created_on" id="created_on" value="<?php echo date('yy-m-d'); ?>" >
+
+<input type="hidden"  name="total" id="total" value="<?php echo $total; ?>" >
+<input type="hidden"  name="status" id="status" value="nomember" >
+<input type="hidden"  name="order1010" id="order1010" value="<?php echo $order; ?>" >
+<input type="hidden"  name="ordernumber" id="ordernumber" value="<?php echo rand(15,35022);; ?>" >
+<input type="hidden"  name="time" id="time" value="<?php echo date('h:i:s'); ?>" >
+<div class="col-md-12" style="margin:30px;text-align: center;" >
+<button style="color:#fff;background: #191f3f;border:0px;padding: 10px;" id="saverequest" name="saverequest" type="submit" title="Submit" class="button submit"><span><span>ارسال الطلب </span></span></button>
+</div>
+
+</form>
+
+
+</div>
+
+
+<?php else: ?>
+<div class="col-md-12" style="background:#fff;text-align: right;width: 100%; float: left;">
+<br/>
+<h3 style="text-align:center; margin-bottom: 30;" >
+<i style="font-size:40px;" class="fa fa-shopping-basket" aria-hidden="true"></i>
+
+<h5 style="text-align: center;" >سله المشتريات فارغه </h5>
+
+ 
+
+<br/<br/<br/</h3> 
+</div></div>
+ 
+<?php endif; ?>
+
+
+
+</div></div></div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	             
+  

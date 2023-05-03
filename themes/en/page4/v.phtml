@@ -1,0 +1,1959 @@
+ 
+	
+	
+	
+		
+	 
+   
+<?php foreach($this->Page as $value) : ?> 
+
+<?php  $xxid = $value->id  ?> 
+
+  
+
+ 
+
+  
+
+ 
+
+
+
+	<section class="hero small-hero" style="background-image:url(<?php echo APP_BASEURL.'/MyUpload/'.  $value->table_image ?>);">
+
+			<div class="bg-overlay">
+
+				<div class="container" style="    max-height: 330px;">
+
+					<div class="intro-wrap">
+
+					 
+
+						<div class="intro-text">
+
+							<div class="taxonomy-description">
+
+								<p> </p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+			  </div>
+
+			</div>
+
+		</section>
+
+
+
+
+
+ 
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+ 
+
+        <section class="">
+
+			<div class="container">
+
+             <div class="col-sm-12" style="padding:0px;" >
+
+<h3> 
+
+ 
+
+<?php if($value->pageid != '0' ): ?> 
+
+
+ <spam style="color:#f9b017" >  <?php echo $value->title ; ?> </spam>  
+
+
+
+<?php elseif($value->pageid == '0' ): ?> 
+
+
+
+<spam style="color:#f9b017" >  
+
+<?php 
+
+$myvalue =  $value->title ;
+
+$arr = explode(' ',trim($myvalue));
+
+$w1 =  $arr[0];  
+
+ 
+
+$rest = strstr($myvalue, ' ');
+
+
+
+
+
+?> 
+
+<spam style="color:#124173" >  <?php echo $w1 ; ?> </spam> <spam style="color:#f9b017" >  <?php echo $rest  ; ?> </spam>
+
+ <?php endif; ?>
+
+ </spam>
+
+
+
+
+
+ </h3> </div>
+
+              
+
+             
+
+              <div class="col-sm-12">   
+
+
+ 
+  
+
+ 
+
+<?php if($value->pageid == '0' ): ?> 
+
+  
+
+
+
+
+
+
+
+<?php elseif($value->pageid != 0 ): ?> 
+
+
+
+  <?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'pages';						                                       
+
+						        $toppages = $model->selectForArray(array('pageid' => $value->pageid ), array('displayorder' => 'ASC')  );
+
+								foreach($toppages as $toppage33):
+
+								   
+
+							?>
+
+ 
+
+
+
+							<li> <a  <?php if($toppage33->id == $xxid ): ?> <?php echo  "style=color:#f9b017 " ?> <?php endif; ?>  href="<?php echo LANG_URL ?><?php echo (trim($toppage33->pagurl)?'mainlyeurope/'.trim($toppage33->pagurl):'page/v/i/'.$toppage33->id) ?>"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+
+  <?php echo $toppage33->title ?>   </a></li>
+
+                             
+
+                             <?php  endforeach; ?>
+
+								 
+
+ <?php  endif; ?>
+
+								 
+
+								</ul>
+
+							</div>
+
+<div <?php if($value->pageid == '0' ): ?> <?php echo 'class="col-md-12" style="padding-left:0px;" ' ?> <?php elseif($value->pageid != '0' ): ?> <?php echo 'class="col-md-9" ' ?>  <?php endif; ?>>
+
+<?php echo $value->decription; ?>  <br/>
+
+<?php 	if($value->type2 == 'before'  ):  ?>
+
+ 
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+   
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+
+ 
+
+   <div class="col-sm-2">  </div>
+
+   <div class="col-sm-8">  
+
+ <div class="form-group">
+
+  <label for="selectbox">Select Country:</label>
+
+  <select class="form-control" id="selectbox">
+
+
+
+<?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'region';						                                       
+
+						        $toppages = $model->selectForArray(array( ), array('displayorder' => 'ASC')  );
+
+								foreach($toppages as $toppage):
+
+								   
+
+							?>
+
+
+
+  
+
+
+
+
+
+<optgroup label="<?php echo $toppage->title; ?> " style="padding-left: 20px;">
+
+<?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'country';						                                       
+
+						        $toppagesxx = $model->selectForArray(array(regionid => $toppage->id ), array('displayorder' => 'ASC')  );
+
+								foreach($toppagesxx as $toppagexx):
+
+								   
+
+							?>
+
+
+
+            <option value="#travel<?php echo $toppagexx->id; ?>"> <?php echo $toppagexx->data; ?> </option>
+
+    
+
+     <?php endforeach; ?>
+
+ 
+
+        </optgroup>
+
+<?php endforeach; ?>
+
+
+
+
+
+    
+
+  </select>
+
+</div>
+
+
+
+
+
+<?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'country';						                                       
+
+						        $toppagesxxz = $model->selectForArray(array(  ), array('displayorder' => 'ASC')  );
+
+								foreach($toppagesxxz as $toppagexxz):
+
+								   
+
+							?>
+
+
+
+<div class="modal fade" id="travel<?php echo $toppagexxz->id; ?>" data-target="#travel<?php echo $toppagexxz->id; ?>">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header orange">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+
+
+                </button>
+
+                 <h4 class="modal-title"><strong></strong><spam style="color:#124173"> Know before you go  </spam>  <spam style="color:#9a9a9a">    &gt;&gt;  </spam> 
+
+  <spam style="color:#f9b017"> <?php echo $toppagexxz->data; ?>  </spam>  </h4>
+
+ 
+
+                  
+
+<?php echo $toppagexxz->shortdata; ?>
+
+<?php echo $toppagexxz->longdata; ?>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+  <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+ </div>
+
+ <div class="col-sm-2" style="    height: 120px;">  </div>
+
+ 
+
+  
+
+
+
+<?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'country';						                                       
+
+						        $toppagesxxzw = $model->selectForArray(array(  ), array('displayorder' => 'ASC')  );
+
+								foreach($toppagesxxzw as $toppagesxxzw11):
+
+								   
+
+							?>
+
+
+
+ <script language="javascript">
+
+ $("#selectbox").change(function () {
+
+    if ($(this).val() == "#travel<?php echo $toppagesxxzw11->id; ?>") {
+
+        $('#travel<?php echo $toppagesxxzw11->id; ?>').modal('show');
+
+      }
+
+     
+
+ });
+
+ </script>
+
+ 
+
+<?php endforeach; ?>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+<?php endif; ?>
+
+<?php echo $value->decription2; ?>  
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+<?php 	if($value->type2 == 'register'  ){
+ $xxxx =  $this->siteData['contactmessage']  ; 
+ 
+if(isset($_POST["submit"])) {
+    require_once('iContactProApi.php');
+
+// Store the singleton
+    $oiCP = iContactProApi::getInstance();
+
+// Give the API your information
+    $oiCP->setConfig(array(
+        'appId' => 'b41c9894-c27e-4a2c-9ef3-8d9f8112acbf',
+        'apiPassword' => 'ebb1234',
+        'apiUsername' => 'info@travelmediapublications.com',
+        'companyId' => 3496967,
+        'profileId' => 20886
+    ));
+
+// Try to make the call(s)
+    try {
+
+        $x = $oiCP->addContact($_POST["email"], null, null,$_POST["name"] ,$_POST["lastname"], null,$_POST["address"], '',$_POST["city"],$_POST["state"],$_POST["zip"],$_POST["phone"], '', null);
+        $oiCP->subscribeContactToList($x->contactId, 2, 'normal');
+		header("Location: /mainlyeurope/Register?message=$xxxx");
+		exit();
+
+    } catch (Exception $oException) { // Catch any exceptions
+        // Dump errors
+        var_dump($oiCP->getErrors());
+        // Grab the last raw request dat
+        var_dump($oiCP->getLastRequest());
+        // Grab the last raw response data
+        var_dump($oiCP->getLastResponse());
+    }
+}
+ ?>
+
+<script>
+function validateForm1111() {
+    var x = document.forms["myForm"]["name"].value;
+    if (x == "") {
+        alert("The First Name  is required and cannot be empty");
+        return false;
+    }
+
+
+   var x2 = document.forms["myForm"]["lastname"].value;
+    if (x2 == "") {
+        alert("The Last Name is required and cannot be empty");
+        return false;
+    }
+
+
+
+   var x3 = document.forms["myForm"]["email"].value;
+    if (x3 == "") {
+        alert("The Email is required and cannot be empty");
+        return false;
+    }
+
+
+}
+</script>
+
+
+ <form  method="post" onsubmit="return validateForm()" >
+ <div class="col-md-12"><h3 style="color:#F00;     padding-bottom: 12px;"><?=(isset($_GET["message"]) ? $_GET["message"] : "")?></h3></div>
+ <div class="col-md-12">
+         <div class="col-md-1" style="padding:0px;text-align: right;" >First Name <spam style="color:red" >*</spam></div>
+         <div class="col-md-5" style="margin-bottom: 20px;" >   <input class="form-control"   dir="ltr"   name="name"  required  /></div>
+         <div class="col-md-1" style="padding:0px;text-align: right;" >Last Name <spam style="color:red" >*</spam> </div>
+         <div class="col-md-5" style="margin-bottom: 20px;" >   <input class="form-control"   dir="ltr"   name="lastname"  required  /></div>
+         
+</div>
+
+
+
+   <div class="col-md-12">
+        <div class="col-md-1" style="text-align: right;padding:0px;"  >Email <spam style="color:red" >*</spam></div>
+        <div class="col-md-5" style="margin-bottom: 20px;" >   <input class="form-control"    dir="ltr"   name="email"   value="<?=(isset($_GET['email'])?$_GET['email']: "")?>"  required /></div>
+    </div>
+
+      
+
+
+  <div class="col-md-12">
+        <div class="col-md-1" style="text-align: right;padding:0px;">Address</div>
+        <div class="col-md-5" style="margin-bottom: 20px;" >   <input class="form-control"    dir="ltr"   name="address"    /></div>
+    </div>
+
+
+
+<div class="col-md-12">
+         <div class="col-md-1" style="padding:0px;text-align: right;" >City</div>
+         <div class="col-md-3" style="margin-bottom: 20px;" >   <input class="form-control"   dir="ltr"   name="city"    /></div>
+         <div class="col-md-1" style="padding:0px;text-align: right;" >State</div>
+         <div class="col-md-3" style="margin-bottom: 20px;" >   <input class="form-control"   dir="ltr"   name="state"    /></div>
+         <div class="col-md-1" style="padding:0px;text-align: right;" >Zip</div>
+         <div class="col-md-3" style="margin-bottom: 20px;" >   <input class="form-control"   dir="ltr"   name="zip"    /></div>
+         
+</div>
+
+
+     <div class="col-md-12">
+         <div class="col-md-1" style="text-align: right;padding:0px;" >Phone</div>
+         <div class="col-md-6" style="margin-bottom: 20px;"  >   <input class="form-control"    dir="ltr"   name="phone"    /></div>
+     </div> 
+
+     <div class="col-md-12">
+         <div class="col-md-1"> </div>
+         <div class="col-md-6"><input type="submit" name="submit" value="Register" class="btn" style="background:#FF0000"> </div>
+
+
+     </div>
+</form>
+
+<?php } ?>
+
+
+
+
+
+
+
+<?php 	if($value->type2 == 'group'  ):  ?>
+
+<div class="col-sm-12" style="text-align:center" > 
+
+<a class="btn btn-primary " style="  color:#fff" href="<?php echo LANG_URL ?>requestgroup"> REQUEST A GROUP QUOTE NOW
+
+
+
+
+
+								 
+
+								</a> </div>
+
+
+
+<?php endif; ?>
+
+ 
+
+<?php 	if($value->type2 == 'testimonials'  ):  ?>
+
+
+
+ 
+
+ <a href="<?php echo LANG_URL ?>testimonials" > <button style="float:right;background: #124173;color: #fff; line-height: 20px;width: 130px;  margin-right: 50px;;" class="btn btn-default">Add Comment </button> </a> 
+
+ 
+
+ 
+
+<?php
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'testmonial';
+
+						        $where = array();
+
+						        $toppages = $model->selectForArray(array('type' => 'approved' ), array('displayorder' => 'ASC') );
+
+						
+
+								foreach($toppages as $index =>$toppage):
+
+								
+
+							?>
+
+		  
+
+ 
+
+
+
+ 
+
+				<div class="col-sm-12  ">
+
+<header class="page-header" style="margin-top: 0px;">
+
+<h6 style="color: #f9b017;text-align: left;padding-right: 20px;"><?php echo $toppage->datepicker; ?> </h6>
+
+ <h3 class="comments-title" style=" margin-top: 0px;"><?php echo $toppage->title; ?> </h3> </header>
+
+					 
+
+					<article class="pagehentry">
+
+						<div class="entry-summary" style="border-bottom: 1px solid #e9eaeb;">
+
+<?php echo $toppage->data; ?> 
+
+<h6 style="text-align: right;padding-right: 20px;font-style: italic;color: #172548;" > <?php echo $toppage->signature; ?></h6>
+
+
+
+			</div>	</article>	 </div> 
+
+
+
+
+
+                      <?php  endforeach;  ?>     
+
+
+
+
+
+<?php  endif;  ?>  
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+ 
+
+<?php 	if($value->type2 == 'press'  ):  ?>
+
+
+
+ 
+
+<?php
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'press';
+
+						        $where = array();
+
+						        $toppages = $model->selectForArray(array(  ), array('displayorder' => 'ASC') );
+
+						
+
+								foreach($toppages as $index =>$toppage):
+
+								
+
+							?>
+
+		  
+
+ 
+
+
+
+ 
+
+				<div class="col-sm-12  " style="border: 1px solid rgba(149, 151, 156, 0.18);margin-bottom: 30px;">
+
+<header class="" style="margin-top: 0px;">
+
+<br/>
+
+ <h3 class="comments-title" style=" margin-top: 0px;"><?php echo $toppage->title; ?> </h3> </header>
+
+ <?php if(trim($toppage->datepicker)): ?>
+
+<div class="col-sm-4" style="padding-left:0px;color: #f9b017;"  ><i style="color: #114073;"class="fa fa-calendar" aria-hidden="true"></i> <?php echo  $toppage->datepicker; ?> </div>
+
+ <?php endif; ?>
+
+ <?php if(trim($toppage->source)): ?>
+
+<div class="col-sm-8" style="padding-left:0px;color: #f9b017;"  > <i style="color: #114073;"class="fa fa-hand-o-right" aria-hidden="true"></i>  <?php echo 'By: '.$toppage->source; ?> </div>  
+
+	 <?php endif; ?>				 
+
+					 
+
+
+
+<div class="col-sm-12" style="padding-top:10px;" >  <?php echo $toppage->data; ?> </div>
+
+<h6 style="text-align: right;padding-right: 20px;font-style: italic;color: #172548;" >
+
+ <?php if(trim($toppage->url)): ?>
+
+ <a target="_blank" href="<?php echo $toppage->url; ?>" >  <button style="float:right;background: #124173;color: #fff; line-height: 20px;width: 180px;     margin-bottom: 20px;;" class="btn btn-default">Read more ...</button> </a> 
+
+<?php endif; ?>
+
+</h6>
+
+
+
+		  </div> 
+
+
+
+
+
+                      <?php  endforeach;  ?>     
+
+
+
+
+
+<?php  endif;  ?>  
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+
+
+</div>
+
+
+
+ </div>
+
+
+
+</div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+ <?php 	if($value->type2 == 'packagetype'  ):  ?>
+
+
+
+
+
+ <section class="main" style="padding-top:20px;" >
+
+			<div class="container">
+
+
+
+				  
+
+        <div class="container">
+
+    <div class="griddx  well well-sm">
+
+        
+
+        <div class="griddx btn-group" >
+
+            <a href="#"  style="    background: #f9b017;" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+
+            </span> </a> <a style="background: #114172;" href="#" id="grid" class="btn btn-default btn-sm"><span
+
+                class="glyphicon glyphicon-th"></span> </a>
+
+        </div>
+
+    </div>
+
+    <div id="products" class="row list-group">
+
+
+
+
+
+  <?php
+
+$tempww7788 = array();
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'items';						                                       
+
+						        $toppages2 = $model->selectForArray(array('inactive' => '0'), array('displayorder' => 'ASC')  );
+
+								foreach($toppages2 as $toppage2): 
+
+									   
+
+							?>  
+
+ <?php 
+
+          $images = explode('||',trim($toppage2->packagetype,'|'));
+
+            
+
+ ?>
+
+<?php  $tempww7788 []= $images[0]; ?>
+
+ 
+
+ 
+
+ <?php endforeach; ?>
+
+
+
+
+
+
+
+                                        <?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'packagetype';						                                       
+
+						        $toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')  );
+
+								foreach($toppages2 as $toppage2):
+
+									   
+
+							?>  
+
+
+
+    <?php if(in_array($toppage2->id, $tempww7788 )): ?> 
+
+          <div class="item col-sm-4">
+
+                                             
+
+							<article class="place-box card">
+
+					 
+
+	
+
+	
+
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'explore/'.trim($toppage2->pagurl):'explore/v/i/'.$toppage2->id) ?>" class="">
+
+									 
+
+									<div class="entry-thumbnail"> 
+
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+
+
+ 				
+
+ 
+
+ </div>
+
+							  </a>
+
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+
+                              <h3><a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'explore/'.trim($toppage2->pagurl):'explore/v/i/'.$toppage2->id) ?>" ><?php echo $toppage2->title; ?> </a> </h3>
+
+                              <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">  
+
+<?php echo $toppage2->title2; ?> 
+
+ 
+
+  </div>
+
+
+
+            
+
+<div style="text-align:right; float:right;  "> 
+
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'explore/'.trim($toppage2->pagurl):'explore/v/i/'.$toppage2->id) ?>" > Packages >>   </a> </div>
+
+<div style="text-align:left; color:#28272F;    height: 27px; ">  
+
+   </div>
+
+</div>
+
+							</article>
+
+                           
+
+						</div>
+
+                         <?php endif; ?>
+
+                        
+
+                        <?php endforeach; ?>
+
+                          
+
+                    
+
+                            
+
+                        
+
+       
+
+                         
+
+                         
+
+						 
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+
+
+
+<?php endif; ?>
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+ <?php 	if($value->type2 == 'offer'  ):  ?>
+
+
+
+
+
+ <section class="main" style="padding-top:20px;" >
+
+			<div class="container">
+
+
+
+				  
+
+        <div class="container">
+
+    <div class="griddx  well well-sm">
+
+        
+
+     
+
+    </div>
+
+    <div id="products" class="row grid-group">
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+                                        <?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'coupon';						                                       
+
+						        $toppages2 = $model->selectForArray(array( ), array('displayorder' => 'ASC')  );
+
+								foreach($toppages2 as $toppage2):
+
+									   
+
+							?>  
+
+
+
+  
+
+          <div class="item col-sm-4 grid-group-item list-group-item">
+
+                                             
+
+							<article class="place-box card">
+
+					 
+
+	
+
+	
+
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'deals/'.trim($toppage2->pagurl):'deals/v/i/'.$toppage2->id) ?>" class="">
+
+									 
+
+									<div class="entry-thumbnail"> 
+
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+
+
+ 				
+
+ 
+
+ </div>
+
+							  </a>
+
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+
+                              <h3  ><spam style="color: #f9b017;" ><?php echo $toppage2->title; ?></spam>   </h3>
+
+                              <div style="border-bottom:1px solid #d0d0d0; padding-bottom:30px;">  
+
+ <h3 style="margin-top: 1px;" ><?php echo $toppage2->title2; ?>  </h3>
+
+<?php echo $toppage2->data1; ?>
+
+ 
+
+  </div>
+
+
+
+            
+
+<div style="text-align:right; float:right;  "> 
+
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'deals/'.trim($toppage2->pagurl):'deals/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+
+<div style="text-align:left; color:#28272F;    height: 27px; ">  
+
+   </div>
+
+</div>
+
+							</article>
+
+                           
+
+						</div>
+
+                        
+
+                        
+
+                        <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'items';						                                       
+
+						        $toppages2 = $model->selectForArray(array('offerid' => '1' , 'inactive' => '0'), array('displayorder' => 'ASC')  );
+
+								foreach($toppages2 as $toppage2):
+
+									   
+
+							?>  
+
+
+
+    
+
+          <div class="item col-sm-4  grid-group-item list-group-item">
+
+                                             
+
+							<article class="place-box card">
+
+					 <?php
+
+ 
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'label';						                                       
+
+						        $toppages27 = $model->selectForArray(array('id' => $toppage2->labelid), array('displayorder' => 'ASC') , 1 );
+
+								foreach($toppages27 as $toppage27):
+
+									   
+
+							?>  		
+
+							
+
+    <img  style="position:absolute" src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage27->image ?>"  width="96" height="91" border="0" class="corner">
+
+	<?php endforeach; ?>
+
+	
+
+	
+
+								<a href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" class="">
+
+									 
+
+									<div class="entry-thumbnail"> 
+
+		 <img style="margin-right:10px;" width="400" height="250"  style="margin-right:10px;"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$toppage2->thumb ?>">
+
+
+
+ 				
+
+ 
+
+ </div>
+
+							  </a>
+
+                              <div style="padding: 1px 15px 4px; z-index: 1; bottom: 0;background: #f2f2f2;border-radius: 0 0 6px 6px;">
+
+                              <h3> <div style="color: #f9b017;padding-bottom:7px;"> <?php echo $toppage2->offertitle; ?></div>  <?php echo $toppage2->title; ?>  </h3>
+
+                              <div><?php echo $toppage2->shortdescription; ?>  </div>
+
+                           <div style="border-bottom:1px solid #d0d0d0; padding-bottom:0px;">   <?php echo $toppage2->daynumber; ?> days  •
+
+ <spam style="color:#f9b017;"> From </spam>	    
+
+<spam <?php if(trim($toppage2->newprice)): ?><?php echo 'style="color:#f9b017;text-decoration: line-through;" ' ?> <?php elseif(!trim($toppage2->newprice)): ?><?php echo 'style="color:#f9b017;" ' ?><?php endif; ?>  >  $<?php echo number_format($toppage2->prize) ?>  </spam>
+
+<?php if(trim($toppage2->newprice)): ?>  <spam style="color:#f9b017; padding-left:8px;" >   $<?php echo number_format($toppage2->newprice); ?>  </spam> <?php endif; ?>  
+
+<?php echo $toppage2->pricedescription; ?><br/> <br/>  </div>
+
+<div style="text-align:right; float:right;  "> 
+
+<a   href="<?php echo LANG_URL ?><?php echo (trim($toppage2->pagurl)?'vacations/'.trim($toppage2->pagurl):'item/v/i/'.$toppage2->id) ?>" > More >>   </a> </div>
+
+<div style="text-align:left; color:#28272F;    height: 27px; ">  
+
+ <?php echo $toppage2->ptdpage; ?>   </div>
+
+</div>
+
+							</article>
+
+                           
+
+						</div>
+
+                        
+
+                        
+
+                        <?php endforeach; ?>
+
+                          
+
+                    
+
+
+
+
+
+
+
+                          
+
+                    
+
+                            
+
+                        
+
+       
+
+                         
+
+                         
+
+						 
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+
+
+
+<?php endif; ?>
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'pages_blocks2';
+
+						        $where = array();
+
+						        $toppages = $model->selectForArray(array('type' => 'acor'), array('displayorder' => 'ASC') );
+
+						
+
+								foreach($toppages as $index =>$toppage):
+
+								
+
+							?>
+
+		  <?php 	if($toppage['pageid'] == $value->id  ):  ?>
+
+
+
+ <section id="who-we-are" class="page-section no-pad light-bg border-tb"  >
+
+            <div class="container-fluid who-we-are">
+
+                <div class="row">
+
+                    <div class="col-md-6 pad-60" data-animation="fadeInLeft">
+
+                         
+
+                        <div class="owl-carousel pagination-1 dark-switch" data-pagination="true" data-autoplay="true"
+
+                        data-navigation="false" data-singleitem="true">
+
+                            <?php 	if(trim($toppage->title1)  ):  ?>
+
+                            <div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                    <?php echo $toppage->title1 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data1 ?> </p>
+
+                                </div>
+
+                            </div>  
+
+<?php endif; ?><?php 	if(trim($toppage->title2)  ):  ?>
+
+                            <div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                     <?php echo $toppage->title2 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data2 ?> </p>
+
+                                </div>
+
+                            </div>
+
+                           
+
+<?php endif; ?><?php 	if(trim($toppage->title3)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                     <?php echo $toppage->title3 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data3 ?> </p>
+
+                                </div>
+
+                            </div>
+
+
+
+<?php endif; ?>
+
+<?php 	if(trim($toppage->title4)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                   <?php echo $toppage->title4 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data4 ?> </p>
+
+                                </div>
+
+                            </div>
+
+<?php endif; ?> 
+
+
+
+
+
+
+
+
+
+<?php 	if(trim($toppage->title5)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                   <?php echo $toppage->title55?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data5 ?> </p>
+
+                                </div>
+
+                            </div>
+
+<?php endif; ?> 
+
+
+
+
+
+
+
+<?php 	if(trim($toppage->title6)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                     <?php echo $toppage->title6 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data6 ?> </p>
+
+                                </div>
+
+                            </div>
+
+<?php endif; ?> 
+
+
+
+
+
+<?php 	if(trim($toppage->title7)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                     <?php echo $toppage->title7 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data7 ?> </p>
+
+                                </div>
+
+                            </div>
+
+<?php endif; ?> 
+
+
+
+
+
+
+
+<?php 	if(trim($toppage->title8)  ):  ?>
+
+
+
+<div class="item">
+
+                                <!-- Heading -->
+
+                                <h2 class="entry-title">
+
+                                    <?php echo $toppage->title8 ?> 
+
+                                </h2>
+
+                                <!-- Content -->
+
+                                <div class="entry-content">
+
+                                    <p>      <?php echo $toppage->data8 ?> </p>
+
+                                </div>
+
+                            </div>
+
+<?php endif; ?> 
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 no-pad text-center" data-animation="fadeInRight">
+
+                        <!-- Image -->
+
+                        <div   style="background-position-x: 0px;" class="image-bg" data-background="<?php echo constant('APP_BASEURL') . '/MyUpload/' . $toppage->image ?>"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+<?php  endif;  ?>   <?php  endforeach;  ?> 
+
+
+
+
+
+
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+<?php
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'pages_blocks3';
+
+						        $where = array();
+
+						        $toppages = $model->selectForArray(array('type' => 'contact'), array('displayorder' => 'ASC') );
+
+						
+
+								foreach($toppages as $index =>$toppage):
+
+								
+
+							?>
+
+		  <?php 	if($toppage['pageid'] == $value->id  ):  ?>
+
+
+
+
+
+
+
+  <!-- page-header -->
+
+            <section id="contact-us" class="page-section" >
+
+                <div class="container" >
+
+					<div class="row">
+
+                        <div class="col-md-12 contact-info">
+
+					 
+
+						 <?php  echo $toppage->data ?> 
+
+						
+
+						<br/><br/>
+
+							<div class="row text-center">
+
+								 
+
+								<address class="col-sm-4 col-md-4">
+
+									<i class="fa fa-microphone i-9x icons-circle text-color light-bg hover-black"></i>
+
+									<div class="title"> <?php  echo $toppage->title1 ?> </div>
+
+									<div>  <?php  echo $toppage->data1 ?>  </div>
+
+								</address>
+
+                                <address class="col-sm-4 col-md-4">
+
+									<i class="fa fa-microphone i-9x icons-circle text-color light-bg hover-black"></i>
+
+									<div class="title"> <?php  echo $toppage->title2 ?> </div>
+
+									<div><?php  echo $toppage->data2 ?> </div>
+
+								</address>
+
+								<address class="col-sm-4 col-md-4">
+
+									<i class="fa fa-envelope i-9x icons-circle text-color light-bg hover-black"></i>
+
+									<div class="title"> <?php  echo $toppage->title3 ?> </div>
+
+									<div> <?php  echo $toppage->data3 ?>  </div>
+
+								</address>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<hr class="pad-10">
+
+					<div class="row">
+
+						<div class="col-md-4">
+
+							<p class="form-message" style="display: none;"></p>
+
+							<div class="contact-form">
+
+								<!-- Form Begins -->
+
+								 <form role="form"  id="form" name="form2" method="post" action=""    enctype="multipart/form-data"   >
+
+                                <!-- Field 1 -->
+
+       <?php  ($this->messageVi)  ?>
+
+
+
+                <?php echo '<p>' . $this->messageVi . '</p>' ?>
+
+                                <div class="input-text form-group">
+
+                                     <?php echo $this->form->name ?>  
+
+                                </div>
+
+                                <!-- Field 2 -->
+
+                                <div class="input-email form-group">
+
+                                   	  <?php echo $this->form->email ?> 
+
+                                </div>
+
+                                <!-- Field 3 -->
+
+                                <div class="input-email form-group">
+
+                                      <?php echo $this->form->phone ?> 
+
+                                </div>
+
+                                <!-- Field 4 -->
+
+                                <div class="textarea-message form-group">
+
+                                     	<?php echo $this->form->message ?>
+
+                                </div>
+
+                                <!-- Button -->
+
+	                        	<input type="hidden" name="action" value="contact_form" />
+
+                                <button  style="color:#ffffff" class="btn btn-default btn-block" id="SEND" type="submit">Send Now 
+
+                                <i class="icon-paper-plane"></i></button>
+
+                            </form>
+
+								<!-- Form Ends -->
+
+							</div>
+
+						</div>						
+
+						<div class="col-md-8">
+
+							<div class="map-section">
+
+								  <?php  echo $toppage->title4 ?> 
+
+							</div>
+
+						</div><!-- map -->
+
+				</div>
+
+            </section><!-- page-section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php  endif;  ?>   <?php  endforeach;  ?> 
+
+
+
+ 
+
+
+
+
+
+
+
+ <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+ 
+
+ 
+
+ 
+
+ 		<section class="main">
+
+			<div class="container">
+
+			  <div class="places">
+
+					<div class="row">
+
+					
+
+					            <?php
+
+								$model = new Model_PlusData();
+
+						        $model->_name  = 'items';
+
+						        $where = array();
+
+						        $toppages = $model->selectForArray(array( ), array('displayorder' => 'ASC') );
+
+								foreach($toppages as $item):
+
+							    if($item['pageid'] ==  $value->id    ):  
+
+                                ?>
+
+                   
+
+                    
+
+						<div class="col-sm-4">
+
+							<article class="place-box card">
+
+								<a href="<?php echo LANG_URL ?><?php echo (trim($item->pagurl)?'package/'.trim($item->pagurl):'item/v/i/'.$item->id) ?>" class="place-link">
+
+									<header>
+
+										<h3 class="entry-title"><i class="fa fa-map-marker"></i> <?php echo $item->title ?></h3> </header>
+
+									<div class="entry-thumbnail">
+
+<?php 
+
+          $images = explode('||',trim($item->table_image,'|'));
+
+            foreach($images as $index=>$photo): if(!trim($photo) ) continue;
+
+ ?>
+
+ <?php if ($index ==0 ):  ?>
+
+ <img width="960" height="540"   src="<?php echo  APP_BASEURL.'/MyUpload/'.$photo ?>">
+
+
+
+<?php endif; ?> <?php endforeach; ?>
+
+
+
+</div>
+
+								</a>
+
+							</article>
+
+						</div>
+
+                        
+
+                        		
+
+            <?php endif ?> <?php endforeach; ?>                    
+
+                                
+
+						 
+
+						 
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		
+
+ 
+
+ 
+
+  <!-- ------------------------------------------------------------------------  ------------------------------------------------------------------------ -->
+
+  
+
+		 
+
+ <?php endforeach; ?>
+
+
+
+
+
+ 
+
+   

@@ -1,0 +1,48 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="title">تشكيلي</h1>
+    </div>
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="<?php echo LANG_URL ?>">الرئيسية</a>
+                </li>
+                <li class="active">أعمال الفنانين</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="works" class="page-section">
+    <div class="mixed-grid">
+        <div class="clearfix"></div>
+        <div class="masonry-grid grid-col-4" data-gutter="0">
+            <div class="grid-sizer"></div>
+            <?php
+            if (count($this->paginator)):
+                foreach ($this->paginator as $i => $item): 
+                $name = 'name_'.LANG;
+                $about = 'about_'.LANG;
+                ?>
+            <!-- Item -->
+            <div class="grid-item all web">
+                <img src="<?php echo LANG_URL.'files/ful/i/'. $item->photo?>" alt="<?php echo $item->$name ?>" class="img-responsive" />
+                <div class="img-overlay"></div>
+                <div class="figcaption">
+                <div class="caption-block">
+                    <h4><?php echo $item->$name ?></h4>
+                    <p><?php echo $item->$about ?></p>
+                </div>
+                <a href="<?php echo LANG_URL .'user/work/i/'. $item->id?>">
+                    <i class="fa fa-link"></i>
+                </a></div>
+            </div>
+            <!-- Item Ends-->
+            <?php endforeach; ?>
+            <?php endif ?>
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'patrial/pagination-control.phtml'); ?>
+<div class="clearfix"></div>

@@ -1,0 +1,172 @@
+
+ <?php foreach($this->Item as $value): ?>
+
+<header id="sticker" class="sticky-navigation dark-header">
+            <!-- Sticky Menu -->
+            <div class="sticky-menu relative">
+                <!-- navbar -->
+                <div id="navigation" class="navbar navbar-default navbar-bg-light" role="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="navbar-header">
+                                <!-- Button For Responsive toggle -->
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span> 
+                                <span class="icon-bar"></span> 
+                                <span class="icon-bar"></span> 
+                                <span class="icon-bar"></span></button> 
+                                <!-- Logo -->
+                                 
+                                <a class="navbar-brand" href="index">
+                                    <img class="Matrix" alt="Matrix" src="<?php echo THEME_DIR ?>img/logo.png" />
+                                </a></div>
+                                <!-- Navbar Collapse -->
+                                <div id="topnav" class="navbar-collapse collapse">
+                                    <!-- nav -->
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="#home" class="scroll">Home</a>
+													 
+												</li>
+                                        <li>
+                                            <a href="#about" class="scroll">About Us</a>
+                                        </li> 
+                                          <li>
+                                            <a href="#gallery" class="scroll">Our Products </a>
+											<ul class="dropdown-menu sm-nowrap">
+ <?php
+								$model = new Model_PlusData();
+						        $model->_name  = 'cat';
+						        $where = array();
+						        $toppages = $model->selectForArray($where, array('displayorder' => 'ASC')  );
+						
+								foreach($toppages as $toppage):
+								 
+							?>
+     <li><a href="<?php echo LANG_URL ?><?php echo (trim($toppage->pagurl)?'Product/'.trim($toppage->pagurl):'category/v/i/'.$toppage->id) ?>">- <?php echo $toppage->title ?> </a></li>
+         <?php 	 endforeach; ?> 
+     </ul>
+                                        </li>
+ 
+                                        <li>
+                                            <a href="#contact-us" class="scroll">Contact us</a>
+                                        </li>
+                                        
+                                         
+                                        <!-- Header Contact -->
+									 
+										<!-- Header Search -->
+										 
+										<!-- Header Share -->
+									 
+                                    </ul>
+                                    <!-- Right nav -->
+									<!-- Header Contact Content -->
+									 
+									<!-- Header Contact Content -->
+									<!-- Header Search Content -->
+								 
+									<!-- Header Search Content -->
+									<!-- Header Share Content -->
+									<div class="bg-white hide-show-content no-display header-share-content">
+										<div class="vertically-absolute-middle social-icon gray-bg icons-circle i-3x">
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a> 
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a> 
+										<a href="#">
+											<i class="fa fa-pinterest"></i>
+										</a> 
+										<a href="#">
+											<i class="fa fa-google"></i>
+										</a> 
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a></div>
+										<button class="close">
+											<i class="fa fa-times"></i>
+										</button>
+									</div>
+									<!-- Header Share Content -->
+                                </div>
+                                <!-- /.navbar-collapse -->
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- navbar -->
+            </div>
+            <!-- Sticky Menu -->
+        </header>
+		
+		
+		    <section id="gallery" class="page-section">
+            <div class="image-bg content-in fixed" data-background="<?php echo THEME_DIR ?>img/sections/bg/about.jpg">
+                <div class="overlay"></div>
+            </div>
+            <div class="container work-section" >
+                <div class="section-title white" data-animation="fadeInUp">
+                    <!-- Heading -->
+                    <h2 class="title"> <?php echo $value->title ?> </h2>
+                </div>
+                 
+            </div>
+			
+			
+			
+			
+			
+			
+			 <!-- Item 3 -->
+                     <div class= "grids col-sm-12 col-md-12 ">
+                        <div class="row">
+                            <div class="container work-section">
+                            <div class="col-sm-6 col-md-6" style="background-color: #f2f2f2;">
+                                <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <?php 
+                                        $images = explode('||',trim($value->table_image,'|'));
+                                        foreach($images as $i=>$photo): if(!trim($photo)) continue;?>
+                                        <li data-target="#carousel-example-generic1" data-slide-to="<?php echo $i ?>"<?php if($i<1): ?> class="active"<?php endif ?>></li>
+                                        <?php endforeach; ?>
+                                    </ol>
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <?php foreach($images as $i=>$photo): if(!trim($photo)) continue;?>
+                                        <div class="item<?php if($i<1): ?> active<?php endif ?>">
+<div style="text-align: center;" >
+                                            <a href="<?php echo LANG_URL.'files/ful/i/'. $photo?>" class="image" rel="prettyPhoto ">
+                                                <img src="<?php echo LANG_URL.'files/ful/i/'. $photo?>"  style=" height:350px; "   />
+                                            </a>  </div>
+                                        </div>
+                                      <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+<div class="col-sm-6 col-md-6">
+                                <h3 class="title"  style="color:#fff;" >
+                                       <?php echo $value->title ?>     
+                                </h3>
+                         
+                                <div class="description"> </div>
+                                    <p style="color:#fff; > <?php echo $value->data1 ?>  </p>
+                                 
+                                <div class="project-meta"> </div>
+								
+								
+							 </div>
+                            </div>
+			 </div>
+			
+			</section>
+		
+	 
+		
+		
+			<?php endforeach; ?>

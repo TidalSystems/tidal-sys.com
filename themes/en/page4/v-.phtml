@@ -1,0 +1,28 @@
+
+<?php foreach ($this->Blocks as $value): ?>
+    <h1><?php echo $value['title'] ?></h1>
+    <article>
+        <?php $this->DataReplace($value['data']); ?>
+        <div class="clear"></div>
+    </article>
+<?php endforeach; ?>
+<?php if ($this->id == 2) { ?>
+    <article>
+        <form id="form2" name="form2" method="post" action="" class="block">
+            <?php if ($this->messageVi): ?>
+                <?php echo '<p>' . $this->messageVi . '</p>' ?>
+            <?php else: ?>
+                <label for="email">الإسم :</label><div class="field-wrapper"><?php echo $this->form->name ?></div>
+                <div class="clear"></div>
+                <label for="email">رقم التليفون:</label><div class="field-wrapper"><?php echo $this->form->phone ?></div>
+                <div class="clear"></div>
+                <label for="email">الإيميل:</label><div class="field-wrapper"><?php echo $this->form->email ?></div>
+                <div class="clear"></div>
+                <label for="email">الرسالة :</label><div class="field-wrapper"><?php echo $this->form->message ?></div>
+                <div class="clear"></div>
+                <label for="email">&nbsp;</label><div class="field-wrapper"><button type="submit" name="SEND" id="SEND">إرسال</button></div>
+                <div class="clear"></div>
+            <?php endif ?>
+        </form>
+    </article>
+<?php } ?>

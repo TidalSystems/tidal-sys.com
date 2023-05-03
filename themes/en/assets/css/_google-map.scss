@@ -1,0 +1,20 @@
+/*--------------------------------------------------------------
+# Google Map
+--------------------------------------------------------------*/
+.google-map {
+	position: relative;
+	display: block;
+	background-color: $cretech-black;
+	border: none;
+	display: block;
+	width: 100%;
+	mix-blend-mode: luminosity;
+	height: 485px;
+
+	iframe {
+		display: block;
+		border: none;
+		width: 100%;
+		height: 100%;
+	}
+}

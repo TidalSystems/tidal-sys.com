@@ -1,0 +1,29 @@
+<div id="breadcrumb">
+    <a href="<?php echo LANG_URL ?>">تشكيلي</a> &raquo; 
+    <a href="<?php echo LANG_URL ?>user/inbox">الرسائل</a>
+</div>
+
+<div id="listLeftPanel">
+    <?php 
+        $img = '';
+        if(count($this->paginator)):
+        foreach($this->paginator as $i=>$item): 
+            $imgs = explode('||', trim($item->table_image));
+            if(count($imgs)>1)
+                $img = $imgs[1];
+    ?>
+    <div class="item">
+        <a href="<?php echo LANG_URL ?>item/v/i/<?php echo $item->id ?>"></a>
+        <img src="<?php echo constant('APP_BASEURL').'/MyUpload/'.$img ?>" />
+        <div class="cover"></div>
+        <div class="title"><?php echo $item->title ?></div>
+        <div class="price"><?php echo $item->price ?> ريال</div>        
+    </div>
+    <?php endforeach;
+        else:?>
+    <p class="error center">لا توجد رسائل</p>
+    <?php endif ?>
+</div>    
+<div class="clearfix"></div>
+    <?php echo $this->paginationControl($this->paginator,'Sliding','patrial/pagination-control.phtml'); ?>
+<div class="clearfix"></div>

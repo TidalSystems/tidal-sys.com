@@ -1,0 +1,625 @@
+
+<?php
+if(isset($_GET['fromdate'])) {$fromdate=  $_GET['fromdate']; } else { $fromdate=  ''; } 
+if(isset($_GET['todate'])) {$todate=  $_GET['todate']; } else { $todate=  ''; } ; 
+?>
+ 
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+
+<?php
+
+ 
+// Load the Google API PHP Client Library.
+require_once APPLICATION_PATH . '/google-api/vendor/autoload.php';
+
+$analytics = initializeAnalytics2();
+$profile = getFirstProfileId($analytics);
+$results = getResults($analytics, $profile);
+$results2 = getResults2($analytics, $profile);
+$results3 = getResults3($analytics, $profile);
+$results4 = getResults4($analytics, $profile); 
+
+function initializeAnalytics2()
+{
+  // Creates and returns the Analytics Reporting service object.
+
+  // Use the developers console and download your service account
+  // credentials in JSON format. Place them in this directory or
+  // change the key file location if necessary.
+   $KEY_FILE_LOCATION = APPLICATION_PATH . '/kk2.json';
+
+  // Create and configure a new client object.
+  $client = new Google_Client();
+  $client->setApplicationName("Hello Analytics Reporting");
+  $client->setAuthConfig($KEY_FILE_LOCATION);
+  $client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
+  $analytics = new Google_Service_Analytics($client);
+
+  return $analytics;
+}
+
+function getFirstProfileId($analytics) {
+  // Get the user's first view (profile) ID.
+
+  // Get the list of accounts for the authorized user.
+  $accounts = $analytics->management_accounts->listManagementAccounts();
+
+  if (count($accounts->getItems()) > 0) {
+    $items = $accounts->getItems();
+    $firstAccountId = $items[0]->getId();
+
+    // Get the list of properties for the authorized user.
+    $properties = $analytics->management_webproperties
+        ->listManagementWebproperties($firstAccountId);
+
+    if (count($properties->getItems()) > 0) {
+      $items = $properties->getItems();
+      $firstPropertyId = $items[0]->getId();
+
+      // Get the list of views (profiles) for the authorized user.
+      $profiles = $analytics->management_profiles
+          ->listManagementProfiles($firstAccountId, $firstPropertyId);
+
+      if (count($profiles->getItems()) > 0) {
+        $items = $profiles->getItems();
+
+        // Return the first view (profile) ID.
+        return $items[0]->getId();
+
+      } else {
+        throw new Exception('No views (profiles) found for this user.');
+      }
+    } else {
+      throw new Exception('No properties found for this user.');
+    }
+  } else {
+    throw new Exception('No accounts found for this user.');
+  }
+}
+
+function getResults($analytics, $profileId ) {
+if(isset($_GET['fromdate'])) {
+$from= $_GET['fromdate'] ;
+ } else { 
+$from= (date("d")-1).'daysAgo' ;
+} 
+
+if(isset($_GET['todate'])) {
+$to= $_GET['todate'] ;
+ } else { 
+$to= 'today' ;
+}
+
+
+  // Calls the Core Reporting API and queries for the number of sessions
+  // for the last seven days.
+   return $analytics->data_ga->get(
+       'ga:' . $profileId,
+        $from,
+        $to,
+       'ga:Pageviews');
+}
+
+
+function getResults2($analytics, $profileId) {
+if(isset($_GET['fromdate'])) {
+$from= $_GET['fromdate'] ;
+ } else { 
+$from= (date("d")-1).'daysAgo' ;
+} 
+
+if(isset($_GET['todate'])) {
+$to= $_GET['todate'] ;
+ } else { 
+$to= 'today' ;
+}
+  // Calls the Core Reporting API and queries for the number of sessions
+  // for the last seven days.
+   return $analytics->data_ga->get(
+       'ga:' . $profileId,
+        $from,
+        $to,
+       'ga:avgSessionDuration');
+}
+
+
+function getResults3($analytics, $profileId) {
+if(isset($_GET['fromdate'])) {
+$from= $_GET['fromdate'] ;
+ } else { 
+$from= (date("d")-1).'daysAgo' ;
+} 
+
+if(isset($_GET['todate'])) {
+$to= $_GET['todate'] ;
+ } else { 
+$to= 'today' ;
+}
+   return $analytics->data_ga->get(
+       'ga:' . $profileId,
+        $from,
+        $to,
+       'ga:bounceRate');
+}
+
+
+
+
+function getResults4($analytics, $profileId) {
+if(isset($_GET['fromdate'])) {
+$from= $_GET['fromdate'] ;
+ } else { 
+$from= (date("d")-1).'daysAgo' ;
+} 
+
+if(isset($_GET['todate'])) {
+$to= $_GET['todate'] ;
+ } else { 
+$to= 'today' ;
+}
+   return $analytics->data_ga->get(
+       'ga:' . $profileId,
+        $from,
+        $to,
+       'ga:users');
+}
+
+ 
+
+function printResults($results) {
+   
+  if (count($results->getRows()) > 0) {
+ 
+    $profileName = $results->getProfileInfo()->getProfileName();
+
+    $rows = $results->getRows();
+    $sessions = $rows[0][0];
+ $sessions2 = number_format($sessions );
+    print "$sessions2\n";
+  } else {
+    print "No results found.\n";
+  }
+}
+
+
+
+
+
+function printResults2($results2) {
+ 
+  if (count($results2->getRows()) > 0) {
+
+    $profileName = $results2->getProfileInfo()->getProfileName();
+
+    
+    $rows = $results2->getRows();
+    $sessions = $rows[0][0];
+  $sessions2 = date("00:i:s", $sessions);
+    print "$sessions2\n";
+  } else {
+    print "No results found.\n";
+  }
+}
+
+
+function printResults3($results3) {
+ 
+  if (count($results3->getRows()) > 0) {
+
+    $profileName = $results3->getProfileInfo()->getProfileName();
+
+    
+    $rows = $results3->getRows();
+    $sessions = $rows[0][0];
+$sessions2 = number_format($sessions, 2); 
+    print "$sessions2 % ";
+  } else {
+    print "No results found.\n";
+  }
+}
+
+
+
+
+function printResults4($results4) {
+   
+  if (count($results4->getRows()) > 0) {
+ 
+    $profileName = $results4->getProfileInfo()->getProfileName();
+
+    $rows = $results4->getRows();
+    $sessions = $rows[0][0];
+ $sessions2 = number_format($sessions );
+    print "$sessions2\n";
+  } else {
+    print "No results found.\n";
+  }
+}
+
+?>
+
+
+<?php
+
+// Load the Google API PHP Client Library.
+ 
+require_once APPLICATION_PATH . '/google-api/vendor/autoload.php';
+
+$accessToken = initializeAnalytics();
+
+function initializeAnalytics()
+{
+  $KEY_FILE_LOCATION = APPLICATION_PATH . '/kk2.json';
+
+  $client = new Google_Client();
+  $client->setApplicationName("centralholidays-224211");
+  $client->setAuthConfig($KEY_FILE_LOCATION);
+  $client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
+
+  $client->refreshTokenWithAssertion();
+  $token = $client->getAccessToken();
+  $accessToken = $token['access_token'];
+
+  return $accessToken;
+
+
+ }
+
+
+?>
+
+ 
+
+  <script>
+(function(w,d,s,g,js,fs){
+  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+  js.src='https://apis.google.com/js/platform.js';
+  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+}(window,document,'script'));
+</script>
+
+
+<div class="row">
+
+<div class="col-md-12">
+ <a href="<?php echo  $this->baseUrl();?>/admin/analytics" class="" type="submit"   style="boardr:0px; background:#df1b23; color:#fff;float: right;height: 30px;padding: 4px;">  Current Month </a> 
+ <form  action="<?php echo  $this->baseUrl();?>/admin/analytics"  method="get"   >
+From <input required style="width:150px;" name="fromdate" id"fromdate" class="fromdate" />  
+To <input  required style="width: 150px;" name="todate" id"todate" class="todate" /> 
+ 
+ <input class="btn btn-primary" type="submit" value="Search" style="position: absolute;height: 30px;padding: 4px;"> 
+</form>
+
+<br/>
+<?php if( isset($_GET['fromdate']) && isset($_GET['todate'])): ?>
+<spam style="color:red"> From </spam><?php echo  date("m-d-Y", strtotime($_GET['fromdate'])); ?><spam style="color:red; padding-left:50px"> To </spam> <?php echo  date("m-d-Y", strtotime($_GET['todate'])); ?> 
+<?php else: ?>
+<spam style="color:red"> From </spam> <?php echo date('m-01-Y');  ?> <spam style="color:red; padding-left:50px"> To </spam> <?php echo date('m-d-Y') ;  ?>
+
+<?php endif; ?> 
+<br/></div>
+ 
+	<!-- Widget Item -->
+					<div class="col-md-3">
+						<div class="widget-area proclinic-box-shadow color-yellow">
+							<div class="widget-left"><br/>
+								<span class="ti-user" style="font-size: 35px;"></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="font-size: 17px;">Visitors</h4>
+								<h3 class="numeric color-yellow" style="font-size: 40px;"><?php printResults4($results4); ?></h3>
+								<p class="inc-dec mb-0"> </p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+
+
+					<!-- Widget Item -->
+					<div class="col-md-3">
+						<div class="widget-area proclinic-box-shadow color-red">
+							<div class="widget-left"><br/>
+								<span class="ti-bar-chart" style="font-size: 35px;"></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="font-size: 17px;">Page Views</h4>
+								<h3 class="numeric color-red" style="font-size: 40px;"><?php printResults($results); ?></h3>
+								<p class="inc-dec mb-0"> </p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-3">
+						<div class="widget-area proclinic-box-shadow color-green">
+							<div class="widget-left"><br/>
+								<span class="ti-timer" style="font-size: 35px;"></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="font-size: 17px;">Avg. Session Duration</h4>
+								<h3 class="numeric color-green" style="font-size: 40px;"><?php printResults2($results2); ?></h3>
+								<p class="inc-dec mb-0"> </p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+						<div class="col-md-3">
+						<div class="widget-area proclinic-box-shadow color-blue">
+							<div class="widget-left"><br/>
+								<span class="ti-direction-alt" style="font-size: 35px;" ></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title" style="font-size: 17px;">Bounce Rate</h4>
+								<h3 class="numeric color-blue" style="font-size: 40px;"><?php  printResults3($results3) ?></h3>
+								<p class="inc-dec mb-0"> </p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+
+ 
+ <div class="form-row" >
+ <div class="col-md-12" >
+ <br/>
+ 
+  <h3 class="widget-title" >Users </h3> 
+<div id="chart-container"></div>
+ 
+</div>
+
+ 
+ 
+ 
+ 
+<div  class="col-md-6">
+<div class="widget-area-2 proclinic-box-shadow">
+ <h3 class="widget-title" >Top Channels </h3> 
+ <div  id="chart-topchannel-container"></div>
+ 
+</div> </div>
+
+
+
+<div  class="col-md-6">
+<div class="widget-area-2 proclinic-box-shadow">
+ <h3 class="widget-title" >Top Pages </h3> 
+<div  id="chart-2-container"></div>
+</div> </div>
+
+ 
+<div  class="col-md-12">
+<div class="widget-area-2 proclinic-box-shadow">
+ <h3 class="widget-title" >Top Location </h3> 
+<div  id="chart-3-container"></div>
+</div> </div>
+
+
+ 
+ 
+<div  class="col-md-6">
+<div class="widget-area-2 proclinic-box-shadow">
+ <h3 class="widget-title" >Source / Medium</h3> 
+ <div  id="chart-topchannel-container5"></div>
+ 
+</div> </div>
+
+
+
+ 
+ 
+<div  class="col-md-6">
+<div class="widget-area-2 proclinic-box-shadow">
+ <h3 class="widget-title" > Referrals </h3> 
+ <div  id="chart-topchannel-container6"></div>
+ 
+</div> </div>
+
+ 
+
+<div  class="col-md-12">
+ <br/>
+ <br/>
+ <br/>
+</div>
+ 
+ 
+
+</body>
+</html>
+<?php 
+if(isset($_GET['fromdate'])) {
+$from= $_GET['fromdate'] ;
+ } else { 
+$from= (date("d")-1).'daysAgo' ;
+} 
+
+if(isset($_GET['todate'])) {
+$to= $_GET['todate'] ;
+ } else { 
+$to= 'today' ;
+}
+
+?> 
+
+<script>
+ 
+    gapi.analytics.ready(function() {
+        gapi.analytics.auth.authorize({
+          serverAuth: {
+            access_token: '<?php echo $accessToken ?>'
+          }
+        });
+		
+		
+		
+		
+  
+		
+ 
+  var dataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+	 'ids': 'ga:147572840',
+      metrics: 'ga:users',
+      dimensions: 'ga:date',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>'
+    },
+    chart: {
+      container: 'chart-container',
+      type: 'LINE',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+   dataChart.execute()
+
+ var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:147572840',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>',
+      'metrics': 'ga:pageviews',
+      'dimensions': 'ga:pagePath',
+      'sort': '-ga:pageviews',
+      'max-results': 10
+    },
+    chart: {
+      'container': 'chart-2-container',
+      'type': 'PIE',
+      'options': {
+        'width': '100%',
+        'pieHole': 4/9,
+      }
+    }
+  });
+  dataChart2.execute();
+
+
+
+
+ var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:147572840',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>',
+      'metrics': 'ga:users',
+      'dimensions': 'ga:region',
+      'sort': '-ga:users',
+      'max-results': 20
+    },
+    chart: {
+      'container': 'chart-3-container',
+        'type': 'COLUMN',
+      'options': {
+        'width': '100%',
+        'pieHole': 6/9,
+      }
+    }
+  });
+  dataChart3.execute();
+
+
+
+
+var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+	'ids': 'ga:147572840',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>',
+        metrics: 'ga:users',
+      dimensions: 'ga:channelGrouping',
+       'max-results': 10
+    },
+    chart: {
+      container: 'chart-topchannel-container',
+      type: 'PIE',
+      options: {
+        width: '100%',
+	 
+      }
+    }
+  });
+  
+    dataChart4.execute();
+  
+  
+ 
+
+
+
+
+var dataChart5 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+	'ids': 'ga:147572840',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>',
+        metrics: 'ga:users',
+      dimensions: 'ga:sourceMedium',
+       'max-results': 10
+    },
+    chart: {
+      container: 'chart-topchannel-container5',
+      type: 'PIE',
+      options: {
+        width: '100%',
+	 
+      }
+    }
+  });
+  
+    dataChart5.execute();
+
+
+
+var dataChart6 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+	'ids': 'ga:147572840',
+      'start-date': '<?php echo $from ?>',
+      'end-date': '<?php echo $to ?>',
+        metrics: 'ga:users',
+      dimensions: 'ga:Source--',
+       'max-results': 50
+    },
+    chart: {
+      container: 'chart-topchannel-container6',
+      type: 'PIE',
+      options: {
+        width: '100%',
+	 
+      }
+    }
+  });
+  
+    dataChart6.execute();
+
+
+
+
+   
+
+
+});
+</script>
+
+
+
+ <script>
+ $(".fromdate").datepicker({ dateFormat: 'yy-mm-dd' });
+ $(".todate").datepicker({ dateFormat: 'yy-mm-dd' });
+ </script>
+
+ 
+ 
+
+</div>
+ 

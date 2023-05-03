@@ -1,0 +1,35 @@
+@mixin cretech-gradient {
+	background-image: linear-gradient(55deg, $cretech-secondary 0%, $cretech-primary 100%);
+}
+
+@mixin reset-ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@mixin subnav-anchor {
+	text-transform: uppercase;
+	color: $cretech-text;
+	font-weight: 500;
+	transition: all 500ms ease;
+	display: block;
+	padding: 7px 20px;
+
+	&:hover {
+		background-color: $cretech-primary;
+		color: #fff;
+	}
+}
+
+@mixin subnav-ul {
+	@include reset-ul;
+	position: absolute;
+	min-width: 220px;
+	background-color: #fff;
+	opacity: 0;
+	visibility: hidden;
+	transition: 500ms ease;
+	z-index: 99;
+	box-shadow: 0px 0px 65px 0px rgba(0, 0, 0, 0.1);
+}

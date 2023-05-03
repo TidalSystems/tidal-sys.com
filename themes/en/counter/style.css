@@ -1,0 +1,183 @@
+/*
+	Metronic by TEMPLATE STOCK
+	templatestock.co @templatestock
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+
+/* ==================== CSS Structure ==================== 
+
+	 * 1.0 RESET STYLES	
+	 * 2.0 BOOTSTRAP FIX FOR WINPHONR 8 AND IE10 
+	 * 3.0 BASIC STYLES
+	 * 4.0 TYPOGRAOHY
+	 * 5.0 PRELOADER
+	 * 6.0 VIDEO BACKGROUND
+	 * 7.0 PARALLAX BACKGROUND 
+	 * 7.1 TRIANGLIFY BACKGROUND 
+	 *
+	 * 8.0 HEADER
+	 * 9.0 HOME SECTION - SLIDER
+	 * 9.1 - ABOUT SECTION - SLIDER
+	 * 9.2 - SERVICES SECTION - SLIDER 
+	 * 9.3 - CONTACT SECTION - SLIDER 
+	 * 9.4 - TEAM SECTION - SLIDER
+	 * 
+	 * 10.0 CLOCK COUNTDOWN
+	 * 11.0 FLEXSLIDERS + TEXTSLIDERS
+	 * 12.0 FORMS
+	 * 13.0 FOOTER
+	 * 14.0 SOCIALS ICONS 
+	 * 15.0 BUTTONS
+	 * 16.0 OVERLAY STYLES
+	 * 17.0 BACKGROUND COLOR STYLES
+	 * 18.0 SHORTCODES STYLES
+	 * 19.0 MS IE STYLES
+	 * 20. 0MOBILE STYLES 
+	 * 21.0 RESPONSIVE STYLES
+  
+========================================================== */
+
+
+
+/* ==================== 1.0 RESET STYLES ==================== */
+
+ 
+
+/* ==================== 2.0 BOOTSTRAP FIX FOR WINPHONR 8 AND IE10  ==================== */
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/* ==================== 3.0 BASIC STYLES ==================== */
+
+
+ 
+
+/* ==================== 10.0 CLOCK COUNTDOWN ==================== */
+
+
+#clock-countdown {
+	color: #dc1f26;
+	overflow: hidden;
+}
+
+.counter-container {
+	display: table;
+	margin: 0 auto;
+}
+
+#clock-countdown .counter-box {
+	display: block;
+	width: 100px;
+	text-align: center;
+	overflow: hidden;
+	padding: 4px 15px;
+	float: left;
+	margin: 15px 0;
+	position: relative;
+}
+
+#clock-countdown .number {
+	font-size: 40px;
+	text-align: center;
+	font-family: 'Monteserrat', sans-serif;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 10px;
+}
+
+#clock-countdown span {
+	display: block;
+	font-size: 18px;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	padding-top: 10px;
+	position: relative;
+	overflow: hidden;
+}
+
+#clock-countdown span:before {
+	position: absolute;
+	content: '';
+	display: block;
+	width: 30px;
+	height: 1px;
+	background: #124173;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0px;
+}
+ 
+.contertextright{
+ text-align:right; 
+}
+
+
+.contertextleft{
+ text-align:left; 
+}
+
+@media (max-width:768px){
+
+
+#clock-countdown .counter-box {
+	display: block;
+	width: 70px;
+	text-align: center;
+	overflow: hidden;
+	padding: 4px 10px;
+	float: left;
+	margin: 2px 0;
+	position: relative;
+}
+
+#clock-countdown .number {
+	font-size: 30px;
+	text-align: center;
+	font-family: 'Monteserrat', sans-serif;
+	font-weight: 500;
+	line-height: 1;
+	margin-bottom: 10px;
+}
+
+#clock-countdown span {
+	display: block;
+	font-size: 12px;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 200;
+	padding-top: 10px;
+	position: relative;
+	overflow: hidden;
+}
+
+#clock-countdown span:before {
+	position: absolute;
+	content: '';
+	display: block;
+	width: 30px;
+	height: 1px;
+	background: #124173;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0px;
+}
+ 
+.contertextleft  {
+ text-align:center; 
+}
+
+.contertextright {
+ text-align:center; 
+}
+
+}

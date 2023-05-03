@@ -1,0 +1,28 @@
+<div id="breadcrumb">
+    <a href="<?php echo LANG_URL ?>">تشكيلي</a> &raquo; 
+    عضوية جديدة
+</div>
+<div id="inner-body" class="users-register">
+    <form enctype="application/x-www-form-urlencoded" method="post" class="" action="<?php echo LANG_URL ?>user/register">
+        <fieldset>
+            <legend>بيانات الحساب</legend>
+            <dt id="username-label"><label for="username" class="required">اسم المستخدم :</label></dt>
+            <dd id="username-element">
+                <?php echo $this->form->username ?></dd>
+            <dt id="password-label"><label for="password" class="required">كلمة المرور :</label></dt>
+            <dd id="password-element">
+                <?php echo $this->form->password ?></dd>
+            <dt id="confirm_password-label"><label for="confirm_password" class="required">تأكيد الكلمة :</label></dt>
+            <dd id="confirm_password-element">
+                <?php echo $this->form->confirm_password ?></dd>
+            <dt id="email-label"><label for="email" class="required">البريد الإلكتروني  :</label></dt>
+            <dd id="email-element">
+                <?php echo $this->form->email ?></dd>
+            <dt id="email-label"><label for="email" class="required">رقم الجوال :</label></dt>
+            <dd id="email-element">
+                <?php echo $this->form->phone ?></dd>
+        </fieldset>
+            <div class="buttons" align="center">
+                <input type="submit" name="save" id="save" value="تسجيل" class="buttons" /></div>
+    </form>
+</div>

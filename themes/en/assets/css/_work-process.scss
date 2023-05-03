@@ -1,0 +1,130 @@
+.work-process {
+	counter-reset: workProcessCount;
+}
+
+.work-process-card-one {
+	counter-increment: workProcessCount;
+	border: 2px solid $cretech-primary;
+	padding: 38px;
+	margin-bottom: 38px;
+	position: relative;
+	padding-bottom: 30px;
+	background-color: #fff;
+	transition: all 500ms ease;
+
+	&:hover {
+		box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	@media (min-width: 992px) {
+		margin-bottom: 0;
+		margin-right: 38px;
+	}
+
+	&::before {
+		content: '';
+		background-color: $cretech-primary;
+		width: 74px;
+		height: 74px;
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		clip-path: polygon(50% 50%, 100% 50%, 50% 100%, 0% 50%);
+		margin-top: -36px;
+
+		@media (min-width: 992px) {
+			left: 100%;
+			transform: translateX(0%) translateY(-50%);
+			top: 50%;
+			clip-path: polygon(0 0, 50% 50%, 0 100%, 0% 50%);
+			margin-top: 0;
+			width: 77px;
+			height: 77px;
+		}
+	}
+
+	&::after {
+		content: '';
+		background-color: #ffffff;
+		width: 42px;
+		height: 42px;
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+		-webkit-clip-path: polygon(50% 50%, 100% 50%, 50% 100%, 0% 50%);
+		clip-path: polygon(50% 50%, 100% 50%, 50% 100%, 0% 50%);
+		margin-top: -22px;
+
+		@media (min-width: 992px) {
+			left: 100%;
+			transform: translateX(0%) translateY(-50%);
+			top: 50%;
+			clip-path: polygon(0 0, 50% 50%, 0 100%, 0% 50%);
+			margin-top: 0;
+		}
+	}
+
+	&__count {
+		font-size: 24px;
+		font-weight: bold;
+		color: #fff;
+		position: relative;
+		margin-bottom: 19px;
+		width: 50px;
+		height: 50px;
+		background-color: $cretech-secondary;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+
+		&::after {
+			content: counters(workProcessCount, ".");
+		}
+	}
+
+	&__title {
+		position: relative;
+		font-size: 26px;
+		font-weight: bold;
+		margin: 0;
+		letter-spacing: -0.05em;
+		color: $cretech-black;
+		margin-bottom: 14px;
+
+		a {
+			background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95% / 0px 2px no-repeat;
+			color: inherit;
+			transition: all 500ms ease;
+
+			&:hover {
+				color: $cretech-primary;
+				background-size: 100% 2px;
+			}
+		}
+	}
+
+	&__text {
+		margin-bottom: 19px;
+	}
+
+	&__link {
+		position: relative;
+		text-transform: uppercase;
+		letter-spacing: .1em;
+		font-size: 14px;
+		font-weight: bold;
+		color: $cretech-primary;
+		letter-spacing: .1em;
+		line-height: 1em;
+		transition: all 500ms ease;
+
+		&:hover {
+			color: $cretech-black;
+		}
+	}
+}
